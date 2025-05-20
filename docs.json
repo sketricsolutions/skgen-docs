@@ -30,18 +30,27 @@
           {
             "group": "Integrations",
             "pages": [
-              "integrations/custom-website",
-              "integrations/whatsapp",
-              "integrations/wordpress",
-              "integrations/wix",
-              "integrations/squarespace",
-              "integrations/slack",
-              "integrations/shopify"
+              "integrations/Custom-Website",
+              "integrations/WhatsApp",
+              "integrations/WordPress",
+              "integrations/Wix",
+              "integrations/SquareSpace",
+              "integrations/Slack",
+              "integrations/Shopify"
             ]
           }
         ]
       }
-    ]
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Overview",
+          "href": "https://docs.sketricgen.ai/",
+            "icon": "book-open"
+        }
+      ]
+    }
   },
   "logo": {
     "light": "/logo/light.png",
@@ -56,8 +65,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.sketricgen.ai"
+      "label": "Homepage",
+      "href": "https://www.sketricgen.ai"
     }
   },
   "footer": {
