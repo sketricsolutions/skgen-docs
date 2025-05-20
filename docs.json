@@ -30,13 +30,13 @@
           {
             "group": "Integrations",
             "pages": [
-              "integrations/Custom-Website",
-              "integrations/WhatsApp",
-              "integrations/WordPress",
-              "integrations/Wix",
-              "integrations/SquareSpace",
-              "integrations/Slack",
-              "integrations/Shopify"
+              "integrationss/Custom-Website",
+              "integrationss/WhatsApp",
+              "integrationss/WordPress",
+              "integrationss/Wix",
+              "integrationss/SquareSpace",
+              "integrationss/Slack",
+              "integrationss/Shopify"
             ]
           }
         ]
