@@ -1,79 +1,47 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
+  "theme": "mint",
   "name": "SketricGen Docs",
   "colors": {
     "primary": "#7D4AEA",
     "light": "#07C983",
-    "dark": "#15803D"
+    "dark": "#0F0716"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "User Guide",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "User Guide",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "user-guide/introduction",
+              "user-guide/best-practices",
+              "user-guide/creating-your-first-agent",
+              "user-guide/playground"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Integrations",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Integrations",
             "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "integrations/custom-website",
+              "integrations/whatsapp",
+              "integrations/wordpress",
+              "integrations/wix",
+              "integrations/squarespace",
+              "integrations/slack",
+              "integrations/shopify"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.png",
@@ -83,20 +51,20 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:contact@sketricsolutions.com"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app.sketricgen.ai"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://www.linkedin.com/company/sketricgen",
+      "facebook": "https://www.facebook.com/profile.php?id=61574534166470",
+      "instagram": "https://www.instagram.com/sketricgen/"
     }
   }
 }
