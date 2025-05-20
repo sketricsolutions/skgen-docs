@@ -25,18 +25,18 @@
         ]
       },
       {
-        "tab": "Integrations",
+        "tab": "integrations",
         "groups": [
           {
-            "group": "Integrations",
+            "group": "integrations",
             "pages": [
-              "integrationss/Custom-Website",
-              "integrationss/WhatsApp",
-              "integrationss/WordPress",
-              "integrationss/Wix",
-              "integrationss/SquareSpace",
-              "integrationss/Slack",
-              "integrationss/Shopify"
+              "integrations/Custom-Website",
+              "integrations/WhatsApp",
+              "integrations/WordPress",
+              "integrations/Wix",
+              "integrations/SquareSpace",
+              "integrations/Slack",
+              "integrations/Shopify"
             ]
           }
         ]
@@ -46,8 +46,8 @@
       "anchors": [
         {
           "anchor": "Overview",
-          "href": "https://docs.sketricgen.ai/",
-            "icon": "book-open"
+          "icon": "book-open",
+          "href": "https://docs.sketricgen.ai"
         }
       ]
     }
