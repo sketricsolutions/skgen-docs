@@ -4,10 +4,10 @@
   "name": "SketricGen Docs",
   "colors": {
     "primary": "#7D4AEA",
-    "light": "#07C983",
-    "dark": "#0F0716"
+    "light": "#7D4AEA",
+    "dark": "#7D4AEA"
   },
-  "favicon": "favicon.png",
+  "favicon": "favicon.ico",
   "navigation": {
     "tabs": [
       {
