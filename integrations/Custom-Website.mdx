@@ -1,0 +1,87 @@
+# Custom Website Integration
+
+Integrate SketricGen with any custom website in just a few steps! You can use either a simple JavaScript snippet or an iframe, depending on your needs. This guide will walk you through both methods with clear examples and screenshots.
+
+---
+
+## 1. JavaScript Embed (Recommended)
+
+Add a chat widget to your website by placing a single script tag in your site's `<head>` section. This is the easiest and most flexible way to get started.
+
+### Step-by-Step Instructions
+
+1. **Copy the Script**
+
+<Snippet language="html">
+<script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="asst_your_agent_id"></script>
+</Snippet>
+
+2. **Paste into the `<head>` Section**
+
+Open your website's HTML file and locate the `<head>` section. Paste the script anywhere inside it. For example:
+
+<Snippet language="html">
+<html>
+  <head>
+    <title>My Website</title>
+    {/* SketricGen Chat Widget */}
+    <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="asst_your_agent_id"></script>
+  </head>
+  <body>
+    {/* Your website content */}
+  </body>
+</html>
+</Snippet>
+
+> **Tip:** Replace `asst_your_agent_id` with your actual agent ID from the SketricGen dashboard.
+
+### What Happens Next?
+- The chat widget will appear on every page where the script is included.
+- You can customize the widget’s appearance and behavior from your SketricGen dashboard.
+
+---
+
+## 2. Manual iFrame Integration
+
+If you want to embed the agent as a full-page or section widget, use the iframe method. This is perfect for help centers, support pages, or dedicated chat areas.
+
+### Step-by-Step Instructions
+
+1. **Copy the iFrame Code**
+
+<Snippet language="html">
+<iframe src="https://app.sketricgen.ai/iframe-widget/asst_your_agent_id" width="100%" height="700px" frameborder="0"></iframe>
+</Snippet>
+
+2. **Paste Where You Want the Chat to Appear**
+
+Add the iframe code to any part of your HTML where you want the chat interface to show up. For example, inside a `<div>` on your support page:
+
+<Snippet language="html">
+<div class="support-chat">
+  <iframe src="https://app.sketricgen.ai/iframe-widget/asst_your_agent_id" width="100%" height="700px" frameborder="0"></iframe>
+</div>
+</Snippet>
+
+> **Tip:** You can adjust the `height` and `width` as needed to fit your layout.
+
+---
+
+## Example Screenshots
+
+Here’s what the integration process looks like (using Squarespace as an example):
+
+<img src="/images/squarespace/screenshot1.png" alt="Add Code to Head" width="600" className="rounded-xl my-4" />
+<img src="/images/squarespace/screenshot2.png" alt="Save and Apply" width="600" className="rounded-xl my-4" />
+
+---
+
+## Troubleshooting & Tips
+
+- Make sure to use your actual agent ID from the SketricGen dashboard.
+- If you don’t see the widget, clear your browser cache and refresh the page.
+- For advanced customizations, visit the SketricGen dashboard or contact support.
+
+---
+
+Need more help? Check our [User Guide](/user-guide/introduction) or reach out to support via the Dashboard.
