@@ -26,20 +26,22 @@ import { Tabs, Tab } from '@components/Tabs'
   If you have direct access to your website's files:
 
   1. Open the file where you want to add the chatbot (typically index.html, .astro, .jsx, or your template file)
-  2. Paste the embed code just before the closing `</body>` tag
+  2. Add the embed code in the `<head>` section of your document
   3. Save the file and upload it to your web server
+
+  > **For multi-page websites:** Adding the script to the `<head>` section of your base template or layout file ensures the chat bubble appears consistently across all pages of your website, giving visitors a seamless experience.
 
   ```html
   <!DOCTYPE html>
   <html>
     <head>
       <!-- Your existing head content -->
+      
+      <!-- SketricGen Widget Script - Best placed in the head for consistent appearance across pages -->
+      <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
     </head>
     <body>
       <!-- Your website content -->
-      
-      <!-- SketricGen Widget Script - Place just before closing body tag -->
-      <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
     </body>
   </html>
   ```
