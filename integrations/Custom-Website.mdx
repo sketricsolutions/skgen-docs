@@ -1,87 +1,111 @@
-# Custom Website Integration
+import { Tabs, Tab } from '@components/Tabs'
 
-Integrate SketricGen with any custom website in just a few steps! You can use either a simple JavaScript snippet or an iframe, depending on your needs. This guide will walk you through both methods with clear examples and screenshots.
+<Tabs>
+  <Tab title="Floating Chat Bubble">
+  
+  ## **Step 1: Create your SketricGen account**
 
----
+  To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your chatbot by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your chatbot.
 
-## 1. JavaScript Embed (Recommended)
+  If you need assistance with setting up a working SketricGen chatbot, refer to the **[step-by-step guide](https://docs.sketricgen.ai/user-guide/creating-your-first-agent)** for creating and deploying your chatbot.
 
-Add a chat widget to your website by placing a single script tag in your site's `<head>` section. This is the easiest and most flexible way to get started.
+  ## **Step 2: Copy the SketricGen Chatbot Embed Code**
 
-### Step-by-Step Instructions
+  After configuring your chatbot, go to the dashboard and click **Publish** to copy the embed code. The code will look similar to this:
 
-1. **Copy the Script**
+  ```html
+  <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
+  ```
 
-<Snippet language="html">
-<script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="asst_your_agent_id"></script>
-</Snippet>
+  > **Note:** Make sure your chatbot is set to **Public** to embed it on your website.
 
-2. **Paste into the `<head>` Section**
+  ![](/images/custom-website/screenshot1.png)
 
-Open your website's HTML file and locate the `<head>` section. Paste the script anywhere inside it. For example:
+  ## **Step 3: Add the embed code to your website**
+  
+  If you have direct access to your website's files:
 
-<Snippet language="html">
-<html>
-  <head>
-    <title>My Website</title>
-    {/* SketricGen Chat Widget */}
-    <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="asst_your_agent_id"></script>
-  </head>
-  <body>
-    {/* Your website content */}
-  </body>
-</html>
-</Snippet>
+  1. Open the file where you want to add the chatbot (typically index.html, .astro, .jsx, or your template file)
+  2. Paste the embed code just before the closing `</body>` tag
+  3. Save the file and upload it to your web server
 
-> **Tip:** Replace `asst_your_agent_id` with your actual agent ID from the SketricGen dashboard.
+  ```html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!-- Your existing head content -->
+    </head>
+    <body>
+      <!-- Your website content -->
+      
+      <!-- SketricGen Widget Script - Place just before closing body tag -->
+      <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
+    </body>
+  </html>
+  ```
 
-### What Happens Next?
-- The chat widget will appear on every page where the script is included.
-- You can customize the widget’s appearance and behavior from your SketricGen dashboard.
+  ## **Step 4: Test your chatbot**
 
----
+  After adding the embed code:
 
-## 2. Manual iFrame Integration
+  1. Preview or publish your website
+  2. Verify that the chat bubble appears (typically in the bottom right corner)
+  3. Test the chatbot by clicking on the bubble and asking a question
 
-If you want to embed the agent as a full-page or section widget, use the iframe method. This is perfect for help centers, support pages, or dedicated chat areas.
+  ![](/images/custom-website/screenshot2.png)
 
-### Step-by-Step Instructions
+  🎉 **Congratulations!** Your SketricGen chatbot is now live on your website, ready to assist your visitors.
 
-1. **Copy the iFrame Code**
+  </Tab>
 
-<Snippet language="html">
-<iframe src="https://app.sketricgen.ai/iframe-widget/asst_your_agent_id" width="100%" height="700px" frameborder="0"></iframe>
-</Snippet>
+  <Tab title="Inline iFrame Embed">
+  
+  ## **Step 1: Create your SketricGen account**
 
-2. **Paste Where You Want the Chat to Appear**
+  To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your chatbot by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your chatbot.
 
-Add the iframe code to any part of your HTML where you want the chat interface to show up. For example, inside a `<div>` on your support page:
+  If you need assistance with setting up a working SketricGen chatbot, refer to the **[step-by-step guide](https://docs.sketricgen.ai/user-guide/creating-your-first-agent)** for creating and deploying your chatbot.
 
-<Snippet language="html">
-<div class="support-chat">
-  <iframe src="https://app.sketricgen.ai/iframe-widget/asst_your_agent_id" width="100%" height="700px" frameborder="0"></iframe>
-</div>
-</Snippet>
+  ## **Step 2: Copy the SketricGen Chatbot iFrame Code**
 
-> **Tip:** You can adjust the `height` and `width` as needed to fit your layout.
+  From your dashboard, click **Publish > Direct Embed** and copy the iframe code. It should look similar to this:
 
----
+  ```html
+  <iframe src="https://app.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
+  ```
 
-## Example Screenshots
+  > **Note:** The chatbot must be set to **Public** for the iframe embed to work.
 
-Here’s what the integration process looks like (using Squarespace as an example):
+  ![](/images/custom-website/screenshot3.png)
 
-<img src="/images/squarespace/screenshot1.png" alt="Add Code to Head" width="600" className="rounded-xl my-4" />
-<img src="/images/squarespace/screenshot2.png" alt="Save and Apply" width="600" className="rounded-xl my-4" />
+  ## **Step 3: Add the iFrame to your website**
 
----
+  If you have direct access to your website's files:
 
-## Troubleshooting & Tips
+  1. Open the file where you want to embed the chatbot (typically index.html, .astro, .jsx, or your template file)
+  2. Locate the section where you want the chatbot to appear
+  3. Paste the iframe code
+  4. Adjust the width and height as needed
+  5. Save the file and upload it to your web server
 
-- Make sure to use your actual agent ID from the SketricGen dashboard.
-- If you don’t see the widget, clear your browser cache and refresh the page.
-- For advanced customizations, visit the SketricGen dashboard or contact support.
+  ```html
+  <div class="chat-container">
+    <h2>Chat with our AI Assistant</h2>
+    <iframe src="https://app.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
+  </div>
+  ```
 
----
+  ## **Step 4: Test your chatbot**
 
-Need more help? Check our [User Guide](/user-guide/introduction) or reach out to support via the Dashboard.
+  After adding the iframe:
+
+  1. Preview or publish your website
+  2. Verify that the chatbot iframe appears correctly
+  3. Test the chatbot by typing a question in the iframe
+
+  ![](/images/custom-website/screenshot4.png)
+
+  🎉 **Congratulations!** You've successfully added the SketricGen chatbot to your website using an iframe embed.
+
+  </Tab>
+</Tabs>
