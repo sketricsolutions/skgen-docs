@@ -36,7 +36,8 @@
               "integrations/Wix",
               "integrations/SquareSpace",
               "integrations/Slack",
-              "integrations/Shopify"
+              "integrations/Shopify",
+              "integrations/Zapier"
             ]
           }
         ]
