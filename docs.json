@@ -19,7 +19,8 @@
               "user-guide/introduction",
               "user-guide/best-practices",
               "user-guide/creating-your-first-agent",
-              "user-guide/playground"
+              "user-guide/playground",
+              "user-guide/api-reference"
             ]
           }
         ]

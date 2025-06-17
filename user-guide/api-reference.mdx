@@ -1,0 +1,193 @@
+---
+title: "API Reference"
+description: "API documentation for SketricGen Agent Response"
+---
+# SketricGen Agent Response API
+
+## Overview
+
+The SketricGen Agent Response API allows you to send messages to your SketricGen AI agents and receive AI-powered responses. This API enables seamless integration between your applications and SketricGen conversational AI.
+
+## Base Information
+
+- **Endpoint**: `GET https://api.sketricgen.ai/v1/agent-response`
+- **Authentication**: API Key + User ID
+- **Content Type**: `application/json`
+- **Method**: GET (with JSON body)
+
+## Authentication
+
+All requests must include authentication headers:
+
+<table>
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>X-API-KEY</code></td>
+      <td>string</td>
+      <td>✅</td>
+      <td>User's API key for authentication</td>
+    </tr>
+    <tr>
+      <td><code>X-USER-ID</code></td>
+      <td>string</td>
+      <td>✅</td>
+      <td>User's UUID for identification</td>
+    </tr>
+  </tbody>
+</table>
+
+## Request Schema
+
+### Headers
+
+```json
+{
+  "X-API-KEY": "your_api_key_here",
+  "X-USER-ID": "your_user_uuid_here",
+  "Content-Type": "application/json"
+}
+```
+
+### Request Body
+
+```json
+{
+  "message": "string",
+  "agent_id": "string",
+  "contact_id": "string" // optional
+}
+```
+
+#### Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>message</code></td>
+      <td>string</td>
+      <td>✅</td>
+      <td>The user's message text to process</td>
+    </tr>
+    <tr>
+      <td><code>agent_id</code></td>
+      <td>string</td>
+      <td>✅</td>
+      <td>SketricGen agent identifier</td>
+    </tr>
+    <tr>
+      <td><code>contact_id</code></td>
+      <td>string</td>
+      <td>❌</td>
+      <td>Unique identifier for the contact/conversation. If not provided, a random ID will be generated</td>
+    </tr>
+  </tbody>
+</table>
+
+## Response Schema
+
+### Success Response (200)
+
+```json
+{
+  "success": true,
+  "agent_response": "Hello! I'd be happy to help you with your order. Could you please provide me with your order number?",
+  "contact_id": "customer_67890"
+}
+```
+
+#### Response Fields
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>success</code></td>
+      <td>boolean</td>
+      <td>Indicates if the request was successful</td>
+    </tr>
+    <tr>
+      <td><code>agent_response</code></td>
+      <td>string</td>
+      <td>AI-generated response from your SketricGen agent</td>
+    </tr>
+    <tr>
+      <td><code>contact_id</code></td>
+      <td>string</td>
+      <td>Contact identifier for conversation continuity</td>
+    </tr>
+  </tbody>
+</table>
+
+### Error Responses
+
+#### Authentication Required (401)
+
+```json
+{
+  "success": false,
+  "message": "Authentication failed"
+}
+```
+
+#### Invalid Request (400)
+
+```json
+{
+  "success": false,
+  "message": "Missing required parameters"
+}
+```
+
+## Testing
+
+### cURL Example
+
+```bash
+curl -X GET https://api.sketricgen.ai/v1/agent-response \
+  -H "Content-Type: application/json" \
+  -H "X-API-KEY: your_api_key_here" \
+  -H "X-USER-ID: your_user_uuid_here" \
+  -d '{
+    "message": "Hello, I need help with my order",
+    "agent_id": "agent_12345",
+    "contact_id": "customer_67890"
+  }'
+```
+
+## Getting Started
+
+### 1. Obtain API Credentials
+
+- Get your API key from your SketricGen dashboard
+- Note your User ID from your account settings
+
+### 2. Set Up Your Agent
+
+- Create and configure your AI agent in the SketricGen platform
+- Note the `agent_id` for API calls
+
+---
+
+*Last Updated: June 17, 2025*
