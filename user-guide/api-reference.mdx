@@ -10,10 +10,10 @@ The SketricGen Agent Response API allows you to send messages to your SketricGen
 
 ## Base Information
 
-- **Endpoint**: `GET https://api.sketricgen.ai/v1/agent-response`
+- **Endpoint**: `POST https://api.sketricgen.ai/v1/agent-response`
 - **Authentication**: API Key + User ID
 - **Content Type**: `application/json`
-- **Method**: GET (with JSON body)
+- **Method**: POST
 
 ## Authentication
 
@@ -165,7 +165,7 @@ All requests must include authentication headers:
 ### cURL Example
 
 ```bash
-curl -X GET https://api.sketricgen.ai/v1/agent-response \
+curl -X POST https://api.sketricgen.ai/v1/agent-response \
   -H "Content-Type: application/json" \
   -H "X-API-KEY: your_api_key_here" \
   -H "X-USER-ID: your_user_uuid_here" \
@@ -190,4 +190,4 @@ curl -X GET https://api.sketricgen.ai/v1/agent-response \
 
 ---
 
-*Last Updated: June 17, 2025*
+*Last Updated: June 18, 2025*
