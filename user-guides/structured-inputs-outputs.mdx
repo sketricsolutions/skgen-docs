@@ -1,3 +1,38 @@
-# Structured Inputs & Outputs
+## Why structure?
 
-Working with structured data in AgentSpace.
+Structured data makes agent workflows **predictable**, **renderable**, and **testable**. In SketricGen, you define schemas in a **form-based UI**—no code required. The platform generates a **backend schema (Pydantic/JSON Schema style)** that agents use for **validation** and during **handoffs**.
+
+> [Screenshot Placeholder]: Edit Agent → Structured Input (your attached image fits here)
+
+---
+
+## Structured Input
+
+Use **Structured Input** to tell upstream callers (parent agents or widgets) **exactly** what fields this agent expects before it runs.
+
+**Create via form**
+
+1. **Open Agent Node → Structured Input**
+2. **Schema Name** (optional)
+3. **Add New Field** → set:
+   - **Field Name** (e.g., `name`)
+   - **Type** (String, Number, Boolean, Array, Object)
+   - **Description** (UI hint + LLM guidance, e.g., “Should always have the name of the user.”)
+   - **Default Value** (optional; used if caller omits the field)
+4. **Save Changes**
+
+## Structured Output (from this agent)
+
+Use **Structured Output** when you want this agent’s final response to be **typed JSON**—ideal for **end responders** and **API consumers**.
+
+Steps are the same as above, just use Click **Agent Node → Structured Output**
+
+**What happens under the hood**
+
+- SketricGen creates a **typed schema** for the agent.
+- On **handoff**, the **calling agent** must supply these fields; missing/invalid values are flagged in **Trace Explorer**.
+- Descriptions are surfaced to both the UI and the model to reduce ambiguity.
+
+**Best practice**
+
+- Put **Structured Inputs** on **child agents** so parents know exactly what to provide before handing off.

@@ -1,3 +1,41 @@
-# Tracing & Optimization
+Agentic AI is iterative. SketricGen lets you **edit → test → observe → improve** in one UI—so teams ship better workflows fast.
 
-Techniques for tracing and optimizing your agents.
+> [GIF] Edit agent → run test → open Trace Explorer → tweak → re-test
+
+## The fast loop (all in one place)
+
+1. **Edit** agent instructions, tool notes, handoff guidance, or structured output.
+2. **Test** in the Playground for the current AgentSpace.
+3. **Observe** in **Trace Explorer** (steps, tool I/O, durations, **credits**).
+4. **Improve** and re-run; **Promote** when stable.
+
+## Trace Explorer (what you see)
+
+- **Agent steps & handoffs** (routing is chosen by agents based on instructions + input).
+- **Tool inputs/outputs** (with redaction).
+- **Durations & total latency**.
+- **Credits per run**.
+- Errors, retries, fallbacks.
+
+> [Screenshot] Expanded tool step with input, output, duration, credits
+
+## Testing tools
+
+- **Snapshots**: save a good run as a baseline.
+- **Diffs**: compare two runs (tool I/O, timings, structured output).
+
+> [GIF] Run → Save Snapshot → Diff
+
+## Optimization quick wins
+
+- Tighten **agent instructions**: when to call which tool; success criteria.
+- Use **Agent as Tool** for repeatable sub-tasks (classification, extraction).
+- Prefer **structured outputs** to cut parsing errors and retries.
+- Configure **tool retries/fallbacks**; keep secrets in vault; redact sensitive fields.
+- Cache heavy lookups where possible; reduce unnecessary tool calls.
+
+## Post-deploy
+
+- Watch **Insights** (usage, failures, latency).
+- Duplicate winning spaces to evolve features without risk.
+- Update widget copy (logo/colors/default & callouts) from the UI—no code redeploy.

@@ -1,3 +1,164 @@
-# Agents
+## Overview
 
-Learn about Agents and how to configure them.
+Agents are the building blocks of every workflow inside the AgentSpace.
+
+Each agent represents a specific role or responsibility that can reason, use tools, and communicate with other agents through handoffs.
+
+Together, they form an orchestrated system that performs complex, multi-step tasks with clarity and modularity.
+
+Agents are configured directly on the canvas. Every agent you add defines a new unit of reasoning or action. The more clearly each agent’s role is defined, the more predictable and interpretable the workflow becomes.
+
+## Agent Structure
+
+An agent consists of several configuration layers that determine how it behaves and interacts within the workflow:
+
+1. **Identity** – The name and description that define what the agent is responsible for.
+2. **Instructions** – The role prompt that guides its tone, purpose, and boundaries.
+3. **Model Settings** – The AI model and parameters that control reasoning depth and variability.
+4. **Tools** – The set of capabilities the agent can access for data retrieval or execution.
+5. **Structured Inputs and Outputs** – The defined data schemas that ensure predictable, typed communication between agents and the system. Structured inputs specify what kind of data the agent expects to receive, while structured outputs define the exact format of data it returns to other agents or external integrations.
+
+> [Screenshot Placeholder]: Agent configuration sidebar showing instructions, tools, and schema tabs.
+
+## Defining Agent Instructions
+
+Instructions act as the agent’s “persona” or internal policy.
+
+They determine what the agent knows, how it should behave, and what tasks it should focus on.
+
+Good instructions describe:
+
+- The agent’s domain or scope (e.g., product support, analytics, content generation).
+- The expected tone or communication style.
+- What to do when uncertain or out of scope.
+- Any constraints or fallback behaviors.
+
+Example:
+
+You are a research assistant that summarizes market trends for internal reports.
+
+Focus on factual accuracy and clear summaries. If information is missing, request clarification before proceeding.
+
+**Guideline:** Treat this field as the agent’s operating manual—short, specific, and purpose-driven.
+
+## Model Selection and Settings
+
+Each agent runs on an underlying AI model. The model determines reasoning style, performance speed, and credit cost.
+
+Common parameters:
+
+- Model type (e.g., GPT-4, Claude, or other available providers)
+- Temperature (controls randomness; lower for precision, higher for creativity)
+- Token limit (maximum response length)
+
+**Guideline:** Choose the model based on the agent’s role—critical reasoning agents should use lower temperature values, while creative ones can be more flexible.
+
+## Adding and Managing Tools
+
+Agents can use tools to interact with data sources or perform actions.
+
+Once a tool is attached, the agent can call it automatically during reasoning when the context requires it.
+
+Supported tools include:
+
+- Sketric App Marketplace for connecting to external apps and actions
+- File Search for referencing internal knowledge bases
+- Web Search for retrieving live data
+- Code Interpreter for executing Python snippets and transformations
+- API Request for connecting to external REST or GraphQL endpoints
+- Custom MCP for linking to specialized or private connectors
+
+**Guideline:** Assign tools that fit the agent’s responsibility. Avoid overloading agents with unnecessary tools - keep their function narrow for clarity and efficient tracing.
+
+## Agent as a Tool
+
+An agent can also operate as a callable tool inside another agent’s workflow.
+
+In this configuration, one agent performs a subtask and returns its structured result to the parent agent, similar to how a function call works in programming.
+
+Example:
+
+- Parent agent: “Manager”
+- Child agent (as a tool): “Summarizer”
+  The Manager sends data to the Summarizer, receives a concise summary, and uses it in the next reasoning step.
+
+**Guideline:** Use agents as tools when modularizing recurring or domain-specific subtasks, such as summarization, validation, translation, or policy checking.
+
+> [Diagram Placeholder]: Parent agent node calling a sub-agent node and receiving a result.
+
+## Communication and Handoffs
+
+Agents communicate through directed handoffs. A handoff represents a transfer of control or responsibility from one agent to another.
+
+Handoffs can be explicitly defined by the designer or dynamically determined by the system based on context.
+
+Two common patterns:
+
+- Sequential handoffs (A → B → C) for predictable multi-step flows.
+- Conditional or AI-driven handoffs for adaptive routing.
+
+**Guideline:** Always label handoffs clearly. When workflows scale, named edges make it easier to trace and debug agent interactions.
+
+## Output and Structured Data
+
+Each agent can produce structured outputs using JSON schemas.
+
+Defining output fields ensures that handoffs and integrations remain reliable and composable.
+
+Example schema:
+
+```json
+{
+	"summary": "string",
+	"confidence": "number",
+	"source_list": ["string"]
+}
+```
+
+Structured outputs make downstream handling predictable, whether the next agent or an external API receives the data.
+
+**Guideline:** Validate all schema changes before publishing. Inconsistent outputs across agents can break workflow logic.
+
+## Testing Agents
+
+You can test agents directly inside the AgentSpace before connecting them to others.
+
+This helps verify whether their reasoning, tool usage, and outputs align with expectations.
+
+Steps to test:
+
+1. Open the agent node and click “Run Test.”
+2. Provide an input or message.
+3. Observe the reasoning chain and tool calls in the Trace Explorer.
+4. Adjust instructions or parameters as needed.
+
+> [Screenshot Placeholder]: Trace view showing an agent’s reasoning and tool interactions.
+
+## Debugging and Optimization
+
+Use the Trace Explorer to review each conversation involving your agent.
+
+Traces show what the agent did, which tools it called, what data was passed, and how much credit was used.
+
+When optimizing:
+
+- Reduce redundant tool calls.
+- Tighten instructions to eliminate unnecessary reasoning loops.
+- Use lower temperature values to increase determinism.
+- Simplify schema definitions to minimize parsing errors.
+
+## Best Practices for Designing Agents
+
+- Keep each agent focused on a single, well-defined task.
+- Avoid overlapping roles between agents.
+- Test each agent in isolation before integrating.
+- Keep instructions concise—avoid long, open-ended prompts.
+- Use naming conventions that describe purpose clearly (e.g., “Product Recommender,” “Content Validator”).
+- Limit tool count per agent to improve transparency and reduce cost.
+- Regularly review traces to monitor how agents evolve in real use.
+
+## Related Links
+
+- [AgentSpace Guide →](https://www.notion.so/1-AgentSpace-Canvas-27ede0351eaa806f9491c4f7d8fbd7cf?pvs=21)
+- [Orchestration & Handoffs Guide →](https://www.notion.so/4-Orchestration-Handoffs-27ede0351eaa80c3a80ec83af4b513c2?pvs=21)
+- [Tracing & Optimization Guide →](https://www.notion.so/27ede0351eaa808b86fff51fb9618a32?pvs=21)

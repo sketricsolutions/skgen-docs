@@ -1,3 +1,43 @@
-# Orchestration & Handoffs
+### How routing works (AI-routed)
 
-How orchestration and handoffs work in AgentSpace.
+SketricGen uses **AI-routed orchestration**: agents decide **when** to hand off based on **instructions + input**, not hard-coded paths. Keep entry flow clear (e.g., a _Manager/Triage_ first), and write crisp guidance for _when_ to call which agent or tool.
+
+> [Diagram Placeholder]: Triage → Researcher → Writer, with optional utility calls.
+
+## Handoff vs Agent-as-Tool
+
+- **Handoff (Agent → Agent)**
+  Transfers **control** to the target agent. That agent owns the rest of the turn (and may hand off again). In the SDK, a handoff is exposed to the model **as a tool** (e.g., `transfer_to_refund_agent`). Typically the **last agent** in the chain produces the reply.
+- **Agent-as-Tool**
+  Use an agent as a **bounded subtask**; it runs and **returns control** to the caller (great for utilities like classify/extract/redact).
+
+**Control-flow rule of thumb:** once handed off, a child **won’t call back** the parent unless you provide an explicit _handoff back_. If you need the parent to remain in charge, model the child as **Agent-as-Tool** instead.
+
+## Writing effective instructions
+
+- Define **role**, **goal**, **when to hand off**, and **tool usage notes**.
+- Keep guidance explicit (e.g., “If the question needs docs, hand off to _Responder_; otherwise answer directly.”).
+- Treat your Manager/Triage as the **entry point** for new messages.
+
+## Structuring data
+
+- Prefer **Structured Inputs** on child agents (so the parent knows exactly what to supply before a handoff).
+- Use **Structured Outputs (JSON)** mainly on **final responders** to keep user/API responses consistent.
+
+## Reliability: retries, fallbacks, traces
+
+- Configure **tool retries** (e.g., 429/5xx) and **fallbacks** for brittle endpoints.
+- Use **Trace Explorer** to see steps, tool I/O, durations, and **credits**; iterate quickly in the UI.
+
+## Starter patterns (AI-routed)
+
+- **Manager → Researcher → Writer** (research then compose).
+- **Manager → (Agent-as-Tool: Classifier) → Specialist** (utility returns; specialist may hand off further).
+- **Manager → Specialist → (Agent-as-Tool: Summarizer)** (bounded helper returns to specialist).
+
+> [GIF Placeholder]: Agent message → handoff in trace → final responder output.
+
+## Why protocols matter
+
+- **MCP** standardizes safe, reusable tool/data access—treat it like a “USB-C for AI.”
+- **A2A** enables interop between agents across vendors/systems for larger workflows.
