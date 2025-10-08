@@ -1,0 +1,65 @@
+**Goal:** Build a simple **Triage → Responder** workflow, attach **File Search**, add a **handoff**, test it, and configure a branded widget — all in the UI.
+
+### 1) Create a new AgentSpace (≈30s)
+
+1. Go to **AgentSpaces → New → Blank** (or choose a template).
+2. Name it: **Support Assist v1** → **Create**.
+
+> [Screenshot Placeholder]: “Create AgentSpace” dialog.
+
+### 2) Add two agents (≈60s)
+
+- **Agent A — Triage**
+  - _Instructions (example):_ “Classify user intent. If product info is needed, handoff to Responder.”
+- **Agent B — Responder**
+  - _Instructions (example):_ “Use the tool to find relevant docs and produce a concise answer with sources.”
+
+> [GIF Placeholder]: Add/rename agents; paste instructions.
+
+### 3) Attach a tool to Responder (≈45s)
+
+1. Select **Responder → Tools → Add Tool**.
+2. Choose **File Search**.
+3. Upload PDFs/Docs or select **Crawler** to index a documentation URL.
+
+> [Screenshot Placeholder]: “Edit Tool” panel showing Sketric App Marketplace, File Search, Web Search, Code Interpreter, API Request, Custom MCP (your provided screenshot fits perfectly here).
+
+### 4) Wire the handoff (≈30s)
+
+- Draw a connection **Triage → Responder**.
+- Condition: “When info lookup is required” (or leave AI-routed default).
+
+> [Screenshot Placeholder]: Edge configuration modal.
+
+### 5) (Optional) Structured output (≈30s)
+
+- In **Responder → Output → Schema**, define:
+
+```json
+{
+	"answer": "string",
+	"sources": ["string"]
+}
+```
+
+This ensures predictable **JSON** your app can render and store.
+
+> [Screenshot Placeholder]: Structured Output editor.
+
+### 6) Test and inspect traces (≈45s)
+
+- Click **Test** and ask: “How do I reset my password?”
+- Open **Trace Explorer** to view: called agent, tool input, tool output, **duration**, and **credits used**.
+
+> [GIF Placeholder]: Test panel + Trace Explorer with steps expanded.
+
+### 7) Configure a branded widget (≈60s)
+
+- In the **UI**, open **Deploy → Widget**:
+  - Upload **logo**, set **brand colors**, add **default text**, **callouts**, or **initial prompts**.
+  - Copy the install snippet or follow the CMS instructions (WordPress, Wix, etc.).
+  - (Public API is also available if you prefer server-side invocation; see **Deploy** docs.)
+
+> [Screenshot Placeholder]: Widget branding panel with color picker, logo upload, default messages.
+
+**You’re done.** You’ve designed a working **agentic workflow**, validated it with **traces**, and readied a **widget** for your site. For API or channel deployments (WhatsApp, Wix, WordPress, …), see **Deploy**.

@@ -11,34 +11,55 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "User Guide",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "User Guide",
+            "group": "Getting Started",
             "pages": [
-              "user-guide/introduction",
-              "user-guide/best-practices",
-              "user-guide/creating-your-first-agent",
-              "user-guide/playground",
-              "user-guide/api-reference"
+              "getting-started/overview",
+              "getting-started/quickstart",
+              "getting-started/core-concepts"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "integrations",
-        "groups": [
+          },
           {
-            "group": "integrations",
+            "group": "User Guides",
             "pages": [
-              "integrations/Custom-Website",
-              "integrations/WhatsApp",
-              "integrations/WordPress",
-              "integrations/Wix",
-              "integrations/SquareSpace",
-              "integrations/Slack",
-              "integrations/Shopify",
-              "integrations/Zapier"
+              "user-guides/intro-video",
+              "user-guides/agentspace-canvas",
+              "user-guides/agents",
+              "user-guides/tools",
+              "user-guides/orchestration-handoffs",
+              "user-guides/structured-inputs-outputs",
+              "user-guides/tracing-optimization",
+              "user-guides/conversations-insights",
+              "user-guides/best-practices"
+            ]
+          },
+          {
+            "group": "Deploy",
+            "pages": [
+              "deploy/whatsapp",
+              "deploy/squarespace-embed",
+              "deploy/squarespace-iframe",
+              "deploy/wix-embed",
+              "deploy/wix-iframe",
+              "deploy/slack",
+              "deploy/shopify",
+              "deploy/wp"
+            ]
+          },
+          {
+            "group": "Dev Guide",
+            "pages": [
+              "dev-guide/public-api-usage",
+              "dev-guide/custom-api-integration",
+              "dev-guide/custom-mcp-integration"
+            ]
+          },
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog/v2-0-0"
             ]
           }
         ]

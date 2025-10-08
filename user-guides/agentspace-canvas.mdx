@@ -1,0 +1,128 @@
+## Overview
+
+The AgentSpace is the central workspace of SketricGen: A visual canvas where you design, test, and optimize multi-agent workflows.
+
+Each workflow is made up of agents, tools, and handoffs, connected through an intuitive drag-and-drop interface.
+
+> [Hero Screenshot Placeholder]: AgentSpace canvas showing two agents connected with a handoff and one tool node attached.
+
+## Key Elements of the AgentSpace
+
+### Agents (Nodes)
+
+Each agent on the canvas represents a specialized role.
+
+Agents handle reasoning, communication, or actions depending on their configuration.
+
+**Common actions:**
+
+- Add a new agent node using the **“+ Add Handoff Agent”** button.
+- Configure its instructions, model, and attached tools.
+- Duplicate or delete using the node toolbar.
+
+**Pro Tip:**
+
+Start with two agents — one primary “Coordinator” and one “Responder” — to get familiar with agent-to-agent handoffs before scaling.
+
+### Tools (Attached Capabilities)
+
+Each agent can be equipped with tools that let it act, compute, or fetch data.
+
+Attached tools appear directly on the agent node, giving a quick view of its capabilities.
+
+**Examples:**
+
+- Attach **File Search** to give the agent access to a knowledge base.
+- Add **API Request** for system integrations.
+- Use **Code Interpreter** for internal computations.
+
+> [Mini Screenshot Placeholder]: “Attach Tool” modal inside AgentSpace.
+
+### Handoffs (Edges)
+
+Handoffs connect two agents. They determine when and how one agent passes the workflow to another.
+
+- **Designer-Routed:** You manually define the next agent and conditions.
+- **AI-Routed:** The system dynamically selects which agent should act next.
+
+You can label each edge to describe its purpose, e.g. _“handoff if data_ready = true”_.
+
+**Pro Tip:**
+
+Use handoffs to modularize responsibilities — one agent can summarize, another can analyze, another can take action.
+
+> [Diagram Placeholder]: Arrows showing handoff paths between agents.
+
+### AgentSpace Controls
+
+Located at the top-right of the canvas, the toolbar helps you manage workflow design.
+
+| Control                   | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| **Zoom & Pan**            | Navigate the canvas for large workflows.       |
+| **Run Test**              | Simulate the current AgentSpace configuration. |
+| **Save Draft**            | Save as a work-in-progress version.            |
+| **Promote to Production** | Lock a version for live use.                   |
+| **Duplicate**             | Clone a tested workflow for new experiments.   |
+
+## Workflow Management
+
+### Versioning
+
+Every AgentSpace can exist as multiple versions:
+
+- **Drafts** for experimentation
+- **Production** for stable, published flows
+
+Version states are visible in the top toolbar.
+
+You can always revert to a previous production version.
+
+### Credit Tracking
+
+Each tool call within an AgentSpace consumes credits.
+
+Credit cost is visible in the **Trace Explorer** after each conversation.
+
+## Orchestrating Multi-Agent Flows
+
+Use the AgentSpace to coordinate **multi-step reasoning and action pipelines**.
+
+Each agent is autonomous but can collaborate through handoffs and shared context.
+
+Example structure:
+
+1. **Collector Agent** — gathers data from a File Search tool.
+2. **Analyzer Agent** — runs computations via Code Interpreter.
+3. **Summarizer Agent** — crafts a structured response for the user.
+
+> [Flow Diagram Placeholder]: Three agents with sequential handoffs and attached tools.
+
+## Testing and Debugging
+
+Before deploying:
+
+- Use **Run Test** inside the AgentSpace.
+- Inspect outputs in the **Trace Explorer** tab.
+- Watch how agents hand off tasks and call tools.
+
+**Checklist before publishing:**
+
+- ✅ Agents produce structured JSON outputs.
+- ✅ Handoffs trigger as expected.
+- ✅ Tool calls succeed without timeouts.
+- ✅ No infinite loops between agents.
+
+## Best Practices for AgentSpace Design
+
+- **Name your agents clearly** — e.g., “Researcher,” “Summarizer,” “Validator.”
+- **Keep workflows modular** — isolate specialized logic per agent.
+- **Label handoffs** for transparency.
+- **Test incrementally** — debug one segment before connecting all agents.
+- **Use minimal tools** per agent — this reduces cost and improves clarity.
+
+## Related Links
+
+- [Agents Guide →](https://www.notion.so/2-Agents-27ede0351eaa80be837af7f7b0f7100b?pvs=21)
+- [Orchestration & Handoffs Guide →](https://www.notion.so/4-Orchestration-Handoffs-27ede0351eaa80c3a80ec83af4b513c2?pvs=21)
+- [Tracing & Optimization →](https://www.notion.so/6-Tracing-Optimization-27ede0351eaa808b86fff51fb9618a32?pvs=21)
