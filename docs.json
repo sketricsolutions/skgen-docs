@@ -38,14 +38,12 @@
           {
             "group": "Deploy",
             "pages": [
-              "deploy/whatsapp",
-              "deploy/squarespace-embed",
-              "deploy/squarespace-iframe",
-              "deploy/wix-embed",
-              "deploy/wix-iframe",
-              "deploy/slack",
-              "deploy/shopify",
-              "deploy/wp"
+              "deploy/WhatsApp",
+              "deploy/SquareSpace",
+              "deploy/Wix",
+              "deploy/Slack",
+              "deploy/Shopify",
+              "deploy/WordPress"
             ]
           },
           {
