@@ -1,125 +1,133 @@
+![canvas_hero.png](/images/user-guides/agent-space/canvas_hero.png)
+
 ## Overview
 
-The AgentSpace is the central workspace of SketricGen: A visual canvas where you design, test, and optimize multi-agent workflows.
+The AgentSpace is the central workspace of SketricGen — a visual canvas where you design, test, and optimize multi-agent workflows.
 
 Each workflow is made up of agents, tools, and handoffs, connected through an intuitive drag-and-drop interface.
 
-> [Hero Screenshot Placeholder]: AgentSpace canvas showing two agents connected with a handoff and one tool node attached.
+Users can build from scratch, import existing configurations, or export their work as portable JSON files. The AgentSpace is where ideas become executable, traceable workflows.
 
-## Key Elements of the AgentSpace
+## Adding Nodes
 
-### Agents (Nodes)
+On the top-left corner of the canvas is the Add Node menu, where you can choose what to add to your workflow.
 
-Each agent on the canvas represents a specialized role.
+| Node Type         | Description                                                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Trigger**       | The starting point for the workflow. Triggers can be text inputs, API events, or other signals that start a conversation.      |
+| **Tool**          | Represents an external capability or connector (such as File Search, Web Search, API Request, or Marketplace apps).            |
+| **Handoff Agent** | A standard agent node that performs reasoning or communication, and can hand off control to other agents.                      |
+| **Tool Agent**    | A specialized agent that behaves as a callable tool. It performs a subtask and returns structured results to its parent agent. |
 
-Agents handle reasoning, communication, or actions depending on their configuration.
+**Tip:** Tool Agents are ideal for modular, reusable subtasks like summarization or validation.
 
-**Common actions:**
+![canvas_add_node.png](/images/user-guides/agent-space/canvas_add_node.png)
 
-- Add a new agent node using the **“+ Add Handoff Agent”** button.
+## Agents and Tools on the Canvas
+
+Each agent you place on the canvas represents a distinct role in your workflow.
+
+Agents can have tools attached to them, which appear directly under the node and indicate available capabilities.
+
+**Common actions**
+
+- Click “+ Add Agent” to create a new node.
 - Configure its instructions, model, and attached tools.
-- Duplicate or delete using the node toolbar.
+- Rename, duplicate, or delete nodes using the node toolbar.
 
-**Pro Tip:**
+Example:
 
-Start with two agents — one primary “Coordinator” and one “Responder” — to get familiar with agent-to-agent handoffs before scaling.
+Lina (Triage Agent) uses studies the customer’s queries and hands off to Alex (Product Specialist) for product specific questions who uses File Search for accurate responses.
 
-### Tools (Attached Capabilities)
+![canvas_agent.png](/images/user-guides/agent-space/canvas_agent.png)
 
-Each agent can be equipped with tools that let it act, compute, or fetch data.
+## Handoffs and Workflow Flow
 
-Attached tools appear directly on the agent node, giving a quick view of its capabilities.
+Handoffs connect agents and define how information moves between them.
 
-**Examples:**
+- **Designer-Routed Handoffs:** You define explicit paths and conditions.
+- **AI-Routed Handoffs:** The system decides which agent should act next, based on context.
+- Edges can be labeled for clarity, such as “handoff if user_intent = product_question.”
 
-- Attach **File Search** to give the agent access to a knowledge base.
-- Add **API Request** for system integrations.
-- Use **Code Interpreter** for internal computations.
+Handoffs are the foundation of orchestration — they make workflows modular, traceable, and easy to expand.
 
-> [Mini Screenshot Placeholder]: “Attach Tool” modal inside AgentSpace.
+![canvas_handoff.gif](/images/user-guides/agent-space/canvas_handoff.gif)
 
-### Handoffs (Edges)
+## Importing and Exporting Configurations
 
-Handoffs connect two agents. They determine when and how one agent passes the workflow to another.
+Workflows in SketricGen can be saved and shared using JSON configuration files.
 
-- **Designer-Routed:** You manually define the next agent and conditions.
-- **AI-Routed:** The system dynamically selects which agent should act next.
+- **Import Config:** Upload a JSON file exported from another AgentSpace to instantly recreate the workflow.
+- **Download Config:** Export your current AgentSpace as a JSON file for versioning, backups, or reuse.
 
-You can label each edge to describe its purpose, e.g. _“handoff if data_ready = true”_.
+This functionality makes it easy to share setups across environments or collaborate between teams.
 
-**Pro Tip:**
+**Tip:** Configuration files preserve all node settings, connections, and tool attachments.
 
-Use handoffs to modularize responsibilities — one agent can summarize, another can analyze, another can take action.
+![canvas_config.png](/images/user-guides/agent-space/canvas_config.png)
 
-> [Diagram Placeholder]: Arrows showing handoff paths between agents.
+## Canvas Controls and Layout Tools
 
-### AgentSpace Controls
+The left-side toolbar contains UI controls for managing your view and workflow layout.
 
-Located at the top-right of the canvas, the toolbar helps you manage workflow design.
+| Control            | Function                                             |
+| ------------------ | ---------------------------------------------------- |
+| Save Workflow      | Saves the current state manually.                    |
+| Undo / Redo        | Step backward or forward through recent actions.     |
+| Zoom In / Zoom Out | Adjusts the canvas scale.                            |
+| Fit View           | Centers all nodes on screen.                         |
+| Auto Layout        | Automatically organizes nodes for clearer structure. |
 
-| Control                   | Description                                    |
-| ------------------------- | ---------------------------------------------- |
-| **Zoom & Pan**            | Navigate the canvas for large workflows.       |
-| **Run Test**              | Simulate the current AgentSpace configuration. |
-| **Save Draft**            | Save as a work-in-progress version.            |
-| **Promote to Production** | Lock a version for live use.                   |
-| **Duplicate**             | Clone a tested workflow for new experiments.   |
+These features enhance usability for larger, more complex workflows but don’t affect workflow logic.
+
+![canvas_layout.gif](/images/user-guides/agent-space/canvas_layout.gif)
+
+## Running and Testing a Workflow
+
+Once your AgentSpace is set up, use the **Test Workflow** button in the top-right corner to simulate and validate its behavior.
+
+When clicked, the workflow is executed from the Trigger node and transitions into the Playground for testing.
+
+Here, you can interact with the agents, observe their tool calls, and review handoffs in real time.
+
+**Checklist before testing**
+
+- Agents have clear instructions and attached tools.
+- Handoffs are connected correctly.
+- Structured Inputs and Outputs are defined for each agent.
+- The Trigger node has valid input settings.
+
+**Tip:** The Playground lets you review conversations and traces for debugging before deploying.
+
+![canvas_playground.png](/images/user-guides/agent-space/canvas_playground.png)
 
 ## Workflow Management
 
 ### Versioning
 
-Every AgentSpace can exist as multiple versions:
+Each AgentSpace can have multiple versions for iterative development.
 
-- **Drafts** for experimentation
-- **Production** for stable, published flows
+- Drafts for experimentation.
+- Production for stable, published flows.
 
-Version states are visible in the top toolbar.
-
-You can always revert to a previous production version.
+You can promote or revert versions anytime using the top toolbar.
 
 ### Credit Tracking
 
-Each tool call within an AgentSpace consumes credits.
+Every tool call within a workflow consumes credits.
 
-Credit cost is visible in the **Trace Explorer** after each conversation.
+The Trace Explorer shows credit usage per conversation and per tool, helping you optimize efficiency before scaling.
 
-## Orchestrating Multi-Agent Flows
+![canvas_traces.png](/images/user-guides/agent-space/canvas_traces.png)
 
-Use the AgentSpace to coordinate **multi-step reasoning and action pipelines**.
+## Best Practices
 
-Each agent is autonomous but can collaborate through handoffs and shared context.
-
-Example structure:
-
-1. **Collector Agent** — gathers data from a File Search tool.
-2. **Analyzer Agent** — runs computations via Code Interpreter.
-3. **Summarizer Agent** — crafts a structured response for the user.
-
-> [Flow Diagram Placeholder]: Three agents with sequential handoffs and attached tools.
-
-## Testing and Debugging
-
-Before deploying:
-
-- Use **Run Test** inside the AgentSpace.
-- Inspect outputs in the **Trace Explorer** tab.
-- Watch how agents hand off tasks and call tools.
-
-**Checklist before publishing:**
-
-- ✅ Agents produce structured JSON outputs.
-- ✅ Handoffs trigger as expected.
-- ✅ Tool calls succeed without timeouts.
-- ✅ No infinite loops between agents.
-
-## Best Practices for AgentSpace Design
-
-- **Name your agents clearly** — e.g., “Researcher,” “Summarizer,” “Validator.”
-- **Keep workflows modular** — isolate specialized logic per agent.
-- **Label handoffs** for transparency.
-- **Test incrementally** — debug one segment before connecting all agents.
-- **Use minimal tools** per agent — this reduces cost and improves clarity.
+- Start simple: one trigger, two agents, and a single handoff.
+- Label edges clearly to describe intent.
+- Use Tool Agents for specialized subtasks that can be reused.
+- Test configurations regularly to catch schema or routing errors.
+- Export stable configurations as JSON for backup.
+- Keep tool usage minimal per agent to simplify tracing.
 
 ## Related Links
 
