@@ -49,9 +49,7 @@
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/public-api-usage",
-              "dev-guide/custom-api-integration",
-              "dev-guide/custom-mcp-integration"
+              "dev-guide/public-api-usage"
             ]
           },
           {
