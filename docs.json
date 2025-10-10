@@ -18,21 +18,21 @@
             "pages": [
               "getting-started/overview",
               "getting-started/quickstart",
-              "getting-started/core-concepts"
+              "getting-started/core-Concepts"
             ]
           },
           {
             "group": "User Guides",
             "pages": [
-              "user-guides/intro-video",
-              "user-guides/agentspace-canvas",
+              "user-guides/intro-Video",
+              "user-guides/agentSpace-(Canvas)",
               "user-guides/agents",
               "user-guides/tools",
-              "user-guides/orchestration-handoffs",
-              "user-guides/structured-inputs-outputs",
-              "user-guides/tracing-optimization",
-              "user-guides/conversations-insights",
-              "user-guides/best-practices"
+              "user-guides/orchestration-Handoffs",
+              "user-guides/structured-Inputs-Outputs",
+              "user-guides/tracing-Optimization",
+              "user-guides/conversations-Insights",
+              "user-guides/best-Practices"
             ]
           },
           {
@@ -49,13 +49,14 @@
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/public-api-usage"
+              "dev-guide/public-API-Usage"
             ]
           },
           {
             "group": "Changelog",
             "pages": [
-              "changelog/v2-0-0"
+              "changelog/v1.0.0",
+              "changelog/v2.0.0"
             ]
           }
         ]
