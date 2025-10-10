@@ -1,43 +1,138 @@
-### How routing works (AI-routed)
+## Overview
 
-SketricGen uses **AI-routed orchestration**: agents decide **when** to hand off based on **instructions + input**, not hard-coded paths. Keep entry flow clear (e.g., a _Manager/Triage_ first), and write crisp guidance for _when_ to call which agent or tool.
+Orchestration in SketricGen defines **how agents collaborate** inside a workflow.
 
-> [Diagram Placeholder]: Triage → Researcher → Writer, with optional utility calls.
+Each agent operates semi-independently but follows your defined logic to decide **when** to hand off control or call another agent as a tool.
+
+SketricGen supports both **AI-routed orchestration** (where the model decides the next step) and **designer-routed orchestration** (where you manually connect agents with explicit edges in the AgentSpace).
+
+![orch_hero.png](/images/user-guides/orchestration-handoffs/orch_hero.png)
+
+## How Routing Works (AI-Routed)
+
+In **AI-routed orchestration**, agents decide when to hand off based on their **instructions** and **current input**, rather than following a fixed sequence.
+
+This routing style gives agents autonomy to decide:
+
+- Whether to continue reasoning, call a tool, or pass control to another agent.
+- Which downstream agent is most appropriate for the current intent.
+
+To achieve reliable AI-routed behavior:
+
+- Designate a clear **entry agent** (such as “Manager” or “Triage”) to handle all first messages.
+- Write **precise conditions** in the agent’s instructions describing when to hand off and when to handle the query directly.
+- Keep roles distinct — avoid overlapping functions between agents.
 
 ## Handoff vs Agent-as-Tool
 
-- **Handoff (Agent → Agent)**
-  Transfers **control** to the target agent. That agent owns the rest of the turn (and may hand off again). In the SDK, a handoff is exposed to the model **as a tool** (e.g., `transfer_to_refund_agent`). Typically the **last agent** in the chain produces the reply.
-- **Agent-as-Tool**
-  Use an agent as a **bounded subtask**; it runs and **returns control** to the caller (great for utilities like classify/extract/redact).
+### Handoff (Agent → Agent)
 
-**Control-flow rule of thumb:** once handed off, a child **won’t call back** the parent unless you provide an explicit _handoff back_. If you need the parent to remain in charge, model the child as **Agent-as-Tool** instead.
+A **handoff** transfers full control from one agent to another.
 
-## Writing effective instructions
+Once handed off, the target agent owns the next reasoning turn and may further hand off to others.
 
-- Define **role**, **goal**, **when to hand off**, and **tool usage notes**.
-- Keep guidance explicit (e.g., “If the question needs docs, hand off to _Responder_; otherwise answer directly.”).
-- Treat your Manager/Triage as the **entry point** for new messages.
+In the backend, this is represented internally as a **tool call** (e.g., `transfer_to_specialist_agent`).
 
-## Structuring data
+Typically, the final agent in the chain generates the conversation’s output.
 
-- Prefer **Structured Inputs** on child agents (so the parent knows exactly what to supply before a handoff).
-- Use **Structured Outputs (JSON)** mainly on **final responders** to keep user/API responses consistent.
+**Characteristics**
 
-## Reliability: retries, fallbacks, traces
+- Passes control permanently until another handoff occurs.
+- Maintains continuity of context (structured inputs can be passed).
+- Ideal for sequential or role-based pipelines (e.g., triage → specialist → responder).
 
-- Configure **tool retries** (e.g., 429/5xx) and **fallbacks** for brittle endpoints.
-- Use **Trace Explorer** to see steps, tool I/O, durations, and **credits**; iterate quickly in the UI.
+### Agent-as-Tool
 
-## Starter patterns (AI-routed)
+In this setup, an agent acts as a **callable utility** rather than a control-transfer node.
 
-- **Manager → Researcher → Writer** (research then compose).
-- **Manager → (Agent-as-Tool: Classifier) → Specialist** (utility returns; specialist may hand off further).
-- **Manager → Specialist → (Agent-as-Tool: Summarizer)** (bounded helper returns to specialist).
+The parent agent calls it as a sub-routine, waits for it to complete, and resumes control when the result is returned.
 
-> [GIF Placeholder]: Agent message → handoff in trace → final responder output.
+Common use cases:
 
-## Why protocols matter
+- Text classification
+- Information extraction
+- Summarization or redaction tasks
 
-- **MCP** standardizes safe, reusable tool/data access—treat it like a “USB-C for AI.”
-- **A2A** enables interop between agents across vendors/systems for larger workflows.
+**Control-flow rule of thumb:**
+
+Once handed off, a child won’t automatically return control to the parent unless you define a _handoff back_.
+
+If the parent should remain in charge, model the secondary logic as **Agent-as-Tool** instead.
+
+**Important:**
+
+The agent directly connected to the **Trigger node** cannot be configured or used as an Agent-as-Tool.
+
+![orch_agent_as_tool.png](/images/user-guides/orchestration-handoffs/orch_agent_as_tool.png)
+
+## Writing Effective Instructions
+
+To orchestrate reliably:
+
+- Define each agent’s **role**, **goal**, and **handoff criteria** in its instructions.
+- Provide clear logic for **when to use tools** and **when to delegate**.
+- Treat your entry agent as the **gateway** for all new inputs.
+
+Example guidance line:
+
+“If the query requires data retrieval or document lookup, hand off to Responder; otherwise, respond directly.”
+
+## Structuring Data Between Agents
+
+Data flow in orchestration depends on **Structured Inputs and Outputs**.
+
+- Use **Structured Inputs** on child agents so the parent knows exactly what to supply before a handoff.
+- Use **Structured Outputs (JSON)** on final responder agents to ensure consistent downstream or API responses.
+- Define only necessary fields; keep schemas concise.
+
+Example:
+
+```json
+{
+	"intent": "string",
+	"customer_id": "integer",
+	"handoff_required": "boolean"
+}
+```
+
+## Reliability: Retries, Fallbacks & Traces
+
+SketricGen provides built-in mechanisms for reliability and debugging:
+
+- **Tool Retries:** Automatically retries failed external calls (e.g., 429 or 5xx errors).
+- **Fallbacks:** Define alternate logic or backup tools for fragile endpoints.
+- **Trace Explorer:** Inspect all agent interactions, tool calls, handoffs, and credit usage for each conversation.
+
+Iterate and refine orchestration flows directly from trace data — identify bottlenecks, redundant handoffs, or misrouted intents.
+
+![orch_trace.png](/images/user-guides/orchestration-handoffs/orch_trace.png)
+
+## Starter Patterns (AI-Routed)
+
+These are common multi-agent orchestration setups you can replicate or adapt:
+
+| Pattern                                            | Description                                                                          |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Manager → Researcher → Writer                      | Manager routes research tasks, Researcher compiles info, Writer drafts the response. |
+| Manager → (Agent-as-Tool: Classifier) → Specialist | Classifier determines type; Specialist handles it further.                           |
+| Manager → Specialist → (Agent-as-Tool: Summarizer) | Specialist processes and sends text to Summarizer for concise output.                |
+
+![orch_handoff.gif](/images/user-guides/orchestration-handoffs/orch_handoff.gif)
+
+## Why Protocols Matter
+
+Interoperability is critical in larger multi-agent ecosystems.
+
+- **MCP (Model Context Protocol):**
+  A standardized way to expose tools and data sources safely and consistently — think of it as “USB-C for AI.”
+- **A2A (Agent-to-Agent) Communication:**
+  Enables secure interoperation between agents across different systems or vendors, letting workflows scale beyond a single environment.
+
+## Best Practices
+
+- Always define one clear **entry agent** to receive initial inputs.
+- Use **handoffs** for ownership transfer and **Agent-as-Tool** for short, reusable subtasks.
+- Keep handoff paths labeled and intentional.
+- Validate Structured Inputs and Outputs to prevent schema mismatches.
+- Review traces after each major workflow run to fine-tune orchestration.
+- Keep logic simple and modular — complexity should emerge from clarity, not layers.
