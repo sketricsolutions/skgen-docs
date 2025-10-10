@@ -25,7 +25,7 @@
             "group": "User Guides",
             "pages": [
               "user-guides/intro-Video",
-              "user-guides/agentSpace-(Canvas)",
+              "user-guides/agentSpace-Canvas",
               "user-guides/agents",
               "user-guides/tools",
               "user-guides/orchestration-Handoffs",
@@ -43,7 +43,8 @@
               "deploy/Wix",
               "deploy/Slack",
               "deploy/Shopify",
-              "deploy/WordPress"
+              "deploy/WordPress",
+              "deploy/Zapier"
             ]
           },
           {
@@ -80,7 +81,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "https://www.sketricgen.ai/contact/"
+        "href": "https://www.sketricgen.ai"
       }
     ],
     "primary": {
