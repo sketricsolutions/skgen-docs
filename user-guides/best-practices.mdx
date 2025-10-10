@@ -1,14 +1,10 @@
 Build your AgentSpace like a team: a **Manager/Triage** agent receives the message first, decides what’s needed, and **passes control** to the right specialist. Your job is to make control flow **predictable** with clear instructions and tool usage notes. [OpenAI CDN](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
 
----
-
 ## Control flow: who’s in charge?
 
 - **Handoffs transfer control**: when Agent A hands off to Agent B, **B owns the run** until it’s done (or hands off again). The final answer normally comes from the **last agent** that handled the message.
 - **Agent as Tool returns control**: use this for bounded sub-tasks; the callee runs, returns a result, and control goes **back to the caller**. Great for reusable utilities (classify, extract, redact).
 - **Routing is AI-decided**: agents choose when to hand off based on **instructions + input** (not hard-coded paths). Keep your instructions explicit about _when_ to call which tool/agent.
-
----
 
 ## Write crisp instructions
 
@@ -16,23 +12,17 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 - Break work into **clear steps**; call out **required fields** before tools/hand-offs.
 - Borrow existing SOPs/policies to reduce ambiguity.
 
----
-
 ## Structure where it matters
 
 - Prefer **Structured Inputs** for child agents (so the parent knows exactly what fields to supply before a handoff).
 - Use **Structured Outputs** primarily on **ending agents** (so user-facing or API consumers get consistent JSON).
 - Avoid forcing intermediate agents to emit final JSON unless they’re the responder.
 
----
-
 ## Tooling principles
 
 - Map only the fields you need; set retries/fallbacks for flaky endpoints; redact sensitive params in traces.
 - Use **File Search** with curated sources or the crawler; add **Web Search** when freshness matters.
 - Keep repeatable logic in **Agent as Tool** to shorten paths and improve latency.
-
----
 
 ## Orchestration patterns to start with
 
@@ -41,20 +31,14 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 - **Manager → Researcher → Writer**: research pulls context; writer composes the final answer.
   Begin simple (one or two specialists), then scale the team as the workload grows.
 
----
-
 ## Iterate fast (the core loop)
 
 **Edit → Test → Observe → Improve** in one UI: update instructions/tool notes, run a test, open **Trace Explorer** (steps, tool I/O, durations, credits), then refine. Save **snapshots** and compare **diffs** to prevent regressions.
-
----
 
 ## Protocols you benefit from
 
 - **MCP (Model Context Protocol)**: a standard “USB-C for AI” to connect models to tools and data safely and consistently. Use MCP servers for clean, reusable capabilities.
 - **A2A (Agent-to-Agent)**: emerging standard for interop between agents across systems—useful when your flows span other vendors or services.
-
----
 
 ## Common mistakes (and fixes)
 

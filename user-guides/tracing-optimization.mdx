@@ -1,41 +1,74 @@
-Agentic AI is iterative. SketricGen lets you **edit → test → observe → improve** in one UI—so teams ship better workflows fast.
+## Overview
 
-> [GIF] Edit agent → run test → open Trace Explorer → tweak → re-test
+Traces give you a transparent view into how your agents think, act, and collaborate.
 
-## The fast loop (all in one place)
+They show **what happened under the hood** during a conversation — which agents were called, what tools they used, how long each step took, and how many credits were consumed.
 
-1. **Edit** agent instructions, tool notes, handoff guidance, or structured output.
-2. **Test** in the Playground for the current AgentSpace.
-3. **Observe** in **Trace Explorer** (steps, tool I/O, durations, **credits**).
-4. **Improve** and re-run; **Promote** when stable.
+SketricGen provides two primary ways to view traces:
 
-## Trace Explorer (what you see)
+1. **In the Playground:** Real-time traces for interactive testing.
+2. **In the Conversations tab:** Historical traces tied to every message from deployed agents.
 
-- **Agent steps & handoffs** (routing is chosen by agents based on instructions + input).
-- **Tool inputs/outputs** (with redaction).
-- **Durations & total latency**.
-- **Credits per run**.
-- Errors, retries, fallbacks.
+## Viewing Traces in the Playground
 
-> [Screenshot] Expanded tool step with input, output, duration, credits
+The Playground offers a direct way to debug your agent workflows as you interact with them.
 
-## Testing tools
+When you send a message in the chat widget:
 
-- **Snapshots**: save a good run as a baseline.
-- **Diffs**: compare two runs (tool I/O, timings, structured output).
+- Each message is logged with a corresponding **trace record**.
+- Click on a trace entry to open the **Agent Trace Details** modal.
+- The trace shows:
+  - Which **agent** received the message.
+  - Any **handoffs** that occurred between agents.
+  - **Function calls** made (e.g., tool invocations or handoffs).
+  - The **duration** of the call and **credits consumed**.
+  - A step-by-step breakdown of each action performed.
 
-> [GIF] Run → Save Snapshot → Diff
+You can expand the trace details to inspect:
 
-## Optimization quick wins
+- The **function arguments** passed between agents.
+- The **structured outputs** generated.
+- The final response returned to the user.
 
-- Tighten **agent instructions**: when to call which tool; success criteria.
-- Use **Agent as Tool** for repeatable sub-tasks (classification, extraction).
-- Prefer **structured outputs** to cut parsing errors and retries.
-- Configure **tool retries/fallbacks**; keep secrets in vault; redact sensitive fields.
-- Cache heavy lookups where possible; reduce unnecessary tool calls.
+![trace_traces.png](/images/user-guides/traces-optimization/trace_traces.png)
 
-## Post-deploy
+This makes the Playground ideal for iterative debugging — refine your workflow logic and see immediate trace feedback.
 
-- Watch **Insights** (usage, failures, latency).
-- Duplicate winning spaces to evolve features without risk.
-- Update widget copy (logo/colors/default & callouts) from the UI—no code redeploy.
+## Viewing Traces in the Conversations Tab
+
+Beyond testing, you can also view traces from **live or historical deployments**.
+
+To explore these:
+
+1. Navigate to **View Conversations** from the sidebar.
+2. Select a specific agent or AgentSpace.
+3. Choose any conversation from the list.
+4. Click the **View Traces** button beside an individual message.
+
+A detailed **Trace Viewer** appears, identical to the one in the Playground, showing:
+
+- The reasoning path followed by the agent.
+- The tools and handoffs executed.
+- Credit usage and latency for each message.
+- Input and output payloads for every step.
+
+![trace_conversations.gif](/images/user-guides/traces-optimization/trace_conversations.gif)
+
+This unified view ensures that whether you’re testing in development or monitoring production workflows, you can always audit exactly how a response was generated.
+
+## Optimization Quick Wins
+
+Once traces help you identify bottlenecks or inefficiencies, use these practices to refine your workflows.
+
+- Tighten **agent instructions** — specify when to call which tool, and define clear success criteria.
+- Use **Agent-as-Tool** for repetitive, well-bounded subtasks (classification, extraction, summarization).
+- Prefer **Structured Outputs** to eliminate parsing errors and reduce retry attempts.
+- Configure **tool retries and fallbacks** for fragile APIs or rate-limited endpoints.
+- Keep sensitive credentials secure — use vault-managed secrets and redact fields in logs.
+- Cache results for heavy lookups to minimize duplicate API calls.
+- Review **Trace Explorer** regularly to identify high-cost or redundant operations.
+- Simplify your orchestration paths — fewer unnecessary handoffs mean faster, cheaper runs.
+
+**Guideline:**
+
+Traces are your best feedback loop. The most efficient agent workflows are built through a cycle of observing traces, optimizing instructions, and retesting in the Playground.
