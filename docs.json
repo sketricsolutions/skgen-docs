@@ -28,10 +28,10 @@
               "user-guides/agentSpace-Canvas",
               "user-guides/agents",
               "user-guides/tools",
-              "user-guides/orchestration-Handoffs",
-              "user-guides/structured-Inputs-Outputs",
-              "user-guides/tracing-Optimization",
-              "user-guides/conversations-Insights",
+              "user-guides/orchestration-and-Handoffs",
+              "user-guides/structured-Inputs-and-Outputs",
+              "user-guides/traces-and-Optimizations",
+              "user-guides/conversations-and-Insights",
               "user-guides/best-Practices"
             ]
           },
