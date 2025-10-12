@@ -8,8 +8,8 @@ Your AgentSpace is the visual canvas where you design and test multi-agent workf
 
 Each workflow is composed of nodes and edges that define the logic of collaboration.
 
-- **Nodes = Agents.** Each node represents a role or capability.
-- **Edges = Handoffs.** Define how one agent passes control or data to another.
+- **Nodes = Agents or tools.** Each node represents a role or capability.
+- **Edges = Handoffs, connections.** Define how one agent passes control or data to another and connects to tools.
 - You can version, duplicate, and promote flows as they evolve.
 
 **Guideline:**
@@ -23,7 +23,7 @@ Start small. Build two or three connected agents, validate each handoff, and obs
 Agents are the individual roles in your workflow. Each has its own:
 
 - **Instructions** (the prompt or system message defining purpose & tone)
-- **Model & parameters** (temperature, max tokens, etc.)
+- **Model & parameters** (OpenAI supported models)
 - **Access to tools** (data retrieval or action execution)
 - **Guardrails & limits** (optional constraints)
 
@@ -53,7 +53,7 @@ You can attach one or many tools to an agent.
 | **File Search**             | Create a private knowledge base from uploaded files or crawled websites.   | Product manuals, FAQs, policy docs.                    |
 | **Web Search**              | Retrieve fresh, web-based context.                                         | Market research, news summaries, dynamic data.         |
 | **Code Interpreter**        | Execute Python code securely in a sandbox.                                 | Data transformation, quick computation, CSV analysis.  |
-| **API Request**             | Call external REST or GraphQL APIs with headers, auth, and schema mapping. | Integrate internal systems or external SaaS APIs.      |
+| **API Request**             | Call external REST APIs with headers, auth, and schema mapping. | Integrate internal systems or external SaaS APIs.      |
 | **Custom MCP**              | Add standardized MCP servers for cross-app interoperability.               | Advanced enterprise integrations.                      |
 
 **Guideline:**

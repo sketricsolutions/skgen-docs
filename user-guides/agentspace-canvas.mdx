@@ -37,7 +37,7 @@ Agents can have tools attached to them, which appear directly under the node and
 
 Example:
 
-Lina (Triage Agent) uses studies the customer’s queries and hands off to Alex (Product Specialist) for product specific questions who uses File Search for accurate responses.
+Lina (Triage Agent) handles basic queries and meeting scheduling. and hands off technical qeuestions to Alex (Product Specialist) for product specific questions who uses File Search for accurate responses.
 
 ![canvas_agent.png](/images/user-guides/agent-space/canvas_agent.png)
 
@@ -45,9 +45,9 @@ Lina (Triage Agent) uses studies the customer’s queries and hands off to Alex 
 
 Handoffs connect agents and define how information moves between them.
 
-- **Designer-Routed Handoffs:** You define explicit paths and conditions.
-- **AI-Routed Handoffs:** The system decides which agent should act next, based on context.
-- Edges can be labeled for clarity, such as “handoff if user_intent = product_question.”
+- **Designer-Routed Handoffs:** You define explicit paths and conditions. Specify clealy in the Instructions of Router Agent that it must never respond to the questions and only hand-off as per your conditions.
+- **AI-Routed Handoffs:** The system decides which agent should act next, based on context. More dynamic and scenario based handoffs.
+- Edges can be labeled for clarity, such as “handoff if user_intent = product_question.”. Use this feature for accurate handoffs.
 
 Handoffs are the foundation of orchestration — they make workflows modular, traceable, and easy to expand.
 
@@ -62,7 +62,7 @@ Workflows in SketricGen can be saved and shared using JSON configuration files.
 
 This functionality makes it easy to share setups across environments or collaborate between teams.
 
-**Tip:** Configuration files preserve all node settings, connections, and tool attachments.
+**Note:** Downloaded config strips off Knowledge base, Sensitive Info and API Headers.
 
 ![canvas_config.png](/images/user-guides/agent-space/canvas_config.png)
 
@@ -92,25 +92,14 @@ Here, you can interact with the agents, observe their tool calls, and review han
 
 **Checklist before testing**
 
-- Agents have clear instructions and attached tools.
-- Handoffs are connected correctly.
-- Structured Inputs and Outputs are defined for each agent.
-- The Trigger node has valid input settings.
+- Agents have clear instructions and required tools attached and working.
+- Handoffs are connected correctly with descriptions.
+- Structured Inputs and Outputs are defined for agents that require a specific structure.
 
 **Tip:** The Playground lets you review conversations and traces for debugging before deploying.
 
 ![canvas_playground.png](/images/user-guides/agent-space/canvas_playground.png)
 
-## Workflow Management
-
-### Versioning
-
-Each AgentSpace can have multiple versions for iterative development.
-
-- Drafts for experimentation.
-- Production for stable, published flows.
-
-You can promote or revert versions anytime using the top toolbar.
 
 ### Credit Tracking
 
@@ -123,7 +112,7 @@ The Trace Explorer shows credit usage per conversation and per tool, helping you
 ## Best Practices
 
 - Start simple: one trigger, two agents, and a single handoff.
-- Label edges clearly to describe intent.
+- Label edges clearly for agent to perform accurate handoffs.
 - Use Tool Agents for specialized subtasks that can be reused.
 - Test configurations regularly to catch schema or routing errors.
 - Export stable configurations as JSON for backup.
@@ -133,4 +122,4 @@ The Trace Explorer shows credit usage per conversation and per tool, helping you
 
 - [Agents Guide →](/user-guides/agents)
 - [Orchestration & Handoffs Guide →](/user-guides/orchestration-handoffs)
-- [Tracing & Optimization →](/user-guides/tracing-optimization))
+- [Tracing & Optimization →](/user-guides/tracing-optimization)

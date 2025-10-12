@@ -16,7 +16,8 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 
 - Prefer **Structured Inputs** for child agents (so the parent knows exactly what fields to supply before a handoff).
 - Use **Structured Outputs** primarily on **ending agents** (so user-facing or API consumers get consistent JSON).
-- Avoid forcing intermediate agents to emit final JSON unless they’re the responder.
+- Avoid forcing intermediate agents to emit final JSON unless they’re the responder. They will always return JSON output and this is not very human/customer friendly. 
+- **Tip:** Structured Outputs is powerful for Agents as Tools!
 
 ## Tooling principles
 

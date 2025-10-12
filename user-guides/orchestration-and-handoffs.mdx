@@ -31,13 +31,11 @@ A **handoff** transfers full control from one agent to another.
 
 Once handed off, the target agent owns the next reasoning turn and may further hand off to others.
 
-In the backend, this is represented internally as a **tool call** (e.g., `transfer_to_specialist_agent`).
-
-Typically, the final agent in the chain generates the conversation’s output.
+This way, if the input message intent is completed, the Agent in control returns the final response. So there is no fixed start and endpoint in the canvas unlike most Automations.
 
 **Characteristics**
 
-- Passes control permanently until another handoff occurs.
+- Passes control of the Run permanently until another handoff occurs.
 - Maintains continuity of context (structured inputs can be passed).
 - Ideal for sequential or role-based pipelines (e.g., triage → specialist → responder).
 
@@ -82,7 +80,7 @@ Example guidance line:
 Data flow in orchestration depends on **Structured Inputs and Outputs**.
 
 - Use **Structured Inputs** on child agents so the parent knows exactly what to supply before a handoff.
-- Use **Structured Outputs (JSON)** on final responder agents to ensure consistent downstream or API responses.
+- Use **Structured Outputs (JSON)** on final responder agents to ensure consistent output or API responses.
 - Define only necessary fields; keep schemas concise.
 
 Example:

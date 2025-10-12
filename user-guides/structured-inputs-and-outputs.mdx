@@ -58,8 +58,9 @@ This ensures predictable data handling between connected agents and external int
 
 ## Best Practices
 
-- Always define **Structured Inputs** for downstream agents—this prevents data mismatch during orchestration.
+- Use defined **Structured Inputs** for downstream agents—this prevents data mismatch during orchestration.
 - Use **Structured Outputs** primarily on **final responder** agents that return data to users or APIs.
+- **Be careful when using Structured outputs** in intermediate agents as the model will always respond in JSON, so its not very human/customer facing friendly. Use this for final agents or agents-as-tools.
 - Keep field names simple and lowercase, separated by underscores.
 - Use short, human-readable descriptions; they also serve as hints for model behavior.
 - When modifying a schema, re-test the workflow to ensure all upstream connections still match.
