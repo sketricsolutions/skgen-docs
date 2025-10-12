@@ -1,0 +1,123 @@
+## Overview
+
+The **Conversations** and **Insights** tabs provide a complete monitoring layer for your agents.
+
+They help you **review, analyze, and optimize** performance by showing real user interactions, credit usage, and traffic distribution across platforms.
+
+These two features together close the feedback loop, letting you trace how your agents perform in real-world deployments and how your overall account resources are utilized.
+
+## Conversations
+
+### Viewing Conversations
+
+The **Conversations** tab lets you review all interactions across your deployed agents.
+
+To view them:
+
+1. Open **View Conversations** from the sidebar.
+2. Select the **AgentSpace** or specific workflow you want to review.
+3. A list of all recorded conversations for that AgentSpace appears.
+4. Click on any conversation to open its full chat history.
+
+Each conversation displays both user messages and agent responses exactly as they occurred, giving you a clear understanding of how your workflow behaves in production.
+
+![insights_list.png](/images/user-guides/conversations-insights/insights_list.png)
+
+### Viewing Traces for Conversations
+
+Within each conversation, you can open **detailed execution traces** for any message.
+
+- Click the **View Traces** button next to an agent’s response.
+- A detailed trace panel opens showing:
+  - The **agents involved** in generating that response.
+  - Any **handoffs** or **tool calls** executed.
+  - The **time taken** and **credits consumed** for that message.
+  - Structured input/output data for debugging.
+
+This feature provides the same deep transparency available in the Playground — now extended to real, live conversations.
+
+![insights_conversations.gif](/images/user-guides/conversations-insights/insights_conversations.gif)
+
+### Exporting Conversations
+
+You can also **export conversations** for documentation, analysis, or training purposes.
+
+Click the **Export** button at the top right of any conversation to download the full dialogue in JSON format.
+
+**Use cases include:**
+
+- Reviewing customer queries for workflow improvements.
+- Sharing examples with team members.
+- Fine-tuning your agents’ prompts or tool configurations.
+
+## Insights
+
+### Overview
+
+The **Insights** tab helps you track and analyze how your account and agents are performing.
+
+It includes two main views: **Account Overview** and **Agent Analytics**.
+
+![insights_overview.png](/images/user-guides/conversations-insights/insights_overview.png)
+
+### Account Overview
+
+This section summarizes key metrics for your account:
+
+| Metric                  | Description                                                            |
+| ----------------------- | ---------------------------------------------------------------------- |
+| **Credit Usage**        | Shows how many of your allocated credits have been consumed.           |
+| **Agent Capacity**      | Displays how many agent slots are currently being used.                |
+| **Active Agents**       | Indicates how many of your agents are live and responding.             |
+| **Estimated Days Left** | Calculates how long your credits will last at your current usage rate. |
+
+You’ll also see a **Credits Overview** panel showing:
+
+- Total credits used and remaining.
+- Your monthly credit allocation.
+- Visual credit utilization charts.
+
+This gives administrators and teams a clear picture of account health and usage patterns.
+
+You can also view the credits consumption by hovering on your Profile
+
+![insights_credits.png](/images/user-guides/conversations-insights/insights_credits.png)
+
+### Agent Analytics
+
+The **Agent Analytics** view provides performance insights for individual agents or AgentSpaces.
+
+You can select any workflow to view its usage metrics.
+
+Each analytics dashboard includes:
+
+- **Total Messages** — Number of messages processed.
+- **Conversations** — Total unique conversations handled.
+- **Credits Used** — Credits consumed by that agent or workflow.
+- **Last Active** — Timestamp of most recent activity.
+- **Activity Timeline** — Message and credit usage trends across the past few days or weeks.
+
+![insights_analytics.gif](/images/user-guides/conversations-insights/insights_analytics.gif)
+
+### Platform Distribution
+
+When agents are deployed across multiple channels, you can track where your users engage most.
+
+- **Usage by Platform:** Breakdown of traffic across connected apps and integrations (e.g., WhatsApp, Shopify, Slack).
+- **Platform Performance:** Credit and message consumption per platform.
+
+This helps you identify which deployment channels bring the highest engagement or cost and where optimization efforts should focus.
+
+## How Conversations and Insights Work Together
+
+- **Conversations** let you drill down into the _quality_ and _content_ of agent interactions.
+- **Insights** provide a _quantitative overview_ of performance and resource utilization.
+  Combined, they give you full operational visibility — from individual message traces to system-wide analytics.
+
+## Best Practices
+
+- Review **Conversations** weekly to identify recurring user queries or misunderstood intents.
+- Monitor **Insights** regularly to track credit efficiency and agent utilization.
+- Use **Agent Analytics** to identify high-performing workflows or underused tools.
+- Compare **Platform Distribution** metrics to refine your deployment strategy.
+- Export key conversations for retraining or documentation when refining prompts.

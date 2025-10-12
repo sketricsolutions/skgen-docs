@@ -11,34 +11,53 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "User Guide",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "User Guide",
+            "group": "Getting Started",
             "pages": [
-              "user-guide/introduction",
-              "user-guide/best-practices",
-              "user-guide/creating-your-first-agent",
-              "user-guide/playground",
-              "user-guide/api-reference"
+              "getting-started/overview",
+              "getting-started/core-Concepts",
+              "getting-started/quickstart"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "integrations",
-        "groups": [
+          },
           {
-            "group": "integrations",
+            "group": "User Guides",
             "pages": [
-              "integrations/Custom-Website",
-              "integrations/WhatsApp",
-              "integrations/WordPress",
-              "integrations/Wix",
-              "integrations/SquareSpace",
-              "integrations/Slack",
-              "integrations/Shopify",
-              "integrations/Zapier"
+              "user-guides/intro-Video",
+              "user-guides/agentSpace-Canvas",
+              "user-guides/agents",
+              "user-guides/tools",
+              "user-guides/orchestration-and-Handoffs",
+              "user-guides/structured-Inputs-and-Outputs",
+              "user-guides/traces-and-Optimizations",
+              "user-guides/conversations-and-Insights",
+              "user-guides/best-Practices"
+            ]
+          },
+          {
+            "group": "Deploy",
+            "pages": [
+              "deploy/WhatsApp",
+              "deploy/SquareSpace",
+              "deploy/Wix",
+              "deploy/Slack",
+              "deploy/Shopify",
+              "deploy/WordPress",
+              "deploy/Zapier"
+            ]
+          },
+          {
+            "group": "Dev Guide",
+            "pages": [
+              "dev-guide/public-API-Usage"
+            ]
+          },
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog/v2.0.0",
+              "changelog/v1.0.0"
             ]
           }
         ]
@@ -62,7 +81,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "https://www.sketricgen.ai/contact/"
+        "href": "https://www.sketricgen.ai"
       }
     ],
     "primary": {
