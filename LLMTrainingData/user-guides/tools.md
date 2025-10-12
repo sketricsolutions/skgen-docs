@@ -1,0 +1,207 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/tools
+
+## Overview
+
+Tools extend the capabilities of your agents by allowing them to act, compute, fetch, or integrate external information.
+
+They can be attached directly to an agent node or added independently as **Tool Nodes** on the AgentSpace canvas.
+
+Each tool operates as a callable function within a workflow—agents invoke them when reasoning or completing assigned tasks.
+
+You can connect to external apps, build knowledge bases, run Python code, make API calls, or integrate with MCP servers.
+
+![Screenshot showing tools sidebar with available tool options](https://docs.sketricgen.ai/images/user-guides/tools/tools_sidebar.png)
+
+## Adding Tools from the Canvas
+
+In the AgentSpace, click **Add Node → Tool** to insert a tool node into your workflow.
+
+Once added, you’ll see a configuration panel where you can select from available tool types.
+
+### Available Tool Types
+
+1. Sketric App Marketplace
+2. File Search
+3. Web Search
+4. Code Interpreter
+5. API Request
+6. Custom MCP
+
+## 1. Sketric App Marketplace
+
+The **Sketric App Marketplace** gives agents access to over 2000+ apps across productivity, communication, and automation categories.
+
+You can connect apps like Gmail, Google Drive, Slack, Notion, Trello, HubSpot, and others either through **OAuth** (login authorization) or by using **API keys**.
+
+Once connected, the tool becomes available for your agents to perform specific actions provided by the app, such as sending an email, updating a sheet, or fetching CRM data.
+
+Example:
+
+- Use OAuth to connect Google Drive or Slack.
+- Use an API key to integrate DataForSEO or any service that provides an MCP connector.
+
+**Guideline:**
+
+For security, API keys are stored in encrypted form. Revoke access from the “Manage Tools → Apps” tab anytime.
+
+![Animated GIF showing Sketric App Marketplace tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_marketplace.gif)
+
+## 2. File Search
+
+**File Search** lets agents connect to structured knowledge bases (KBs) created within your SketricGen account.
+
+Knowledge bases serve as private data repositories for your agents to reference when responding to queries.
+
+You can create and manage knowledge bases through **Manage Tools → Knowledge Bases**.
+
+Supported upload formats include:
+
+- DOC, DOCX
+- JSON
+- HTML
+- MD
+- PDF
+- PPTX
+- TXT
+
+You can also populate your knowledge base by:
+
+- Uploading a website URL for automatic crawling.
+- Pasting raw text directly.
+- Adding question–answer pairs (Q&A format).
+
+Example:
+
+Use File Search for customer FAQs, product documentation, or internal manuals so agents can respond using your own data.
+
+**Guideline:**
+
+Ensure uploaded files have readable text—scanned image-based PDFs should be converted before uploading.
+
+![Animated GIF showing File Search tool functionality](https://docs.sketricgen.ai/images/user-guides/tools/tools_filesearch.gif)
+
+## 3. Web Search
+
+**Web Search** allows agents to retrieve live information from the internet.
+
+When enabled, the agent can query public data sources to find up-to-date facts, references, or research for any assigned task.
+
+Typical uses:
+
+- Collecting recent statistics or news.
+- Validating data when a File Search source is missing.
+- Enhancing responses with the latest context.
+
+**Guideline:**
+
+Use Web Search for dynamic, time-sensitive queries; for stable and private data, prefer File Search.
+
+![Screenshot showing Web Search tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_websearch.png)
+
+## 4. Code Interpreter
+
+The **Code Interpreter** tool allows agents to execute Python code in a sandboxed environment.
+
+It can process data, generate files, run scripts, or perform computational tasks.
+
+Example use cases:
+
+- Generating or editing PDFs, CSVs, or charts.
+- Performing numeric calculations or simple analytics.
+- Running text or data transformations dynamically.
+
+**Guideline:**
+
+Because execution runs in a secure sandbox, the agent cannot access external environments—keep computations lightweight and self-contained.
+
+![Screenshot showing Code Interpreter tool interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_codeinterpreter.png)
+
+## 5. API Request
+
+The **API Request** tool lets your agent interact directly with any REST API.
+
+You can define endpoints, headers, and authentication parameters manually, or use the **Import through AI** feature to automatically configure the API from a link or documentation snippet.
+
+Configuration fields:
+
+- Name and description
+- HTTP method (GET, POST, PUT, DELETE, etc.)
+- API URL
+- Optional headers and query parameters
+
+Example:
+
+Integrate your internal company endpoint or a public service like weather, currency exchange, or analytics APIs.
+
+**Guideline:**
+
+Always verify the endpoint and authentication type. Misconfigured headers or invalid tokens can prevent successful tool calls.
+
+![Screenshot showing API Request tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_api.png)
+
+## 6. Custom MCP
+
+The **Custom MCP** tool connects your agent to any MCP (Model Context Protocol) server.
+
+This enables standardized interoperability between your own tools and external systems.
+
+Configuration fields:
+
+- Name and description
+- MCP Server URL
+- Connection type (HTTP over SSE, WebSocket, etc.)
+- Headers for authentication
+- Available tools (fetched from MCP endpoint)
+
+Example:
+
+Integrate your company’s internal data connector or an external MCP endpoint to expose enterprise tools directly to the agent.
+
+**Guideline:**
+
+After configuring the URL and connection type, click **Filter Tools** to fetch available MCP endpoints.
+
+![Screenshot showing Custom MCP tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_custommcp.png)
+
+## Managing Tools
+
+All your connected tools and data sources can be managed from the left sidebar under **Manage Tools**.
+
+### Knowledge Bases Tab
+
+View and edit your File Search knowledge bases.
+
+You can:
+
+- Create new knowledge bases.
+- Rename or delete existing ones.
+- See which agents are currently using each KB.
+- Track their creation and update timestamps.
+
+![Screenshot showing knowledge base management interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_kb.png)
+
+### Apps Tab
+
+View all connected apps from the Sketric App Marketplace.
+
+You can:
+
+- Check connection status (Healthy, Expired).
+- View authentication type (OAuth or API Key).
+- Disconnect unused apps anytime.
+
+![Screenshot showing connected apps in tools management](https://docs.sketricgen.ai/images/user-guides/tools/tools_apps.png)
+
+## Best Practices
+
+- Attach tools only where they’re necessary—overloading an agent with too many tools can slow reasoning.
+- Use File Search for static or company-owned data, and Web Search for live queries.
+- Keep credentials private and rotate API keys periodically.
+- Regularly review Manage Tools to remove unused connections.
+- Combine File Search and Code Interpreter for powerful document analysis or report generation workflows.
+
+## Related Links
+
+- [AgentSpace Guide →](https://docs.sketricgen.ai/user-guides/agentspace-canvas)
+- [Agents Guide →](https://docs.sketricgen.ai/user-guides/agents)
+- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs)

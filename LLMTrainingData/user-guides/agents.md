@@ -1,0 +1,195 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/agents
+
+## Overview
+
+Agents are the building blocks of every workflow inside the AgentSpace.
+
+Each agent represents a role or responsibility that can reason, use tools, and pass information to other agents through handoffs.
+
+Agents are configured directly on the canvas. Every agent you add defines a new unit of reasoning or execution. The clearer the agent’s role and scope, the more predictable and interpretable the overall workflow becomes.
+
+## Agent Structure
+
+An agent consists of several configuration layers that determine how it behaves within a workflow:
+
+1. **Identity** – The name and description that define what the agent is responsible for.
+2. **Instructions** – The guiding prompt that shapes how the agent reasons, speaks, and acts.
+3. **Model Settings** – The underlying GPT model that powers the agent’s reasoning.
+4. **Tools** – The capabilities the agent can use to retrieve, process, or generate information.
+5. **Structured Inputs and Outputs** – Defined data schemas that ensure predictable, typed communication between agents and the system. Structured inputs define what data an agent expects to receive, while structured outputs define what data it returns to the next agent or integration.
+
+![Screenshot showing agent sidebar with configuration options](https://docs.sketricgen.ai/images/user-guides/agent/agent_sidebar.png)
+
+## Defining Agent Instructions
+
+Instructions define the personality, tone, and responsibility of your agent. They describe what the agent knows, how it should behave, and when it should delegate to others.
+
+In addition to writing instructions manually, SketricGen provides an **Improve your instructions with AI** feature.
+
+When used, this feature rewrites a basic or incomplete prompt into a more effective one based on best practices for role clarity and task precision.
+
+**How it works**
+
+- Write a short or draft version of your instructions.
+- Click “Improve your instructions with AI.”
+- The system generates an enhanced version automatically.
+- Enable **Edit Mode** to make small adjustments before applying.
+- Click **Accept & Apply** to replace your original text.
+
+This feature helps you set consistent, production-quality prompts without needing prompt-engineering expertise.
+
+![Screenshot showing AI-powered instruction improvement feature](https://docs.sketricgen.ai/images/user-guides/agent/agent_improve_instructions.png)
+
+**Guideline:**
+
+Even with AI-enhanced prompts, keep your instructions purpose-driven and bounded to a single domain.
+
+## Model Selection and Settings
+
+Each agent runs on a GPT model provided by SketricGen. Supported versions include **GPT-4o**, **GPT-4o Mini**, **GPT-4.1, GPT-4.1 Mini, GPT-5, GPT-5 Mini**, and **GPT-o3**.
+
+Different models vary in speed, reasoning depth, and credit cost.
+
+**Guideline:**
+
+Choose lighter models like GPT-4.0 Mini for fast responses and heavier models such as GPT-4.1 or GPT-5 for agents that perform analytical or multi-step reasoning.
+
+![Screenshot showing agent model selection and configuration](https://docs.sketricgen.ai/images/user-guides/agent/agent_models.png)
+
+## Adding and Managing Tools
+
+Agents can use tools to extend their abilities — such as searching data, running code, or calling external APIs.
+
+Once attached, a tool becomes available for automatic use during the agent’s reasoning process.
+
+Available tools include:
+
+- Sketric App Marketplace (connect to 2000+ apps and their actions)
+- File Search (access knowledge bases or crawled website content)
+- Web Search (fetch live web results)
+- Code Interpreter (run Python snippets in a sandbox)
+- API Request (connect to REST or GraphQL endpoints)
+- Custom MCP (connect to private or standardized MCP servers)
+
+**Guideline:**
+
+Only assign tools that an agent genuinely needs. Fewer tools lead to clearer reasoning paths and more efficient trace logs.
+
+## Agent as a Tool
+
+An agent can also function as a **Tool Agent** — a callable sub-agent that performs a specific task and returns its output to a parent agent.
+
+There are two ways to enable this:
+
+1. From the **Add Node** menu, select **Tool Agent** to create one directly.
+2. In an existing agent’s settings, toggle **Use Agent-as-a-Tool** on.
+
+When used, the parent agent can call this Tool Agent the same way it calls any other tool, receiving structured results for further reasoning.
+
+**Use cases**
+
+- Modular subtasks such as summarization, data validation, or translation.
+- Reusable specialized agents that serve multiple workflows.
+
+![Animated GIF showing agent-as-tool functionality](https://docs.sketricgen.ai/images/user-guides/agent/agent_agent_as_tool.gif)
+
+**Guideline:**
+
+Treat Tool Agents like helper functions — keep them small, single-purpose, and reusable.
+
+**Important:**
+
+The agent connected directly to the Trigger node **cannot** be configured or used as an Agent-as-a-Tool.
+
+## Communication and Handoffs
+
+Agents interact with each other through handoffs, which define the transfer of control between nodes.
+
+Handoffs can be explicitly defined by the designer or dynamically managed by the system.
+
+Two typical orchestration styles:
+
+- Sequential: Agent A → Agent B → Agent C
+- Conditional or AI-driven: The system chooses the next agent based on context.
+
+**Guideline:**
+
+Explain your handoffs clearly to reflect intent, such as “handoff if user asks about X” or “handoff to Y specialist.” This makes complex workflows easier to trace and debug.
+
+**Example of Sequential Handoffs:**
+
+![Screenshot showing sequential agent execution pattern](https://docs.sketricgen.ai/images/user-guides/agent/agent_sequential.png)
+
+**Example of Conditional Handoffs:**
+
+![Screenshot showing conditional agent execution logic](https://docs.sketricgen.ai/images/user-guides/agent/agent_conditional.png)
+
+## Structured Inputs and Outputs
+
+Each agent supports structured input and output schemas, allowing data to flow consistently between agents and external systems.
+
+Supported field types:
+
+- Integer
+- String
+- Boolean
+- Float
+
+Structured inputs define what an agent receives, while structured outputs define what it produces. This ensures interoperability between connected agents and integrations.
+
+Example:
+
+```json
+{
+	"intent": "string",
+	"confidence": "float",
+	"handoff_required": "boolean"
+}
+```
+
+**Guideline:**
+
+Always validate your schema before publishing. Consistent schema design prevents logic errors and ensures data compatibility across the workflow.
+
+![Screenshot showing structured input/output configuration for agents](https://docs.sketricgen.ai/images/user-guides/agent/agent_structured_io.png)
+
+## Testing Agents
+
+Agents cannot be tested in isolation.
+
+However, you can test the current workflow at any point as long as all existing nodes are connected and error-free.
+
+When you click **Test Workflow**, SketricGen runs the flow from the Trigger node through connected agents and displays outputs in the Playground.
+
+**Guideline:**
+
+Use incremental testing - build and test small portions of the workflow before expanding to full orchestration.
+
+## Debugging and Optimization
+
+After running a workflow, open the Trace Explorer to review agent behavior.
+
+Traces show which agents were called, which tools were used, what data was passed, and how many credits were consumed.
+
+When optimizing:
+
+- Simplify instructions to reduce unnecessary reasoning.
+- Remove unused or redundant tools.
+- Verify schema alignment between agents.
+- Check for loops or repeated handoffs.
+
+## Best Practices for Designing Agents
+
+- Keep each agent’s scope narrow and clearly defined.
+- Avoid overlapping responsibilities between agents.
+- Use descriptive names (e.g., “Triage Agent,” “Product Specialist”).
+- Regularly enhance instructions using the AI improvement feature.
+- Validate Structured Inputs and Outputs early in development.
+- Test frequently with partial flows.
+- Review traces to identify inefficiencies and credit-heavy behaviors.
+
+## Related Links
+
+- [AgentSpace Guide →](https://docs.sketricgen.ai/user-guides/agentspace-canvas)
+- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs)
+- [Tracing & Optimization Guide →](https://docs.sketricgen.ai/user-guides/traces-and-optimizations)
