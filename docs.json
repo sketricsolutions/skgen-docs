@@ -24,7 +24,6 @@
           {
             "group": "User Guides",
             "pages": [
-              "user-guides/intro-Video",
               "user-guides/agentSpace-Canvas",
               "user-guides/agents",
               "user-guides/tools",
