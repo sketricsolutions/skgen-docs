@@ -13,7 +13,7 @@ All API requests require authentication via an API key in the request headers.
 **Required Header:**
 
 ```
-API-KEY: your_api_key_here
+api-key: your_api_key_here
 ```
 (You can retrieve it from your account setting at [app.sketricgen.ai/profile](https://app.sketricgen.ai/profile))
 
@@ -28,7 +28,7 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 
 | Header         | Type   | Required | Description                 |
 | -------------- | ------ | -------- | --------------------------- |
-| `API-KEY`      | string | Yes      | Your API authentication key |
+| `api-key`      | string | Yes      | Your API authentication key |
 | `Content-Type` | string | Yes      | Must be `application/json`  |
 
 ### Request Body
@@ -94,27 +94,27 @@ When streaming is enabled, the endpoint returns real-time Server-Sent Events (SS
 
 | Event Type             | Description                               |
 | ---------------------- | ----------------------------------------- |
-| `run_started`          | Workflow execution has begun              |
-| `text_message_start`   | AI has started generating a text response |
-| `text_message_content` | Incremental text content (streaming)      |
-| `text_message_end`     | AI has finished generating text response  |
-| `tool_call_start`      | AI has started using a tool/function      |
-| `tool_call_end`        | AI has finished using a tool/function     |
-| `run_finished`         | Workflow execution completed successfully |
-| `run_error`            | An error occurred during execution        |
+| `RUN_STARTED`          | Workflow execution has begun              |
+| `TEXT_MESSAGE_START`   | AI has started generating a text response |
+| `TEXT_MESSAGE_CONTENT` | Incremental text content (streaming)      |
+| `TEXT_MESSAGE_END`     | AI has finished generating text response  |
+| `TOOL_CALL_START`      | AI has started using a tool/function      |
+| `TOOL_CALL_END`        | AI has finished using a tool/function     |
+| `RUN_FINISHED`         | Workflow execution completed successfully |
+| `RUN_ERROR`            | An error occurred during execution        |
 
 **Example Streaming Events:**
 
 ```
-data: {"type": "run_started", "timestamp": 1640995200, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
+data: {"type": "RUN_STARTED", "timestamp": 1640995200, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
 
-data: {"type": "text_message_start", "timestamp": 1640995201, "message_id": "msg_456def"}
+data: {"type": "TEXT_MESSAGE_START", "timestamp": 1640995201, "message_id": "msg_456def"}
 
-data: {"type": "text_message_content", "timestamp": 1640995202, "message_id": "msg_456def", "delta": "I'll help"}
+data: {"type": "TEXT_MESSAGE_CONTENT", "timestamp": 1640995202, "message_id": "msg_456def", "delta": "I'll help"}
 
-data: {"type": "text_message_content", "timestamp": 1640995203, "message_id": "msg_456def", "delta": " you analyze"}
+data: {"type": "TEXT_MESSAGE_CONTENT", "timestamp": 1640995203, "message_id": "msg_456def", "delta": " you analyze"}
 
-data: {"type": "text_message_end", "timestamp": 1640995210, "message_id": "msg_456def"}
+data: {"type": "TEXT_MESSAGE_END", "timestamp": 1640995210, "message_id": "msg_456def"}
 
-data: {"type": "run_finished", "timestamp": 1640995211, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
+data: {"type": "RUN_FINISHED", "timestamp": 1640995211, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
 ```
