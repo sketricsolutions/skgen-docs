@@ -12,7 +12,7 @@
   s.src = 'https://jswidget.sketricgen.ai/widget-embed.js';
   s.async = true;
   // set your data-* attributes
-  s.setAttribute('data-agent-id', 'asst_Bt6bWUSVpoXnzPA5N9VhB3l4');
+  s.setAttribute('data-agent-id', 'skflow_233f626b-7761-4a8e-86ca-6bb54c92500b');
 
   // append as early as possible
   document.head.appendChild(s);
