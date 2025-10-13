@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/deploy/custom-website
+
 <Tabs>
   <Tab title="Floating Chat Bubble">
   
@@ -17,7 +19,7 @@
 
   > **Note:** Make sure your workflow is set to **Public** to embed it on your website.
 
-  ![Screenshot showing SketricGen dashboard with Publish button and embed code copy option](/images/custom-website/screenshot1.png)
+  ![Screenshot showing SketricGen dashboard with embed code options](https://docs.sketricgen.ai/images/custom-website/screenshot1.png)
 
   ## **Step 3: Add the embed code to your website**
   
@@ -52,7 +54,7 @@
   2. Verify that the chat bubble appears (typically in the bottom right corner)
   3. Test the workflow by clicking on the bubble and asking a question
 
-  ![Screenshot showing custom website with embedded SketricGen floating chat widget](/images/custom-website/screenshot2.png)
+  ![Screenshot showing custom website with embedded chat widget](https://docs.sketricgen.ai/images/custom-website/screenshot2.png)
 
   🎉 **Congratulations!** Your SketricGen workflow is now live on your website, ready to assist your visitors.
 
@@ -76,7 +78,7 @@
 
   > **Note:** The workflow must be set to **Public** for the iframe embed to work.
 
-  ![Screenshot showing SketricGen Direct Embed iframe code copy interface](/images/custom-website/screenshot3.png)
+  ![Screenshot showing chat widget customization options](https://docs.sketricgen.ai/images/custom-website/screenshot3.png)
 
   ## **Step 3: Add the iFrame to your website**
 
@@ -91,7 +93,7 @@
   ```html
   <div class="chat-container">
     <h2>Chat with our AI Assistant</h2>
-    <iframe src="https://app.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
+    <iframe src="https://app.sketricgen.ai/iframe-widget/skgen_xxxx" width="100%" height="700px" frameborder="0"></iframe>
   </div>
   ```
 
@@ -103,7 +105,7 @@
   2. Verify that the workflow iframe appears correctly
   3. Test the workflow by typing a question in the iframe
 
-  ![Screenshot showing custom website with embedded SketricGen iframe widget](/images/custom-website/screenshot4.png)
+  ![Screenshot showing live custom website with functional chat widget](https://docs.sketricgen.ai/images/custom-website/screenshot4.png)
 
   🎉 **Congratulations!** You've successfully added the SketricGen workflow to your website using an iframe embed.
 

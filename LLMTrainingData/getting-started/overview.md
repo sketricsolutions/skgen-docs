@@ -1,4 +1,6 @@
-![SketricGen overview hero image showing the drag-and-drop AgentSpace interface with connected agents and tools](/images/overview/overview_hero.png)
+**Public URL:** https://docs.sketricgen.ai/getting-started/overview
+
+![SketricGen overview hero image showing the drag-and-drop AgentSpace interface with connected agents and tools](https://docs.sketricgen.ai/images/overview/overview_hero.png)
 
 ## What is SketricGen?
 
@@ -33,5 +35,5 @@ Build a collaborative team of agents, attach tools, define handoffs, validate st
 
 ### Next Steps
 
-- **Core Concepts:** Familiarize yourself with the core concepts behind agentic workflows
-- **Quickstart (≈ 5 minutes):** Build a two-agent workflow, attach a tool, add a handoff, run a test, configure a widget and publish it.
+- **[Core Concepts](https://docs.sketricgen.ai/getting-started/core-concepts):** Familiarize yourself with the core concepts behind agentic workflows
+- **[Quickstart](https://docs.sketricgen.ai/getting-started/quickstart) (≈ 5 minutes):** Build a two-agent workflow, attach a tool, add a handoff, run a test, configure a widget and publish it.

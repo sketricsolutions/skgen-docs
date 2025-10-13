@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/getting-started/quickstart
+
 # Building a Customer Facing Agent Workflow (≈3–5 min)
 
 **Goal:** Create a two-agent AgentSpace for a product landing page (ResumeRanker in this example):
@@ -11,7 +13,7 @@ Test the flow, inspect traces, brand the widget, and publish.
 1. **AgentSpaces → New → Blank**
 2. Name: **“ResumeRanker FAQ Space** → **Create**
 
-![Screenshot showing the AgentSpace creation interface with "New" and "Blank" options](/images/quickstart/new-space.png)
+![Screenshot showing the AgentSpace creation interface with "New" and "Blank" options](https://docs.sketricgen.ai/images/quickstart/new-space.png)
 
 ---
 
@@ -37,7 +39,7 @@ Test the flow, inspect traces, brand the widget, and publish.
   * Connect account/permissions as prompted.
 
 
-![Animated GIF showing how to create an agent named Lina and connect Google Calendar tool](/images/quickstart/lina-tool.gif)
+![Animated GIF showing how to create an agent named Lina and connect Google Calendar tool](https://docs.sketricgen.ai/images/quickstart/lina-tool.gif)
 
 ### Agent 2 — **Alex (Product Specialist)**
 
@@ -51,7 +53,7 @@ Test the flow, inspect traces, brand the widget, and publish.
   * Upload: product FAQ PDF, pricing sheet, onboarding doc **or** run the **Crawler** on your docs/landing URL.
   * Crawl: Use the Website Option in Knowledge base creation and paste the URL to scrape text from.
 
-![Screenshot showing the knowledge base creation interface with website crawling option](/images/quickstart/kb-crawl.png)
+![Screenshot showing the knowledge base creation interface with website crawling option](https://docs.sketricgen.ai/images/quickstart/kb-crawl.png)
 
 
 ---
@@ -61,7 +63,7 @@ Test the flow, inspect traces, brand the widget, and publish.
 * Draw connection **Lina → Alex**.
 * Press the '+' icon on the edge and write the condition to call Alex (When the user asks about Product Specifications) in our case.
 
-![Screenshot showing the AgentSpace canvas with Lina and Alex agents connected by a handoff edge](/images/quickstart/final_result.png)
+![Screenshot showing the AgentSpace canvas with Lina and Alex agents connected by a handoff edge](https://docs.sketricgen.ai/images/quickstart/final_result.png)
 
 ---
 
@@ -72,7 +74,7 @@ Test the flow, inspect traces, brand the widget, and publish.
   * Fields: `user_query` (String, Required)
   * Why? Lina makes sure to clearly define the user's query for Alex. (Alex still sees the chat history but this is cleaner)
 
-![Screenshot showing the structured input configuration interface for defining user_query field](/images/quickstart/structured_input.png)
+![Screenshot showing the structured input configuration interface for defining user_query field](https://docs.sketricgen.ai/images/quickstart/structured_input.png)
 
 ---
 
@@ -85,20 +87,20 @@ Open **Playground** and try:
 
 Then click **View Traces** on the top left of the playground to see: agent steps, tool inputs/outputs, durations, and **credits**.
 
-![Screenshot showing the Trace Explorer interface displaying agent steps, tool calls, durations, and credit consumption](/images/quickstart/test_traces.png)
+![Screenshot showing the Trace Explorer interface displaying agent steps, tool calls, durations, and credit consumption](https://docs.sketricgen.ai/images/quickstart/test_traces.png)
 
 ---
 
 ## 6) Design the widget & publish
 
-![Screenshot showing the widget design interface with logo upload, brand colors, greeting message, and callouts configuration](/images/quickstart/design_widget.png)
+![Screenshot showing the widget design interface with logo upload, brand colors, greeting message, and callouts configuration](https://docs.sketricgen.ai/images/quickstart/design_widget.png)
 
 1. Upload **logo**, set **brand colors**, add **default greeting** and **callouts** (e.g., “Ask about pricing or book a demo”).
 2. **Publish (top right in playground) → Chat Bubble**
 3. Copy the snippet or follow CMS steps (WordPress, Wix, etc.).
 4. Paste into a page on your site and verify.
 
-![Screenshot showing the publish workflow interface with Chat Bubble option and embed code snippet](/images/quickstart/publish_agent.png)
+![Screenshot showing the publish workflow interface with Chat Bubble option and embed code snippet](https://docs.sketricgen.ai/images/quickstart/publish_agent.png)
 
 ---
 

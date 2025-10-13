@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/conversations-and-insights
+
 ## Overview
 
 The **Conversations** and **Insights** tabs provide a complete monitoring layer for your agents.
@@ -21,7 +23,7 @@ To view them:
 
 Each conversation displays both user messages and agent responses exactly as they occurred, giving you a clear understanding of how your workflow behaves in production.
 
-![Screenshot showing the conversations list interface with search, filters, and conversation history](/images/user-guides/conversations-insights/insights_list.png)
+![Screenshot showing conversations list interface](https://docs.sketricgen.ai/images/user-guides/conversations-insights/insights_list.png)
 
 ### Viewing Traces for Conversations
 
@@ -36,7 +38,7 @@ Within each conversation, you can open **detailed execution traces** for any mes
 
 This feature provides the same deep transparency available in the Playground — now extended to real, live conversations.
 
-![Animated GIF showing conversation details interface with message history, agent interactions, and trace information](/images/user-guides/conversations-insights/insights_conversations.gif)
+![Animated GIF showing conversations interface with message details](https://docs.sketricgen.ai/images/user-guides/conversations-insights/insights_conversations.gif)
 
 ### Exporting Conversations
 
@@ -58,7 +60,7 @@ The **Insights** tab helps you track and analyze how your account and agents are
 
 It includes two main views: **Account Overview** and **Agent Analytics**.
 
-![Screenshot showing insights overview dashboard with conversation metrics, performance statistics, and usage analytics](/images/user-guides/conversations-insights/insights_overview.png)
+![Screenshot showing insights overview dashboard](https://docs.sketricgen.ai/images/user-guides/conversations-insights/insights_overview.png)
 
 ### Account Overview
 
@@ -81,7 +83,7 @@ This gives administrators and teams a clear picture of account health and usage 
 
 You can also view the credits consumption by hovering on your Profile
 
-![Screenshot showing credits usage interface with consumption tracking, billing information, and usage limits](/images/user-guides/conversations-insights/insights_credits.png)
+![Screenshot showing credits usage analytics](https://docs.sketricgen.ai/images/user-guides/conversations-insights/insights_credits.png)
 
 ### Agent Analytics
 
@@ -97,7 +99,7 @@ Each analytics dashboard includes:
 - **Last Active** — Timestamp of most recent activity.
 - **Activity Timeline** — Message and credit usage trends across the past few days or weeks.
 
-![Animated GIF showing analytics dashboard with conversation trends, performance metrics, and usage statistics](/images/user-guides/conversations-insights/insights_analytics.gif)
+![Animated GIF showing analytics dashboard with performance metrics](https://docs.sketricgen.ai/images/user-guides/conversations-insights/insights_analytics.gif)
 
 ### Platform Distribution
 

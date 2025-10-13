@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/structured-inputs-and-outputs
+
 ## Why Structure?
 
 Structured data makes multi-agent workflows predictable, renderable, and testable.
@@ -8,7 +10,7 @@ Each agent’s Structured Input and Structured Output are automatically converte
 
 These schemas are used during **handoffs**, **agent calls**, and **validations**, ensuring that every agent in your workflow exchanges data in a consistent, typed format.
 
-![Screenshot showing structured input/output configuration interface with JSON schema definition and validation](/images/user-guides/structured-input-output/io_structured_io.png)
+![Screenshot showing structured input/output interface](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured_io.png)
 
 ## Structured Input
 
@@ -86,4 +88,4 @@ This ensures predictable data handling between connected agents and external int
 }
 ```
 
-![Animated GIF showing structured data flow between agents with input/output schema validation](/images/user-guides/structured-input-output/io_structured.gif)
+![Animated GIF showing structured data flow in workflows](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured.gif)

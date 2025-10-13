@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/deploy/wordpress
+
 ## **Step 1: Sign Into SketricGen and Set Up Your workflow**
 
 To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don’t have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
@@ -14,35 +16,35 @@ You can usually access your dashboard by visiting `yourdomain.com/wp-admin/`. Al
 
 - In the left sidebar of your WordPress admin dashboard, click on **Plugins**.
 
-  ![Screenshot showing WordPress admin dashboard with Plugins sidebar menu](/images/wordpress/screenshot1.png)
+  ![WordPress Plugins Sidebar showing the plugins menu in WordPress admin dashboard](https://docs.sketricgen.ai/images/wordpress/screenshot1.png)
 
 - Click **Add New Plugin** at the top of the next page.
 
-  ![Screenshot showing WordPress Add New Plugin interface](/images/wordpress/screenshot2.png)
+  ![Add New Plugin button in WordPress plugins page](https://docs.sketricgen.ai/images/wordpress/screenshot2.png)
 
 - In the search bar on the next page, type “**SketricGen**” to search for the **SketricGen** plugin.  
   Click **Install Now**, then **Activate**.
 
-  ![Screenshot showing WordPress plugin search results for SketricGen with Install Now and Activate buttons](/images/wordpress/screenshot3.png)
+  ![Search and Install Plugin interface showing SketricGen plugin search results with Install Now and Activate buttons](https://docs.sketricgen.ai/images/wordpress/screenshot3.png)
 
 ### 3. Get your Agent ID from SketricGen Dashboard
 
 Go to your agent’s playground and in the **Publish** sidebar copy the Agent ID — it should look like **“asst_…”**
 
-![Screenshot showing SketricGen agent playground with Agent ID copy option in Publish sidebar](/images/wordpress/screenshot4.png)
+![Copy Agent ID from SketricGen dashboard playground publish sidebar](https://docs.sketricgen.ai/images/wordpress/screenshot4.png)
 
 ### 4. Add your Agent ID
 
 - In the left sidebar on your admin dashboard, click **SketricGen Chat** under **Settings**.
 
-   ![Screenshot showing WordPress admin dashboard with SketricGen Chat settings menu](/images/wordpress/screenshot5.png)
+   ![SketricGen Settings page in WordPress admin showing the settings interface](https://docs.sketricgen.ai/images/wordpress/screenshot5.png)
 
 - Enter your **Agent ID**, enable the chat widget, and click **“Save Changes”**.
 
-   ![Screenshot showing SketricGen Chat settings interface with Agent ID input field and Save Changes button](/images/wordpress/screenshot6.png)
+   ![Enter Agent ID form field with Save Changes button in SketricGen settings](https://docs.sketricgen.ai/images/wordpress/screenshot6.png)
 
 ## **Step 3: Test your widget on live website**
 
-![Screenshot showing WordPress website with embedded SketricGen chat widget](/images/wordpress/screenshot7.png)
+![Widget on Live Site showing the SketricGen chat widget successfully embedded and functional on the WordPress website](https://docs.sketricgen.ai/images/wordpress/screenshot7.png)
 
 🎉 **Congratulations!** Your WordPress website now has the SketricGen chat widget integrated.

@@ -1,0 +1,122 @@
+**Public URL:** https://docs.sketricgen.ai/dev-guide/public-api-usage
+
+## Overview
+
+SketricGen provides a high-performance Public API service that enables AI-powered conversational workflows using custom agents you design in the Web App.
+This API provides endpoints for running AI workflows, managing conversations, and streaming real-time responses.
+
+**Base URL:**
+`https://chat-v2.sketricgen.ai/api/v1`
+
+## Authentication
+
+All API requests require authentication via an API key in the request headers.
+
+**Required Header:**
+
+```
+API-KEY: your_api_key_here
+```
+(You can retrieve it from your account setting at [app.sketricgen.ai/profile](https://app.sketricgen.ai/profile))
+
+## Endpoints
+
+### Run Workflow
+
+**POST** `/run-workflow`
+Execute an AI workflow using a specified agent to generate intelligent responses based on user input.
+
+### Request Headers
+
+| Header         | Type   | Required | Description                 |
+| -------------- | ------ | -------- | --------------------------- |
+| `API-KEY`      | string | Yes      | Your API authentication key |
+| `Content-Type` | string | Yes      | Must be `application/json`  |
+
+### Request Body
+
+| Field             | Type    | Required | Description                               | Constraints                          |
+| ----------------- | ------- | -------- | ----------------------------------------- | ------------------------------------ |
+| `agent_id`        | string  | Yes      | Unique identifier for the AI agent to use | -                                    |
+| `user_input`      | string  | Yes      | The user's message or query to process    | Max 10,000 characters                |
+| `conversation_id` | string  | No       | ID of existing conversation to continue   | If omitted, creates new conversation |
+| `stream`          | boolean | No       | Enable real-time response streaming       | Default: `false`                     |
+
+### Example Request
+
+```json
+{
+	"agent_id": "agent_abc123xyz",
+	"user_input": "Help me analyze this quarterly sales data",
+	"conversation_id": "conv_def456ghi",
+	"stream": false
+}
+```
+
+## Response Formats
+
+The endpoint supports two response modes.
+
+### 1. Standard Response (stream: false)
+
+**HTTP Status:** `201 Created`
+
+**Response Body:**
+
+| Field             | Type    | Description                              |
+| ----------------- | ------- | ---------------------------------------- |
+| `agent_id`        | string  | The agent that processed the request     |
+| `user_id`         | string  | Identifier for the user account          |
+| `conversation_id` | string  | ID of the conversation (new or existing) |
+| `response`        | string  | The AI agent's generated response        |
+| `owner`           | string  | Owner of the agent                       |
+| `error`           | boolean | Indicates if an error occurred           |
+
+**Example Response:**
+
+```json
+{
+	"agent_id": "agent_abc123xyz",
+	"user_id": "user_789xyz",
+	"conversation_id": "conv_def456ghi",
+	"response": "I'll help you analyze your quarterly sales data. Please share the data file or provide the key metrics you'd like me to examine.",
+	"owner": "company_abc",
+	"error": false
+}
+```
+
+### 2. Streaming Response (stream: true)
+
+**HTTP Status:** `200 OK`
+**Content-Type:** `text/event-stream`
+
+When streaming is enabled, the endpoint returns real-time Server-Sent Events (SSE) as the AI processes the request.
+
+**Event Types:**
+
+| Event Type             | Description                               |
+| ---------------------- | ----------------------------------------- |
+| `run_started`          | Workflow execution has begun              |
+| `text_message_start`   | AI has started generating a text response |
+| `text_message_content` | Incremental text content (streaming)      |
+| `text_message_end`     | AI has finished generating text response  |
+| `tool_call_start`      | AI has started using a tool/function      |
+| `tool_call_end`        | AI has finished using a tool/function     |
+| `run_finished`         | Workflow execution completed successfully |
+| `run_error`            | An error occurred during execution        |
+
+**Example Streaming Events:**
+
+```
+data: {"type": "run_started", "timestamp": 1640995200, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
+
+data: {"type": "text_message_start", "timestamp": 1640995201, "message_id": "msg_456def"}
+
+data: {"type": "text_message_content", "timestamp": 1640995202, "message_id": "msg_456def", "delta": "I'll help"}
+
+data: {"type": "text_message_content", "timestamp": 1640995203, "message_id": "msg_456def", "delta": " you analyze"}
+
+data: {"type": "text_message_end", "timestamp": 1640995210, "message_id": "msg_456def"}
+
+data: {"type": "run_finished", "timestamp": 1640995211, "thread_id": "conv_def456ghi", "run_id": "run_123abc"}
+```

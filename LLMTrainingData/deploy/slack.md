@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/deploy/slack
+
 ## **Step 1: Sign Into SketricGen and Set Up Your workflow**
 
     To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don’t have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
@@ -8,13 +10,13 @@
 
 After configuring your workflow, click the **Connect** button on the Slack integration panel in the **Publish** sidebar.
 
-![Screenshot showing SketricGen Slack integration panel with Connect button in the Publish sidebar](/images/slack/screenshot1.png)
+![Connect Slack Integration interface showing how to connect Slack to SketricGen](https://docs.sketricgen.ai/images/slack/screenshot1.png)
 
 ## **Step 3: Grant Permissions**
 
 ### 1. Grant SketricGen the required permissions to access your Slack account and workspace.
 
-   ![Screenshot showing Slack permission grant interface for SketricGen workspace access](/images/slack/screenshot2.png)
+   ![Grant Permissions dialog showing Slack authorization request](https://docs.sketricgen.ai/images/slack/screenshot2.png)
 
 ### 2. After success, you will get a message:  
    **“SketricGen has been successfully added to your workspace.”**
@@ -23,18 +25,18 @@ After configuring your workflow, click the **Connect** button on the Slack integ
 
 ### 1. If everything is smooth, the **Connect** button in the Slack panel of the Publish sidebar will change to **Manage**.
 
-   ![Screenshot showing SketricGen Slack integration panel with Manage button after successful connection](/images/slack/screenshot3.png)
+   ![Manage Button in Slack integration settings](https://docs.sketricgen.ai/images/slack/screenshot3.png)
 
 ### 2. Click on the **Manage** button to view your integration details.
 
-   ![Screenshot showing SketricGen Slack integration details and configuration options](/images/slack/screenshot4.png)
+   ![Integration Details page showing Slack bot configuration](https://docs.sketricgen.ai/images/slack/screenshot4.png)
 
 ## Step 5: Open Slack and Message Your Bot
 
 ### 1. Open any channel in your Slack workspace and type **@sketricgen** followed by a question related to your workflow’s purpose.  
    Slack will then prompt you to either invite the bot to the channel or take no action.
 
-   ![Screenshot showing Slack channel with @sketricgen bot mention and invitation prompt](/images/slack/screenshot5.png)
+   ![Mention Bot in Slack showing how to mention the SketricGen bot](https://docs.sketricgen.ai/images/slack/screenshot5.png)
 
 ### 2. Click on **Add Them**.  
    The workflow will then be available in the channel to answer any questions you might have.
@@ -45,7 +47,7 @@ You're all set! The SketricGen workflow is now connected and ready to enhance co
 
 Whenever you or your teammates have a question, simply mention `@sketricgen` along with your query, and the bot will provide an answer.
 
-![Screenshot showing Slack channel with SketricGen bot responding to user questions](/images/slack/screenshot6.png)
+![Bot Responding in Slack showing the SketricGen bot providing AI responses](https://docs.sketricgen.ai/images/slack/screenshot6.png)
 
 ### 🎉 Congratulations!! Slack is successfully connected with your AI Agent
 

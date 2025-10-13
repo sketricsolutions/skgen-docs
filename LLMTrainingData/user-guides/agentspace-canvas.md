@@ -1,4 +1,6 @@
-![AgentSpace Canvas hero image showing the visual drag-and-drop interface for building multi-agent workflows](/images/user-guides/agent-space/canvas_hero.png)
+**Public URL:** https://docs.sketricgen.ai/user-guides/agentspace-canvas
+
+![AgentSpace canvas hero image showing the visual workspace for designing multi-agent workflows](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_hero.png)
 
 ## Overview
 
@@ -21,7 +23,7 @@ On the top-left corner of the canvas is the Add Node menu, where you can choose 
 
 **Tip:** Tool Agents are ideal for modular, reusable subtasks like summarization or validation.
 
-![Screenshot showing the "Add Node" interface with options for Agent, Tool, and Handoff](/images/user-guides/agent-space/canvas_add_node.png)
+![Screenshot showing how to add nodes to the AgentSpace canvas](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_add_node.png)
 
 ## Agents and Tools on the Canvas
 
@@ -39,7 +41,7 @@ Example:
 
 Lina (Triage Agent) handles basic queries and meeting scheduling. and hands off technical qeuestions to Alex (Product Specialist) for product specific questions who uses File Search for accurate responses.
 
-![Screenshot showing agent node configuration interface with identity, instructions, and model settings](/images/user-guides/agent-space/canvas_agent.png)
+![Screenshot showing agent node configuration in AgentSpace](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_agent.png)
 
 ## Handoffs and Workflow Flow
 
@@ -51,7 +53,7 @@ Handoffs connect agents and define how information moves between them.
 
 Handoffs are the foundation of orchestration — they make workflows modular, traceable, and easy to expand.
 
-![Animated GIF showing how to create handoff connections between agents by dragging from one agent to another](/images/user-guides/agent-space/canvas_handoff.gif)
+![Animated GIF showing handoff creation between agents in AgentSpace](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_handoff.gif)
 
 ## Importing and Exporting Configurations
 
@@ -64,7 +66,7 @@ This functionality makes it easy to share setups across environments or collabor
 
 **Note:** Downloaded config strips off Knowledge base, Sensitive Info and API Headers.
 
-![Screenshot showing the configuration panel for editing agent properties and settings](/images/user-guides/agent-space/canvas_config.png)
+![Screenshot showing AgentSpace configuration options](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_config.png)
 
 ## Canvas Controls and Layout Tools
 
@@ -80,7 +82,7 @@ The left-side toolbar contains UI controls for managing your view and workflow l
 
 These features enhance usability for larger, more complex workflows but don’t affect workflow logic.
 
-![Animated GIF showing canvas layout management with zoom, pan, and node organization features](/images/user-guides/agent-space/canvas_layout.gif)
+![Animated GIF showing layout and auto-arrangement features in AgentSpace](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_layout.gif)
 
 ## Running and Testing a Workflow
 
@@ -98,7 +100,7 @@ Here, you can interact with the agents, observe their tool calls, and review han
 
 **Tip:** The Playground lets you review conversations and traces for debugging before deploying.
 
-![Screenshot showing the playground interface for testing agent workflows with input/output](/images/user-guides/agent-space/canvas_playground.png)
+![Screenshot showing AgentSpace playground for testing workflows](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_playground.png)
 
 
 ### Credit Tracking
@@ -107,7 +109,7 @@ Every tool call within a workflow consumes credits.
 
 The Trace Explorer shows credit usage per conversation and per tool, helping you optimize efficiency before scaling.
 
-![Screenshot showing the traces interface displaying conversation flow, agent interactions, and performance metrics](/images/user-guides/agent-space/canvas_traces.png)
+![Screenshot showing traces view in AgentSpace for debugging workflows](https://docs.sketricgen.ai/images/user-guides/agent-space/canvas_traces.png)
 
 ## Best Practices
 
@@ -120,6 +122,6 @@ The Trace Explorer shows credit usage per conversation and per tool, helping you
 
 ## Related Links
 
-- [Agents Guide →](/user-guides/agents)
-- [Orchestration & Handoffs Guide →](/user-guides/orchestration-handoffs)
-- [Tracing & Optimization →](/user-guides/tracing-optimization)
+- [Agents Guide →](https://docs.sketricgen.ai/user-guides/agents)
+- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs)
+- [Tracing & Optimization →](https://docs.sketricgen.ai/user-guides/traces-and-optimizations)

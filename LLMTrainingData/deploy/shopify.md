@@ -1,4 +1,6 @@
 
+**Public URL:** https://docs.sketricgen.ai/deploy/shopify
+
 ## **Step 1: Create your SketricGen account**
 
 To get started with the integration, **[sign in to your SketricGen account](#)**.  
@@ -14,7 +16,7 @@ After configuring your workflow, go to your dashboard and click on **Publish > D
 
 > **Note:** Ensure your workflow is set to **Public** to make it accessible on your Shopify website.
 
-![Screenshot showing SketricGen Direct Embed iframe code copy interface](/images/shopify/screenshot1.png)
+![Screenshot showing the SketricGen dashboard with Publish > Direct Embed option to copy iframe embed code](https://docs.sketricgen.ai/images/shopify/screenshot1.png)
 
 
 ## **Step 3: Sign into your Shopify website and embed your workflow**
@@ -23,17 +25,17 @@ After configuring your workflow, go to your dashboard and click on **Publish > D
 ### 2. From the left-hand menu, go to **Online Store → Pages**.  
 ### 3. Choose the page you want to edit. (In this example, we’re embedding the workflow on the Contact page.)
 
-![Screenshot showing Shopify admin dashboard with Online Store > Pages navigation](/images/shopify/screenshot2.png)
+![Screenshot showing Shopify admin dashboard with Online Store > Pages menu option](https://docs.sketricgen.ai/images/shopify/screenshot2.png)
 
 ### 4. Paste the embed code into the **HTML/code editor**, then click **Save**.
 
-![Screenshot showing Shopify page editor with HTML/code editor and Save button](/images/shopify/screenshot3.png)
+![Screenshot showing Shopify page editor with HTML/code editor where embed code is pasted](https://docs.sketricgen.ai/images/shopify/screenshot3.png)
 
 ---
 
 ## **Step 4: Test your widget after publishing**
 
-![Screenshot showing Shopify website with embedded SketricGen chat widget](/images/shopify/screenshot4.png)
+![Screenshot showing the live Shopify website with SketricGen chat widget successfully embedded and functional](https://docs.sketricgen.ai/images/shopify/screenshot4.png)
 
 
 

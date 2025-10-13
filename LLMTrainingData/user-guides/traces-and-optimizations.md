@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/traces-and-optimizations
+
 ## Overview
 
 Traces give you a transparent view into how your agents think, act, and collaborate inside the **AgentSpace**.
@@ -20,7 +22,7 @@ Each trace provides:
 - The **time taken** and **credits consumed** per step.
 - A complete breakdown of each agent’s reasoning and outputs.
 
-![Screenshot showing traces interface with conversation flow, agent steps, tool calls, and performance metrics](/images/user-guides/traces-optimization/trace_traces.png)
+![Screenshot showing traces interface with workflow execution details](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_traces.png)
 
 You can expand each agent’s trace to inspect:
 
@@ -49,7 +51,7 @@ The Trace Explorer provides a structured timeline of events, showing how your mu
 - How structured inputs and outputs flowed between nodes.
 - Any failed or retried tool calls.
 
-![Animated GIF showing trace logs interface with detailed execution logs, error tracking, and debugging information](/images/user-guides/traces-optimization/trace_logs.gif)
+![Animated GIF showing trace logs and debugging interface](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_logs.gif)
 
 ## Optimization Quick Wins
 

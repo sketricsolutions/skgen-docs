@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/tools
+
 ## Overview
 
 Tools extend the capabilities of your agents by allowing them to act, compute, fetch, or integrate external information.
@@ -8,7 +10,7 @@ Each tool operates as a callable function within a workflow—agents invoke them
 
 You can connect to external apps, build knowledge bases, run Python code, make API calls, or integrate with MCP servers.
 
-![Tools sidebar interface showing available tools including File Search, Web Search, Code Interpreter, API Request, and Custom MCP](/images/user-guides/tools/tools_sidebar.png)
+![Screenshot showing tools sidebar with available tool options](https://docs.sketricgen.ai/images/user-guides/tools/tools_sidebar.png)
 
 ## Adding Tools from the Canvas
 
@@ -42,7 +44,7 @@ Example:
 
 For security, API keys are stored in encrypted form. Revoke access from the “Manage Tools → Apps” tab anytime.
 
-![Animated GIF showing the tools marketplace interface with searchable tool categories and installation options](/images/user-guides/tools/tools_marketplace.gif)
+![Animated GIF showing Sketric App Marketplace tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_marketplace.gif)
 
 ## 2. File Search
 
@@ -76,7 +78,7 @@ Use File Search for customer FAQs, product documentation, or internal manuals so
 
 Ensure uploaded files have readable text—scanned image-based PDFs should be converted before uploading.
 
-![Animated GIF showing file search tool interface with search functionality and results display](/images/user-guides/tools/tools_filesearch.gif)
+![Animated GIF showing File Search tool functionality](https://docs.sketricgen.ai/images/user-guides/tools/tools_filesearch.gif)
 
 ## 3. Web Search
 
@@ -94,7 +96,7 @@ Typical uses:
 
 Use Web Search for dynamic, time-sensitive queries; for stable and private data, prefer File Search.
 
-![Screenshot showing web search tool configuration interface with search parameters and settings](/images/user-guides/tools/tools_websearch.png)
+![Screenshot showing Web Search tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_websearch.png)
 
 ## 4. Code Interpreter
 
@@ -112,7 +114,7 @@ Example use cases:
 
 Because execution runs in a secure sandbox, the agent cannot access external environments—keep computations lightweight and self-contained.
 
-![Screenshot showing code interpreter tool interface with code execution capabilities and output display](/images/user-guides/tools/tools_codeinterpreter.png)
+![Screenshot showing Code Interpreter tool interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_codeinterpreter.png)
 
 ## 5. API Request
 
@@ -135,7 +137,7 @@ Integrate your internal company endpoint or a public service like weather, curre
 
 Always verify the endpoint and authentication type. Misconfigured headers or invalid tokens can prevent successful tool calls.
 
-![Screenshot showing API request tool configuration interface with endpoint, method, headers, and body settings](/images/user-guides/tools/tools_api.png)
+![Screenshot showing API Request tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_api.png)
 
 ## 6. Custom MCP
 
@@ -159,7 +161,7 @@ Integrate your company’s internal data connector or an external MCP endpoint t
 
 After configuring the URL and connection type, click **Filter Tools** to fetch available MCP endpoints.
 
-![Screenshot showing custom MCP (Model Context Protocol) tool configuration interface](/images/user-guides/tools/tools_custommcp.png)
+![Screenshot showing Custom MCP tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_custommcp.png)
 
 ## Managing Tools
 
@@ -176,7 +178,7 @@ You can:
 - See which agents are currently using each KB.
 - Track their creation and update timestamps.
 
-![Screenshot showing knowledge base tool interface with document upload and search capabilities](/images/user-guides/tools/tools_kb.png)
+![Screenshot showing knowledge base management interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_kb.png)
 
 ### Apps Tab
 
@@ -188,7 +190,7 @@ You can:
 - View authentication type (OAuth or API Key).
 - Disconnect unused apps anytime.
 
-![Screenshot showing Sketric App Marketplace interface with available third-party integrations and apps](/images/user-guides/tools/tools_apps.png)
+![Screenshot showing connected apps in tools management](https://docs.sketricgen.ai/images/user-guides/tools/tools_apps.png)
 
 ## Best Practices
 
@@ -200,6 +202,6 @@ You can:
 
 ## Related Links
 
-- [AgentSpace Guide →](/user-guides/agentspace-canvas)
-- [Agents Guide →](/user-guides/agents)
-- [Orchestration & Handoffs Guide →](/user-guides/orchestration-handoffs)
+- [AgentSpace Guide →](https://docs.sketricgen.ai/user-guides/agentspace-canvas)
+- [Agents Guide →](https://docs.sketricgen.ai/user-guides/agents)
+- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs)

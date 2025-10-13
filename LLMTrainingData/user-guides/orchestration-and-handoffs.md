@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs
+
 ## Overview
 
 Orchestration in SketricGen defines **how agents collaborate** inside a workflow.
@@ -6,7 +8,7 @@ Each agent operates semi-independently but follows your defined logic to decide 
 
 SketricGen supports both **AI-routed orchestration** (where the model decides the next step) and **designer-routed orchestration** (where you manually connect agents with explicit edges in the AgentSpace).
 
-![Orchestration hero image showing multi-agent workflow with connected agents and handoff connections](/images/user-guides/orchestration-handoffs/orch_hero.png)
+![Hero image showing orchestration and handoffs concept](https://docs.sketricgen.ai/images/user-guides/orchestration-handoffs/orch_hero.png)
 
 ## How Routing Works (AI-Routed)
 
@@ -61,7 +63,7 @@ If the parent should remain in charge, model the secondary logic as **Agent-as-T
 
 The agent directly connected to the **Trigger node** cannot be configured or used as an Agent-as-Tool.
 
-![Screenshot showing agent-as-tool configuration interface for using agents as reusable components](/images/user-guides/orchestration-handoffs/orch_agent_as_tool.png)
+![Screenshot showing agent-as-tool configuration](https://docs.sketricgen.ai/images/user-guides/orchestration-handoffs/orch_agent_as_tool.png)
 
 ## Writing Effective Instructions
 
@@ -103,7 +105,7 @@ SketricGen provides built-in mechanisms for reliability and debugging:
 
 Iterate and refine orchestration flows directly from trace data — identify bottlenecks, redundant handoffs, or misrouted intents.
 
-![Screenshot showing trace explorer interface displaying agent execution flow, handoffs, and performance metrics](/images/user-guides/orchestration-handoffs/orch_trace.png)
+![Screenshot showing orchestration trace view](https://docs.sketricgen.ai/images/user-guides/orchestration-handoffs/orch_trace.png)
 
 ## Starter Patterns (AI-Routed)
 
@@ -115,7 +117,7 @@ These are common multi-agent orchestration setups you can replicate or adapt:
 | Manager → (Agent-as-Tool: Classifier) → Specialist | Classifier determines type; Specialist handles it further.                           |
 | Manager → Specialist → (Agent-as-Tool: Summarizer) | Specialist processes and sends text to Summarizer for concise output.                |
 
-![Animated GIF showing handoff configuration interface with routing options, conditions, and fallback settings](/images/user-guides/orchestration-handoffs/orch_handoff.gif)
+![Animated GIF showing handoff execution between agents](https://docs.sketricgen.ai/images/user-guides/orchestration-handoffs/orch_handoff.gif)
 
 ## Why Protocols Matter
 

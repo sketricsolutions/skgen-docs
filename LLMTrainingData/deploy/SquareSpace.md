@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/deploy/squarespace
+
 <Tabs>
   <Tab title="Floating Chat Bubble">
   
@@ -13,35 +15,35 @@
 
   > **Note:** Make sure your workflow is set to **Public** to embed it on your Squarespace site.
 
-  ![Screenshot showing SketricGen dashboard with Publish button and embed code copy option](/images/squarespace/screenshot1.png)
+  ![](/images/squarespace/screenshot1.png)
 
   ## **Step 3: Sign in to your Squarespace account and embed your workflow**
 
   ### 1. Sign in to your Squarespace account and open the dashboard  
   ### 2. Select the site you want to embed the workflow on
 
-  ![Screenshot showing Squarespace dashboard with site selection interface](/images/squarespace/screenshot2.png)
+  ![](/images/squarespace/screenshot2.png)
 
   ### 3. Click **Edit**  
 
-  ![Screenshot showing Squarespace site editor with Edit button](/images/squarespace/screenshot3.png)
+  ![](/images/squarespace/screenshot3.png)
 
   ### 4. Click **Add Block**  
 
-  ![Screenshot showing Squarespace Add Block interface](/images/squarespace/screenshot4.png)
+  ![](/images/squarespace/screenshot4.png)
 
   ### 5. Select **Code** and paste the embed code you copied in Step 2  
 
-  ![Screenshot showing Squarespace Code Block configuration interface](/images/squarespace/screenshot5.png)  
-  ![Screenshot showing Squarespace Code Block editor with embed code input](/images/squarespace/screenshot6.png)  
+  ![](/images/squarespace/screenshot5.png)  
+  ![](/images/squarespace/screenshot6.png)  
 
   ### 6. Adjust the position of the widget and click **Save**
 
-  ![Screenshot showing Squarespace Code Block save and apply options](/images/squarespace/screenshot7.png)
+  ![](/images/squarespace/screenshot7.png)
 
   ## **Step 4: Test your widget after publishing**
 
-  ![Screenshot showing Squarespace site with embedded SketricGen chat widget](/images/squarespace/screenshot8.png)
+  ![](/images/squarespace/screenshot8.png)
 
   🎉 **Congratulations!** Your workflow is now live on Squarespace, ready to serve your visitors with custom responses.
 
@@ -61,29 +63,29 @@
 
   > **Note:** The workflow must be set to **Public** to work on Squarespace.
 
-  ![Screenshot showing SketricGen Direct Embed iframe code copy interface](/images/squarespace/screenshot9.png)
+  ![](/images/squarespace/screenshot9.png)
 
   ## **Step 3: Embed your workflow**
 
   ### 1. Log in to Squarespace and open dashboard
   ### 2. Select the sit you want to add iframe on
-  ![Screenshot showing Squarespace dashboard with site selection interface](/images/squarespace/screenshot2.png)  
+  ![](/images/squarespace/screenshot2.png)  
   ### 3. Click **Edit**
 
-  ![Screenshot showing Squarespace site editor with Edit button](/images/squarespace/screenshot3.png)  
+  ![](/images/squarespace/screenshot3.png)  
 
   ### 4. Click **Add Block**
 
-  ![Screenshot showing Squarespace Add Block interface](/images/squarespace/screenshot4.png)
+  ![](/images/squarespace/screenshot4.png)
 
   ### 5. Choose the **Code** block and paste the iframe code  
      Adjust size and placement as needed, then click **Save**
 
-  ![Screenshot showing Squarespace Code block with iframe embed and save options](/images/squarespace/screenshot10.png)
+  ![](/images/squarespace/screenshot10.png)
 
   ## **Step 4: Test your widget after publishing**
 
-  ![Screenshot showing Squarespace site with embedded SketricGen iframe widget](/images/squarespace/screenshot11.png)
+  ![](/images/squarespace/screenshot11.png)
 
   🎉 **Congrats!** You've successfully added your SketricGen workflow using an iframe.
 

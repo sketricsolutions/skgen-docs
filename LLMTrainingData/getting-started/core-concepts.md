@@ -1,3 +1,5 @@
+**Public URL:** https://docs.sketricgen.ai/getting-started/core-concepts
+
 Every workflow in SketricGen starts inside an AgentSpace — a visual environment where you connect agents, tools, and logic to build intelligent, multi-agent systems.
 
 The following concepts form the foundation of how SketricGen works.
@@ -16,7 +18,7 @@ Each workflow is composed of nodes and edges that define the logic of collaborat
 
 Start small. Build two or three connected agents, validate each handoff, and observe the trace before scaling to complex workflows.
 
-![AgentSpace Canvas showing connected nodes representing agents and tools with edges showing handoffs between them](/images/core-concepts/core_agent_space.png)
+![AgentSpace Canvas showing connected nodes representing agents and tools with edges showing handoffs between them](https://docs.sketricgen.ai/images/core-concepts/core_agent_space.png)
 
 ## Agents
 
@@ -39,7 +41,7 @@ Define each agent like a job description - what they _know_, _do_, and _when to 
 
 Over-specifying beats ambiguity.
 
-![Agent configuration interface showing instructions, model settings, tools access, and guardrails](/images/core-concepts/core_agent.png)
+![Agent configuration interface showing instructions, model settings, tools access, and guardrails](https://docs.sketricgen.ai/images/core-concepts/core_agent.png)
 
 ## Tools (Capabilities)
 
@@ -60,7 +62,7 @@ You can attach one or many tools to an agent.
 
 Attach only the tools that each agent truly needs — fewer tools make reasoning more focused and traces easier to interpret.
 
-![Tools marketplace interface showing available tools including Sketric App Marketplace, File Search, Web Search, Code Interpreter, API Request, and Custom MCP](/images/core-concepts/core_tools.png)
+![Tools marketplace interface showing available tools including Sketric App Marketplace, File Search, Web Search, Code Interpreter, API Request, and Custom MCP](https://docs.sketricgen.ai/images/core-concepts/core_tools.png)
 
 ## Handoffs (Orchestration)
 
@@ -76,7 +78,7 @@ They are the connective logic of your workflow.
 
 For production workflows, prefer _designer-routed_ handoffs at first - this ensures predictable behavior and easier debugging.
 
-![Handoff configuration interface showing designer-routed and AI-routed options with conditions and fallbacks](/images/core-concepts/core_handoff.png)
+![Handoff configuration interface showing designer-routed and AI-routed options with conditions and fallbacks](https://docs.sketricgen.ai/images/core-concepts/core_handoff.png)
 
 ## Structured Inputs & Outputs (JSON)
 
@@ -90,9 +92,9 @@ Use **structured JSON schemas** to keep workflows reliable, traceable, and compo
 
 Always validate schema changes in the Trace Explorer before publishing—small mismatches can break downstream logic.
 
-![Structured output configuration showing JSON schema definition with required and optional fields](/images/core-concepts/core_structured_output.png)
+![Structured output configuration showing JSON schema definition with required and optional fields](https://docs.sketricgen.ai/images/core-concepts/core_structured_output.png)
 
-![Structured input interface showing how to define input schemas for agents](/images/core-concepts/core_structured_input.png)
+![Structured input interface showing how to define input schemas for agents](https://docs.sketricgen.ai/images/core-concepts/core_structured_input.png)
 
 ## Conversations, Tool Calls & Traces
 
@@ -108,7 +110,7 @@ The **Trace Explorer** helps you visualize each step and pinpoint inefficiencies
 
 Review traces often - optimize agents that over-call tools or generate unnecessary handoffs.
 
-![Trace Explorer interface showing conversation flow, agent interactions, tool calls, durations, and credit consumption](/images/core-concepts/core_trace.png)
+![Trace Explorer interface showing conversation flow, agent interactions, tool calls, durations, and credit consumption](https://docs.sketricgen.ai/images/core-concepts/core_trace.png)
 
 ## Deployment (At a Glance)
 
@@ -117,7 +119,7 @@ Once your workflow is ready, deploy it through one of two paths:
 - **Widget:** Configure your branding (logo, colors, greeting message) and embed the snippet into your site or CMS.
 - **Public API:** Trigger workflows programmatically and receive **structured JSON** responses.
 
-(See the [Deploy](/deploy/whatsapp) section for integration-specific steps.)
+(See the [Deploy](https://docs.sketricgen.ai/deploy/whatsapp) section for integration-specific steps.)
 
 ## Philosophy: Agentic, Not Hard-Coded
 
