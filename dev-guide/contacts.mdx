@@ -1,0 +1,95 @@
+## Overview
+
+The `contact_id` parameter is an optional identifier used to associate conversations with external contacts or users in your system. It enables conversation management and retrieval across different platforms and integrations, allowing you to maintain persistent customer experiences.
+
+## What is Contact ID?
+
+Contact ID is a string identifier that you can pass when starting a new conversation to link it with a specific contact or user in your external system. This creates a persistent relationship between your users and their conversation history with your AI agents.
+
+## Usage in API Requests
+
+### Including Contact ID in Requests
+
+When making a request to the `/run-workflow` endpoint, you can include the `contact_id` parameter:
+
+```json
+{
+  "agent_id": "agent_abc123xyz",
+  "user_input": "Hello, I need help with my order",
+  "contact_id": "customer_12345",
+  "stream": false
+}
+```
+
+### Request Body Parameters
+
+| Field        | Type   | Required | Description                                    |
+|--------------|--------|----------|------------------------------------------------|
+| `contact_id` | string | No       | External identifier for the contact/user       |
+
+## Behavior Scenarios
+
+### Without Contact ID
+
+When `contact_id` is not provided:
+
+- **Independent Conversations**: Each conversation remains separate and isolated
+- **No History Linking**: Conversations cannot be retrieved or connected by contact
+- **Session-Based**: Each interaction is treated as a standalone session
+- **Limited Context**: No access to previous conversations from the same user
+
+**Example:**
+```json
+{
+  "agent_id": "agent_abc123xyz",
+  "user_input": "What's my order status?",
+  // No contact_id provided
+  "stream": false
+}
+```
+
+### With Contact ID
+
+When `contact_id` is provided:
+
+- **Linked Conversations**: All conversations are associated with the external contact
+- **History Retrieval**: Enables retrieving conversation history for the contact
+- **Multi-Session Support**: Supports continuous customer experiences across sessions
+- **Persistent Context**: Access to previous interactions with the same contact
+
+**Example:**
+```json
+{
+  "agent_id": "agent_abc123xyz",
+  "user_input": "What's my order status?",
+  "contact_id": "customer_12345",
+  "stream": false
+}
+```
+
+## Best Practices
+
+### Contact ID Format
+- Use consistent, unique identifiers from your system
+- Avoid personally identifiable information in the ID itself
+- Consider using UUIDs or hashed values for security
+
+**Good Examples:**
+```
+"contact_12345"
+"user_uuid_550e8400-e29b-41d4-a716-446655440000"
+"customer_hash_abc123def456"
+```
+
+**Avoid:**
+```
+"john.doe@email.com"
+"555-123-4567"
+"John Doe"
+```
+
+### Implementation Strategy
+1. **Map Your Users**: Create a mapping between your system's user IDs and contact IDs
+2. **Consistent Usage**: Always use the same contact ID for the same user across all conversations
+3. **Privacy Compliance**: Ensure contact IDs comply with your privacy policies
+4. **Documentation**: Document your contact ID scheme for your development team

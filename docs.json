@@ -49,7 +49,8 @@
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/public-API-Usage"
+              "dev-guide/public-API-Usage",
+              "dev-guide/contacts"
             ]
           },
           {

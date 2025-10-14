@@ -38,6 +38,7 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 | `agent_id`        | string  | Yes      | Unique identifier for the AI agent to use | -                                    |
 | `user_input`      | string  | Yes      | The user's message or query to process    | Max 10,000 characters                |
 | `conversation_id` | string  | No       | ID of existing conversation to continue   | If omitted, creates new conversation |
+| `contact_id`      | string  | No       | External identifier to associate conversation with a contact | Max 255 characters |
 | `stream`          | boolean | No       | Enable real-time response streaming       | Default: `false`                     |
 
 ### Example Request
@@ -47,6 +48,7 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 	"agent_id": "agent_abc123xyz",
 	"user_input": "Help me analyze this quarterly sales data",
 	"conversation_id": "conv_def456ghi",
+	"contact_id": "customer_12345",
 	"stream": false
 }
 ```
@@ -66,6 +68,7 @@ The endpoint supports two response modes.
 | `agent_id`        | string  | The agent that processed the request     |
 | `user_id`         | string  | Identifier for the user account          |
 | `conversation_id` | string  | ID of the conversation (new or existing) |
+| `contact_id`      | string  | External contact identifier (if provided) |
 | `response`        | string  | The AI agent's generated response        |
 | `owner`           | string  | Owner of the agent                       |
 | `error`           | boolean | Indicates if an error occurred           |
@@ -77,6 +80,7 @@ The endpoint supports two response modes.
 	"agent_id": "agent_abc123xyz",
 	"user_id": "user_789xyz",
 	"conversation_id": "conv_def456ghi",
+	"contact_id": "customer_12345",
 	"response": "I'll help you analyze your quarterly sales data. Please share the data file or provide the key metrics you'd like me to examine.",
 	"owner": "company_abc",
 	"error": false

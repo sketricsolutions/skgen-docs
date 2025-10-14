@@ -4,7 +4,7 @@
 
 To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don’t have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
 
-If you need assistance with setting up a working SketricGen workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/user-guide/creating-your-first-agent)** for creating and deploying your workflow.
+If you need assistance with setting up a working SketricGen workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your workflow.
 
 ## **Step 2: Install SketricGen Chat Widget on Your WordPress Website**
 
