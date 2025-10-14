@@ -16,22 +16,22 @@
           {
             "group": "Getting Started",
             "pages": [
-              "getting-started/overview",
-              "getting-started/core-Concepts",
-              "getting-started/quickstart"
+              "getting-started/Overview",
+              "getting-started/Core-Concepts",
+              "getting-started/Quickstart"
             ]
           },
           {
             "group": "User Guides",
             "pages": [
-              "user-guides/agentSpace-Canvas",
-              "user-guides/agents",
-              "user-guides/tools",
-              "user-guides/orchestration-and-Handoffs",
-              "user-guides/structured-Inputs-and-Outputs",
-              "user-guides/traces-and-Optimizations",
-              "user-guides/conversations-and-Insights",
-              "user-guides/best-Practices"
+              "user-guides/AgentSpace-Canvas",
+              "user-guides/Agents",
+              "user-guides/Tools",
+              "user-guides/Orchestration-and-Handoffs",
+              "user-guides/Structured-Inputs-and-Outputs",
+              "user-guides/Traces-and-Optimizations",
+              "user-guides/Conversations-and-Insights",
+              "user-guides/Best-Practices"
             ]
           },
           {
@@ -43,13 +43,15 @@
               "deploy/Slack",
               "deploy/Shopify",
               "deploy/WordPress",
-              "deploy/Zapier"
+              "deploy/Zapier",
+              "deploy/Custom-Website"
             ]
           },
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/public-API-Usage"
+              "dev-guide/Public-API-Usage",
+              "dev-guide/Contacts"
             ]
           },
           {
