@@ -37,10 +37,10 @@
           {
             "group": "Deploy",
             "pages": [
-              "deploy/WhatsApp",
+              "deploy/whatsApp",
               "deploy/squareSpace",
               "deploy/wix",
-              "deploy/Slack",
+              "deploy/slack",
               "deploy/shopify",
               "deploy/wordPress",
               "deploy/zapier",
