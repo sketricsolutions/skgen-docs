@@ -38,13 +38,13 @@
             "group": "Deploy",
             "pages": [
               "deploy/WhatsApp",
-              "deploy/SquareSpace",
-              "deploy/Wix",
+              "deploy/squareSpace",
+              "deploy/wix",
               "deploy/Slack",
-              "deploy/Shopify",
-              "deploy/WordPress",
-              "deploy/Zapier",
-              "deploy/Custom-Website"
+              "deploy/shopify",
+              "deploy/wordPress",
+              "deploy/zapier",
+              "deploy/custom-Website"
             ]
           },
           {
