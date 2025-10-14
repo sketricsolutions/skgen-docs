@@ -34,6 +34,7 @@ When making a request to the `/run-workflow` endpoint, you can include the `cont
 When `contact_id` is not provided:
 
 - **Independent Conversations**: Each conversation remains separate and isolated
+- **Default Behavior**: A proxy contactID is saved in browser storage. Users can see their old conversation in the same browser session.
 - **No History Linking**: Conversations cannot be retrieved or connected by contact
 - **Session-Based**: Each interaction is treated as a standalone session
 - **Limited Context**: No access to previous conversations from the same user
@@ -53,9 +54,12 @@ When `contact_id` is not provided:
 When `contact_id` is provided:
 
 - **Linked Conversations**: All conversations are associated with the external contact
+- **First run**: On the first run with a new contactID, our system saves it and after that groups conversations with the same contact ID.
 - **History Retrieval**: Enables retrieving conversation history for the contact
 - **Multi-Session Support**: Supports continuous customer experiences across sessions
 - **Persistent Context**: Access to previous interactions with the same contact
+
+>**Note:** Please [contact us](contact@sketricsolutions.com) if you want to remove/reset contactIDs from our system.
 
 **Example:**
 ```json
@@ -73,6 +77,7 @@ When `contact_id` is provided:
 - Use consistent, unique identifiers from your system
 - Avoid personally identifiable information in the ID itself
 - Consider using UUIDs or hashed values for security
+- Usually, these are the unique contact/userIDs used in your product to identify a specific user
 
 **Good Examples:**
 ```
@@ -89,7 +94,7 @@ When `contact_id` is provided:
 ```
 
 ### Implementation Strategy
-1. **Map Your Users**: Create a mapping between your system's user IDs and contact IDs
-2. **Consistent Usage**: Always use the same contact ID for the same user across all conversations
-3. **Privacy Compliance**: Ensure contact IDs comply with your privacy policies
-4. **Documentation**: Document your contact ID scheme for your development team
+1. **Consistent Usage**: Always send the same contact ID for the same user across all conversations
+2. **Privacy Compliance**: Ensure contact IDs comply with your privacy policies
+3. **Documentation**: Document your contact ID scheme for your development team
+4. **Map Your Users**: (Optional) If you dont send you system's userID as contactID then, create a mapping between your system's user IDs and contact IDs for your own records.
