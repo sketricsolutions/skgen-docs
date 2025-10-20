@@ -16,42 +16,42 @@
           {
             "group": "Getting Started",
             "pages": [
-              "getting-started/Overview",
-              "getting-started/Core-Concepts",
-              "getting-started/Quickstart"
+              "getting-started/overview",
+              "getting-started/core-concepts",
+              "getting-started/quickstart"
             ]
           },
           {
             "group": "User Guides",
             "pages": [
-              "user-guides/AgentSpace-Canvas",
-              "user-guides/Agents",
-              "user-guides/Tools",
-              "user-guides/Orchestration-and-Handoffs",
-              "user-guides/Structured-Inputs-and-Outputs",
-              "user-guides/Traces-and-Optimizations",
-              "user-guides/Conversations-and-Insights",
-              "user-guides/Best-Practices"
+              "user-guides/agentspace-canvas",
+              "user-guides/agents",
+              "user-guides/tools",
+              "user-guides/orchestration-and-handoffs",
+              "user-guides/structured-inputs-and-outputs",
+              "user-guides/traces-and-optimizations",
+              "user-guides/conversations-and-insights",
+              "user-guides/best-practices"
             ]
           },
           {
             "group": "Deploy",
             "pages": [
-              "deploy/whatsApp",
-              "deploy/squareSpace",
+              "deploy/whatsapp",
+              "deploy/squarespace",
               "deploy/wix",
               "deploy/slack",
-              "deploy/Shopify",
-              "deploy/wordPress",
+              "deploy/shopify",
+              "deploy/wordpress",
               "deploy/zapier",
-              "deploy/custom-Website"
+              "deploy/custom-website"
             ]
           },
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/Public-API-Usage",
-              "dev-guide/Contacts"
+              "dev-guide/public-api-usage",
+              "dev-guide/contacts"
             ]
           },
           {
