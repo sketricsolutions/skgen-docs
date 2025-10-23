@@ -16,49 +16,49 @@
           {
             "group": "Getting Started",
             "pages": [
-              "docs/getting-started/overview",
-              "docs/getting-started/core-concepts",
-              "docs/getting-started/quickstart"
+              "getting-started/overview",
+              "getting-started/core-concepts",
+              "getting-started/quickstart"
             ]
           },
           {
             "group": "User Guides",
             "pages": [
-              "docs/user-guides/agentspace-canvas",
-              "docs/user-guides/agents",
-              "docs/user-guides/tools",
-              "docs/user-guides/orchestration-and-handoffs",
-              "docs/user-guides/structured-inputs-and-outputs",
-              "docs/user-guides/traces-and-optimizations",
-              "docs/user-guides/conversations-and-insights",
-              "docs/user-guides/best-practices"
+              "user-guides/agentspace-canvas",
+              "user-guides/agents",
+              "user-guides/tools",
+              "user-guides/orchestration-and-handoffs",
+              "user-guides/structured-inputs-and-outputs",
+              "user-guides/traces-and-optimizations",
+              "user-guides/conversations-and-insights",
+              "user-guides/best-practices"
             ]
           },
           {
             "group": "Deploy",
             "pages": [
-              "docs/deploy/whatsapp",
-              "docs/deploy/squarespace",
-              "docs/deploy/wix",
-              "docs/deploy/slack",
-              "docs/deploy/shopify",
-              "docs/deploy/wordpress",
-              "docs/deploy/zapier",
-              "docs/deploy/custom-website"
+              "deploy/whatsapp",
+              "deploy/squarespace",
+              "deploy/wix",
+              "deploy/slack",
+              "deploy/shopify",
+              "deploy/wordpress",
+              "deploy/zapier",
+              "deploy/custom-website"
             ]
           },
           {
             "group": "Dev Guide",
             "pages": [
-              "docs/dev-guide/public-api-usage",
-              "docs/dev-guide/contacts"
+              "dev-guide/public-api-usage",
+              "dev-guide/contacts"
             ]
           },
           {
             "group": "Changelog",
             "pages": [
-              "docs/changelog/v2.0.0",
-              "docs/changelog/v1.0.0"
+              "changelog/v2.0.0",
+              "changelog/v1.0.0"
             ]
           }
         ]
