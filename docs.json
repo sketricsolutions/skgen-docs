@@ -41,6 +41,7 @@
               "deploy/squarespace",
               "deploy/wix",
               "deploy/slack",
+              "deploy/telegram",
               "deploy/shopify",
               "deploy/wordpress",
               "deploy/zapier",
