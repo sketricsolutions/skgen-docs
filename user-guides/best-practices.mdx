@@ -5,6 +5,7 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 - **Handoffs transfer control**: when Agent A hands off to Agent B, **B owns the run** until it’s done (or hands off again). The final answer normally comes from the **last agent** that handled the message.
 - **Agent as Tool returns control**: use this for bounded sub-tasks; the callee runs, returns a result, and control goes **back to the caller**. Great for reusable utilities (classify, extract, redact).
 - **Routing is AI-decided**: agents choose when to hand off based on **instructions + input** (not hard-coded paths). Keep your instructions explicit about _when_ to call which tool/agent.
+- **Forced handoffs for guaranteed paths**: when you need deterministic execution (e.g., compliance pipelines or sequential processing), use **forced handoffs** to ensure Agent B always runs after Agent A — regardless of AI judgment.
 
 ## Write crisp instructions
 

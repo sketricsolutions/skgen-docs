@@ -31,6 +31,7 @@
               "user-guides/structured-inputs-and-outputs",
               "user-guides/traces-and-optimizations",
               "user-guides/conversations-and-insights",
+              "user-guides/advanced-agent-settings",
               "user-guides/best-practices"
             ]
           },
@@ -54,6 +55,7 @@
             "group": "Dev Guide",
             "pages": [
               "dev-guide/public-api-usage",
+              "dev-guide/python-sdk",
               "dev-guide/contacts"
             ]
           },

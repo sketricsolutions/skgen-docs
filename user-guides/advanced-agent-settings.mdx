@@ -1,0 +1,163 @@
+# Advanced Agent Settings
+
+This guide covers the model configuration options available for fine-tuning agent behavior. These settings allow you to balance between creativity, consistency, and performance.
+
+---
+
+## Model Settings Overview
+
+Each agent in SketricGen can be configured with specific model settings that control how the underlying LLM generates responses. You can adjust these in the agent node's settings panel within the AgentSpace.
+
+---
+
+## Temperature
+
+**What it does:** Controls the randomness/creativity of the model's output.
+
+| Value | Behavior |
+|-------|----------|
+| `0.0` | Deterministic — always picks the most likely token. Best for factual, consistent responses. |
+| `0.3 - 0.5` | Low creativity — slightly varied but mostly predictable. Good for customer support, data extraction. |
+| `0.7` | Balanced (default for many models) — moderate variety. Good for general conversation. |
+| `1.0` | High creativity — more random and diverse outputs. Good for brainstorming, creative writing. |
+
+**Range:** `0.0` to `1.0`
+
+### When to use low temperature (0.0 - 0.3):
+- Customer support agents that need consistent answers
+- Data extraction tasks
+- Compliance-sensitive responses
+- Structured output generation (JSON)
+- Agents that call tools frequently
+
+### When to use high temperature (0.7 - 1.0):
+- Creative writing agents
+- Brainstorming assistants
+- Varied response generation
+- Conversational agents where variety is desired
+
+---
+
+## Top P (Nucleus Sampling)
+
+**What it does:** Controls diversity by limiting the token selection pool to the top cumulative probability mass.
+
+| Value | Behavior |
+|-------|----------|
+| `0.1` | Very focused — only considers tokens in the top 10% probability mass |
+| `0.5` | Moderate focus — considers top 50% probability mass |
+| `0.9` | Broad sampling — considers most likely tokens up to 90% cumulative probability |
+| `1.0` | No filtering — all tokens are considered (default) |
+
+**Range:** `0.0` to `1.0`
+
+### Temperature vs Top P
+
+Both settings control output diversity, but in different ways:
+
+| Setting | How it works |
+|---------|--------------|
+| **Temperature** | Adjusts the probability distribution — makes unlikely tokens more or less likely |
+| **Top P** | Cuts off the distribution — only considers tokens within a probability threshold |
+
+**Recommendation:** Adjust **either** temperature **or** top_p, not both simultaneously. Using both can lead to unpredictable behavior.
+
+- If you want **predictable, focused outputs** → Lower temperature to 0.0-0.3, keep top_p at 1.0
+- If you want **creative, varied outputs** → Raise temperature to 0.7-1.0, or lower top_p to 0.9
+
+---
+
+## Reasoning Effort
+
+**What it does:** Controls how much "thinking" effort the model applies before responding. This is particularly relevant for reasoning-capable models.
+
+| Value | Behavior | Best For |
+|-------|----------|----------|
+| `minimal` | Quick responses with minimal reasoning chain | Simple lookups, quick Q&A |
+| `low` | Light reasoning — suitable for straightforward tasks | Standard conversations, simple instructions |
+| `medium` | Balanced reasoning depth (default) | General-purpose agents |
+| `high` | Deep reasoning — extensive thinking before responding | Complex analysis, multi-step problems |
+
+### When to use high reasoning effort:
+- Complex analytical tasks
+- Multi-step problem solving
+- Code generation and debugging
+- Mathematical reasoning
+- Strategic planning agents
+
+### When to use low/minimal reasoning effort:
+- Simple Q&A
+- Quick lookups and retrieval
+- Straightforward instructions
+- Cost-sensitive applications (higher reasoning = more tokens = higher cost)
+- Low-latency requirements
+
+---
+
+## Verbosity
+
+**What it does:** Controls the length and detail level of the model's responses. This is particularly relevant for reasoning-capable models
+
+| Value | Behavior |
+|-------|----------|
+| `low` | Concise, brief responses — just the essentials |
+| `medium` | Balanced detail level (default) |
+| `high` | Detailed, comprehensive responses with explanations |
+
+### When to use low verbosity:
+- API-style agents that return structured data
+- Agents that feed into other agents (keeps context lean for downstream processing)
+- Quick-response chatbots
+- Cost optimization (fewer tokens)
+
+### When to use medium verbosity:
+- General-purpose conversational agents
+- Customer support (balanced helpfulness)
+- Most standard use cases
+
+### When to use high verbosity:
+- Educational or explainer agents
+- Documentation generators
+- Detailed customer-facing responses
+- Agents where thoroughness is valued
+
+---
+
+## Configuration in AgentSpace
+
+Model settings are configured per-agent in the AgentSpace canvas:
+
+1. Select an agent node
+2. Toogle **Advanced Mode**
+3. Adjust the model settings:
+   - Temperature slider (0.0 - 1.0)
+   - Top P slider (0.0 - 1.0)
+   - Reasoning Effort dropdown (minimal / low / medium / high)
+   - Verbosity dropdown (low / medium / high)
+4. Settings are saved with the workflow
+
+![Screenshot showing advanced mode settings](/images/user-guide/advanced_mode.png)
+
+---
+
+## Best Practices
+
+1. **Start with defaults** — Only adjust settings when you observe specific issues or have clear requirements.
+
+2. **Change one setting at a time** — Makes it easier to understand the impact of each change.
+
+3. **Test with representative inputs** — Model behavior can vary significantly based on input type and length.
+
+4. **Match settings to task type:**
+
+   | Task Type | Temperature | Reasoning | Verbosity |
+   |-----------|-------------|-----------|-----------|
+   | Data extraction | Low (0.0-0.2) | Medium | Low |
+   | Creative writing | High (0.7-1.0) | Medium | High |
+   | Customer support | Low-Medium (0.3-0.5) | Low | Medium |
+   | Complex analysis | Low (0.1-0.3) | High | High |
+   | Quick Q&A | Low (0.0-0.3) | Minimal | Low |
+
+5. **Consider downstream agents** — If your agent hands off to another agent, lower verbosity keeps context manageable.
+
+6. **Monitor costs** — Higher reasoning effort increases token usage and costs.
