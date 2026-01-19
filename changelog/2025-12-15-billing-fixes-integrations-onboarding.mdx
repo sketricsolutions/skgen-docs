@@ -1,0 +1,139 @@
+---
+title: "Billing Fixes, Integration Controls, and Better Onboarding (Dec 15–17, 2025)"
+description: "SketricGen hotfix release: critical billing integrity fixes, conversation history controls for integrations, improved onboarding experience with guided tours, smoother workflow and template navigation."
+tags: ["hotfix", "billing", "integrations", "onboarding", "workflows"]
+version: "v2"
+releaseDate: "2025-12-15"
+updated: "2025-12-17"
+---
+
+This hotfix release addresses critical billing issues, adds user-requested integration controls, and improves the onboarding experience—ensuring reliable payments, better conversation management, and smoother navigation.
+
+## TL;DR
+- 🔒 **Critical billing fix:** prevents unintended premium access when payments fail
+- 💬 **Conversation history controls** for WhatsApp, Telegram, and Instagram
+- 🎯 **Improved onboarding** with a new guided tour system
+- 📝 **Smoother workflow creation** from templates (skips unnecessary setup steps)
+- 🔧 **Better draft detection** for workflows
+
+---
+
+## What's Fixed & Improved
+
+### 1) Critical billing integrity fix (Dec 15)
+We fixed a critical issue where users could receive paid plan benefits despite failed Stripe payments:
+
+- Users are **no longer upgraded to paid plans** when Stripe marks a subscription as incomplete or incomplete_expired (initial payment never succeeds)
+- Only **active and trialing** subscriptions now trigger plan/credit updates
+- Failed payments and expired subscriptions are now handled correctly, ensuring users remain on their correct plan (e.g., Free plan if payment fails)
+
+**Why it matters:** ensures billing accuracy and prevents unintended premium access, protecting both users and the platform from billing errors.
+
+---
+
+### 2) Conversation history controls for integrations (Dec 17)
+You can now **enable or disable conversation history** for messaging integrations:
+
+- Available for **WhatsApp**, **Telegram**, and **Instagram**
+- Controlled per integration in your integration settings
+- When disabled, agents won't retain conversation context between messages
+
+**Why it matters:** gives you control over data retention and agent behavior across different channels—useful for privacy requirements or when you want stateless interactions.
+
+---
+
+### 3) Improved onboarding experience (Dec 17)
+We upgraded the onboarding system with a better guided tour:
+
+- Replaced the previous onboarding with **NextStep.js** for smoother, more reliable tours
+- Clearer step-by-step guidance for new users
+- Better visual indicators and flow
+
+**Why it matters:** faster time-to-value for new users and fewer "what do I do next?" moments.
+
+---
+
+### 4) Smoother workflow creation from templates (Dec 15)
+Creating workflows from templates is now faster:
+
+- **Templates now open directly in the workflow editor** (skips the setup modal)
+- Draft workflows are properly detected and labeled
+- Cleaner navigation flow when working with templates
+
+**Why it matters:** less clicking, faster iteration when starting from templates.
+
+---
+
+### 5) Knowledge base limits updated (Dec 17)
+For new users, the default knowledge base limit has been adjusted:
+
+- Changed from **5 knowledge bases → 1 knowledge base** for Free plan users
+- Aligns with updated plan structure
+
+**Why it matters:** clearer expectations for Free plan users and more consistent plan tiers.
+
+---
+
+## Who This Release is For
+- Anyone using **paid plans** (ensures billing accuracy)
+- Teams deploying agents on **WhatsApp, Telegram, or Instagram** who want conversation history control
+- **New users** going through onboarding
+- Builders who frequently use **templates** to create workflows
+- **Free plan users** (clarified knowledge base limits)
+
+---
+
+## How to Use (Quick Steps)
+
+### Manage conversation history for integrations
+1. Go to **Integrations**
+2. Open settings for your WhatsApp, Telegram, or Instagram integration
+3. Toggle **conversation history** on or off based on your needs
+4. Save and test with a message to confirm behavior
+
+### Start with the new onboarding tour
+1. Create a new account or access the onboarding tour from your dashboard
+2. Follow the guided steps to create your first agent/workflow
+3. Complete the tour to unlock best practices and tips
+
+### Create workflows from templates faster
+1. Go to **Templates**
+2. Select a template you want to use
+3. Click to create from template—you'll land directly in the workflow editor
+4. Customize and publish
+
+---
+
+## FAQ
+
+**What was the billing issue?**  
+In rare cases, users could receive paid plan benefits even when their initial payment failed or expired. This has been fixed to ensure billing accuracy.
+
+**Will this affect my existing paid subscription?**  
+No—this fix only prevents incorrect upgrades. If you have an active, valid subscription, nothing changes.
+
+**Can I disable conversation history for all my integrations?**  
+Yes—you can control this setting individually for WhatsApp, Telegram, and Instagram integrations.
+
+**Why would I want to disable conversation history?**  
+For privacy requirements, compliance, or if you want each message to be treated independently without context from previous messages.
+
+**What happened to the old onboarding tour?**  
+We replaced it with a better system (NextStep.js) that's more reliable, maintainable, and provides a smoother experience.
+
+**Do templates still work the same way?**  
+Yes—but now when you create a workflow from a template, you skip the setup modal and go directly to editing, which is faster.
+
+**What if I'm on the Free plan and had more than 1 knowledge base?**  
+This change only affects new users. Existing users keep their current knowledge bases.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: WhatsApp Integration:** [/deploy/whatsapp](/deploy/whatsapp)
+- **Docs: Telegram Integration:** [/deploy/telegram](/deploy/telegram)
+- **Docs: Instagram Integration:** [/deploy/instagram](/deploy/instagram)
+- **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)

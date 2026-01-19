@@ -60,10 +60,36 @@
             ]
           },
           {
-            "group": "Changelog",
+            "group": "Product Updates",
             "pages": [
-              "changelog/v2.0.0",
-              "changelog/v1.0.0"
+              {
+                "group": "2026 Updates",
+                "pages": [
+                  "changelog/2026-01-13-app-landing-auth-flow-workflow-scheduling-integrations"
+                ]
+              },
+              {
+                "group": "2025 Updates",
+                "expanded": false,
+                "pages": [
+                  "changelog/2025-12-29-node-inspector-editing-image-gen-integrations-performance",
+                  "changelog/2025-12-15-billing-fixes-integrations-onboarding",
+                  "changelog/2025-12-13-chat-widget-file-upload-guided-tour-advanced-agent-settings",
+                  "changelog/2025-11-26-conversations-contacts-attachments-instagram-zapier",
+                  "changelog/2025-11-17-telegram-google-signin-mobile-integrations",
+                  "changelog/2025-11-07-affiliate-referrals-widget-import-ui",
+                  "changelog/2025-11-03-iframe-fullscreen-embed-forced-handoff-ga-tracking",
+                  "changelog/2025-10-24-message-tracing-templates-ui-integrations"
+                ]
+              },
+              {
+                "group": "Major Releases",
+                "expanded": false,
+                "pages": [
+                  "changelog/v2.0.0",
+                  "changelog/v1.0.0"
+                ]
+              }
             ]
           }
         ]
