@@ -17,7 +17,7 @@ All API requests require authentication via an API key in the request headers.
 ```
 API-KEY: your_api_key_here
 ```
-(You can retrieve it from your account setting at [app.sketricgen.ai/profile](https://app.sketricgen.ai/profile))
+(You can retrieve it from your account setting at [www.sketricgen.ai/profile](https://www.sketricgen.ai/profile))
 
 ## Endpoints
 

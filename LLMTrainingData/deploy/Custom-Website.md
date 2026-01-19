@@ -5,7 +5,7 @@
   
   ## **Step 1: Create your SketricGen account**
 
-  To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
+  To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
 
   If you need assistance with setting up a working SketricGen workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your workflow.
 
@@ -64,7 +64,7 @@
   
   ## **Step 1: Create your SketricGen account**
 
-  To get started with the integration, **[sign in to your SketricGen account](https://app.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://app.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
+  To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
 
   If you need assistance with setting up a working SketricGen workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your workflow.
 
@@ -73,7 +73,7 @@
   From your dashboard, click **Publish > Direct Embed** and copy the iframe code. It should look similar to this:
 
   ```html
-  <iframe src="https://app.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
+  <iframe src="https://www.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
   ```
 
   > **Note:** The workflow must be set to **Public** for the iframe embed to work.
@@ -93,7 +93,7 @@
   ```html
   <div class="chat-container">
     <h2>Chat with our AI Assistant</h2>
-    <iframe src="https://app.sketricgen.ai/iframe-widget/skgen_xxxx" width="100%" height="700px" frameborder="0"></iframe>
+    <iframe src="https://www.sketricgen.ai/iframe-widget/skgen_xxxx" width="100%" height="700px" frameborder="0"></iframe>
   </div>
   ```
 
