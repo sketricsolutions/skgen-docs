@@ -6,11 +6,11 @@ Structured data makes multi-agent workflows predictable, renderable, and testabl
 
 In SketricGen, you can define schemas directly in a **form-based UI**—no coding required.
 
-Each agent’s Structured Input and Structured Output are automatically converted into a **backend schema** (Pydantic/JSON Schema style).
+Each agent's Structured Input and Structured Output are automatically converted into a **backend schema** (Pydantic/JSON Schema style).
 
 These schemas are used during **handoffs**, **agent calls**, and **validations**, ensuring that every agent in your workflow exchanges data in a consistent, typed format.
 
-![Screenshot showing structured input/output interface](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured_io.png)
+![Screenshot showing structured input/output configuration interface with JSON schema definition and validation](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured_io.png)
 
 ## Structured Input
 
@@ -26,7 +26,7 @@ It acts as a contract for parent agents, ensuring they supply all required field
 4. Click **Add New Field** and configure the following:
    - **Field Name** — e.g., `customer_name`, `intent`, `priority`.
    - **Type** — choose from _String_, _Integer_, _Float_, or _Boolean_.
-   - **Description** — acts as both a UI tooltip and a guidance note for the agent (e.g., “The name of the customer requesting support”).
+   - **Description** — acts as both a UI tooltip and a guidance note for the agent (e.g., "The name of the customer requesting support").
    - **Default Value** — optional, used if no value is supplied by the parent.
 5. Click **Save Changes** to confirm.
 
@@ -47,7 +47,7 @@ This ensures predictable data handling between connected agents and external int
 3. Add fields exactly as you would for Structured Inputs:
    - Name
    - Type (String, Integer, Float, Boolean)
-   - Description (e.g., “Summarized report text returned by this agent.”)
+   - Description (e.g., "Summarized report text returned by this agent.")
    - Default Value (optional)
 4. Save the schema.
 
@@ -88,4 +88,4 @@ This ensures predictable data handling between connected agents and external int
 }
 ```
 
-![Animated GIF showing structured data flow in workflows](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured.gif)
+![Animated GIF showing structured data flow between agents with input/output schema validation](https://docs.sketricgen.ai/images/user-guides/structured-input-output/io_structured.gif)

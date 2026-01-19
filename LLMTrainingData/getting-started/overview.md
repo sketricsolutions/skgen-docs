@@ -10,7 +10,7 @@ Build a collaborative team of agents, attach tools, define handoffs, validate st
 
 ### Why SketricGen?
 
-- **Design, don’t hard-code.** Orchestrate a team of agents visually instead of writing fragile automation scripts.
+- **Design, don't hard-code.** Orchestrate a team of agents visually instead of writing fragile automation scripts.
 - **Full control.** Manage logic, handoffs, structured inputs/outputs, and traces - all in one workspace.
 - **Ship fast.** Configure a branded widget inside the UI or integrate directly through the public API.
 
@@ -35,5 +35,5 @@ Build a collaborative team of agents, attach tools, define handoffs, validate st
 
 ### Next Steps
 
-- **[Core Concepts](https://docs.sketricgen.ai/getting-started/core-concepts):** Familiarize yourself with the core concepts behind agentic workflows
-- **[Quickstart](https://docs.sketricgen.ai/getting-started/quickstart) (≈ 5 minutes):** Build a two-agent workflow, attach a tool, add a handoff, run a test, configure a widget and publish it.
+- **Core Concepts:** Familiarize yourself with the core concepts behind agentic workflows
+- **Quickstart (≈ 5 minutes):** Build a two-agent workflow, attach a tool, add a handoff, run a test, configure a widget and publish it.

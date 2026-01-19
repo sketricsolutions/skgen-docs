@@ -6,12 +6,14 @@
 **Lina (Triage + Scheduling)** → **handoff → Alex (Product Specialist + Docs)**.
 Test the flow, inspect traces, brand the widget, and publish.
 
+**Video Tutorial:** [Watch on YouTube](https://www.youtube.com/embed/N2fcTQWbBOA)
+
 ---
 
 ## 1) Create a new AgentSpace
 
 1. **AgentSpaces → New → Blank**
-2. Name: **“ResumeRanker FAQ Space** → **Create**
+2. Name: **"ResumeRanker FAQ Space** → **Create**
 
 ![Screenshot showing the AgentSpace creation interface with "New" and "Blank" options](https://docs.sketricgen.ai/images/quickstart/new-space.png)
 
@@ -82,8 +84,8 @@ Test the flow, inspect traces, brand the widget, and publish.
 
 Open **Playground** and try:
 
-* “What does ResumeRanker cost?” → expect **handoff to Alex** (File Search cites sources).
-* “Can I book a demo for Tuesday?” → expect **Lina** to **use Google Calendar** tool.
+* "What does ResumeRanker cost?" → expect **handoff to Alex** (File Search cites sources).
+* "Can I book a demo for Tuesday?" → expect **Lina** to **use Google Calendar** tool.
 
 Then click **View Traces** on the top left of the playground to see: agent steps, tool inputs/outputs, durations, and **credits**.
 
@@ -95,7 +97,7 @@ Then click **View Traces** on the top left of the playground to see: agent steps
 
 ![Screenshot showing the widget design interface with logo upload, brand colors, greeting message, and callouts configuration](https://docs.sketricgen.ai/images/quickstart/design_widget.png)
 
-1. Upload **logo**, set **brand colors**, add **default greeting** and **callouts** (e.g., “Ask about pricing or book a demo”).
+1. Upload **logo**, set **brand colors**, add **default greeting** and **callouts** (e.g., "Ask about pricing or book a demo").
 2. **Publish (top right in playground) → Chat Bubble**
 3. Copy the snippet or follow CMS steps (WordPress, Wix, etc.).
 4. Paste into a page on your site and verify.
@@ -104,7 +106,7 @@ Then click **View Traces** on the top left of the playground to see: agent steps
 
 ---
 
-## You’re live
+## You're live
 
 You now have an **AI-routed, two-agent** assistant that answers FAQs and books meetings. Iterate quickly: tweak instructions → re-test → check **traces** → republish.
 

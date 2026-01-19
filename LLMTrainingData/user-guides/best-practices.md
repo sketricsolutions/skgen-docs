@@ -2,11 +2,12 @@
 
 Build your AgentSpace like a team: a **Manager/Triage** agent receives the message first, decides what's needed, and **passes control** to the right specialist. Your job is to make control flow **predictable** with clear instructions and tool usage notes.
 
-## Control flow: who’s in charge?
+## Control flow: who's in charge?
 
-- **Handoffs transfer control**: when Agent A hands off to Agent B, **B owns the run** until it’s done (or hands off again). The final answer normally comes from the **last agent** that handled the message.
+- **Handoffs transfer control**: when Agent A hands off to Agent B, **B owns the run** until it's done (or hands off again). The final answer normally comes from the **last agent** that handled the message.
 - **Agent as Tool returns control**: use this for bounded sub-tasks; the callee runs, returns a result, and control goes **back to the caller**. Great for reusable utilities (classify, extract, redact).
 - **Routing is AI-decided**: agents choose when to hand off based on **instructions + input** (not hard-coded paths). Keep your instructions explicit about _when_ to call which tool/agent.
+- **Forced handoffs for guaranteed paths**: when you need deterministic execution (e.g., compliance pipelines or sequential processing), use **forced handoffs** to ensure Agent B always runs after Agent A — regardless of AI judgment.
 
 ## Write crisp instructions
 
@@ -18,7 +19,7 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 
 - Prefer **Structured Inputs** for child agents (so the parent knows exactly what fields to supply before a handoff).
 - Use **Structured Outputs** primarily on **ending agents** (so user-facing or API consumers get consistent JSON).
-- Avoid forcing intermediate agents to emit final JSON unless they’re the responder. They will always return JSON output and this is not very human/customer friendly. 
+- Avoid forcing intermediate agents to emit final JSON unless they're the responder. They will always return JSON output and this is not very human/customer friendly. 
 - **Tip:** Structured Outputs is powerful for Agents as Tools!
 
 ## Tooling principles
@@ -40,13 +41,13 @@ Build your AgentSpace like a team: a **Manager/Triage** agent receives the messa
 
 ## Protocols you benefit from
 
-- **MCP (Model Context Protocol)**: a standard “USB-C for AI” to connect models to tools and data safely and consistently. Use MCP servers for clean, reusable capabilities.
+- **MCP (Model Context Protocol)**: a standard "USB-C for AI" to connect models to tools and data safely and consistently. Use MCP servers for clean, reusable capabilities.
 - **A2A (Agent-to-Agent)**: emerging standard for interop between agents across systems—useful when your flows span other vendors or services.
 
 ## Common mistakes (and fixes)
 
 1. **Misunderstanding control flow**
-   - _Mistake_: Parent calls multiple children assuming they all reply; or expecting a child to “call back” without an explicit handoff.
+   - _Mistake_: Parent calls multiple children assuming they all reply; or expecting a child to "call back" without an explicit handoff.
    - _Fix_: Remember: **handoff transfers control**; add an explicit **handoff back** if needed. Otherwise use **Agent as Tool** to keep control with the parent.
 2. **Structured output in the wrong place**
    - _Mistake_: Forcing JSON at intermediate layers then accidentally replying to the user with that JSON.
