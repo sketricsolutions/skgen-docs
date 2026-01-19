@@ -20,11 +20,11 @@ Each trace provides:
 - Any **handoffs** made between agents.
 - Detailed **function calls** (tool invocations or agent transfers).
 - The **time taken** and **credits consumed** per step.
-- A complete breakdown of each agent’s reasoning and outputs.
+- A complete breakdown of each agent's reasoning and outputs.
 
-![Screenshot showing traces interface with workflow execution details](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_traces.png)
+![Screenshot showing traces interface with conversation flow, agent steps, tool calls, and performance metrics](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_traces.png)
 
-You can expand each agent’s trace to inspect:
+You can expand each agent's trace to inspect:
 
 - The **function arguments** or structured data passed downstream.
 - The **structured outputs** produced.
@@ -51,11 +51,11 @@ The Trace Explorer provides a structured timeline of events, showing how your mu
 - How structured inputs and outputs flowed between nodes.
 - Any failed or retried tool calls.
 
-![Animated GIF showing trace logs and debugging interface](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_logs.gif)
+![Animated GIF showing trace logs interface with detailed execution logs, error tracking, and debugging information](https://docs.sketricgen.ai/images/user-guides/traces-optimization/trace_logs.gif)
 
 ## Optimization Quick Wins
 
-Once you’ve reviewed your traces, you can apply these best practices to improve performance and reliability.
+Once you've reviewed your traces, you can apply these best practices to improve performance and reliability.
 
 - Tighten **agent instructions** — define when to call each tool and what success looks like.
 - Use **Agent-as-Tool** for recurring, contained subtasks (classification, summarization, extraction).
@@ -68,4 +68,4 @@ Once you’ve reviewed your traces, you can apply these best practices to improv
 
 **Guideline:**
 
-Think of traces as your workflow’s feedback loop. Continuous monitoring and small refinements after each trace review lead to dramatically better agent performance.
+Think of traces as your workflow's feedback loop. Continuous monitoring and small refinements after each trace review lead to dramatically better agent performance.

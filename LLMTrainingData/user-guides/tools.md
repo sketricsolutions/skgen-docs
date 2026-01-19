@@ -10,13 +10,13 @@ Each tool operates as a callable function within a workflow—agents invoke them
 
 You can connect to external apps, build knowledge bases, run Python code, make API calls, or integrate with MCP servers.
 
-![Screenshot showing tools sidebar with available tool options](https://docs.sketricgen.ai/images/user-guides/tools/tools_sidebar.png)
+![Tools sidebar interface showing available tools including File Search, Web Search, Code Interpreter, API Request, and Custom MCP](https://docs.sketricgen.ai/images/user-guides/tools/tools_sidebar.png)
 
 ## Adding Tools from the Canvas
 
 In the AgentSpace, click **Add Node → Tool** to insert a tool node into your workflow.
 
-Once added, you’ll see a configuration panel where you can select from available tool types.
+Once added, you'll see a configuration panel where you can select from available tool types.
 
 ### Available Tool Types
 
@@ -24,8 +24,9 @@ Once added, you’ll see a configuration panel where you can select from availab
 2. File Search
 3. Web Search
 4. Code Interpreter
-5. API Request
-6. Custom MCP
+5. Image Generation
+6. API Request
+7. Custom MCP
 
 ## 1. Sketric App Marketplace
 
@@ -42,9 +43,9 @@ Example:
 
 **Guideline:**
 
-For security, API keys are stored in encrypted form. Revoke access from the “Manage Tools → Apps” tab anytime.
+For security, API keys are stored in encrypted form. Revoke access from the "Manage Tools → Apps" tab anytime.
 
-![Animated GIF showing Sketric App Marketplace tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_marketplace.gif)
+![Animated GIF showing the tools marketplace interface with searchable tool categories and installation options](https://docs.sketricgen.ai/images/user-guides/tools/tools_marketplace.gif)
 
 ## 2. File Search
 
@@ -78,7 +79,7 @@ Use File Search for customer FAQs, product documentation, or internal manuals so
 
 Ensure uploaded files have readable text—scanned image-based PDFs should be converted before uploading.
 
-![Animated GIF showing File Search tool functionality](https://docs.sketricgen.ai/images/user-guides/tools/tools_filesearch.gif)
+![Animated GIF showing file search tool interface with search functionality and results display](https://docs.sketricgen.ai/images/user-guides/tools/tools_filesearch.gif)
 
 ## 3. Web Search
 
@@ -96,7 +97,7 @@ Typical uses:
 
 Use Web Search for dynamic, time-sensitive queries; for stable and private data, prefer File Search.
 
-![Screenshot showing Web Search tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_websearch.png)
+![Screenshot showing web search tool configuration interface with search parameters and settings](https://docs.sketricgen.ai/images/user-guides/tools/tools_websearch.png)
 
 ## 4. Code Interpreter
 
@@ -114,9 +115,28 @@ Example use cases:
 
 Because execution runs in a secure sandbox, the agent cannot access external environments—keep computations lightweight and self-contained.
 
-![Screenshot showing Code Interpreter tool interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_codeinterpreter.png)
+![Screenshot showing code interpreter tool interface with code execution capabilities and output display](https://docs.sketricgen.ai/images/user-guides/tools/tools_codeinterpreter.png)
 
-## 5. API Request
+## 5. Image Generation
+
+The **Image Generation** tool allows agents to create images using AI models.
+
+When enabled, agents can generate visual content on demand based on text descriptions—such as marketing images, product mockups, social media creatives, thumbnails, or illustrations.
+
+Example use cases:
+
+- Generating marketing visuals for campaigns or ads.
+- Creating product thumbnails or mockups automatically.
+- Producing social media graphics based on text inputs.
+- Building custom illustrations or concept art for projects.
+
+**Guideline:**
+
+Image generation works best with clear, descriptive prompts. The more specific your description, the more accurate the generated image will be. You can iterate on prompts to refine the output style and content.
+
+![Screenshot showing the Edit Tool interface with Image Generation tool option highlighted, displaying various tool types including Sketric App Marketplace, File Search, Web Search, Code Interpreter, Image Generation, API Request, and Custom MCP](https://docs.sketricgen.ai/images/changelog/image_generation_tool.png)
+
+## 6. API Request
 
 The **API Request** tool lets your agent interact directly with any REST API.
 
@@ -137,9 +157,9 @@ Integrate your internal company endpoint or a public service like weather, curre
 
 Always verify the endpoint and authentication type. Misconfigured headers or invalid tokens can prevent successful tool calls.
 
-![Screenshot showing API Request tool configuration](https://docs.sketricgen.ai/images/user-guides/tools/tools_api.png)
+![Screenshot showing API request tool configuration interface with endpoint, method, headers, and body settings](https://docs.sketricgen.ai/images/user-guides/tools/tools_api.png)
 
-## 6. Custom MCP
+## 7. Custom MCP
 
 The **Custom MCP** tool connects your agent to any MCP (Model Context Protocol) server.
 
@@ -155,13 +175,13 @@ Configuration fields:
 
 Example:
 
-Integrate your company’s internal data connector or an external MCP endpoint to expose enterprise tools directly to the agent.
+Integrate your company's internal data connector or an external MCP endpoint to expose enterprise tools directly to the agent.
 
 **Guideline:**
 
 After configuring the URL and connection type, click **Filter Tools** to fetch available MCP endpoints.
 
-![Screenshot showing Custom MCP tool integration](https://docs.sketricgen.ai/images/user-guides/tools/tools_custommcp.png)
+![Screenshot showing custom MCP (Model Context Protocol) tool configuration interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_custommcp.png)
 
 ## Managing Tools
 
@@ -178,7 +198,7 @@ You can:
 - See which agents are currently using each KB.
 - Track their creation and update timestamps.
 
-![Screenshot showing knowledge base management interface](https://docs.sketricgen.ai/images/user-guides/tools/tools_kb.png)
+![Screenshot showing knowledge base tool interface with document upload and search capabilities](https://docs.sketricgen.ai/images/user-guides/tools/tools_kb.png)
 
 ### Apps Tab
 
@@ -190,12 +210,13 @@ You can:
 - View authentication type (OAuth or API Key).
 - Disconnect unused apps anytime.
 
-![Screenshot showing connected apps in tools management](https://docs.sketricgen.ai/images/user-guides/tools/tools_apps.png)
+![Screenshot showing Sketric App Marketplace interface with available third-party integrations and apps](https://docs.sketricgen.ai/images/user-guides/tools/tools_apps.png)
 
 ## Best Practices
 
-- Attach tools only where they’re necessary—overloading an agent with too many tools can slow reasoning.
+- Attach tools only where they're necessary—overloading an agent with too many tools can slow reasoning.
 - Use File Search for static or company-owned data, and Web Search for live queries.
+- Use Image Generation when your workflow needs visual outputs—marketing content, product mockups, or social media graphics.
 - Keep credentials private and rotate API keys periodically.
 - Regularly review Manage Tools to remove unused connections.
 - Combine File Search and Code Interpreter for powerful document analysis or report generation workflows.
@@ -204,4 +225,4 @@ You can:
 
 - [AgentSpace Guide →](https://docs.sketricgen.ai/user-guides/agentspace-canvas)
 - [Agents Guide →](https://docs.sketricgen.ai/user-guides/agents)
-- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-and-handoffs)
+- [Orchestration & Handoffs Guide →](https://docs.sketricgen.ai/user-guides/orchestration-handoffs)

@@ -72,7 +72,6 @@ They are the connective logic of your workflow.
 
 - **Designer-routed:** Explicitly define paths and conditions.
 - **AI-routed:** Let the system decide the next best agent dynamically.
-- Include **fallbacks** or **retries** for reliability.
 
 **Guideline:**
 

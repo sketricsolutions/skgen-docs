@@ -1,43 +1,74 @@
-
 **Public URL:** https://docs.sketricgen.ai/deploy/shopify
 
-## **Step 1: Create your SketricGen account**
+## Inline iFrame Embed
 
-To get started with the integration, **[sign in to your SketricGen account](#)**.  
-If you don’t have an account yet, you can create one for **[free](#)**.  
-Once you're logged in, begin setting up your workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your workflow.
+### Step 1: Create your SketricGen account
 
-If you need help setting up your workflow, refer to the **[step-by-step guide](#)**.
+To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your agent workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your agent workflow.
 
+If you need assistance with setting up a working SketricGen agent workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your agent workflow.
 
-## **Step 2: Copy the SketricGen workflow Embed Code**
+### Step 2: Copy the SketricGen Agent Embed Code
 
-After configuring your workflow, go to your dashboard and click on **Publish > Direct Embed** to copy the iframe embed code.
+After configuring your agent workflow, go to your agent workflow's dashboard and click on **Publish > Direct Embed** to copy the iframe embed code.
 
-> **Note:** Ensure your workflow is set to **Public** to make it accessible on your Shopify website.
+> **Note:** Ensure your agent workflow is set to **Public** to make it accessible on your Shopify website.
 
-![Screenshot showing the SketricGen dashboard with Publish > Direct Embed option to copy iframe embed code](https://docs.sketricgen.ai/images/shopify/screenshot1.png)
+![Screenshot showing SketricGen Direct Embed iframe code copy interface](https://docs.sketricgen.ai/images/shopify/screenshot1.png)
 
+### Step 3: Sign into your Shopify website and embed your agent workflow
 
-## **Step 3: Sign into your Shopify website and embed your workflow**
+#### 1. Log into your **Shopify** admin dashboard.  
+#### 2. From the left-hand menu, go to **Online Store → Pages**.  
+#### 3. Choose the page you want to edit. (In this example, we're embedding the agent workflow on the Contact page.)
 
-### 1. Log into your **Shopify** admin dashboard.  
-### 2. From the left-hand menu, go to **Online Store → Pages**.  
-### 3. Choose the page you want to edit. (In this example, we’re embedding the workflow on the Contact page.)
+![Screenshot showing Shopify admin dashboard with Online Store > Pages navigation](https://docs.sketricgen.ai/images/shopify/screenshot2.png)
 
-![Screenshot showing Shopify admin dashboard with Online Store > Pages menu option](https://docs.sketricgen.ai/images/shopify/screenshot2.png)
+#### 4. Paste the embed code into the **HTML/code editor**, then click **Save**.
 
-### 4. Paste the embed code into the **HTML/code editor**, then click **Save**.
+![Screenshot showing Shopify page editor with HTML/code editor and Save button](https://docs.sketricgen.ai/images/shopify/screenshot3.png)
 
-![Screenshot showing Shopify page editor with HTML/code editor where embed code is pasted](https://docs.sketricgen.ai/images/shopify/screenshot3.png)
+### Step 4: Test your widget after publishing
 
----
-
-## **Step 4: Test your widget after publishing**
-
-![Screenshot showing the live Shopify website with SketricGen chat widget successfully embedded and functional](https://docs.sketricgen.ai/images/shopify/screenshot4.png)
-
-
+![Screenshot showing Shopify website with embedded SketricGen chat widget](https://docs.sketricgen.ai/images/shopify/screenshot4.png)
 
 🎉 **Congratulations!**  
 Your SketricGen Chat Widget is now successfully integrated into your Shopify site. Visitors can now chat with your AI agent and receive tailored responses.
+
+---
+
+## Floating Chat bubble
+
+### Step 1: Create your SketricGen account
+
+To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your agent workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your agent workflow.
+
+If you need assistance with setting up a working SketricGen agent workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your agent workflow.
+
+### Step 2: Copy the SketricGen Agent Embed Code
+
+After configuring your agent workflow, go to your agent workflow's dashboard and click on **Publish** to copy the embed code.
+
+> **Note:** Ensure your agent workflow is set to **Public** in order to add it to your Shopify website.
+
+![Screenshot showing SketricGen dashboard with Publish button and embed code copy option](https://docs.sketricgen.ai/images/shopify/screenshot5.png)
+
+### Step 3: Sign in to your Shopify account and embed your agent workflow in your desired theme
+
+#### 1. Click on **Customize theme**
+
+![Screenshot showing Shopify admin dashboard with Customize theme option](https://docs.sketricgen.ai/images/shopify/screenshot6.png)
+
+#### 2. Add a **Custom Liquid Section**
+
+![Screenshot showing Shopify theme customizer with Add Custom Liquid Section option](https://docs.sketricgen.ai/images/shopify/screenshot7.png)
+
+#### 3. Paste the code you copied in step 2 in the element block and adjust the position and size of the widget accordingly
+
+![Screenshot showing Shopify Custom Liquid Section with embed code input and positioning options](https://docs.sketricgen.ai/images/shopify/screenshot8.png)
+
+### Step 4: Test your widget after publishing
+
+![Screenshot showing Shopify website with embedded SketricGen chat widget](https://docs.sketricgen.ai/images/shopify/screenshot9.png)
+
+🎉 **Congratulations!** You have successfully integrated SketricGen Chat Widget. Your visitors can now directly chat with your agent and get tailor made responses.
