@@ -1,0 +1,147 @@
+---
+title: "In-Product Message Tracing + New Templates + Cleaner UI (Oct 24, 2025)"
+description: "SketricGen update: detailed in-product message tracing for debugging agents, six new templates, major UI polish, better integration handling, richer conversation inputs, and a clearer free-plan upgrade flow."
+tags: ["release", "observability", "debugging", "templates", "ui", "integrations", "billing"]
+version: "v2"
+releaseDate: "2025-10-24"
+---
+
+This release makes it easier to **debug agents**, **launch faster with new templates**, and enjoy a cleaner, more consistent experience across SketricGen.
+
+## TL;DR
+- Added **detailed in-product message tracing** to debug agent runs end-to-end
+- Shipped **6 new production-ready templates** (with updated thumbnails)
+- Big **UI/UX polish** across Chat, Flow Editor, Agent Cards, Node Inspector, Conversations
+- Improved **integration + connection handling** (better status + notifications + management access)
+- Upgraded conversation inputs: **Markdown, JSON parsing, boolean fields**, improved state handling
+- Free plan users now see a clearer **upgrade path** (redirect to pricing with messaging)
+
+---
+
+## What’s new
+
+### 1) In-product message tracing (debug agents end-to-end)
+SketricGen now provides **detailed tracing inside the product** for messages and workflow testing so you can see what happened during an agent run, including:
+- The user message and the agent’s internal reasoning steps (high-level)
+- Tool calls made by the agent
+- Inputs and outputs for each tool call
+- The final response, with the full execution path visible
+
+**Why it matters:** faster debugging, easier iteration during workflow creation/testing, and fewer “mystery failures” when agents behave unexpectedly.
+
+> Screenshot/GIF placeholder: “Message trace view showing tool calls + inputs/outputs”
+
+---
+
+### 2) Six new templates (launch faster)
+We replaced the previous template set with **six new, fully tested templates**, each with a professional thumbnail.
+
+**Why it matters:** templates reduce time-to-value—start from a working pattern instead of building every workflow from scratch.
+
+---
+
+### 3) UI & experience improvements (cleaner, more consistent)
+We shipped a broad polish pass across:
+- Chat Window
+- Flow Editor
+- Agent Cards
+- Node Inspector
+- Conversations Page
+
+Includes improvements to layout, spacing, padding, and typography for a more consistent UI.
+
+**Why it matters:** faster building, fewer misclicks, and more confidence when configuring agents and workflows.
+
+---
+
+### 4) Better connection & integration handling (less friction)
+Integrations now feel more reliable with:
+- Improved **connection tracking** for agent nodes
+- Better **success/error notifications** during app disconnections
+- Easier access to **manage connected apps** (Pipedream, APIs, etc.)
+
+**Why it matters:** fewer broken runs caused by disconnected tools, and quicker recovery when something changes in your connected stack.
+
+---
+
+### 5) Conversation & input handling enhancements (better structured data)
+Conversation fields now support:
+- **Markdown formatting**
+- **JSON parsing**
+- **Boolean inputs**
+- Improved state management
+
+**Why it matters:** agents can process and display structured inputs more reliably—especially useful for workflows that pass data between steps.
+
+---
+
+### 6) Subscription & access flow update (clearer upgrades)
+Free plan users are now redirected to the pricing page with clearer upgrade messaging.
+
+**Why it matters:** less confusion around plan limits and a more explicit path to unlock advanced capabilities.
+
+---
+
+## Who this release is for
+- Teams building and testing workflows that need **fast debugging and clear visibility**
+- Builders who want to ship faster using **ready-to-use templates**
+- Anyone relying on **tool integrations** (Pipedream/APIs) and needing reliable connection status
+- Workflows that pass structured data and benefit from **JSON/boolean inputs + Markdown**
+
+---
+
+## How to use (quick steps)
+
+### Debug a workflow test with message tracing
+1. Run a test message in Chat or during workflow testing
+2. Open the **Trace / Run Details** view for that message
+3. Review the execution timeline:
+   - tool calls
+   - inputs/outputs
+   - intermediate steps
+4. Fix prompts/nodes/connections and re-run
+
+![Screenshot showing the Trace view opened from a test run with agent steps, tool calls, and execution details](/images/quickstart/test_traces.png)
+
+### Start from the new templates
+1. Go to **Templates**
+2. Pick one of the new templates (look for the updated thumbnails)
+3. Duplicate/customize for your use case
+4. Connect tools/apps and run a test message
+
+### Use structured conversation fields (JSON/boolean/Markdown)
+1. Open the relevant conversation input configuration
+2. Choose the expected type (JSON / boolean) or add Markdown
+3. Test the workflow to confirm parsing and display behavior
+
+---
+
+## FAQ
+
+**What is “message tracing” in SketricGen?**  
+A run-level view that shows how an agent responded, including tool calls and the inputs/outputs between each step, so you can debug quickly.
+
+**Can I see tool call inputs and outputs during testing?**  
+Yes—traces show the tool calls made by the agent along with what was sent and what came back.
+
+**Is tracing available during workflow creation and testing?**  
+Yes—tracing is designed to help during workflow building and test runs so you can iterate faster.
+
+**Do templates work out of the box?**  
+They’re tested and ready to use, but you’ll still connect your own tools (apps/APIs) and customize prompts/settings.
+
+**How do I pass structured data to an agent (JSON/boolean)?**  
+Use the updated conversation fields that support JSON parsing and boolean inputs so your workflow steps receive the right shape of data.
+
+**What happens when an integration disconnects?**  
+You’ll now get clearer success/error notifications and improved connection tracking so you can fix issues faster.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Traces & Optimization:** [/user-guides/traces-and-optimizations](/user-guides/traces-and-optimizations)
+- **Docs: Structured Inputs/Outputs:** [/user-guides/structured-inputs-and-outputs](/user-guides/structured-inputs-and-outputs)
+- **Docs: Managing Tools:** [/user-guides/tools](/user-guides/tools)

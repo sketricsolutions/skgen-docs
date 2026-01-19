@@ -1,0 +1,157 @@
+---
+title: "Telegram Integration, Google Sign-In, and Mobile Upgrades (Nov 17–20, 2025)"
+description: "SketricGen update: Telegram integration (groups + mentions), Google Sign-In onboarding, major mobile UI improvements, stronger integration management, more reliable chat servers, and stability upgrades for long-running automations."
+tags: ["release", "telegram", "integrations", "authentication", "mobile", "workflows", "reliability"]
+version: "v2"
+releaseDate: "2025-11-17"
+updated: "2025-11-20"
+---
+
+This release bundle improves how you **deploy agents to Telegram**, how quickly users **get onboarded with Google Sign-In**, and how smooth SketricGen feels on **mobile**—plus reliability upgrades across chat servers, integrations, and long-running workflows.
+
+## TL;DR
+- ✅ **Telegram integration fully released** (webhooks, bot mentions, group chat support)
+- 🔐 **Google Sign-In** for faster onboarding
+- 📱 Major **mobile responsiveness** upgrades across Dashboard, AgentSpace, FlowEditor, Conversations, Profile
+- 🔧 Better **integration management** (cleaner controls, safer deletion, improved status handling)
+- 💬 More reliable chat server behavior (fewer “Something went wrong” moments)
+- ⏳ Better support for **long-running automations** (improved stability for heavy execution flows)
+- 🧩 Instagram: backend foundation completed, **user-facing rollout coming soon** (not enabled yet)
+
+---
+
+## What’s new
+
+### 1) Telegram integration (now fully available)
+SketricGen now supports a complete Telegram deployment experience:
+- Webhook registration and event handling
+- Bot-mention handling
+- Group chat support
+- Cleaner message routing and more real-time behavior
+
+**Why it matters:** you can deploy agents to Telegram channels/groups with fewer edge cases and smoother message handling.
+
+---
+
+### 2) Google Sign-In + improved onboarding guidance
+- Added **Google Sign-In** for faster account creation and login
+- Improved SSO redirect logic and onboarding messaging across mobile + desktop
+
+**Why it matters:** less friction to start building and testing workflows (especially for teams onboarding multiple users).
+
+---
+
+### 3) Mobile UI upgrades (big polish pass)
+We improved mobile layout and responsiveness across:
+- Dashboard
+- AgentSpace
+- FlowEditor
+- Conversations
+- Profile
+
+Highlights include:
+- Better breakpoints and visual consistency
+- Mobile sidebar state handling
+- Improved input behavior on mobile (less accidental zoom)
+- Cleaner navigation across key screens
+
+**Why it matters:** building, testing, and monitoring workflows on mobile is now far more usable.
+
+---
+
+### 4) Integration management improvements (cleaner controls + safer deletion)
+We upgraded integration management so it’s easier to maintain connected channels/tools:
+- Dedicated delete controls and improved authentication flows
+- Cleaner configuration handling
+- “Soft delete” behavior and status-based filtering (so inactive integrations don’t clutter your workspace)
+
+**Why it matters:** fewer “stale integrations,” fewer accidental breakages, and faster cleanup when a tool connection changes.
+
+---
+
+### 5) Chat server reliability improvements (fewer failures under load)
+We improved reliability across Telegram and third-party integration events:
+- Better retry handling and validation
+- Improved exception handling to reduce intermittent errors (including “Something went wrong”)
+
+**Why it matters:** more consistent agent replies and fewer dropped/failed runs—especially when traffic spikes or integrations send noisy events.
+
+---
+
+### 6) Workflow stability for heavier automation runs
+We strengthened reliability for longer/heavier execution flows (e.g., complex automations triggered by webhooks), including improved timeout behavior and routing stability.
+
+**Why it matters:** fewer mid-run failures for “big” workflows and more confidence running production automations.
+
+---
+
+### 7) Instagram integration status (coming soon)
+We completed the backend foundation for Instagram integration (auth + event handling + message processing).  
+**Important:** the user-facing UI/workflow is **not enabled yet**. We’ll roll it out in a later release once the frontend is ready.
+
+**Why it matters:** we’re close—this groundwork is what enables a stable Instagram release rather than a fragile “beta” integration.
+
+---
+
+### 8) Performance & maintainability work (internal, but you’ll feel it)
+We shipped a set of platform refactors and cleanup work that improves long-term reliability and reduces UI friction.
+
+**Why it matters for users:** faster interactions, fewer edge-case bugs, and smoother iteration as your workspace grows.
+
+---
+
+## Who this release is for
+- Teams deploying agents on **Telegram** (support, community, sales, onboarding)
+- Anyone who wants **faster onboarding** (Google Sign-In)
+- Builders who need SketricGen to work well on **mobile**
+- Users managing multiple integrations and wanting **cleaner, safer integration controls**
+- Teams running **heavier / longer workflows** and needing more stability
+
+---
+
+## How to use (quick steps)
+
+### Connect Telegram and run a test
+1. Go to **Integrations** → Telegram
+2. Connect your bot and complete webhook setup
+3. Add the bot to a group (if needed) and mention it to trigger responses
+4. Send a test message and confirm the agent replies correctly
+
+### Sign in with Google
+1. Log out (if already logged in) or open the login page
+2. Choose **Continue with Google**
+3. Complete onboarding steps and create your first agent/workflow
+
+### Clean up an integration safely
+1. Go to **Integrations**
+2. Open the connected app/channel settings
+3. Use the delete/disable controls
+4. Re-run a test workflow to confirm everything is still connected and stable
+
+---
+
+## FAQ
+
+**Does SketricGen support Telegram group chats?**  
+Yes—Telegram integration now supports group chat behavior, including bot mentions and cleaner routing.
+
+**How do I trigger the bot in a Telegram group?**  
+Mention the bot (and/or follow your configured trigger behavior) to route messages to your agent.
+
+**Is Google Sign-In available for everyone?**  
+Yes—Google Sign-In is now available to speed up onboarding.
+
+**Why do some changes sound “internal”?**  
+Because reliability improvements (retries, validation, stability) directly reduce failed runs and make agents more consistent in production.
+
+**Is Instagram integration available now?**  
+Not yet. The backend is ready, but the user-facing UI is not enabled. We’ll announce it when it’s available for users.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Telegram Integration:** [/deploy/telegram](/deploy/telegram)
+- **Docs: Managing Integrations:** [/user-guides/tools](/user-guides/tools)

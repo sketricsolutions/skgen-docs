@@ -1,0 +1,183 @@
+---
+title: "App + Landing Unified, Smoother Workflow Editing, and More Reliable Scheduling (Jan 13, 2026)"
+description: "SketricGen update: landing page experience integrated into the app with /app routing, improved authentication flow, smoother Flow Editor panning, clearer schedule triggers, more reliable integration updates, better asset downloads, and stronger API import parsing."
+tags: ["release", "workflow-builder", "scheduling", "integrations", "authentication", "ui", "reliability"]
+version: "v2"
+releaseDate: "2026-01-13"
+---
+
+This release bundles two weeks of improvements focused on: a more unified SketricGen experience (site + app), smoother workflow building, and stronger reliability for scheduling, integrations, and asset handling.
+
+## TL;DR
+- The **landing experience is now integrated into the app** with standardized routing (including the `/app/` prefix and expanded public pages)
+- Improved **authentication flow** for cleaner redirects and more consistent login state
+- Flow Editor now supports **pan-on-scroll** and reduces accidental zooming
+- Trigger nodes now show **clear schedule badges** (including warnings when unpublished/config is missing)
+- More reliable integration scheduling and updates (active-only processing + safer Pipedream trigger updates)
+- Better **asset downloads** with fallback behavior when downloads are blocked
+- Stronger **API import parsing** (handles mixed result formats and nested JSON more reliably)
+
+---
+
+## What’s new
+
+### 1) Landing + app unified (cleaner navigation and consistency)
+We migrated the full landing page experience directly into the application:
+- Standardized routing with the **`/app/` prefix**
+- Expanded supported public routes like **/blog**, **/templates**, **/contact**, and more
+- Unified styling and layout consistency (buttons, grids, animations, hero/CTA behaviors)
+
+**Why it matters:** everything feels like one product now—less context switching, more consistent navigation, and a smoother path from “discover” → “try” → “build.”
+
+![Screenshot showing the new SketricGen landing page with dark theme, featuring "Build your team of AI Agents" headline, search bar, and suggested use cases including AI Receptionist, Personalised Outreach, Content Creation, and E-Commerce Sales Agent](/images/changelog/sketricgen_new_landing_page.png)
+
+---
+
+### 2) New authentication flow (better redirects, fewer login weirdness moments)
+Authentication got a major reliability upgrade:
+- Improved login popup behavior and redirect-path handling
+- More consistent Google login behavior and state handling
+- Simplified auth logic across key surfaces (Dashboard, Templates, and landing components)
+
+Some changes are internal (new backend checks), but they reduce auth edge cases and improve consistency.
+
+**Why it matters for users:** fewer broken redirects, fewer “why am I logged out?” moments, and a smoother onboarding/login experience.
+
+---
+
+### 3) Smoother workflow editing (pan-on-scroll + better control)
+Flow Editor now supports:
+- **Pan-on-scroll navigation** for smoother canvas movement
+- Reduced accidental zooming by disabling zoom-on-scroll
+- Improved interaction consistency for larger workflows
+
+**Why it matters:** faster workflow editing, less frustration when navigating large canvases, and better control when building quickly.
+
+---
+
+### 4) Trigger & scheduling clarity (badges that actually tell you what’s wrong)
+Trigger nodes now have clearer schedule badge logic:
+- Badge shows only when `triggerType = schedule`
+- Warnings appear for **unpublished schedule triggers**
+- Destructive styling is used when configuration is required
+- Published schedules display the configured **interval/cron** values
+
+**Why it matters:** you can spot misconfigured schedules immediately and avoid silent “nothing is running” situations.
+
+---
+
+### 5) Integrations & webhooks reliability (active-only + safer updates)
+Scheduling and trigger integrations are more reliable:
+- Scheduled webhook processing now runs only on **active integrations**
+- Sorting uses the latest `updated_at` (fallback to `created_at`) to pick the most relevant integration record
+- Clearer errors when no active integration is available
+- Pipedream trigger integrations can now be **updated safely** without creating duplicates (preserves settings and removes obsolete records)
+
+Some of this is internal platform behavior, but it directly reduces broken runs caused by duplicate/inactive integration records.
+
+**Why it matters for users:** fewer workflow failures due to stale connections, and cleaner updates when you change triggers.
+
+---
+
+### 6) Asset handling improvements (downloads that don’t fail silently)
+We improved chat asset downloads:
+- HTTP response validation
+- Timestamped filenames (more unique, easier to organize)
+- Automatic fallback to **open in a new tab** if downloads are blocked by CORS/network behavior
+
+**Why it matters:** you can still access assets even when the browser blocks direct download.
+
+---
+
+### 7) API import robustness (better parsing, clearer errors)
+API import is now more resilient when configs are generated or returned in different formats:
+- Supports results as **string or object**
+- Better nested JSON parsing (including JSON embedded in a response field)
+- Clearer user-facing errors and deeper debug logging
+
+**Why it matters:** fewer broken imports and faster recovery when an imported config isn’t perfectly formatted.
+
+---
+
+### 8) Workflow & template enhancements (limits + cleanup messaging)
+We improved workflow/template behavior:
+- Asynchronous cleanup for deleted workflows, with clearer messaging that it’s processing in the background
+- Added additional template metadata support (e.g., markdown URL fields)
+- Plan-based workflow limit checks with better UI feedback and error handling
+
+**Why it matters:** clearer limits, clearer feedback, and fewer confusing “why is this still here?” moments after deletions.
+
+---
+
+## Who this release is for
+- New users who want a smoother path from public pages into the app experience
+- Teams building larger workflows who need **faster, more controlled editor navigation**
+- Anyone using scheduled triggers and wanting **clearer schedule status**
+- Builders relying on integrations (especially Pipedream triggers) who want **cleaner updates and fewer duplicates**
+- Users downloading files/assets from chat and needing reliable access
+- Teams importing API configs and wanting fewer parsing failures
+
+---
+
+## How to use (quick steps)
+
+### Navigate the unified app experience
+1. Visit public pages (e.g., /templates, /blog)
+2. Click into the app experience via `/app/`
+3. Use the unified header/CTA navigation to move between discovery and building
+
+### Confirm your schedule trigger is configured
+1. Open your workflow in Flow Editor
+2. Select the Trigger node
+3. Check the schedule badge status:
+   - If it warns about unpublished/config-required, fix it before relying on the schedule
+4. Publish and confirm interval/cron is displayed
+
+### Update a Pipedream trigger without duplicates
+1. Open your integration/trigger settings
+2. Update the trigger configuration
+3. Re-run a test and confirm there are no duplicate integration records and the workflow triggers correctly
+
+### Download chat assets reliably
+1. Open a conversation with assets
+2. Download the file
+3. If download is blocked, use the auto “open in new tab” fallback to access it
+
+---
+
+## Hotfixes
+
+### Hotfix — Jan 19, 2026
+- **Improved authentication flow** — Streamlined redirect logic for more consistent navigation after login/signup.
+- **Better theme handling** — Updated theme switching for more reliable dark/light mode transitions.
+- **Category selection fix** — Blog categories now default to "All" when no specific match is found, preventing empty views.
+- **Workflow deletion feedback** — Improved success messages and completion handling when deleting workflows.
+- **Navigation improvements** — Fixed navigation behavior in Space Setup Modal for smoother onboarding.
+
+---
+
+## FAQ
+
+**Why did the site URLs change (what is `/app/`)?**  
+Routing was standardized so the landing and app experience feel unified, with consistent navigation and public paths.
+
+**How do I know if my schedule trigger will actually run?**  
+Check the schedule badge on the Trigger node—warnings appear if it’s unpublished or missing configuration, and published schedules show interval/cron values.
+
+**Will updating my Pipedream trigger create duplicates?**  
+This release improves trigger updates so existing integration records can be updated safely without creating duplicates.
+
+**Why are some changes described as “internal”?**  
+Because reliability improvements (integration filtering, parsing, auth checks) reduce failures and edge cases you experience—even if the change is behind the scenes.
+
+**What if a file download is blocked in the browser?**  
+SketricGen now falls back to opening the asset in a new tab so it stays accessible.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Tools & Integrations:** [/user-guides/tools](/user-guides/tools)
+- **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)

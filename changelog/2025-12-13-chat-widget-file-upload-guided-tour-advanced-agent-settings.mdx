@@ -1,0 +1,215 @@
+---
+title: "File Upload in Chat Widget, Guided Tours, and Advanced Agent Controls (Dec 13, 2025)"
+description: "SketricGen update: drag-and-drop file uploads in the chat widget (PDFs, images, text files), a guided onboarding tour, a new Space setup flow, advanced agent controls (temperature/top-p/verbosity), plus editor and MCP tool improvements."
+tags: ["release", "chat-widget", "file-upload", "onboarding", "workflows", "agent-settings", "mcp", "ui"]
+version: "v2"
+releaseDate: "2025-12-13"
+---
+
+This release is about getting you from **"new workspace" → "working agent"** faster, while unlocking richer conversations (file uploads) and more precise agent behavior (advanced settings).
+
+## TL;DR
+- 📎 **Upload files directly in the chat widget** (drag & drop, previews, validation)
+- 🧭 New **guided tour** that walks new users through building and testing a workflow
+- 🧱 New **Space setup modal** for faster “first agent space” creation (templates + video tutorial + empty canvas)
+- 🎛️ **Advanced agent settings** (temperature, top-p, verbosity, reasoning effort)
+- 🧩 **Python SDK** released for running workflows programmatically
+- ✍️ Workflow editor upgrades (validation, node UI, warnings, tool node configuration)
+- 🔌 MCP tools improvements (better discovery, validation, connection reliability)
+- 📈 Better in-product stats (message counts, cost tracking, improved conversation analytics)
+
+---
+
+## What’s new
+
+### 1) File upload in the chat widget (richer conversations)
+You can now **drag & drop files directly into the chat input** (including embedded widget use cases):
+
+**Supported file types**
+- Images
+- PDFs
+- Text formats: `txt`, `md`, `json`, `xml`, `csv`
+
+**What you’ll see**
+- Thumbnail previews before sending
+- Clear validation for size/type limits
+- Upload progress + error handling so you know what happened
+
+**Why it matters:** your agents can work with real inputs (docs, spreadsheets, screenshots, structured JSON) instead of copy/paste—making support, onboarding, and internal workflows more useful.
+
+> Screenshot/GIF placeholder: “Drag & drop upload → preview → send in widget chat”
+
+---
+
+### 2) Guided tour system (onboarding that actually helps)
+New users now get an interactive guided tour that walks through:
+- The palette
+- Agent nodes
+- Testing runs
+- Publishing/deploying
+
+Tour progress is saved so users can resume (or skip if returning).
+
+**Why it matters:** fewer “where do I start?” moments, faster activation, and less time spent guessing how to build a workflow.
+
+> Screenshot/GIF placeholder: “Guided tour steps highlighting key UI”
+
+---
+
+### 3) Space setup modal (faster first setup)
+Creating a new space is now guided with:
+- Template selection (carousel)
+- Video tutorial integration
+- “Empty canvas” for custom builds
+- Auto-creation flow for brand-new users
+
+**Why it matters:** your first agent space is the hardest step—this reduces setup friction and gets users to a working workflow faster.
+
+> Screenshot/GIF placeholder: “Space setup modal with template carousel + video”
+
+---
+
+### 4) Advanced agent settings (more control, better outputs)
+We added advanced controls so you can fine-tune agent behavior per node:
+- Temperature (slider)
+- Top-P (slider)
+- Verbosity (low/medium/high)
+- Reasoning effort (minimal/low/medium/high) for supported reasoning models
+- Advanced mode toggle
+- Settings persist per agent node
+
+**Why it matters:** you can tune agents for different jobs—creative drafting vs. strict extraction vs. tool-heavy workflows—without changing the entire system.
+
+> Screenshot/GIF placeholder: “Advanced settings panel on an agent node”
+
+---
+
+### 5) Python SDK (run workflows programmatically)
+We released a **Python SDK** for running SketricGen workflows from your own systems, with smoother integrations and file-handling support.
+
+**Why it matters:** teams can trigger workflows from internal services, scripts, and products—without rebuilding logic.
+
+> Note: Public docs link should point to the SDK install + quickstart.
+
+---
+
+## Enhancements (you’ll feel these while building)
+
+### Workflow editor improvements
+- Clearer node display (Trigger node shows “Input”)
+- Collapsible EditorPanel sections
+- Better validation errors and connection warnings
+- Sticky node improvements + better color handling
+- Tool node configuration UI improvements
+
+**Why it matters:** faster building, fewer configuration mistakes, clearer debugging during tests.
+
+---
+
+### Agent space upgrades
+- Improved workflow listing (filtering + search)
+- Better loading/error states
+- Better first-time auto-creation flow
+
+**Why it matters:** less time navigating, more time iterating.
+
+---
+
+### MCP tools improvements (reliability + discovery)
+- Default MCP type updated (more reliable streaming behavior)
+- Better tool discovery, validation, and error handling
+- Improved MCP server connection logic
+
+**Why it matters:** fewer “tool not found” moments and more consistent connectivity during runs.
+
+---
+
+### Stats & analytics improvements (user-facing visibility)
+We improved in-product stats and tracking, including:
+- Message count tracking for agents
+- Better conversation analytics
+- Better cost tracking at the conversation level
+- Improved conversation detail support
+
+**Why it matters:** clearer visibility into usage, performance, and cost drivers as you scale.
+
+---
+
+## Who this release is for
+- Teams embedding SketricGen chat and wanting **file uploads** (support, onboarding, internal tools)
+- New users who want a **guided first build** instead of guessing
+- Builders who need **more control over agent behavior**
+- Teams running tool-heavy workflows who want **more reliable MCP discovery and execution**
+- Developers who want to run workflows via **Python**
+
+---
+
+## How to use (quick steps)
+
+### Upload a file in the chat widget
+1. Open chat (in-app or embedded widget)
+2. Drag & drop a file into the input (or select upload)
+3. Preview the file and confirm it passes validation
+4. Send the message and let the agent process it
+
+### Run the guided tour
+1. Create a new workspace/space (or open onboarding)
+2. Start the guided tour
+3. Follow the steps: build → test → publish
+4. Skip anytime (returning users won’t be forced through it)
+
+### Create a new Space using the setup modal
+1. Click **Create Space**
+2. Choose a template (or pick Empty Canvas)
+3. Watch the quick video if needed
+4. Auto-create and start testing immediately
+
+### Tune an agent with advanced settings
+1. Open the agent node in the workflow
+2. Enable **Advanced mode**
+3. Adjust temperature/top-p/verbosity (and reasoning effort if available)
+4. Run a test message and iterate
+
+### Use the Python SDK
+1. Install the SDK (see docs)
+2. Authenticate
+3. Trigger a workflow run from your Python app/script
+4. Use results in your system
+
+---
+
+## Hotfixes
+_No hotfixes appended to this release yet._  
+(If hotfixes happen later, append here as: **Date — change (impact)**.)
+
+---
+
+## FAQ
+
+**What files can I upload in the chat widget?**  
+Images, PDFs, and text formats like txt/md/json/xml/csv. You’ll see validation for supported types and size limits.
+
+**Can users preview files before sending?**  
+Yes—files show a preview (including thumbnails where relevant) before you send.
+
+**Is file upload available in embedded chat widgets?**  
+Yes—this release focuses on the widget upload experience, including drag & drop.
+
+**What do advanced agent settings change?**  
+They let you tune agent behavior per node (creativity vs. precision), and persist as part of the workflow configuration.
+
+**What is the guided tour for?**  
+A step-by-step onboarding flow to help new users build, test, and publish their first workflow quickly.
+
+**Who is the Python SDK for?**  
+Teams that want to run SketricGen workflows from their own backend services, scripts, or products.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)
+- **Docs: Advanced Agent Settings:** [/user-guides/advanced-agent-settings](/user-guides/advanced-agent-settings)
+- **Docs: Python SDK:** [/dev-guide/python-sdk](/dev-guide/python-sdk)
