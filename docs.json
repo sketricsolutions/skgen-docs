@@ -65,6 +65,7 @@
               {
                 "group": "2026 Updates",
                 "pages": [
+                  "changelog/2026-01-21-onboarding-infinite-scroll-tool-management",
                   "changelog/2026-01-13-app-landing-auth-flow-workflow-scheduling-integrations"
                 ]
               },
