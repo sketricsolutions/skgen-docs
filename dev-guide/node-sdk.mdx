@@ -1,0 +1,323 @@
+## Overview
+
+Node.js SDK for the SketricGen Chat Server API. Build AI-powered workflows, chat applications, and document analysis tools with TypeScript or JavaScript.
+
+## Requirements
+
+- Node.js 18 or later (uses built-in `fetch`, `FormData`, `Blob`, and streams)
+- ESM: use `"type": "module"` in `package.json` or `.mjs` files
+
+## Installation
+
+```bash
+npm install sketricgen
+```
+
+Or with other package managers:
+
+```bash
+# yarn
+yarn add sketricgen
+
+# pnpm
+pnpm add sketricgen
+```
+
+## Quick Start
+
+```javascript
+import { SketricGenClient } from 'sketricgen';
+
+// Initialize client (use fromEnv() to read SKETRICGEN_API_KEY from environment)
+const client = SketricGenClient.fromEnv();
+
+// Run a workflow
+const response = await client.runWorkflow(
+  'agent-123',
+  'Hello, how are you?',
+);
+console.log(response.response);
+```
+
+## Features
+
+- **Run Workflows**: Execute chat/workflow requests with AI agents
+- **Streaming**: Real-time streaming responses using Server-Sent Events
+- **File Attachments**: Attach images and PDFs to workflows (paths or explicit upload)
+- **TypeScript**: Full type definitions included
+- **Error Handling**: Typed error classes (e.g. `SketricGenAPIError`, `SketricGenValidationError`)
+- **CLI Help**: Run `npx sketricgen --help` or `npx sketricgen --help runWorkflow` for usage
+
+---
+
+## Client Reference
+
+### SketricGenClient
+
+The main client for interacting with the SketricGen API.
+
+#### Constructor
+
+```javascript
+const client = new SketricGenClient({
+  apiKey: 'your-api-key',        // Required
+  baseUrl: 'https://...',       // Optional; default: https://chat-v2.sketricgen.ai
+  uploadInitUrl: 'https://...', // Optional; upload endpoints (not derived from baseUrl)
+  uploadCompleteUrl: 'https://...',
+  timeout: 300,                  // Optional; request timeout in seconds
+  uploadTimeout: 300,            // Optional; upload timeout in seconds
+  maxRetries: 3,                // Optional
+});
+```
+
+#### From Environment Variables
+
+```javascript
+// Set SKETRICGEN_API_KEY environment variable
+const client = SketricGenClient.fromEnv();
+
+// Optional overrides
+const client = SketricGenClient.fromEnv({ apiKey: 'override-key' });
+```
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `SKETRICGEN_API_KEY` | *required* | Your API key |
+| `SKETRICGEN_TIMEOUT` | — | Request timeout in seconds |
+| `SKETRICGEN_UPLOAD_TIMEOUT` | — | Upload timeout for large files |
+| `SKETRICGEN_MAX_RETRIES` | — | Maximum retry attempts |
+
+---
+
+### runWorkflow()
+
+Execute a workflow/chat request.
+
+```javascript
+// Non-streaming: returns Promise<ChatResponse>
+const response = await client.runWorkflow(
+  'agent-123',                    // agentId (required)
+  'Hello, how are you?',          // userInput (required, max 10,000 chars)
+  {
+    conversationId: 'conv-456',   // Optional: resume a conversation
+    contactId: 'contact-789',     // Optional: external contact ID
+    filePaths: ['./doc.pdf'],     // Optional: local paths; client uploads then attaches
+    assets: ['file-id-1'],        // Optional: pre-obtained file IDs from files.upload()
+    stream: false,                // Optional: set true for streaming
+  }
+);
+
+// Streaming: returns AsyncGenerator<StreamEvent>
+const stream = client.runWorkflow('agent-123', 'Tell me a story', { stream: true });
+for await (const event of stream) {
+  // handle event.event_type, event.data (JSON string)
+}
+```
+
+**Returns**: `Promise<ChatResponse>` if `stream` is false or omitted; `AsyncGenerator<StreamEvent>` if `stream: true`.
+
+#### Example: Non-Streaming
+
+```javascript
+const response = await client.runWorkflow(
+  'agent-123',
+  'What is the weather like today?',
+  { conversationId: 'conv-456' },
+);
+console.log('Response:', response.response);
+console.log('Conversation ID:', response.conversation_id);
+```
+
+#### Example: Streaming
+
+```javascript
+const stream = client.runWorkflow('agent-123', 'Tell me a story', { stream: true });
+
+for await (const event of stream) {
+  const data = JSON.parse(event.data);
+  if (data.type === 'TEXT_MESSAGE_CONTENT') {
+    process.stdout.write(data.delta || '');
+  } else if (data.type === 'RUN_FINISHED') {
+    console.log();
+  }
+}
+```
+
+---
+
+### files.upload()
+
+Upload a file and get a `fileId` for use in `runWorkflow(..., { assets: [fileId] })`.
+
+```javascript
+const result = await client.files.upload({
+  agentId: 'agent-123',   // Required
+  file: './document.pdf', // Required: path (string), Buffer, or Readable stream
+  filename: 'doc.pdf',    // Required when file is Buffer or Readable (must include extension)
+  contentType: 'application/pdf', // Optional when file is Buffer/Readable
+});
+
+console.log(result.fileId); // use in runWorkflow(..., { assets: [result.fileId] })
+```
+
+When `file` is a path string, `filename` and `contentType` are optional (inferred from the path). When `file` is a `Buffer` or Node `Readable` stream, `filename` is required.
+
+---
+
+## Response Models
+
+### ChatResponse
+
+Response from a non-streaming workflow request.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `agent_id` | `string` | Workflow/Agent ID |
+| `user_id` | `string` | User identifier |
+| `conversation_id` | `string` | Conversation ID for follow-up messages |
+| `response` | `string` | The assistant's response text |
+| `owner` | `string` | Owner of the agent |
+| `error` | `boolean` | Error flag (default: `false`) |
+
+### StreamEvent
+
+Individual event from a streaming response.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `event_type` | `string` | Type of the SSE event |
+| `data` | `string` | JSON string containing event data |
+| `id` | `string \| undefined` | Optional event ID |
+
+Parse `event.data` with `JSON.parse(event.data)` to access the payload. The parsed object may include a `type` field matching `event_type`.
+
+---
+
+## Streaming Events
+
+The streaming API uses the [AG-UI Protocol](https://docs.ag-ui.com). Parse the `data` field as JSON to access event details.
+
+### Event Types
+
+| Event Type | Description | Key Fields |
+|------------|-------------|------------|
+| `RUN_STARTED` | Workflow execution started | `thread_id`, `run_id` |
+| `TEXT_MESSAGE_START` | Assistant message started | `message_id`, `role` |
+| `TEXT_MESSAGE_CONTENT` | Text chunk received | `message_id`, `delta` |
+| `TEXT_MESSAGE_END` | Assistant message completed | `message_id` |
+| `TOOL_CALL_START` | Tool/function call started | `tool_call_id`, `tool_call_name` |
+| `TOOL_CALL_END` | Tool/function call completed | `tool_call_id` |
+| `RUN_FINISHED` | Workflow completed | `thread_id`, `run_id` |
+| `RUN_ERROR` | Workflow error occurred | `message` |
+| `CUSTOM` | Custom event | varies |
+
+### Complete Streaming Example
+
+```javascript
+import { SketricGenClient } from 'sketricgen';
+
+const client = SketricGenClient.fromEnv();
+
+const stream = client.runWorkflow(
+  'agent-123',
+  'Search for info and summarize it',
+  { stream: true },
+);
+
+for await (const event of stream) {
+  const data = JSON.parse(event.data);
+  const eventType = event.event_type ?? data.type;
+
+  switch (eventType) {
+    case 'RUN_STARTED':
+      console.error('Started run:', data.run_id);
+      break;
+    case 'TEXT_MESSAGE_CONTENT':
+      if (data.delta) process.stdout.write(data.delta);
+      break;
+    case 'TOOL_CALL_START':
+      console.error('\n[Calling:', data.tool_call_name + ']');
+      break;
+    case 'TOOL_CALL_END':
+      console.error('[Done]');
+      break;
+    case 'RUN_FINISHED':
+      console.error('\n\nCompleted!');
+      break;
+    case 'RUN_ERROR':
+      console.error('\nError:', data.message);
+      break;
+  }
+}
+```
+
+---
+
+## File Attachments
+
+Attach files to workflows for document analysis and image understanding.
+
+### Supported File Types
+
+| Type | MIME Types | Max Size |
+|------|------------|----------|
+| Images | `image/jpeg`, `image/png`, `image/webp`, `image/gif` | 20 MB |
+| Documents | `application/pdf` | 20 MB |
+
+### Single File (via filePaths)
+
+```javascript
+const response = await client.runWorkflow(
+  'agent-123',
+  'Summarize this document',
+  { filePaths: ['./path/to/document.pdf'] },
+);
+console.log(response.response);
+```
+
+### Multiple Files
+
+```javascript
+const response = await client.runWorkflow(
+  'agent-123',
+  'Compare these two documents',
+  {
+    filePaths: [
+      './path/to/document1.pdf',
+      './path/to/document2.pdf',
+    ],
+  },
+);
+console.log(response.response);
+```
+
+### Upload First, Then Run (assets)
+
+```javascript
+const upload1 = await client.files.upload({ agentId: 'agent-123', file: './doc1.pdf' });
+const upload2 = await client.files.upload({ agentId: 'agent-123', file: './doc2.pdf' });
+
+const response = await client.runWorkflow(
+  'agent-123',
+  'Compare these two documents',
+  { assets: [upload1.fileId, upload2.fileId] },
+);
+console.log(response.response);
+```
+
+### Streaming with Files
+
+```javascript
+const stream = client.runWorkflow(
+  'agent-123',
+  'Analyze this image',
+  { filePaths: ['./path/to/image.png'], stream: true },
+);
+
+for await (const event of stream) {
+  const data = JSON.parse(event.data);
+  if (data.type === 'TEXT_MESSAGE_CONTENT') {
+    if (data.delta) process.stdout.write(data.delta);
+  }
+}
+```
