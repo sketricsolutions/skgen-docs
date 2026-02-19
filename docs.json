@@ -24,6 +24,7 @@
           {
             "group": "User Guides",
             "pages": [
+              "user-guides/max-agent-builder",
               "user-guides/agentspace-canvas",
               "user-guides/agents",
               "user-guides/tools",
