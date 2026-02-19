@@ -75,7 +75,7 @@ Use File Search for customer FAQs, product documentation, or internal manuals so
 
 **Guideline:**
 
-Ensure uploaded files have readable text—scanned image-based PDFs should be converted before uploading.
+Scanned PDFs are supported — the backend extracts and parses text for indexing into the knowledge base.
 
 ![Animated GIF showing file search tool interface with search functionality and results display](/images/user-guides/tools/tools_filesearch.gif)
 
@@ -105,9 +105,9 @@ It can process data, generate files, run scripts, or perform computational tasks
 
 Example use cases:
 
-- Generating or editing PDFs, CSVs, or charts.
 - Performing numeric calculations or simple analytics.
 - Running text or data transformations dynamically.
+- Generating or editing PDFs, CSVs, or charts (currently **beta** — generated files may not yet be surfaced cleanly in the product UI).
 
 **Guideline:**
 
@@ -167,7 +167,7 @@ Configuration fields:
 
 - Name and description
 - MCP Server URL
-- Connection type (HTTP over SSE, WebSocket, etc.)
+- Connection type (Streamable HTTP or SSE over HTTP)
 - Headers for authentication
 - Available tools (fetched from MCP endpoint)
 
@@ -214,8 +214,9 @@ You can:
 
 - Attach tools only where they're necessary—overloading an agent with too many tools can slow reasoning.
 - Use File Search for static or company-owned data, and Web Search for live queries.
-- Use Image Generation when your workflow needs visual outputs—marketing content, product mockups, or social media graphics.
+- Use Image Generation when your workflow needs visual outputs—marketing content, product mockups, or social media graphics. Multi-step asset workflows (generate → save → upload to another app) are still experimental.
 - Keep credentials private and rotate API keys periodically.
+- **Free plan note:** Marketplace app integrations on the free plan are **non-persistent** — when the session ends or the tab is closed, connected apps disconnect. Built-in tools (web search, etc.) remain available but are credit-based.
 - Regularly review Manage Tools to remove unused connections.
 - Combine File Search and Code Interpreter for powerful document analysis or report generation workflows.
 

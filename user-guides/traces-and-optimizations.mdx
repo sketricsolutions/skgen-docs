@@ -58,9 +58,8 @@ Once you’ve reviewed your traces, you can apply these best practices to improv
 - Tighten **agent instructions** — define when to call each tool and what success looks like.
 - Use **Agent-as-Tool** for recurring, contained subtasks (classification, summarization, extraction).
 - Prefer **Structured Outputs** to avoid parsing errors and reduce retry loops.
-- Configure **tool retries and fallbacks** for fragile or rate-limited integrations.
-- Keep sensitive credentials in vaults; redact or mask fields in traces.
-- Cache results from heavy lookups to minimize unnecessary tool calls.
+- The system automatically retries tool calls on failure (once or twice), but there is no user-facing retry or fallback configuration.
+- Keep sensitive credentials secure; rotate API keys periodically.
 - Review Trace Explorer regularly to identify latency sources or redundant operations.
 - Simplify orchestration paths — fewer handoffs improve both speed and cost efficiency.
 

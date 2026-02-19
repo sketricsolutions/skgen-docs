@@ -108,6 +108,16 @@ When agents are deployed across multiple channels, you can track where your user
 
 This helps you identify which deployment channels bring the highest engagement or cost and where optimization efforts should focus.
 
+## Conversation Memory and Statefulness
+
+Within the same conversation thread, agents retain full context of the interaction. This means follow-up messages in the same conversation can reference previous turns without repeating information.
+
+Key behaviors to be aware of:
+
+- **Within a conversation:** Stateful. Agents remember the full thread context.
+- **Across conversations:** No persistent memory. Each new conversation starts fresh with only the workflow instructions — no previous chat context carries over.
+- **Long conversations:** When context grows long, the system automatically summarizes and optimizes it to stay within model limits.
+
 ## How Conversations and Insights Work Together
 
 - **Conversations** let you drill down into the _quality_ and _content_ of agent interactions.

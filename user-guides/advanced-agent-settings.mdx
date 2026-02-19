@@ -67,9 +67,9 @@ Both settings control output diversity, but in different ways:
 
 ---
 
-## Reasoning Effort
+## Reasoning Effort (GPT-5.2 only)
 
-**What it does:** Controls how much "thinking" effort the model applies before responding. This is particularly relevant for reasoning-capable models.
+**What it does:** Controls how much "thinking" effort the model applies before responding.
 
 | Value | Behavior | Best For |
 |-------|----------|----------|
@@ -83,20 +83,17 @@ Both settings control output diversity, but in different ways:
 - Multi-step problem solving
 - Code generation and debugging
 - Mathematical reasoning
-- Strategic planning agents
 
 ### When to use low/minimal reasoning effort:
-- Simple Q&A
-- Quick lookups and retrieval
+- Simple Q&A and quick lookups
 - Straightforward instructions
 - Cost-sensitive applications (higher reasoning = more tokens = higher cost)
-- Low-latency requirements
 
 ---
 
-## Verbosity
+## Verbosity (GPT-5.2 only)
 
-**What it does:** Controls the length and detail level of the model's responses. This is particularly relevant for reasoning-capable models
+**What it does:** Controls the length and detail level of the model's responses.
 
 | Value | Behavior |
 |-------|----------|
@@ -106,20 +103,13 @@ Both settings control output diversity, but in different ways:
 
 ### When to use low verbosity:
 - API-style agents that return structured data
-- Agents that feed into other agents (keeps context lean for downstream processing)
+- Agents that feed into other agents (keeps context lean)
 - Quick-response chatbots
-- Cost optimization (fewer tokens)
-
-### When to use medium verbosity:
-- General-purpose conversational agents
-- Customer support (balanced helpfulness)
-- Most standard use cases
 
 ### When to use high verbosity:
 - Educational or explainer agents
 - Documentation generators
 - Detailed customer-facing responses
-- Agents where thoroughness is valued
 
 ---
 
@@ -128,12 +118,10 @@ Both settings control output diversity, but in different ways:
 Model settings are configured per-agent in the AgentSpace canvas:
 
 1. Select an agent node
-2. Toogle **Advanced Mode**
+2. Toggle **Advanced Mode**
 3. Adjust the model settings:
-   - Temperature slider (0.0 - 1.0)
-   - Top P slider (0.0 - 1.0)
-   - Reasoning Effort dropdown (minimal / low / medium / high)
-   - Verbosity dropdown (low / medium / high)
+   - **All models:** Temperature slider (0.0 - 1.0), Top P slider (0.0 - 1.0)
+   - **GPT-5.2 only:** Reasoning Effort dropdown (minimal / low / medium / high), Verbosity dropdown (low / medium / high)
 4. Settings are saved with the workflow
 
 ![Screenshot showing advanced mode settings](/images/user-guide/advanced_mode.png)
@@ -150,14 +138,14 @@ Model settings are configured per-agent in the AgentSpace canvas:
 
 4. **Match settings to task type:**
 
-   | Task Type | Temperature | Reasoning | Verbosity |
-   |-----------|-------------|-----------|-----------|
-   | Data extraction | Low (0.0-0.2) | Medium | Low |
-   | Creative writing | High (0.7-1.0) | Medium | High |
-   | Customer support | Low-Medium (0.3-0.5) | Low | Medium |
-   | Complex analysis | Low (0.1-0.3) | High | High |
-   | Quick Q&A | Low (0.0-0.3) | Minimal | Low |
+   | Task Type | Temperature | Top P | Reasoning (GPT-5.2) | Verbosity (GPT-5.2) |
+   |-----------|-------------|-------|----------------------|----------------------|
+   | Data extraction | Low (0.0-0.2) | 1.0 | Medium | Low |
+   | Creative writing | High (0.7-1.0) | 0.9 | Medium | High |
+   | Customer support | Low-Medium (0.3-0.5) | 1.0 | Low | Medium |
+   | Complex analysis | Low (0.1-0.3) | 1.0 | High | High |
+   | Quick Q&A | Low (0.0-0.3) | 1.0 | Minimal | Low |
 
-5. **Consider downstream agents** — If your agent hands off to another agent, lower verbosity keeps context manageable.
+5. **Consider downstream agents** — If your agent hands off to another agent, lower verbosity (on GPT-5.2) keeps context manageable.
 
-6. **Monitor costs** — Higher reasoning effort increases token usage and costs.
+6. **Monitor costs** — Higher reasoning effort and more complex models increase token usage and costs.

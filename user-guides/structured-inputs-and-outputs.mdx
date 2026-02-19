@@ -53,7 +53,7 @@ This ensures predictable data handling between connected agents and external int
 
 - SketricGen generates a **typed schema** for the agent in JSON Schema format.
 - On **handoff**, the parent agent must provide all Structured Input fields required by the child.
-- If any fields are missing or invalid, they are flagged inside **Trace Explorer** for quick debugging.
+- Validation is **strict**: if the schema is not satisfied, the backend throws an error and the agent retries until it produces schema-valid output. Failed validations are also visible in the **Trace Explorer** for debugging.
 - Descriptions are surfaced both in the UI and model prompt context, improving model interpretability.
 
 ## Best Practices

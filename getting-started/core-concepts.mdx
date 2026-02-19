@@ -25,7 +25,7 @@ Agents are the individual roles in your workflow. Each has its own:
 - **Instructions** (the prompt or system message defining purpose & tone)
 - **Model & parameters** (OpenAI supported models)
 - **Access to tools** (data retrieval or action execution)
-- **Guardrails & limits** (optional constraints)
+- **Constraints** (enforced via agent instructions and structured schema validation)
 
 Agents can:
 
@@ -53,6 +53,7 @@ You can attach one or many tools to an agent.
 | **File Search**             | Create a private knowledge base from uploaded files or crawled websites.   | Product manuals, FAQs, policy docs.                    |
 | **Web Search**              | Retrieve fresh, web-based context.                                         | Market research, news summaries, dynamic data.         |
 | **Code Interpreter**        | Execute Python code securely in a sandbox.                                 | Data transformation, quick computation, CSV analysis.  |
+| **Image Generation**        | Generate images using AI models from text descriptions.                    | Marketing visuals, product mockups, social media graphics. |
 | **API Request**             | Call external REST APIs with headers, auth, and schema mapping. | Integrate internal systems or external SaaS APIs.      |
 | **Custom MCP**              | Add standardized MCP servers for cross-app interoperability.               | Advanced enterprise integrations.                      |
 
@@ -68,14 +69,14 @@ A handoff defines when and how one agent transfers the task to another.
 
 They are the connective logic of your workflow.
 
-- **Designer-routed:** Explicitly define paths and conditions.
-- **AI-routed:** Let the system decide the next best agent dynamically.
+- **AI-routed:** Agents decide when to hand off based on their instructions and handoff conditions you define on each edge.
+- **Forced handoff:** Deterministic, designer-controlled routing that guarantees the next agent always runs after the current one completes.
 
 **Guideline:**
 
-For production workflows, prefer _designer-routed_ handoffs at first - this ensures predictable behavior and easier debugging.
+For production workflows, prefer _forced handoffs_ at first - this ensures predictable behavior and easier debugging.
 
-![Handoff configuration interface showing designer-routed and AI-routed options with conditions and fallbacks](/images/core-concepts/core_handoff.png)
+![Handoff configuration interface showing AI-routed and forced handoff options](/images/core-concepts/core_handoff.png)
 
 ## Structured Inputs & Outputs (JSON)
 
@@ -111,10 +112,11 @@ Review traces often - optimize agents that over-call tools or generate unnecessa
 
 ## Deployment (At a Glance)
 
-Once your workflow is ready, deploy it through one of two paths:
+Once your workflow is ready, deploy it through any of these paths:
 
 - **Widget:** Configure your branding (logo, colors, greeting message) and embed the snippet into your site or CMS.
-- **Public API:** Trigger workflows programmatically and receive **structured JSON** responses.
+- **Messaging platforms:** Connect to WhatsApp, Telegram, Instagram, or Slack for direct user interaction.
+- **Public API & SDKs:** Trigger workflows programmatically (Node or Python SDK) and receive **structured JSON** responses.
 
 (See the [Deploy](/deploy/whatsapp) section for integration-specific steps.)
 
