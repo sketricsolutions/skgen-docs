@@ -1,0 +1,140 @@
+---
+title: "Max - Agent Builder"
+description: "Build multi-agent workflows from a conversation. Max gathers your requirements, suggests apps, and wires everything on the canvas for you."
+---
+
+<iframe
+  width="100%"
+  style={{ aspectRatio: '16/9', maxWidth: '800px', margin: '0 auto', display: 'block' }}
+  src="https://www.youtube.com/embed/0xSeN2kiauo"
+  title="Max - Agent Builder Demo"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+## Overview
+
+Max - Agent Builder (referred to as "Max" throughout this guide) is an AI-powered workflow builder that turns a natural-language conversation into a fully wired multi-agent workflow on your AgentSpace canvas.
+
+Instead of manually placing agents, attaching tools, and writing instructions, you describe what you need and Max builds it for you — agents, edges, handoff conditions, and instructions included.
+
+Max is currently in **beta** and available to all users. Free plan users have limited builds.
+
+## How Max Works
+
+Max follows a structured flow to go from your idea to a working workflow:
+
+### 1. Describe your goal
+
+The SketricGen homepage is a chat interface where you tell Max what you want to build. For example:
+
+- "I need a customer support workflow that answers FAQs and books demos"
+- "Build me a lead outreach pipeline that researches contacts and sends personalized emails"
+
+### 2. Requirements gathering
+
+Max asks follow-up questions to understand your use case in detail:
+
+- What agents are needed and what each one should do
+- Which tools or apps the agents should use
+- How agents should hand off to each other
+- Any specific behavior or constraints
+
+### 3. App discovery
+
+Based on your requirements, Max searches the SketricGen marketplace of 2000+ apps and suggests the right integrations for your workflow.
+
+### 4. Plan approval
+
+Before building, Max presents a text summary of the planned workflow — the agents, their roles, the tools, and how they connect. You review and approve the plan (or ask Max to adjust it).
+
+### 5. Build mode
+
+Once you approve, Max switches to builder mode. You are routed to the AgentSpace canvas where you can watch Max work in real time:
+
+- Adding agent nodes to the canvas
+- Connecting agents with edges (handoff connections)
+- Writing handoff conditions on each edge
+- Writing agent instructions for each agent
+- Attaching the required tools to each agent
+
+This typically takes **1–3 minutes** depending on the complexity of the workflow.
+
+### 6. Review, connect, and go
+
+Once Max finishes building:
+
+- **Review** the agents, instructions, and handoff conditions Max created
+- **Connect** your apps by authenticating via OAuth or entering API keys for marketplace tools
+- **Populate** any Knowledge Bases that Max attached (upload files, crawl websites, or paste text)
+- **Test** the workflow in the Playground
+- **Publish** when ready
+
+## Accessing Max
+
+Max is available from two entry points:
+
+- **Homepage:** The default landing page after login is the Max chat UI. This is the primary way to start a new workflow.
+- **AgentSpace:** Within any existing AgentSpace, you can open Max to modify or extend the current workflow.
+
+## Editing Existing Workflows with Max
+
+Max is not limited to creating new workflows. You can use Max to modify existing ones:
+
+- **Add agents** — describe the new role and Max adds it to the canvas with instructions and connections.
+- **Remove agents** — tell Max which agent to remove and it updates the workflow.
+- **Update instructions** — ask Max to rewrite or refine agent instructions or handoff conditions.
+
+The same Max chat conversation persists, so Max has full context of the workflow it built or is modifying.
+
+You can also skip Max and edit the workflow manually at any time — update instructions, reconfigure tools, or adjust handoffs directly on the canvas.
+
+## What Max Creates Automatically
+
+| Component | Max handles it? | Notes |
+|-----------|----------------|-------|
+| Agent nodes | Yes | Placed on canvas with names and roles |
+| Agent instructions | Yes | Written based on your requirements |
+| Handoff edges and conditions | Yes | AI-routed handoffs with conditions |
+| Tool attachment | Yes | Auto-attached; user authenticates |
+| Model selection | Default | Uses a default model; user can change per agent |
+| Knowledge Base content | No | Max attaches the File Search tool, but the user must create/populate the KB |
+| Structured Inputs/Outputs | No | Must be configured manually |
+| Publishing/deployment | No | User publishes when ready |
+
+## Known Limitations (Beta)
+
+- **App detail depth:** Max knows what each marketplace app does at a high level but cannot look up detailed actions, pricing, or operational specifics for every app.
+- **Knowledge Bases:** Max attaches the File Search tool node but cannot create or populate Knowledge Bases. You need to go into the tool, create a KB, and upload your files or crawl a website.
+- **Structured I/O:** Max does not configure structured input/output schemas. Set those up manually if your workflow needs them.
+- **Forced handoffs:** Max currently only creates AI-routed handoffs. Forced handoff support is planned.
+- **Deployment:** Max cannot publish or deploy workflows. You handle that step.
+
+## Tips for Getting the Best Results from Max
+
+- **Be specific about roles.** Instead of "build me a support bot," say "I need a triage agent that greets users and routes product questions to a specialist agent that uses a knowledge base."
+- **Mention your apps.** If you know which integrations you need (e.g. Google Calendar, HubSpot, Slack), tell Max upfront so it includes them in the plan.
+- **Review the plan before approving.** This is where you catch missing agents or unnecessary complexity.
+- **Iterate after the build.** Max gets you 80–90% of the way. Fine-tune instructions, test in the Playground, and adjust based on traces.
+- **Use Max for edits too.** Instead of manually reconfiguring, ask Max to add a new agent or change handoff logic.
+
+## FAQ
+
+**Can I use Max on the free plan?**
+Yes, but with limited builds. Paid plans have higher or no limits.
+
+**Does Max work with all tool types?**
+Max can attach any tool type (marketplace apps, File Search, Web Search, Code Interpreter, Image Generation, API Request, Custom MCP). For marketplace apps, you just need to authenticate after Max attaches them.
+
+**What if I don't like what Max built?**
+You can ask Max to make changes in the same chat, or edit the workflow manually. You can also start over with a new conversation.
+
+**Does Max remember previous workflows?**
+Max retains context within the same conversation. Starting a new conversation starts fresh.
+
+## Related Links
+
+- [AgentSpace Guide →](/user-guides/agentspace-canvas)
+- [Agents Guide →](/user-guides/agents)
+- [Tools Guide →](/user-guides/tools)
+- [Orchestration & Handoffs Guide →](/user-guides/orchestration-and-handoffs)
