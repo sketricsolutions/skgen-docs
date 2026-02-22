@@ -10,7 +10,7 @@ This release focuses on more reliable authentication and user tracking, a richer
 
 ## TL;DR
 - **Unified authentication** with better session handling and clearer error reporting
-- **User model enhancements** including total credits consumed, last activity date, and improved credit deduction logging
+- **Usage and activity visibility**: total credits consumed, last activity date, and clearer usage tracking
 - **Widget & embed upgrades**: preview mode toggle, dark mode support, customizable CTA button, and QR code download for workflows
 - **Chat and layout refinements** for consistency, responsiveness, and cleaner input behavior
 - **API dry-run improvements** with better error handling and response visibility in test results
@@ -21,11 +21,9 @@ This release focuses on more reliable authentication and user tracking, a richer
 ## What's new
 
 ### 1) Stronger authentication and user tracking
-We improved how sign-in and user data work under the hood:
-- **Unified auth utility** replacing Amplify session fetching for more consistent behavior
-- Better session and attribute handling with enhanced error reporting
-- User model now tracks **total credits consumed**, **last activity date**, and **updatedAt** timestamps
-- Credit deduction logic logs total credits consumed more clearly
+We improved sign-in and how your usage is tracked:
+- More consistent session handling and clearer error reporting when something goes wrong
+- Your account now tracks **total credits consumed** and **last activity date** for better visibility
 - **Last activity date** is set automatically when you sign up
 
 **Why it matters:** fewer auth hiccups, clearer errors when something goes wrong, and better visibility into your usage and activity.
@@ -38,7 +36,7 @@ The widget and fullscreen embed got several upgrades:
 - **Dark mode support** for fullscreen and iframe widgets with dynamic theme handling
 - **Customizable CTA button** in fullscreen widget (title + link)
 - **QR code download** for workflows using workflow URLs
-- Reorganized widget configuration via `useWidgetConfig` hook for cleaner logic and better visibility control
+- Cleaner widget configuration and visibility control
 
 **Why it matters:** you can preview how your widget looks in both modes, match your site’s theme with dark mode, add a custom call-to-action, and share workflows easily via QR code.
 
@@ -46,9 +44,8 @@ The widget and fullscreen embed got several upgrades:
 
 ### 3) Chat and layout polish (consistency and responsiveness)
 Chat and related UI received refinements:
-- Improved **ChatLayout**, **ChatInput**, **LiveWidgetPreview**, and **ChatSidebar** styling for consistency and responsiveness
-- Integrated **react-textarea-autosize** for better input behavior; removed unused chat components
-- Refined avatar handling and input area layout
+- Improved chat layout, input area, preview, and sidebar styling for consistency and responsiveness
+- Better input behavior and refined avatar and input area layout
 - Fixed minor styling issues in fullscreen preview components
 
 **Why it matters:** chat feels more consistent, inputs behave more predictably, and the fullscreen preview looks cleaner.
@@ -57,9 +54,9 @@ Chat and related UI received refinements:
 
 ### 4) API testing and developer experience
 API dry-run and test feedback are easier to use:
-- **Dry-run testing** now routes through Next.js API endpoints for better error handling
+- **Dry-run testing** with better error handling and clearer feedback
 - **Response bodies** are included in test results for clearer visibility
-- Refined test-import API handling and feedback in **ApiDryRunDialog**
+- Refined test-import handling and feedback in the API test dialog
 
 **Why it matters:** when testing APIs, you see full responses and get clearer errors, so debugging and validation are faster.
 

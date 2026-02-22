@@ -1,0 +1,140 @@
+---
+title: "Auth, UTM Attribution, Voice Polish, Limits & Dashboard UX (Feb 17, 2026)"
+description: "SketricGen update: UTM attribution on sign-up, auth and onboarding redirect improvements, plan limit checks with upgrade CTAs, centralized voice input with auto-stop and silence timeout, dashboard and chat polish, and UI updates including blog theme and resources dropdown."
+tags: ["release", "authentication", "utm", "attribution", "voice", "limits", "dashboard", "ui"]
+version: "v2"
+releaseDate: "2026-02-17"
+---
+
+This release improves sign-up attribution with UTM capture, makes auth and onboarding redirects more reliable, tightens plan-limit checks with clearer upgrade prompts, centralizes voice input with better recording behavior, and polishes dashboard, chat, and UI—including blog theme toggle and a resources dropdown in the header.
+
+## TL;DR
+- **Campaign attribution:** we now store where sign-ups came from (e.g. UTM parameters) so you can measure which campaigns and channels work
+- **Sign-in and redirects:** after login or SSO you're taken to the right place more reliably, with fewer redirect quirks
+- **Plan limits:** faster limit checks and a clear **upgrade CTA** when you hit workflow or knowledge base limits; agents created in the background start inactive so they don't count until you turn them on
+- **Voice input:** consistent behavior everywhere—**auto-stop** and **silence timeout** so recordings end predictably; the UI clearly shows when the mic is on
+- **Dashboard and chat:** better mobile routing, fewer duplicate tool messages, and clearer handling when you hit plan limits
+- **UI updates:** blog **theme toggle**, header **resources** dropdown, improved demo CTA, and styling refinements on landing, blog, and contact pages
+
+---
+
+## What's new
+
+### 1) UTM attribution on sign-up
+We now capture where new users come from so you can measure campaigns:
+- UTM parameters in the sign-up URL (e.g. source, medium, campaign) are captured and stored on the user's account
+- You can use this data in your analytics or backend to attribute sign-ups to specific campaigns and channels
+- Simpler usage model: agent usage is derived from your plan and current usage rather than a separate count
+
+**Why it matters:** you can see which campaigns and channels drive sign-ups without extra setup. For developers: UTM data is stored on the user record; see dev docs for attribute names if you need to query it.
+
+---
+
+### 2) Authentication and onboarding flow
+Login and post-login navigation are more predictable:
+- After sign-in or SSO, you're sent to the right place based on whether you've already created agents and your workflow list
+- Redirect logic is simpler and more consistent across login popup and SSO
+- Onboarding routing and post-login navigation are more stable
+
+**Why it matters:** you’re sent to the right place after sign-in or SSO more reliably, with fewer redirect quirks.
+
+---
+
+### 3) Plan limits and upgrade prompts
+Limit checks are faster and clearer when you hit caps:
+- **Workflow and knowledge base** limit checks run more efficiently with fewer redundant requests
+- **Upgrade CTA** appears when you hit workflow or knowledge base plan limits so you can see upgrade options quickly
+- Agents created in the background (e.g. during setup) start **inactive** so they don't count against your active limit until you turn them on
+
+**Why it matters:** you see plan limits and upgrade options without extra delay, and background-created agents don't count as active until you activate them.
+
+---
+
+### 4) Voice input (consistent behavior everywhere)
+Voice recording is unified and more reliable across the app:
+- **Auto-stop** and **silence timeout** so recordings end predictably when you stop speaking
+- Same behavior in dashboard chat and workflow chat—no surprises when you switch contexts
+- The UI clearly shows when the mic is on and when input is disabled (e.g. while the system is processing)
+
+**Why it matters:** voice input behaves the same everywhere, stops when you go silent or when auto-stop triggers, and the UI clearly shows when the mic is on.
+
+---
+
+### 5) Dashboard and chat improvements
+Dashboard chat and error handling are smoother:
+- **Mobile routing** in dashboard chat improved so navigation feels right on smaller screens
+- You can't send new messages while the system is processing—the input state reflects this clearly
+- Fewer duplicate tool messages in the thread for a cleaner conversation view
+- When you hit a plan limit in chat, the error is explained and an upgrade path is shown
+
+**Why it matters:** chat works better on mobile, duplicate tool messages are reduced, and hitting a plan limit in chat is explained and surfaced clearly.
+
+---
+
+### 6) UI and experience updates
+Surfaces and navigation got small upgrades:
+- **Blog** client **theme toggle** for light/dark
+- **Header** updated with a **resources** dropdown
+- **Demo CTA** visibility improved
+- Styling refinements on **landing**, **blog**, and **contact** pages
+
+**Why it matters:** you can switch blog theme, find resources from the header, and see a clearer demo CTA; landing and contact feel more consistent.
+
+---
+
+## Who this release is for
+- **Marketing and growth** teams who want UTM attribution on new sign-ups
+- **New users** going through auth and onboarding who benefit from stable redirects
+- **Teams near plan limits** who want clear upgrade CTAs and fewer redundant limit checks
+- **Voice users** who want consistent mic behavior, auto-stop, and silence timeout
+- **Dashboard and chat users** on mobile or hitting plan limits who want better routing and error handling
+- **Readers and visitors** who use the blog theme toggle, resources dropdown, or demo CTA
+
+---
+
+## How to use (quick steps)
+
+### Rely on UTM attribution
+1. Use UTM parameters in your sign-up and campaign links as usual (e.g. utm_source, utm_medium, utm_campaign)
+2. After sign-up, UTM data is stored on the user's account and is available for your analytics or backend
+3. Use that data to attribute sign-ups to campaigns and channels
+
+### Use voice input with the new behavior
+1. Use the **mic button** in dashboard or workflow chat to start recording
+2. Speak; recording **auto-stops** on silence timeout or when you stop
+3. If the mic or input is disabled, wait for the current action to finish—the UI reflects recording state
+
+### When you hit a plan limit
+1. Look for the **upgrade CTA** when you hit workflow or knowledge base limits
+2. Use it to see upgrade options; limit checks run in the background with fewer extra calls
+
+### Use the new UI options
+1. On the **blog**, use the **theme toggle** for light or dark
+2. In the **header**, open the **resources** dropdown to find links
+3. Use the improved **demo CTA** where it’s shown on landing or marketing pages
+
+---
+
+## FAQ
+
+**What UTM parameters are stored?**  
+Whatever UTM parameters are present in the URL at sign-up (e.g. utm_source, utm_medium, utm_campaign) are captured and stored on the user's account. You can use them in your analytics or backend for attribution.
+
+**Why do some agents start inactive?**  
+Agents created in the background (e.g. during setup or automation) now start inactive so they don't count against your active workflow limit until you turn them on.
+
+**Does voice auto-stop work everywhere?**  
+Yes. In dashboard chat and workflow chat, voice recording uses auto-stop and silence timeout so behavior is consistent. The mic stops when you go silent or when auto-stop triggers.
+
+**Where is the resources dropdown?**  
+In the main site **header**; use it to access resources and key links without leaving the page.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)
+- **Docs: Widget & Deploy:** [/deploy/custom-website](/deploy/custom-website)
+- **Docs: Public API:** [/dev-guide/public-api-usage](/dev-guide/public-api-usage)

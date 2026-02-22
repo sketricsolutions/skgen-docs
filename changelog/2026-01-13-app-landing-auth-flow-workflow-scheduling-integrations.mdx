@@ -9,11 +9,11 @@ releaseDate: "2026-01-13"
 This release bundles two weeks of improvements focused on: a more unified SketricGen experience (site + app), smoother workflow building, and stronger reliability for scheduling, integrations, and asset handling.
 
 ## TL;DR
-- The **landing experience is now integrated into the app** with standardized routing (including the `/app/` prefix and expanded public pages)
+- The **landing experience is now integrated into the app** with standardized routing and expanded public pages (blog, templates, contact, and more)
 - Improved **authentication flow** for cleaner redirects and more consistent login state
 - Flow Editor now supports **pan-on-scroll** and reduces accidental zooming
 - Trigger nodes now show **clear schedule badges** (including warnings when unpublished/config is missing)
-- More reliable integration scheduling and updates (active-only processing + safer Pipedream trigger updates)
+- More reliable integration scheduling and updates so workflows use the right connections and trigger updates are safer
 - Better **asset downloads** with fallback behavior when downloads are blocked
 - Stronger **API import parsing** (handles mixed result formats and nested JSON more reliably)
 
@@ -23,8 +23,8 @@ This release bundles two weeks of improvements focused on: a more unified Sketri
 
 ### 1) Landing + app unified (cleaner navigation and consistency)
 We migrated the full landing page experience directly into the application:
-- Standardized routing with the **`/app/` prefix**
-- Expanded supported public routes like **/blog**, **/templates**, **/contact**, and more
+- **Standardized routing** so app and landing live in one place
+- Expanded public routes: **blog**, **templates**, **contact**, and more
 - Unified styling and layout consistency (buttons, grids, animations, hero/CTA behaviors)
 
 **Why it matters:** everything feels like one product now—less context switching, more consistent navigation, and a smoother path from “discover” → “try” → “build.”
@@ -57,23 +57,19 @@ Flow Editor now supports:
 
 ### 4) Trigger & scheduling clarity (badges that actually tell you what’s wrong)
 Trigger nodes now have clearer schedule badge logic:
-- Badge shows only when `triggerType = schedule`
-- Warnings appear for **unpublished schedule triggers**
-- Destructive styling is used when configuration is required
-- Published schedules display the configured **interval/cron** values
+- **Schedule triggers** show a badge so you can see which nodes are on a schedule
+- Warnings appear for **unpublished schedule triggers** or when configuration is missing
+- Published schedules display the configured **interval or cron** values
 
 **Why it matters:** you can spot misconfigured schedules immediately and avoid silent “nothing is running” situations.
 
 ---
 
-### 5) Integrations & webhooks reliability (active-only + safer updates)
+### 5) Integrations & webhooks reliability (fewer broken runs)
 Scheduling and trigger integrations are more reliable:
-- Scheduled webhook processing now runs only on **active integrations**
-- Sorting uses the latest `updated_at` (fallback to `created_at`) to pick the most relevant integration record
+- Scheduled webhook processing runs only on **active integrations**, so stale or inactive connections don't trigger runs
 - Clearer errors when no active integration is available
-- Pipedream trigger integrations can now be **updated safely** without creating duplicates (preserves settings and removes obsolete records)
-
-Some of this is internal platform behavior, but it directly reduces broken runs caused by duplicate/inactive integration records.
+- **Safer trigger updates** so you can change trigger integrations without creating duplicates or losing settings
 
 **Why it matters for users:** fewer workflow failures due to stale connections, and cleaner updates when you change triggers.
 
