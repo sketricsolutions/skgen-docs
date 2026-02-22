@@ -1,0 +1,130 @@
+---
+title: "Brand Agent, Crawl Pipeline, Dashboard Feedback & Voice Input (Feb 12, 2026)"
+description: "SketricGen update: Brand Agent creation and workflow generation, crawl pipeline with live progress, dashboard upgrade alerts and feedback, voice input with ScribeMic, and UI/styling improvements."
+tags: ["release", "brand-agent", "workflow", "crawl", "dashboard", "feedback", "voice", "ui"]
+version: "v2"
+releaseDate: "2026-02-12"
+---
+
+This release adds Brand Agent creation with workflow generation, a stronger crawl pipeline with live progress and plan-limit disclaimers, dashboard upgrade alerts and in-app feedback, voice input via ScribeMic, and UI and styling polish across the app.
+
+## TL;DR
+- **Brand Agent creation** from the dashboard with progress tracking and workflow generation—see workflows build in real time and get upgrade prompts when you hit capacity
+- **Crawl pipeline** with live status and progress, plan-limit disclaimers up front, and secure access to crawled content
+- **Dashboard** upgrade alerts when you approach workflow limits, clearer permissions and validation, and **in-app feedback** from dashboard and chat
+- **Voice input** in chat so you can speak instead of type when it's faster
+- **UI and styling** improvements: refreshed buttons and badges, better dark mode, and consistent look across landing, dashboard, and chat
+
+---
+
+## What's new
+
+### 1) Brand Agent creation and workflow generation
+We added an end-to-end flow for creating Brand Agents and generating workflows from the dashboard:
+- **Brand Agent creation** from the dashboard with clear progress as workflows are built
+- Better brand data capture and cost visibility for Brand Agent setup
+- Improved error handling and event handling so the dashboard reflects workflow-building progress
+- Simplified workflow limit checks and upgrade alerts when you hit capacity
+
+**Why it matters:** you can create Brand Agents from the dashboard, see progress as workflows are built, and get clearer feedback when you hit workflow capacity—with upgrade prompts when needed.
+
+---
+
+### 2) Crawl pipeline and infrastructure
+The crawl system is more robust and transparent:
+- **Live progress** and status so you see how each crawl job is doing
+- **Plan limit disclaimers** shown up front so you know when a crawl is affected by your plan
+- More reliable job processing and better error handling when creating crawl jobs
+- Crawled content is available via secure links; job expiration was tightened for better resource use
+
+**Why it matters:** crawl jobs run more reliably, you see live progress and plan limits up front, and you can access crawled content securely.
+
+---
+
+### 3) Dashboard, permissions, and feedback
+Dashboard and permissions are clearer; feedback is built in:
+- **Upgrade alerts** on the Dashboard when you approach or hit workflow capacity limits
+- **User permission handling** and workflow validation improved for more predictable behavior
+- **In-app feedback** from the dashboard and chat so you can send comments or issues without leaving the app
+- Clearer indicators when knowledge base or tools are processing
+
+**Why it matters:** you know when to upgrade, permissions and validation behave more predictably, and you can give feedback directly from the dashboard and chat.
+
+---
+
+### 4) Voice input in chat
+Voice is now part of the input experience:
+- **Voice input** in the chat flow so you can speak instead of type
+- Integrated voice pipeline for reliable transcription
+
+**Why it matters:** you can speak your input instead of typing when it’s faster or more convenient.
+
+---
+
+### 5) UI, UX, and styling
+Visual consistency and polish across the app:
+- **Button and badge** styles updated with a refreshed look and better dark mode
+- Landing page, hero, and chat header styling refined for consistency
+- Dashboard and chat component styles updated for a more consistent look
+
+**Why it matters:** the app feels more cohesive, and dark mode and key surfaces (landing, dashboard, chat) are easier on the eye and easier to use.
+
+---
+
+## Who this release is for
+- **Teams building Brand Agents** who want dashboard-driven creation and workflow generation with clear progress
+- **Users who run crawls** and want live status, plan-limit clarity, and reliable S3 access
+- **Dashboard users** who care about upgrade alerts, permissions, and in-app feedback
+- **Chat users** who prefer **voice input** when speaking is faster than typing
+- **Everyone** who benefits from clearer UI, dark mode, and consistent styling
+
+---
+
+## How to use (quick steps)
+
+### Create a Brand Agent and track workflow progress
+1. Use the **Brand Agent creation** flow from the dashboard
+2. Watch **progress tracking** as the workflow is built
+3. If you hit workflow limits, use the **upgrade alert** to see your options
+
+### Run and monitor crawl jobs
+1. Create a crawl job from the dashboard or API
+2. Watch **live progress** and any **plan limit** disclaimers
+3. Access crawled content via the secure links provided when the job completes
+
+### Give feedback from the app
+1. In the **Dashboard** or **chat** window, use the in-app feedback option
+2. Submit feedback in context; it's sent to the team for follow-up
+
+### Use voice input
+1. In chat, use the **mic button** (where available) to speak your input
+2. Voice is transcribed and sent as your message
+
+---
+
+## FAQ
+
+**What is Brand Agent creation?**  
+It's the flow in the dashboard that lets you create a Brand Agent with your brand details and optional requirements, then generate or update workflows—with progress visible along the way.
+
+**Do crawl jobs expire sooner now?**  
+Yes—crawl job expiration was reduced for better resource use; you still get secure links to access crawled content before expiry.
+
+**Where do I see workflow capacity limits?**  
+The Dashboard shows **upgrade alerts** when you approach or hit workflow capacity, with clearer logic around limits and upgrade prompts.
+
+**Where can I send feedback?**  
+You can send in-app feedback from the Dashboard and from the chat window—comments or issues go to the team without leaving the app.
+
+**Where is voice input available?**  
+Voice input is available in the chat flow where the mic option is shown; use it to speak instead of type when it's more convenient.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)
+- **Docs: Widget & Deploy:** [/deploy/custom-website](/deploy/custom-website)
+- **Docs: Public API:** [/dev-guide/public-api-usage](/dev-guide/public-api-usage)
