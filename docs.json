@@ -8,6 +8,11 @@
     "dark": "#7D4AEA"
   },
   "favicon": "favicon.ico",
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.sketricgen.ai"
+    }
+  },
   "navigation": {
     "tabs": [
       {
