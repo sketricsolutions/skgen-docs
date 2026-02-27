@@ -1,13 +1,14 @@
 ---
-title: "AgentSpace Canvas"
-description: "Design multi-agent workflows visually on the AgentSpace canvas — add agents, connect handoffs, attach tools, import/export configs, and test in the Playground."
+title: "AgentSpace"
+description: "Design multi-agent workflows visually on the AgentSpace — add agents, connect handoffs, attach tools, import/export configs, and test in the Playground."
+keywords: ["AgentSpace", "visual workflow", "drag-and-drop", "multi-agent orchestration"]
 ---
 
-![AgentSpace Canvas hero image showing the visual drag-and-drop interface for building multi-agent workflows](/images/user-guides/agent-space/canvas_hero.png)
+![AgentSpace hero image showing the visual drag-and-drop interface for building multi-agent workflows](/images/user-guides/agent-space/canvas_hero.png)
 
 ## Overview
 
-The AgentSpace is the central workspace of SketricGen — a visual canvas where you design, test, and optimize multi-agent workflows.
+The AgentSpace is the central workspace of SketricGen — a visual workspace where you design, test, and optimize multi-agent workflows.
 
 Each workflow is made up of agents, tools, and handoffs, connected through an intuitive drag-and-drop interface.
 
@@ -15,7 +16,7 @@ Users can build from scratch, import existing configurations, or export their wo
 
 ## Adding Nodes
 
-On the top-left corner of the canvas is the Add Node menu, where you can choose what to add to your workflow.
+On the top-left corner of the AgentSpace is the Add Node menu, where you can choose what to add to your workflow.
 
 | Node Type         | Description                                                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -28,9 +29,9 @@ On the top-left corner of the canvas is the Add Node menu, where you can choose 
 
 ![Screenshot showing the "Add Node" interface with options for Agent, Tool, and Handoff](/images/user-guides/agent-space/canvas_add_node.png)
 
-## Agents and Tools on the Canvas
+## Agents and Tools on the AgentSpace
 
-Each agent you place on the canvas represents a distinct role in your workflow.
+Each agent you place on the AgentSpace represents a distinct role in your workflow.
 
 Agents can have tools attached to them, which appear directly under the node and indicate available capabilities.
 
@@ -42,7 +43,7 @@ Agents can have tools attached to them, which appear directly under the node and
 
 Example:
 
-Lina (Triage Agent) handles basic queries and meeting scheduling. and hands off technical qeuestions to Alex (Product Specialist) for product specific questions who uses File Search for accurate responses.
+Lina (Triage Agent) handles basic queries and meeting scheduling and hands off technical questions to Alex (Product Specialist) for product-specific questions; Alex uses File Search for accurate responses.
 
 ![Screenshot showing agent node configuration interface with identity, instructions, and model settings](/images/user-guides/agent-space/canvas_agent.png)
 
@@ -50,7 +51,7 @@ Lina (Triage Agent) handles basic queries and meeting scheduling. and hands off 
 
 Handoffs connect agents and define how information moves between them.
 
-- **Designer-Routed Handoffs:** You define explicit paths and conditions. Specify clealy in the Instructions of Router Agent that it must never respond to the questions and only hand-off as per your conditions.
+- **Designer-Routed Handoffs:** You define explicit paths and conditions. Specify clearly in the Instructions of Router Agent that it must never respond to the questions and only hand-off as per your conditions.
 - **AI-Routed Handoffs:** The system decides which agent should act next, based on context. More dynamic and scenario based handoffs.
 - Edges can be labeled for clarity, such as “handoff if user_intent = product_question.”. Use this feature for accurate handoffs.
 
@@ -71,7 +72,7 @@ This functionality makes it easy to share setups across environments or collabor
 
 ![Screenshot showing the configuration panel for editing agent properties and settings](/images/user-guides/agent-space/canvas_config.png)
 
-## Canvas Controls and Layout Tools
+## AgentSpace Controls and Layout Tools
 
 The left-side toolbar contains UI controls for managing your view and workflow layout.
 
@@ -79,13 +80,13 @@ The left-side toolbar contains UI controls for managing your view and workflow l
 | ------------------ | ---------------------------------------------------- |
 | Save Workflow      | Saves the current state manually.                    |
 | Undo / Redo        | Step backward or forward through recent actions.     |
-| Zoom In / Zoom Out | Adjusts the canvas scale.                            |
+| Zoom In / Zoom Out | Adjusts the AgentSpace scale.                        |
 | Fit View           | Centers all nodes on screen.                         |
 | Auto Layout        | Automatically organizes nodes for clearer structure. |
 
 These features enhance usability for larger, more complex workflows but don’t affect workflow logic.
 
-![Animated GIF showing canvas layout management with zoom, pan, and node organization features](/images/user-guides/agent-space/canvas_layout.gif)
+![Animated GIF showing AgentSpace layout management with zoom, pan, and node organization features](/images/user-guides/agent-space/canvas_layout.gif)
 
 ## Running and Testing a Workflow
 
@@ -126,5 +127,5 @@ The Trace Explorer shows credit usage per conversation and per tool, helping you
 ## Related Links
 
 - [Agents Guide →](/user-guides/agents)
-- [Orchestration & Handoffs Guide →](/user-guides/orchestration-handoffs)
-- [Tracing & Optimization →](/user-guides/tracing-optimization)
+- [Orchestration & Handoffs Guide →](/user-guides/orchestration-and-handoffs)
+- [Traces & Optimizations →](/user-guides/traces-and-optimizations)

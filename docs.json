@@ -8,6 +8,13 @@
     "dark": "#7D4AEA"
   },
   "favicon": "favicon.ico",
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.sketricgen.ai",
+      "og:image": "https://docs.sketricgen.ai/images/space-light.png",
+      "og:site_name": "SketricGen Documentation"
+    }
+  },
   "navigation": {
     "tabs": [
       {
