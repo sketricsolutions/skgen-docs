@@ -1,6 +1,8 @@
 ---
 title: "Max - Agent Builder"
-description: "Build multi-agent workflows from a conversation. Max gathers your requirements, suggests apps, and wires everything on the canvas for you."
+description: "Build multi-agent workflows from a conversation. Max gathers your requirements, suggests apps, and wires everything on the AgentSpace for you."
+tag: "BETA"
+keywords: ["Max", "AI agent builder", "text-to-workflow", "no-code", "agent builder"]
 ---
 
 <iframe
@@ -14,7 +16,7 @@ description: "Build multi-agent workflows from a conversation. Max gathers your 
 
 ## Overview
 
-Max - Agent Builder (referred to as "Max" throughout this guide) is an AI-powered workflow builder that turns a natural-language conversation into a fully wired multi-agent workflow on your AgentSpace canvas.
+Max - Agent Builder (referred to as "Max" throughout this guide) is an AI-powered workflow builder that turns a natural-language conversation into a fully wired multi-agent workflow on your AgentSpace.
 
 Instead of manually placing agents, attaching tools, and writing instructions, you describe what you need and Max builds it for you — agents, edges, handoff conditions, and instructions included.
 
@@ -50,9 +52,9 @@ Before building, Max presents a text summary of the planned workflow — the age
 
 ### 5. Build mode
 
-Once you approve, Max switches to builder mode. You are routed to the AgentSpace canvas where you can watch Max work in real time:
+Once you approve, Max switches to builder mode. You are routed to the AgentSpace where you can watch Max work in real time:
 
-- Adding agent nodes to the canvas
+- Adding agent nodes to the AgentSpace
 - Connecting agents with edges (handoff connections)
 - Writing handoff conditions on each edge
 - Writing agent instructions for each agent
@@ -81,19 +83,19 @@ Max is available from two entry points:
 
 Max is not limited to creating new workflows. You can use Max to modify existing ones:
 
-- **Add agents** — describe the new role and Max adds it to the canvas with instructions and connections.
+- **Add agents** — describe the new role and Max adds it to the AgentSpace with instructions and connections.
 - **Remove agents** — tell Max which agent to remove and it updates the workflow.
 - **Update instructions** — ask Max to rewrite or refine agent instructions or handoff conditions.
 
 The same Max chat conversation persists, so Max has full context of the workflow it built or is modifying.
 
-You can also skip Max and edit the workflow manually at any time — update instructions, reconfigure tools, or adjust handoffs directly on the canvas.
+You can also skip Max and edit the workflow manually at any time — update instructions, reconfigure tools, or adjust handoffs directly on the AgentSpace.
 
 ## What Max Creates Automatically
 
 | Component | Max handles it? | Notes |
 |-----------|----------------|-------|
-| Agent nodes | Yes | Placed on canvas with names and roles |
+| Agent nodes | Yes | Placed on AgentSpace with names and roles |
 | Agent instructions | Yes | Written based on your requirements |
 | Handoff edges and conditions | Yes | AI-routed handoffs with conditions |
 | Tool attachment | Yes | Auto-attached; user authenticates |

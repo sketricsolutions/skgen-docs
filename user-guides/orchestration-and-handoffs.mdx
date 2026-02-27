@@ -38,7 +38,7 @@ A **handoff** transfers full control from one agent to another.
 
 Once handed off, the target agent owns the next reasoning turn and may further hand off to others.
 
-This way, if the input message intent is completed, the Agent in control returns the final response. So there is no fixed start and endpoint in the canvas unlike most Automations.
+This way, if the input message intent is completed, the Agent in control returns the final response. So there is no fixed start and endpoint in the AgentSpace unlike most Automations.
 
 **Characteristics**
 
@@ -85,7 +85,7 @@ Use forced handoffs when you need:
 
 ### How Forced Handoff Works
 
-1. **Edge Configuration**: Mark an edge between two agents as a "Forced Handoff" in the AgentSpace canvas.
+1. **Edge Configuration**: Mark an edge between two agents as a "Forced Handoff" on the AgentSpace.
 
 2. **Natural Handoff Skipping**: When an edge is marked as forced, the system skips creating a natural handoff for that same connection. This prevents duplicate routing logic.
 
