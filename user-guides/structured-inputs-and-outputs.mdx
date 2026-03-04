@@ -13,25 +13,31 @@ Each agent’s Structured Input and Structured Output are automatically converte
 
 These schemas are used during **handoffs**, **agent calls**, and **validations**, ensuring that every agent in your workflow exchanges data in a consistent, typed format.
 
-![Screenshot showing structured input/output configuration interface with JSON schema definition and validation](/images/user-guides/structured-input-output/io_structured_io.png)
+Configure Input Schema and Output Schema in the agent node inspector: open the agent, expand **Advanced Mode**, and use the **Structured Data** section.
+
+![Edit Agent modal showing Advanced Mode with Structured Data — Input Schema and Output Schema Configure buttons](/images/core-concepts/core_structured_data_ui.png)
 
 ## Structured Input
 
 A **Structured Input** defines what data an agent expects before it starts reasoning.
 
-It acts as a contract for parent agents, ensuring they supply all required fields when handing off or invoking this agent.
+**When it applies:** Structured input is used when the **calling agent** needs to follow a specific schema when it provides input to this agent. That schema is what you define as this agent’s Input Schema. The calling agent is only required to follow this schema when it is **calling this agent** (e.g. as a tool or via handoff). It is not required when some other agent is called, or when the agent decides to return a response directly to the user.
+
+It acts as a contract for parent/calling agents: when they invoke this agent, they must supply all required fields defined in this agent’s Input Schema.
 
 ### Creating a Structured Input
 
-1. Open the agent node in the AgentSpace.
-2. Navigate to the **Structured Input** tab.
-3. (Optional) Add a **Schema Name** to help identify this structure.
-4. Click **Add New Field** and configure the following:
+1. Open the agent node in the AgentSpace (Edit Agent).
+2. Expand **Advanced Mode** and find **Structured Data**.
+3. Next to **Input Schema**, click **Configure**.
+4. (Optional) Add a **Schema Name** to help identify this structure.
+5. Click **+ Add Field** and configure the following:
    - **Field Name** — e.g., `customer_name`, `intent`, `priority`.
    - **Type** — choose from _String_, _Integer_, _Float_, or _Boolean_.
    - **Description** — acts as both a UI tooltip and a guidance note for the agent (e.g., “The name of the customer requesting support”).
-   - **Default Value** — optional, used if no value is supplied by the parent.
-5. Click **Save Changes** to confirm.
+   - **Default Value** — optional, used if no value is supplied by the caller.
+   - **Required** — check if the field must be supplied.
+6. Click **Update** (or **Save Changes**) to confirm.
 
 **Guideline:**
 
@@ -41,18 +47,20 @@ Structured Inputs are most useful on _child agents_, where they communicate clea
 
 A **Structured Output** defines the exact JSON format an agent produces once its reasoning is complete.
 
+**When it applies:** Structured output is used so the agent **always returns the defined schema**, no matter whether a handoff agent or a human receives the response. Once you configure an Output Schema, the agent’s response is forced into that structure for every exit path (handoff to another agent or final reply to the user).
+
 This ensures predictable data handling between connected agents and external integrations, especially when publishing results to APIs or widgets.
 
 ### Creating a Structured Output
 
-1. Open the same agent node.
-2. Select the **Structured Output** tab.
-3. Add fields exactly as you would for Structured Inputs:
+1. Open the same agent node (Edit Agent).
+2. Under **Advanced Mode** → **Structured Data**, next to **Output Schema**, click **Configure**.
+3. In the **Configure Structured Output (JSON)** modal, add fields (Schema Name, then **+ Add Field**) as for Structured Input:
    - Name
    - Type (String, Integer, Float, Boolean)
    - Description (e.g., “Summarized report text returned by this agent.”)
-   - Default Value (optional)
-4. Save the schema.
+   - Default Value (optional), **Required** checkbox.
+4. Click **Update** to save the schema.
 
 **What happens behind the scenes**
 
@@ -91,4 +99,4 @@ This ensures predictable data handling between connected agents and external int
 }
 ```
 
-![Animated GIF showing structured data flow between agents with input/output schema validation](/images/user-guides/structured-input-output/io_structured.gif)
+![Configure Structured Output (JSON) modal with schema name, fields, types, and Add Field button](/images/core-concepts/core_structure_data_setup.png)
