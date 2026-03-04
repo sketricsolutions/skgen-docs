@@ -79,27 +79,24 @@ They are the connective logic of your workflow.
 - **AI-routed:** Agents decide when to hand off based on their instructions and handoff conditions you define on each edge.
 - **Forced handoff:** Deterministic, designer-controlled routing that guarantees the next agent always runs after the current one completes.
 
-**Guideline:**
-
-For production workflows, prefer _forced handoffs_ at first - this ensures predictable behavior and easier debugging.
-
 ![Handoff configuration interface showing AI-routed and forced handoff options](/images/core-concepts/core_handoff.png)
 
 ## Structured Inputs & Outputs (JSON)
 
 Use **structured JSON schemas** to keep workflows reliable, traceable, and composable.
 
-- Define required and optional fields for each agent.
+- **Structured input:** The *calling* agent must follow the defined schema only when it calls this agent (e.g. as a tool or handoff). It is not required when calling other agents or when returning a response directly to the user.
+- **Structured output:** The agent always returns the defined schema, whether a handoff agent or a human receives the response.
+- Define required and optional fields in the agent node inspector under **Advanced Mode** → **Structured Data**.
 - Keep schemas consistent across agents for smoother data flow.
-- Structured outputs enable deterministic downstream actions (widgets, APIs, databases).
 
 **Guideline:**
 
 Always validate schema changes in the Trace Explorer before publishing—small mismatches can break downstream logic.
 
-![Structured output configuration showing JSON schema definition with required and optional fields](/images/core-concepts/core_structured_output.png)
+![Edit Agent Advanced Mode with Structured Data — Input Schema and Output Schema](/images/core-concepts/core_structured_data_ui.png)
 
-![Structured input interface showing how to define input schemas for agents](/images/core-concepts/core_structured_input.png)
+![Configure Structured Output (JSON) modal with schema name and fields](/images/core-concepts/core_structure_data_setup.png)
 
 ## Conversations, Tool Calls & Traces
 
