@@ -74,6 +74,7 @@
               {
                 "group": "2026 Updates",
                 "pages": [
+                  "changelog/2026-03-13-max-trial-subscription-updates",
                   "changelog/2026-02-17-auth-utm-voice-limits-dashboard-ui",
                   "changelog/2026-02-12-brand-agent-crawl-dashboard-voice-ui",
                   "changelog/2026-01-30-auth-widget-chat-api-landing",
