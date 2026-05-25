@@ -1,0 +1,103 @@
+---
+title: "Practical Agents That Do Real Work"
+description: "SketricGen V3 update: website Brand Agents for AI chatbots and lead capture, plus AI Workforce for automation, files, connectors, skills, traces, and models."
+tags: ["brand-agents", "ai-workforce", "deep-agents", "connectors", "skills", "lead-capture"]
+releaseDate: "2026-05-25"
+---
+
+SketricGen V3 is about moving from simple chatbots and demos to agents that can help run real business work.
+
+The product now separates two jobs that need different defaults:
+
+- **Brand Agents** for customer-facing website chatbots where security, brand behavior, lead capture, and controlled tools matter.
+- **AI Workforce** for internal AI automation where teams need longer runs, files, connectors, skills, traces, and broader model choice.
+
+## Brand Agents: Customer-Facing Agents
+
+Brand Agents are built for visitors, leads, prospects, customers, and public channels.
+
+You can start from a website URL or manual setup. SketricGen extracts Brand DNA, structures website content into a Knowledge Base, and helps you publish an agent that can answer questions, guide visitors, and collect leads.
+
+Brand Agents now support:
+
+- Website-based Brand DNA extraction
+- Knowledge Base setup from scraped website content
+- Lead capture inside chat
+- Page navigation for guiding visitors to the right page
+- Web search when current public information is useful
+- Selected customer-facing app connectors
+- Conversation and lead review after publishing
+
+The main idea is simple: one business input can become a practical Brand Agent that explains your offer, answers questions, collects qualified leads, and keeps improving as you refine its knowledge.
+
+## AI Workforce: Internal Agents for Longer Work
+
+AI Workforce is for work that happens inside your team.
+
+Agent Spaces now use a clearer structure: one main agent talks to the user and focused sub agents help with bounded tasks. Sub agents do not create their own sub agents, so runs stay easier to trace and debug.
+
+AI Workforce can now support:
+
+- Longer runs that may take minutes instead of seconds
+- Planning and todos during a run
+- Files, run workspaces, and generated artifacts
+- App connectors for internal systems
+- Reusable skills from the marketplace
+- AI Workforce templates
+- Rich traces for reviewing what happened
+
+This makes AI Workforce closer to a work harness for business tasks. It is powerful like modern coding agents, but connected to your apps, files, and internal processes instead of only a local codebase.
+
+## Connectors and Skills
+
+SketricGen V3 expands what agents can do after they understand a task.
+
+AI Workforce can use broad connector access through 2,000+ SketricGen connectors, API Request, and custom tools.
+
+Brand Agents use a smaller curated connector surface. That keeps public agents safer and easier to approve before publishing.
+
+The skill marketplace is now a major part of building capable agents. You can search for skills, review their source, verification, categories, and usage signals, then install them directly onto an agent. Once installed, the skill gives the agent a curated way to perform that task during a run.
+
+That means you can build from proven capabilities instead of starting every agent from a blank prompt. Connect the apps, install the skill, add instructions, choose the model, and test the run.
+
+## Knowledge Bases With More Control
+
+Knowledge Bases remain the trusted source layer for both product paths.
+
+For website scraping, SketricGen can show the crawled pages and the amount of content detected. The latest update also gives more control over scraped website content: crawled pages can be stored as Markdown so you can view, edit, and improve what the agent will later use.
+
+That matters because cleaner scraped Markdown usually produces better answers. If a website crawl includes irrelevant navigation, repeated footer text, outdated copy, or missing context, you can tighten the source before relying on it.
+
+## Files, Artifacts, and Traces
+
+AI Workforce runs can now produce and inspect files during longer tasks. Artifacts and traces make it easier to review what happened before using the output.
+
+Use traces to check:
+
+- Which agent or sub agent handled each step
+- Which tools and connectors were called
+- What failed or slowed the run down
+- What files or artifacts were created
+- How much credit the run consumed
+
+## Model Choice
+
+SketricGen now uses a broader model catalog instead of assuming every agent must use one provider.
+
+Available models and settings may change over time, so the in-product model picker is the current source of truth.
+
+## Existing Workflows
+
+Existing workflows should continue to work, but the UI is now organized around the way teams actually use agents:
+
+- Brand Agents for public customer-facing deployment
+- AI Workforce for internal work, sub agents, tools, skills, templates, files, runs, and traces
+- Knowledge Bases for trusted content
+- Conversations and Leads for reviewing customer-facing results
+
+## Start Here
+
+- [Brand Agents vs AI Workforce](/getting-started/choose-product)
+- [Create a Brand Agent](/brand-agents/create-brand-agent)
+- [AI Workforce Overview](/ai-workforce/overview)
+- [Knowledge Bases](/shared-platform/knowledge-bases)

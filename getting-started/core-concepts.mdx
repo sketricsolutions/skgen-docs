@@ -1,133 +1,73 @@
 ---
 title: "Core Concepts"
-description: "Learn the core building blocks of SketricGen: AgentSpace, AI agents, tools, handoffs, structured I/O, and traces for multi-agent orchestration."
+description: "Learn SketricGen core concepts for website Brand Agents, AI Workforce automation, Knowledge Bases, connectors, skills, sub agents, files, artifacts, and traces."
 icon: "puzzle"
-keywords: ["core concepts", "AgentSpace", "agents", "tools", "handoffs", "multi-agent orchestration"]
+keywords: ["core concepts", "Brand Agents", "AI Workforce", "AI agent builder", "AI automation tools", "Knowledge Bases"]
 ---
 
-Every workflow in SketricGen starts inside an AgentSpace — a visual environment where you connect agents, tools, and logic to build intelligent, multi-agent systems.
+SketricGen has two product paths, but the same core concepts power both.
 
-The following concepts form the foundation of how SketricGen works.
+## Brand Agents
 
-## AgentSpace
+Brand Agents are customer-facing agents trained on your brand, website, and approved knowledge. They are built for public deployment through widgets or customer channels. They are the best fit for a website chatbot, lead capture assistant, or visitor-facing support agent.
 
-Your AgentSpace is the visual workspace where you design and test multi-agent workflows.
+Brand Agents focus on security, brand behavior, lead capture, visitor guidance, and controlled tool access.
 
-Each workflow is composed of nodes and edges that define the logic of collaboration.
+## AI Workforce
 
-- **Nodes = Agents or tools.** Each node represents a role or capability.
-- **Edges = Handoffs, connections.** Define how one agent passes control or data to another and connects to tools.
-- You can version, duplicate, and promote flows as they evolve.
+AI Workforce is the internal workspace for multi-agent work and workflow automation. It uses Agent Spaces and the updated runtime for longer runs, planning, files, artifacts, tools, and team workflows.
 
-**Guideline:**
-
-Start small. Build two or three connected agents, validate each handoff, and observe the trace before scaling to complex workflows.
-
-![AgentSpace Canvas showing connected nodes representing agents and tools with edges showing handoffs between them](/images/core-concepts/core_agent_space.png)
+AI Workforce is the right place for research, content, operations, sales, internal support, and file-heavy work.
 
 ## Agents
 
-Agents are the individual roles in your workflow. Each has its own:
+An agent is a role with:
 
-- **Instructions** (the prompt or system message defining purpose & tone)
-- **Model & parameters** (OpenAI supported models)
-- **Access to tools** (data retrieval or action execution)
-- **Constraints** (enforced via agent instructions and structured schema validation)
+- Instructions
+- A selected model
+- Tools it can use
+- Optional structured output
+- A place in the workflow or product surface
 
-Agents can:
+Good agents have narrow responsibilities and clear success criteria.
 
-- **Call tools** to fetch data or perform actions
-- **Handoff** to other agents to delegate tasks
-- **Produce structured outputs** such as JSON
+## Tools and Connectors
 
-**Guideline:**
+Tools let agents act or retrieve information. Examples include:
 
-Define each agent like a job description - what they _know_, _do_, and _when to delegate_.
+- Knowledge Bases
+- Web Search
+- Image Generation when enabled
+- API Request
+- 2,000+ SketricGen connectors
+- Marketplace skills
+- Custom MCP servers
+- Brand Agent Lead Capture and Page Navigation
 
-Over-specifying beats ambiguity.
+Only assign tools that the agent truly needs.
 
-![Agent configuration interface showing instructions, model settings, tools access, and guardrails](/images/core-concepts/core_agent.png)
+## Skills
 
-## Tools (Capabilities)
+Skills are reusable task packages for AI Workforce agents. They can package task-specific instructions, files, and operating patterns so an agent can do a job in a more reliable way than starting from a blank prompt.
 
-Tools give agents the power to act, compute, or retrieve knowledge.
+Use skills when you want an agent to follow a curated process, such as analyzing a document, creating a report, reviewing a design, planning a project, or producing an artifact.
 
-You can attach one or many tools to an agent.
+## Knowledge Bases
 
-| Tool                        | Purpose                                                                    | Typical Use Case                                       |
-| --------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------ |
-| **Sketric App Marketplace** | Connect to 2000+ apps via prebuilt connectors and actions.                 | CRM updates, sending emails, project management tasks. |
-| **File Search**             | Create a private knowledge base from uploaded files or crawled websites.   | Product manuals, FAQs, policy docs.                    |
-| **Web Search**              | Retrieve fresh, web-based context.                                         | Market research, news summaries, dynamic data.         |
-| **Code Interpreter**        | Execute Python code securely in a sandbox.                                 | Data transformation, quick computation, CSV analysis.  |
-| **Image Generation**        | Generate images using AI models from text descriptions.                    | Marketing visuals, product mockups, social media graphics. |
-| **API Request**             | Call external REST APIs with headers, auth, and schema mapping. | Integrate internal systems or external SaaS APIs.      |
-| **Custom MCP**              | Add standardized MCP servers for cross-app interoperability.               | Advanced enterprise integrations.                      |
+Knowledge Bases store trusted information from websites, files, text, or Q&A pairs. Brand Agents use them for public answers. AI Workforce uses them for internal reference data.
 
-**Guideline:**
+## Main Agents and Sub Agents
 
-Attach only the tools that each agent truly needs — fewer tools make reasoning more focused and traces easier to interpret.
+In AI Workforce, the main agent owns the user conversation and can call specialist sub agents for bounded work.
 
-![Tools marketplace interface showing available tools including Sketric App Marketplace, File Search, Web Search, Code Interpreter, API Request, and Custom MCP](/images/core-concepts/core_tools.png)
+Use sub agents for classification, extraction, summarization, validation, research, and other focused helper tasks. Sub agents cannot have their own sub agents, so workflows stay one level deep and easier to debug.
 
-## Handoffs (Orchestration)
+## Runs, Schedules, Files, and Artifacts
 
-A handoff defines when and how one agent transfers the task to another.
+AI Workforce runs can create and inspect files. A run workspace stores conversation-specific artifacts, while an agent workspace can store reusable files for future runs.
 
-They are the connective logic of your workflow.
+Schedules can trigger AI Workforce runs automatically for recurring internal work, such as daily briefs, weekly reports, or periodic checks across connected tools.
 
-- **AI-routed:** Agents decide when to hand off based on their instructions and handoff conditions you define on each edge.
-- **Forced handoff:** Deterministic, designer-controlled routing that guarantees the next agent always runs after the current one completes.
+## Traces
 
-![Handoff configuration interface showing AI-routed and forced handoff options](/images/core-concepts/core_handoff.png)
-
-## Structured Inputs & Outputs (JSON)
-
-Use **structured JSON schemas** to keep workflows reliable, traceable, and composable.
-
-- **Structured input:** The *calling* agent must follow the defined schema only when it calls this agent (e.g. as a tool or handoff). It is not required when calling other agents or when returning a response directly to the user.
-- **Structured output:** The agent always returns the defined schema, whether a handoff agent or a human receives the response.
-- Define required and optional fields in the agent node inspector under **Advanced Mode** → **Structured Data**.
-- Keep schemas consistent across agents for smoother data flow.
-
-**Guideline:**
-
-Always validate schema changes in the Trace Explorer before publishing—small mismatches can break downstream logic.
-
-![Edit Agent Advanced Mode with Structured Data — Input Schema and Output Schema](/images/core-concepts/core_structured_data_ui.png)
-
-![Configure Structured Output (JSON) modal with schema name and fields](/images/core-concepts/core_structure_data_setup.png)
-
-## Conversations, Tool Calls & Traces
-
-Every interaction generates data you can inspect and learn from.
-
-- A **Conversation** is a complete user interaction flow.
-- **Tool Calls** show when and how a tool was used.
-- **Traces** record the sequence of agents, tool inputs/outputs, reasoning artifacts, duration, and credit consumption.
-
-The **Trace Explorer** helps you visualize each step and pinpoint inefficiencies.
-
-**Guideline:**
-
-Review traces often - optimize agents that over-call tools or generate unnecessary handoffs.
-
-![Trace Explorer interface showing conversation flow, agent interactions, tool calls, durations, and credit consumption](/images/core-concepts/core_trace.png)
-
-## Deployment (At a Glance)
-
-Once your workflow is ready, deploy it through any of these paths:
-
-- **Widget:** Configure your branding (logo, colors, greeting message) and embed the snippet into your site or CMS.
-- **Messaging platforms:** Connect to WhatsApp, Telegram, Instagram, or Slack for direct user interaction.
-- **Public API & SDKs:** Trigger workflows programmatically (Node or Python SDK) and receive **structured JSON** responses.
-
-(See the [Deploy](/deploy/whatsapp) section for integration-specific steps.)
-
-## Philosophy: Agentic, Not Hard-Coded
-
-SketricGen empowers you to design agentic systems, not brittle automations.
-
-You define roles, tools, and logic - SketricGen handles the orchestration, scaling, and traceability.
-
-Every workflow you ship becomes a living, improvable system.
+Traces show how a run executed: agents, sub-agent calls, tool calls, errors, latency, credit usage, and generated artifacts. Use traces to debug and improve agents before relying on them.

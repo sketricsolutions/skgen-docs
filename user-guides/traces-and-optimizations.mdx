@@ -1,73 +1,46 @@
 ---
-title: "Traces & Optimization"
-description: "Inspect agent reasoning, tool calls, handoffs, latency, and credit consumption with the Trace Explorer — debug and optimize your AI workflows."
+title: "Traces and Optimization"
+description: "Use SketricGen traces to inspect AI Workforce runs, sub-agent calls, tool calls, latency, credit usage, generated files, artifacts, and errors."
+keywords: ["traces", "agent runs", "AI Workforce", "agentic workflow", "artifacts", "tool calls", "optimization"]
 ---
 
-## Overview
+Traces show what happened during an agent run. They are useful for both Brand Agents and AI Workforce, but they are especially important for longer internal runs.
 
-Traces give you a transparent view into how your agents think, act, and collaborate inside the **AgentSpace**.
+![AI Workforce run trace view showing user messages, skills, agent steps, tool calls, and output events](/images/v3/ai-workforce-run-traces.jpg)
 
-They show **what happens under the hood** during a workflow run, which agents were called, what tools they used, how long each step took, and how many credits were consumed.
+## What Traces Show
 
-The **Trace Explorer** is built directly into the AgentSpace and Playground so you can debug and optimize your workflows in real time.
+Traces can show:
 
-## Viewing Traces in the Playground
+- Which agent handled the message
+- Sub-agent calls
+- Tool calls and tool results
+- Errors or failed calls
+- Latency and duration
+- Credit usage
+- Structured data
+- Generated artifacts or file-related events
 
-When testing your workflow in the Playground, each message execution is automatically logged with a corresponding **trace record**.
+![Detailed trace view showing user input, tool result JSON, timing, and step-level run details](/images/v3/ai-workforce-trace-details.png)
 
-You can open and explore these traces to see exactly how your agents responded to user input.
+## Brand Agent Review
 
-Each trace provides:
+For Brand Agents, use traces and conversations to understand why the agent answered a visitor a certain way, whether the Knowledge Base was enough, and whether lead capture or navigation tools fired correctly.
 
-- The **entry agent** that first received the message.
-- Any **handoffs** made between agents.
-- Detailed **function calls** (tool invocations or agent transfers).
-- The **time taken** and **credits consumed** per step.
-- A complete breakdown of each agent’s reasoning and outputs.
+## AI Workforce Review
 
-![Screenshot showing traces interface with conversation flow, agent steps, tool calls, and performance metrics](/images/user-guides/traces-optimization/trace_traces.png)
+For AI Workforce, use traces alongside run files and artifacts. Longer runs may involve planning, multiple tool calls, generated files, connector actions, marketplace skills, and scheduled automation.
 
-You can expand each agent’s trace to inspect:
+## Optimization Loop
 
-- The **function arguments** or structured data passed downstream.
-- The **structured outputs** produced.
-- The exact **handoff path** followed during orchestration.
+Use this loop:
 
-This makes the Playground the ideal environment for iterative debugging — test, observe, refine, and retest within seconds.
+1. Run a realistic test.
+2. Open the trace.
+3. Identify unclear instructions, slow tools, missing knowledge, or bad routing.
+4. Update instructions, tools, Knowledge Bases, or model selection.
+5. Re-run the same test.
 
-## Trace Explorer in the AgentSpace
+Small changes usually beat large rewrites.
 
-Within the AgentSpace, traces are tied to workflow executions and can be accessed after running a test.
-
-When a workflow is executed:
-
-- Each **tool call**, **handoff**, and **agent decision** is captured as a trace event.
-- You can open the **Trace Explorer** to view the complete sequence of actions.
-- Every trace displays execution metrics — including agent runtime, tool latency, and credit cost.
-
-The Trace Explorer provides a structured timeline of events, showing how your multi-agent system reached its final output.
-
-**Key insights include:**
-
-- Which agent initiated and completed each step.
-- The order and duration of handoffs.
-- How structured inputs and outputs flowed between nodes.
-- Any failed or retried tool calls.
-
-![Animated GIF showing trace logs interface with detailed execution logs, error tracking, and debugging information](/images/user-guides/traces-optimization/trace_logs.gif)
-
-## Optimization Quick Wins
-
-Once you’ve reviewed your traces, you can apply these best practices to improve performance and reliability.
-
-- Tighten **agent instructions** — define when to call each tool and what success looks like.
-- Use **Agent-as-Tool** for recurring, contained subtasks (classification, summarization, extraction).
-- Prefer **Structured Outputs** to avoid parsing errors and reduce retry loops.
-- The system automatically retries tool calls on failure (once or twice), but there is no user-facing retry or fallback configuration.
-- Keep sensitive credentials secure; rotate API keys periodically.
-- Review Trace Explorer regularly to identify latency sources or redundant operations.
-- Simplify orchestration paths — fewer handoffs improve both speed and cost efficiency.
-
-**Guideline:**
-
-Think of traces as your workflow’s feedback loop. Continuous monitoring and small refinements after each trace review lead to dramatically better agent performance.
+For related setup, see [AI Workforce Tools, Connectors, and Skills](/user-guides/tools), [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts), and [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs).

@@ -1,117 +1,70 @@
 ---
-title: "Deploy to Custom Website"
-description: "Embed a SketricGen AI agent as a chat bubble or inline iframe on any website — step-by-step guide for custom web deployment."
-keywords: ["deploy", "embed", "widget", "custom website", "chat bubble", "iframe"]
+title: "Deploy an AI Chatbot to a Custom Website"
+description: "Embed a SketricGen Brand Agent as an AI chatbot for your website with a floating chat widget, inline iframe, lead capture, and public deployment."
+keywords: ["AI chatbot for website", "website chatbot", "website chat widget", "Brand Agent widget", "embed chatbot", "iframe"]
 ---
 
-<Tabs>
-  <Tab title="Floating Chat Bubble">
-  
-  ## **Step 1: Create your SketricGen account**
+Deploy a Brand Agent to your website when you want visitors to ask questions, get product guidance, or submit lead details. This creates a public website chat widget backed by your Brand Agent knowledge and approved tools.
 
-  To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your agent workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your agent workflow.
+## Before You Start
 
-  If you need assistance with setting up a working SketricGen agent workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your agent workflow.
+You need:
 
-  ## **Step 2: Copy the SketricGen agent workflow Embed Code**
+- A created Brand Agent
+- A tested customer-facing conversation flow
+- Public/published visibility enabled
+- Widget styling reviewed
 
-  After configuring your agent workflow, go to the dashboard and click **Publish** to copy the embed code. The code will look similar to this:
+The widget must be public because client-side website code cannot safely include a private API key.
 
-  ```html
-  <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
-  ```
+## Floating Chat Bubble
 
-  > **Note:** Make sure your agent workflow is set to **Public** to embed it on your website.
+Use the floating chat bubble when you want the agent available across your site as a website chatbot.
 
-  ![Screenshot showing SketricGen dashboard with Publish button and embed code copy option](/images/custom-website/screenshot1.png)
+1. Open your Brand Agent.
+2. Test the agent with realistic visitor questions.
+3. Open **Publish**.
+4. Choose the chat bubble/widget option.
+5. Copy the embed snippet.
+6. Paste the snippet into your website template, layout, or tag manager.
 
-  ## **Step 3: Add the embed code to your website**
-  
-  If you have direct access to your website's files:
+Example:
 
-  1. Open the file where you want to add the agent workflow (typically index.html, .astro, .jsx, or your template file)
-  2. Add the embed code in the `<head>` section of your document
-  3. Save the file and upload it to your web server
+```html
+<script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
+```
 
-  > **For multi-page websites:** Adding the script to the `<head>` section of your base template or layout file ensures the chat bubble appears consistently across all pages of your website, giving visitors a seamless experience.
+For multi-page websites, add the script to your shared layout so the widget appears consistently.
 
-  ```html
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <!-- Your existing head content -->
-      
-      <!-- SketricGen Widget Script - Best placed in the head for consistent appearance across pages -->
-      <script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
-    </head>
-    <body>
-      <!-- Your website content -->
-    </body>
-  </html>
-  ```
+## Inline iFrame
 
-  ## **Step 4: Test your agent workflow**
+Use an iframe when you want the agent embedded directly inside a page section.
 
-  After adding the embed code:
+1. Open your Brand Agent.
+2. Open **Publish**.
+3. Choose the direct embed or iframe option.
+4. Copy the iframe code.
+5. Paste it into the page where the chat should appear.
 
-  1. Preview or publish your website
-  2. Verify that the chat bubble appears (typically in the bottom right corner)
-  3. Test the agent workflow by clicking on the bubble and asking a question
+Example:
 
-  ![Screenshot showing custom website with embedded SketricGen floating chat widget](/images/custom-website/screenshot2.png)
+```html
+<iframe
+  src="https://www.sketricgen.ai/iframe-widget/YOUR_AGENT_ID"
+  width="100%"
+  height="700px"
+  frameborder="0"
+></iframe>
+```
 
-  🎉 **Congratulations!** Your SketricGen agent workflow is now live on your website, ready to assist your visitors.
+## Test After Deploying
 
-  </Tab>
+After adding the widget:
 
-  <Tab title="Inline iFrame Embed">
-  
-  ## **Step 1: Create your SketricGen account**
+1. Open the live page.
+2. Confirm the widget or iframe appears.
+3. Ask a question from your Brand Agent's Knowledge Base.
+4. Test lead capture if enabled.
+5. Check the conversation in SketricGen.
 
-  To get started with the integration, **[sign in to your SketricGen account](https://www.sketricgen.ai)**. If you don't have an account yet, you can create one for **[free](https://www.sketricgen.ai)**. Once you're logged in, begin setting up your agent workflow by uploading your data sources. These can include files, text snippets, websites, or Q&A pairs, which will serve as the knowledge base for your agent workflow.
-
-  If you need assistance with setting up a working SketricGen agent workflow, refer to the **[step-by-step guide](https://docs.sketricgen.ai/getting-started/quickstart)** for creating and deploying your agent workflow.
-
-  ## **Step 2: Copy the SketricGen agent workflow iFrame Code**
-
-  From your dashboard, click **Publish > Direct Embed** and copy the iframe code. It should look similar to this:
-
-  ```html
-  <iframe src="https://www.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
-  ```
-
-  > **Note:** The agent workflow must be set to **Public** for the iframe embed to work.
-
-  ![Screenshot showing SketricGen Direct Embed iframe code copy interface](/images/custom-website/screenshot3.png)
-
-  ## **Step 3: Add the iFrame to your website**
-
-  If you have direct access to your website's files:
-
-  1. Open the file where you want to embed the agent workflow (typically index.html, .astro, .jsx, or your template file)
-  2. Locate the section where you want the agent workflow to appear
-  3. Paste the iframe code
-  4. Adjust the width and height as needed
-  5. Save the file and upload it to your web server
-
-  ```html
-  <div class="chat-container">
-    <h2>Chat with our AI Assistant</h2>
-    <iframe src="https://www.sketricgen.ai/iframe-widget/asst_yK4xJuMWAoWobKOYKsF0QmMS" width="100%" height="700px" frameborder="0"></iframe>
-  </div>
-  ```
-
-  ## **Step 4: Test your agent workflow**
-
-  After adding the iframe:
-
-  1. Preview or publish your website
-  2. Verify that the agent workflow iframe appears correctly
-  3. Test the agent workflow by typing a question in the iframe
-
-  ![Screenshot showing custom website with embedded SketricGen iframe widget](/images/custom-website/screenshot4.png)
-
-  🎉 **Congratulations!** You've successfully added the SketricGen agent workflow to your website using an iframe embed.
-
-  </Tab>
-</Tabs>
+If the widget does not appear, confirm the Brand Agent is published/public and that the `data-agent-id` or iframe URL uses the correct agent ID.

@@ -1,232 +1,138 @@
 ---
-title: "Tools"
-description: "Connect 2000+ apps, knowledge bases, web search, code interpreter, image generation, REST APIs, and MCP servers as tools for your AI agents."
+title: "AI Workforce Tools, Connectors, Skills, and MCP"
+description: "Connect AI Workforce agents to AI knowledge bases, 2,000+ connectors, MCP servers, API automation tools, web search, image generation, and marketplace skills."
+keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "skills marketplace"]
 ---
 
-## Overview
+Tools and skills turn AI Workforce agents from chat interfaces into AI automation tools that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
 
-Tools extend the capabilities of your agents by allowing them to act, compute, fetch, or integrate external information.
+Brand Agents use a leaner, customer-facing tool surface. For public agents, see [Brand Agent Connectors and Lead Capture](/brand-agents/connectors-and-leads).
 
-They can be attached directly to an agent node or added independently as **Tool Nodes** on the AgentSpace.
+![AI Workforce connector browser with app choices](/images/v3/ai-workforce-app-connectors-browser.jpg)
 
-Each tool operates as a callable function within a workflow—agents invoke them when reasoning or completing assigned tasks.
+## AI Workforce Tool Types
 
-You can connect to external apps, build knowledge bases, run Python code, make API calls, or integrate with MCP servers.
+AI Workforce agents can use:
 
-![Tools sidebar interface showing available tools including File Search, Web Search, Code Interpreter, API Request, and Custom MCP](/images/user-guides/tools/tools_sidebar.png)
+- [**Knowledge Bases**](#knowledge-bases): trusted data from websites, files, text, and Q&A pairs.
+- [**SketricGen connectors**](#sketricgen-connectors): 2,000+ app actions for internal workflows.
+- [**Custom MCP tools**](#custom-mcp-tools): company-specific capabilities exposed through MCP servers.
+- [**API Request**](#api-request): direct HTTP calls for controlled integrations.
+- [**Web Search**](#web-search): current public information.
+- [**Image Generation**](#image-generation): visual asset generation when the tool is enabled.
+- [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
 
-## Adding Tools from the Canvas
+Use the section links above to jump to the tool type you are configuring.
 
-In the AgentSpace, click **Add Node → Tool** to insert a tool node into your workflow.
+## Knowledge Bases
 
-Once added, you’ll see a configuration panel where you can select from available tool types.
+[Knowledge Bases](/shared-platform/knowledge-bases) let agents retrieve trusted source material from websites, uploaded files, pasted text, and Q&A pairs.
 
-### Available Tool Types
+Use Knowledge Bases when the agent needs approved company, product, policy, support, sales, or website context. For AI Workforce, this usually means internal reference data the run should cite or use while preparing an artifact. For Brand Agents, Knowledge Bases power customer-facing answers from approved website and brand content.
 
-1. Sketric App Marketplace
-2. File Search
-3. Web Search
-4. Code Interpreter
-5. Image Generation
-6. API Request
-7. Custom MCP
+Knowledge Bases are retrieval tools, not broad app connectors. If the agent needs to take action in another system, pair the Knowledge Base with a connector, API Request, or custom MCP tool.
 
-## 1. Sketric App Marketplace
+## SketricGen Connectors
 
-The **Sketric App Marketplace** gives agents access to over 2000+ apps across productivity, communication, and automation categories.
+SketricGen connectors give AI Workforce agents access to 2,000+ applications. They are useful for internal workflows that need to read or update CRMs, calendars, email, documents, spreadsheets, support systems, project management tools, databases, commerce tools, marketing platforms, and team communication apps.
 
-You can connect apps like Gmail, Google Drive, Slack, Notion, Trello, HubSpot, and others either through **OAuth** (login authorization) or by using **API keys**.
+When you add a connector, choose the app first, connect the account, then select only the actions this agent should be able to call. For example, a meeting-prep agent might receive calendar actions to list events and retrieve event details, while a sales operations agent might receive CRM actions to update a record or add a note.
 
-Once connected, the tool becomes available for your agents to perform specific actions provided by the app, such as sending an email, updating a sheet, or fetching CRM data.
+![Connector action picker showing selected and available actions inside a connected app](/images/v3/ai-workforce-connector-actions.png)
 
-Example:
+Action selection is the permission boundary that matters day to day. Review the selected action names, descriptions, configurable properties, and connected account before running sensitive workflows.
 
-- Use OAuth to connect Google Drive or Slack.
-- Use an API key to integrate DataForSEO or any service that provides an MCP connector.
+For practical workflows, combine connectors with skills. A meeting-prep agent can use a calendar connector to fetch meeting details, a research skill to structure investigation, a document skill to produce the brief, and the run workspace to save the artifact. See [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts) for how outputs are stored.
 
-**Guideline:**
+## Custom MCP Tools
 
-For security, API keys are stored in encrypted form. Revoke access from the “Manage Tools → Apps” tab anytime.
+Custom MCP tools let you connect a hosted MCP server directly to an AI Workforce agent. Use this when a service, vendor, or internal platform already exposes an MCP endpoint and you want SketricGen to make selected MCP tools available inside an Agent Space.
 
-![Animated GIF showing the tools marketplace interface with searchable tool categories and installation options](/images/user-guides/tools/tools_marketplace.gif)
+This is different from a single API Request. A hosted MCP can expose a group of tools, and SketricGen lets you discover those tools, choose the ones the agent can use, and attach the allowlisted set to the right agent.
 
-## 2. File Search
+The example below uses a public weather MCP endpoint, fetches the available tools, and allowlists only the weather lookup tool for the agent.
 
-**File Search** lets agents connect to structured knowledge bases (KBs) created within your SketricGen account.
+![Custom MCP setup with hosted MCP URL, connection type, headers, and tool discovery](/images/v3/ai-workforce-custom-mcp-setup.png)
 
-Knowledge bases serve as private data repositories for your agents to reference when responding to queries.
+To configure a Custom MCP tool:
 
-You can create and manage knowledge bases through **Manage Tools → Knowledge Bases**.
+1. Add a **Custom MCP** tool node.
+2. Enter the hosted MCP server URL.
+3. Choose the connection type, usually **Streamable HTTP** unless the hosted MCP requires SSE over HTTP.
+4. Add headers for authentication, such as an authorization token or API key header.
+5. Click **Filter Tools** to fetch the tools exposed by that MCP server.
+6. Select only the tools this agent should be allowed to call.
+7. Save the tool and connect it to the main agent or the specialist sub agent that needs it.
 
-Supported upload formats include:
+The allowlist matters. If the hosted MCP exposes ten tools but this workflow only needs two, select those two. That keeps the agent easier to control, reduces accidental tool calls, and makes traces easier to review.
 
-- DOC, DOCX
-- JSON
-- HTML
-- MD
-- PDF
-- PPTX
-- TXT
+Use Custom MCP when you have a reusable hosted tool surface, an internal service that already speaks MCP, or a third-party product that publishes an MCP endpoint. Use [API Request](#api-request) when you only need to wrap one REST endpoint.
 
-You can also populate your knowledge base by:
+For orchestration patterns, see [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs).
 
-- Uploading a website URL for automatic crawling.
-- Pasting raw text directly.
-- Adding question–answer pairs (Q&A format).
+## API Request
 
-Example:
+API Request turns a cURL-style REST endpoint into an API automation tool the agent can call. Use it when you have one endpoint, webhook, lookup, or action that should become available to the agent without building a full connector or MCP server.
 
-Use File Search for customer FAQs, product documentation, or internal manuals so agents can respond using your own data.
+The configuration defines the request the agent is allowed to make: HTTP method, URL, headers, query parameters, request body fields, and tool instructions. Those fields become the tool schema the agent follows when it calls the endpoint.
 
-**Guideline:**
+The example below wraps a public weather forecast endpoint as a `GET` tool, then prompts the builder to test the endpoint before saving.
 
-Scanned PDFs are supported — the backend extracts and parses text for indexing into the knowledge base.
+![API Request setup with Import through AI, HTTP method, URL, headers, and query parameter controls](/images/v3/ai-workforce-api-request-setup.png)
 
-![Animated GIF showing file search tool interface with search functionality and results display](/images/user-guides/tools/tools_filesearch.gif)
+You can configure API Request in two ways:
 
-## 3. Web Search
+- **Manual setup:** choose the method, paste the endpoint URL, add headers, define query parameters or body fields, then test the API before saving.
+- **Import through AI:** paste an API documentation URL, OpenAPI spec, or similar reference and describe the endpoint you want. SketricGen maps the endpoint, headers, parameters, and body fields into a usable tool configuration.
 
-**Web Search** allows agents to retrieve live information from the internet.
+In the import flow, paste the API documentation or OpenAPI spec and describe the specific tool you want SketricGen to generate.
 
-When enabled, the agent can query public data sources to find up-to-date facts, references, or research for any assigned task.
+![Import API Configuration dialog for generating an API Request tool from documentation](/images/v3/ai-workforce-api-import-ai.png)
 
-Typical uses:
+Use the description field to tell the agent when to call the API and what a successful response means. For example, a lead enrichment endpoint should only be called after the agent has a valid email or domain; a support ticket endpoint should only be called after the user confirms the issue should be escalated.
 
-- Collecting recent statistics or news.
-- Validating data when a File Search source is missing.
-- Enhancing responses with the latest context.
+API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, REST API automation, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
 
-**Guideline:**
+## Web Search
 
-Use Web Search for dynamic, time-sensitive queries; for stable and private data, prefer File Search.
+Web Search lets an agent look up current public information when a Knowledge Base is not enough.
 
-![Screenshot showing web search tool configuration interface with search parameters and settings](/images/user-guides/tools/tools_websearch.png)
+Use Web Search for market research, recent news, public company information, competitive checks, and time-sensitive facts. For workflows that require approved internal facts, pair Web Search with a [Knowledge Base](#knowledge-bases) and tell the agent which source should win when sources conflict.
 
-## 4. Code Interpreter
+![Web Search tool configuration](/images/user-guides/tools/tools_websearch.png)
 
-The **Code Interpreter** tool allows agents to execute Python code in a sandboxed environment.
+## Image Generation
 
-It can process data, generate files, run scripts, or perform computational tasks.
+Image Generation lets agents create visual assets when the capability is enabled for your workspace.
 
-Example use cases:
+Use it for workflows that produce social creatives, thumbnails, concept visuals, or supporting images. Treat image-heavy workflows as something to test end to end: the model, tool availability, artifact handling, and any upload connector all affect reliability.
 
-- Performing numeric calculations or simple analytics.
-- Running text or data transformations dynamically.
-- Generating or editing PDFs, CSVs, or charts (currently **beta** — generated files may not yet be surfaced cleanly in the product UI).
+## Skills Marketplace
 
-**Guideline:**
+![AI Workforce skill marketplace with search, verified skills, install counts, sources, categories, and install buttons](/images/v3/ai-workforce-skills-marketplace-dialog.png)
 
-Because execution runs in a secure sandbox, the agent cannot access external environments—keep computations lightweight and self-contained.
+Marketplace skills are reusable task packages you can install onto an agent. They make the skills marketplace a practical AI tools marketplace for proven processes such as PDF work, financial analysis, dashboard creation, product requirements, design review, research, writing, or planning.
 
-![Screenshot showing code interpreter tool interface with code execution capabilities and output display](/images/user-guides/tools/tools_codeinterpreter.png)
+Use skills when you want more than raw app access. A connector lets an agent act in an app. A skill gives the agent a curated way to perform a task well.
 
-## 5. Image Generation
+When browsing skills, review:
 
-The **Image Generation** tool allows agents to create images using AI models.
+- The skill name and description.
+- The source or namespace.
+- Verification and reputation signals such as installs.
+- Category tags that match the work you want the agent to do.
+- Whether the skill should be installed on the main agent or a specialist sub agent.
 
-When enabled, agents can generate visual content on demand based on text descriptions—such as marketing images, product mockups, social media creatives, thumbnails, or illustrations.
+Click **Install** to attach the skill to the selected agent. After installation, the agent can use that skill during runs alongside its instructions, model, files, tools, and connected apps.
 
-Example use cases:
+![Installed AI Workforce skills with workflow, version, status, edit, and uninstall controls](/images/v3/tools-installed-skills.png)
 
-- Generating marketing visuals for campaigns or ads.
-- Creating product thumbnails or mockups automatically.
-- Producing social media graphics based on text inputs.
-- Building custom illustrations or concept art for projects.
+Installed skills can be reviewed from the Skills page. This helps teams see which workflows use which skills, check status, edit skill files when needed, and remove skills that should no longer be available.
 
-**Guideline:**
+## Tool Assignment
 
-Image generation works best with clear, descriptive prompts. The more specific your description, the more accurate the generated image will be. You can iterate on prompts to refine the output style and content.
+Attach tools only where they are needed. The main agent should have the tools required to plan and coordinate the run. Sub agents should receive the smaller tool set required for their specialist task.
 
-![Screenshot showing the Edit Tool interface with Image Generation tool option highlighted, displaying various tool types including Sketric App Marketplace, File Search, Web Search, Code Interpreter, Image Generation, API Request, and Custom MCP](/images/changelog/image_generation_tool.png)
+For example, a research sub agent may need Web Search and a Knowledge Base, while a reporting sub agent may only need access to run files and a structured output schema.
 
-## 6. API Request
-
-The **API Request** tool lets your agent interact directly with any REST API.
-
-You can define endpoints, headers, and authentication parameters manually, or use the **Import through AI** feature to automatically configure the API from a link or documentation snippet.
-
-Configuration fields:
-
-- Name and description
-- HTTP method (GET, POST, PUT, DELETE, etc.)
-- API URL
-- Optional headers and query parameters
-
-Example:
-
-Integrate your internal company endpoint or a public service like weather, currency exchange, or analytics APIs.
-
-**Guideline:**
-
-Always verify the endpoint and authentication type. Misconfigured headers or invalid tokens can prevent successful tool calls.
-
-![Screenshot showing API request tool configuration interface with endpoint, method, headers, and body settings](/images/user-guides/tools/tools_api.png)
-
-## 7. Custom MCP
-
-The **Custom MCP** tool connects your agent to any MCP (Model Context Protocol) server.
-
-This enables standardized interoperability between your own tools and external systems.
-
-Configuration fields:
-
-- Name and description
-- MCP Server URL
-- Connection type (Streamable HTTP or SSE over HTTP)
-- Headers for authentication
-- Available tools (fetched from MCP endpoint)
-
-Example:
-
-Integrate your company’s internal data connector or an external MCP endpoint to expose enterprise tools directly to the agent.
-
-**Guideline:**
-
-After configuring the URL and connection type, click **Filter Tools** to fetch available MCP endpoints.
-
-![Screenshot showing custom MCP (Model Context Protocol) tool configuration interface](/images/user-guides/tools/tools_custommcp.png)
-
-## Managing Tools
-
-All your connected tools and data sources can be managed from the left sidebar under **Manage Tools**.
-
-### Knowledge Bases Tab
-
-View and edit your File Search knowledge bases.
-
-You can:
-
-- Create new knowledge bases.
-- Rename or delete existing ones.
-- See which agents are currently using each KB.
-- Track their creation and update timestamps.
-
-![Screenshot showing knowledge base tool interface with document upload and search capabilities](/images/user-guides/tools/tools_kb.png)
-
-### Apps Tab
-
-View all connected apps from the Sketric App Marketplace.
-
-You can:
-
-- Check connection status (Healthy, Expired).
-- View authentication type (OAuth or API Key).
-- Disconnect unused apps anytime.
-
-![Screenshot showing Sketric App Marketplace interface with available third-party integrations and apps](/images/user-guides/tools/tools_apps.png)
-
-## Best Practices
-
-- Attach tools only where they're necessary—overloading an agent with too many tools can slow reasoning.
-- Use File Search for static or company-owned data, and Web Search for live queries.
-- Use Image Generation when your workflow needs visual outputs—marketing content, product mockups, or social media graphics. Multi-step asset workflows (generate → save → upload to another app) are still experimental.
-- Keep credentials private and rotate API keys periodically.
-- **Free plan note:** Marketplace app integrations on the free plan are **non-persistent** — when the session ends or the tab is closed, connected apps disconnect. Built-in tools (web search, etc.) remain available but are credit-based.
-- Regularly review Manage Tools to remove unused connections.
-- Combine File Search and Code Interpreter for powerful document analysis or report generation workflows.
-
-## Related Links
-
-- [AgentSpace Guide →](/user-guides/agentspace-canvas)
-- [Agents Guide →](/user-guides/agents)
-- [Orchestration & Handoffs Guide →](/user-guides/orchestration-handoffs)
+For debugging tool calls, action errors, latency, and credit usage, see [Traces and Optimization](/user-guides/traces-and-optimizations).
