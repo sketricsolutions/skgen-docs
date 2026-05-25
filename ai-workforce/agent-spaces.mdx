@@ -1,10 +1,10 @@
 ---
-title: "AI Workforce Agent Spaces"
-description: "Build internal AI Workforce workflows in Agent Spaces with a main agent, sub agents, tools, models, testing, traces, and reusable templates."
-keywords: ["Agent Spaces", "AI Workforce", "multi-agent workflow builder", "agent orchestration", "AI agent builder"]
+title: "AI Agent Builder and Agent Spaces"
+description: "Build AI Workforce Agent Spaces with a main agent, sub agents, tools, models, testing, traces, templates, and agentic workflow orchestration."
+keywords: ["AI agent builder", "Agent Spaces", "AI Workforce", "agentic workflow", "multi-agent workflow builder", "agent orchestration"]
 ---
 
-Agent Spaces are the visual builder for AI Workforce. They help you design internal multi-agent workflows without writing framework code.
+Agent Spaces are the visual AI agent builder for AI Workforce. They help you design internal multi-agent workflows and agentic automation without writing framework code.
 
 ## Agent Space Structure
 
@@ -17,6 +17,8 @@ An Agent Space contains:
 - **Tools:** built-in tools, app connectors, API requests, MCP servers, and Knowledge Bases.
 - **Testing:** a playground for running the workflow before relying on it.
 - **Traces:** execution history for debugging and optimization.
+
+For tool setup, see [AI Workforce Tools, Connectors, and Skills](/user-guides/tools). For scheduled execution and files, see [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts).
 
 ## Building a Workflow
 
@@ -52,4 +54,4 @@ Use the loop:
 
 Review tool calls, sub-agent calls, artifacts, latency, and credit usage before treating a workflow as production-ready.
 
-When tuning behavior, adjust the main agent first. Change the model, instructions, tool access, or structured output schema one at a time, then run the same test prompt again and inspect traces. Add sub agents only when the work needs a clear specialist helper.
+When tuning behavior, adjust the main agent first. Change the model, instructions, tool access, or structured output schema one at a time, then run the same test prompt again and inspect traces. Add sub agents only when the work needs a clear specialist helper. For predictable JSON outputs, see [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs).

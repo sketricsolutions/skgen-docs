@@ -1,10 +1,10 @@
 ---
-title: "Runs, Schedules, Files, and Artifacts"
-description: "Understand AI Workforce runs, scheduled recurring tasks, planning, workspace files, generated artifacts, traces, and longer-running internal work."
-keywords: ["AI Workforce runs", "scheduled runs", "recurring AI tasks", "planning", "files", "artifacts", "agent workspace", "traces"]
+title: "Scheduled Runs, Files, and Artifacts"
+description: "Use AI Workforce for scheduled automation, report automation, longer runs, planning, workspace files, generated artifacts, traces, and recurring internal work."
+keywords: ["AI Workforce runs", "scheduled automation", "report automation", "scheduled runs", "recurring AI tasks", "files", "artifacts", "traces"]
 ---
 
-AI Workforce runs can do more than return a single chat response. They can plan work, use tools, create files, produce artifacts you can inspect, and run recurring tasks on a schedule.
+AI Workforce runs can do more than return a single chat response. They can plan work, use tools, create files, produce artifacts you can inspect, and run recurring tasks on a schedule. Use scheduled runs for report automation, recurring research, operations checks, and other repeatable team workflows.
 
 ![AI Workforce playground for testing an internal workflow](/images/v3/ai-workforce-pre-meeting-playground.jpg)
 
@@ -28,6 +28,7 @@ Scheduled runs work well for:
 
 - Daily research or news briefs.
 - Weekly sales, support, or operations reports.
+- Automated report generation and recurring executive summaries.
 - Recurring content drafts.
 - Pipeline, CRM, or project-management checks.
 - Knowledge Base or document review tasks.
@@ -39,7 +40,7 @@ Treat a schedule like an automation contract. Give the agent a clear recurring i
 
 AI Workforce runs can maintain a todo/planning state during a run. This helps the agent break down a larger task and track progress.
 
-The plan is a working aid, not a guarantee. Always review the final output, generated files, and trace when accuracy matters.
+The plan is a working aid, not a guarantee. Always review the final output, generated files, and [traces](/user-guides/traces-and-optimizations) when accuracy matters.
 
 ## Workspace Files
 
@@ -61,6 +62,6 @@ When a run creates files, inspect them in the product before using them downstre
 
 ## Traces
 
-Traces show the run timeline: agent steps, sub-agent calls, tool calls, errors, latency, and credit usage. Use traces to understand why a run succeeded, failed, or took longer than expected.
+Traces show the run timeline: agent steps, sub-agent calls, tool calls, errors, latency, and credit usage. Use traces to understand why a run succeeded, failed, or took longer than expected. For tool configuration, see [AI Workforce Tools, Connectors, and Skills](/user-guides/tools).
 
 ![AI Workforce trace view with user messages, skills, agent steps, and tool calls](/images/v3/ai-workforce-run-traces.jpg)

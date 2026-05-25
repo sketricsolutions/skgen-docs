@@ -1,10 +1,10 @@
 ---
 title: "Orchestration and Structured Data"
-description: "Understand how AI Workforce uses a main agent, sub agents, structured data outputs, planning, tools, and traces during multi-agent runs."
-keywords: ["agent orchestration", "sub agents", "structured data", "structured outputs", "AI Workforce", "planning", "multi-agent runs"]
+description: "Understand AI Workforce orchestration for agentic workflows, including the main agent, sub agents, structured data outputs, planning, tools, and traces."
+keywords: ["agent orchestration", "agentic workflow", "multi-agent workflow", "multi agent system", "sub agents", "structured outputs", "AI Workforce"]
 ---
 
-Orchestration defines how agents collaborate during an AI Workforce run. Structured data defines when an agent should return predictable JSON instead of a normal conversational answer.
+Orchestration defines how agents collaborate during an AI Workforce run or agentic workflow. Structured data defines when an agent should return predictable JSON instead of a normal conversational answer.
 
 In SketricGen V3, the main agent owns the user conversation. Sub agents help the main agent with bounded specialist work.
 
@@ -88,7 +88,7 @@ Keep schemas small and focused. Re-test after changing schema fields, and check 
 
 AI Workforce runs can keep a todo/planning state. This helps longer-running agents break a task into steps and continue work across tools, files, and artifacts.
 
-The plan is not a replacement for review. Check final outputs, workspace files, and traces before using results.
+The plan is not a replacement for review. Check final outputs, workspace files, and [traces](/user-guides/traces-and-optimizations) before using results.
 
 ## Traces
 
@@ -98,4 +98,4 @@ Traces show which tools and sub agents were used, what failed, how long steps to
 
 - [AI Workforce Agent Spaces](/ai-workforce/agent-spaces)
 - [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts)
-- [Tools](/user-guides/tools)
+- [AI Workforce Tools, Connectors, and Skills](/user-guides/tools)

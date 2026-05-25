@@ -1,10 +1,10 @@
 ---
-title: "AI Workforce Tools, Connectors, and Skills"
-description: "Connect AI Workforce agents to Knowledge Bases, web search, image generation when enabled, API requests, 2,000+ connectors, custom tools, and marketplace skills."
-keywords: ["AI agent tools", "connectors", "SketricGen connectors", "MCP", "skills"]
+title: "AI Workforce Tools, Connectors, Skills, and MCP"
+description: "Connect AI Workforce agents to AI knowledge bases, 2,000+ connectors, MCP servers, API automation tools, web search, image generation, and marketplace skills."
+keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "skills marketplace"]
 ---
 
-Tools and skills turn AI Workforce agents from chat interfaces into agents that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
+Tools and skills turn AI Workforce agents from chat interfaces into AI automation tools that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
 
 Brand Agents use a leaner, customer-facing tool surface. For public agents, see [Brand Agent Connectors and Lead Capture](/brand-agents/connectors-and-leads).
 
@@ -72,7 +72,7 @@ For orchestration patterns, see [Orchestration and Structured Data](/user-guides
 
 ## API Request
 
-API Request turns a cURL-style REST endpoint into a tool the agent can call. Use it when you have one endpoint, webhook, lookup, or action that should become available to the agent without building a full connector or MCP server.
+API Request turns a cURL-style REST endpoint into an API automation tool the agent can call. Use it when you have one endpoint, webhook, lookup, or action that should become available to the agent without building a full connector or MCP server.
 
 The configuration defines the request the agent is allowed to make: HTTP method, URL, headers, query parameters, request body fields, and tool instructions. Those fields become the tool schema the agent follows when it calls the endpoint.
 
@@ -91,7 +91,7 @@ In the import flow, paste the API documentation or OpenAPI spec and describe the
 
 Use the description field to tell the agent when to call the API and what a successful response means. For example, a lead enrichment endpoint should only be called after the agent has a valid email or domain; a support ticket endpoint should only be called after the user confirms the issue should be escalated.
 
-API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
+API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, REST API automation, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
 
 ## Web Search
 
@@ -111,7 +111,7 @@ Use it for workflows that produce social creatives, thumbnails, concept visuals,
 
 ![AI Workforce skill marketplace with search, verified skills, install counts, sources, categories, and install buttons](/images/v3/ai-workforce-skills-marketplace-dialog.png)
 
-Marketplace skills are reusable task packages you can install onto an agent. They help an agent follow a proven process for a specific job, such as PDF work, financial analysis, dashboard creation, product requirements, design review, research, writing, or planning.
+Marketplace skills are reusable task packages you can install onto an agent. They make the skills marketplace a practical AI tools marketplace for proven processes such as PDF work, financial analysis, dashboard creation, product requirements, design review, research, writing, or planning.
 
 Use skills when you want more than raw app access. A connector lets an agent act in an app. A skill gives the agent a curated way to perform a task well.
 
