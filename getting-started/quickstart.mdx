@@ -1,126 +1,58 @@
 ---
 title: "Quickstart"
-description: "Build and deploy a two-agent AI workflow in under 5 minutes — create agents, add tools, configure handoffs, test, and publish a web widget."
+description: "Start quickly in SketricGen by creating a Brand Agent for a website or an AI Workforce Agent Space for internal multi-agent work."
 icon: "rocket"
-keywords: ["quickstart", "AI workflow", "multi-agent", "deploy widget", "handoffs", "no-code"]
+keywords: ["SketricGen quickstart", "Brand Agent quickstart", "AI Workforce quickstart", "AI agent builder"]
 ---
 
-# Building a Customer Facing Agent Workflow (≈3–5 min)
+This quickstart gives you two paths. Choose **Brand Agent** for a customer-facing website agent, or **AI Workforce** for internal multi-agent work.
 
-**Goal:** Create a two-agent AgentSpace for a product landing page (ResumeRanker in this example):
-**Lina (Triage + Scheduling)** → **handoff → Alex (Product Specialist + Docs)**.
-Test the flow, inspect traces, brand the widget, and publish.
+## Path 1: Create a Brand Agent
 
-<iframe
-  width="100%"
-  style={{ aspectRatio: '16/9', maxWidth: '800px', margin: '0 auto', display: 'block' }}
-  src="https://www.youtube.com/embed/N2fcTQWbBOA"
-  title="SketricGen Quickstart Video"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
+Use this path when the agent will talk to visitors, prospects, leads, or customers.
 
----
+1. Open **Brand Agents**.
+2. Click **New Brand Agent**.
+3. Choose **Website URL** or **Manual setup**.
+4. If using a URL, paste your website and let SketricGen read the site.
+5. Review the generated Brand DNA.
+6. Add or edit Knowledge Base sources.
+7. Connect optional tools such as Lead Capture, Page Navigation, Web Search, or selected app connectors.
+8. Test realistic visitor questions.
+9. Customize the widget and publish.
 
-## 1) Create a new AgentSpace
+Test prompts:
 
-1. **AgentSpaces → New → Blank**
-2. Name: **“ResumeRanker FAQ Space** → **Create**
+- "What does this product do?"
+- "How much does it cost?"
+- "Can I book a demo?"
+- "Where can I find the refund policy?"
 
-![Screenshot showing the AgentSpace creation interface with "New" and "Blank" options](/images/quickstart/new-space.png)
+## Path 2: Create an AI Workforce Agent Space
 
----
+Use this path when the agent will be used internally by your team.
 
-## 2) Add two agents
+1. Open **AI Workforce -> Agent Spaces**.
+2. Create a new Agent Space or start from a template.
+3. Configure the main agent.
+4. Add one specialist sub agent if the workflow needs help.
+5. Attach only the tools each agent needs.
+6. Select the model for each agent.
+7. Run a test in the playground.
+8. Inspect traces, generated files, and artifacts.
+9. Refine instructions and tools before using the workflow for real work.
 
-### Agent 1 — **Lina (Triage & Scheduling)**
+Good first AI Workforce tasks:
 
-* **Instructions (paste & tweak — or enhance with AI):**
->  You are Lina, the triage agent for Resumes Ranker. Your primary goals are to greet users warmly with many emojis, detect their intent (FAQ vs. demo request), and guide the conversation accordingly.
->
->Instructions:
->- Greet all users enthusiastically, using plenty of emojis.
->- Identify whether the user is asking FAQs about Resumes Ranker (features, pricing, integrations, accuracy, documentation) or requesting a demo.
->- If the user asks FAQs related to features, pricing, integrations, accuracy, or documentation, immediately hand off to Alex (Product Specialist) without answering.
->- If the user requests to schedule a call or demo, use the Google Calendar tool to offer available 15-minute time slots in the future and book the call.
->- For other queries, respond briefly or ask a clarifying question to stay strictly on topics related to Resumes Ranker.
->- Do not engage in any conversations unrelated to Resumes Ranker.
->
->Maintain a friendly, emoji-rich communication style throughout.
+- Research a market or prospect.
+- Draft a blog or campaign brief.
+- Summarize uploaded files.
+- Run an internal operations checklist.
+- Use a connector to fetch or update business data.
 
-* **Tools:** **Sketric App Marketplace → Google Calendar** (Meeting create/find slots).
+## Next
 
-  * Connect account/permissions as prompted.
-
-
-![Animated GIF showing how to create an agent named Lina and connect Google Calendar tool](/images/quickstart/lina-tool.gif)
-
-### Agent 2 — **Alex (Product Specialist)**
-
-* **Instructions (paste & tweak — or enhance with AI):**
->You are Alex, the product specialist for Resumes Ranker. Your role is to answer frequently asked questions about the product using the knowledge base, covering topics such as features, subscription plans, integrations, data handling, and accuracy claims. Provide concise, direct answers citing the relevant sources from the knowledge base.
-
->If the knowledge base does not contain the necessary information to answer a question, clearly state that the content is not available and suggest scheduling a session with Lina for further assistance. Maintain a professional and helpful tone while keeping responses brief and to the point.
-
-* **Tools:** **File Search**
-
-  * Upload: product FAQ PDF, pricing sheet, onboarding doc **or** run the **Crawler** on your docs/landing URL.
-  * Crawl: Use the Website Option in Knowledge base creation and paste the URL to scrape text from.
-
-![Screenshot showing the knowledge base creation interface with website crawling option](/images/quickstart/kb-crawl.png)
-
-
----
-
-## 3) Connect the handoff
-
-* Draw connection **Lina → Alex**.
-* Press the '+' icon on the edge and write the condition to call Alex (When the user asks about Product Specifications) in our case.
-
-![Screenshot showing the AgentSpace with Lina and Alex agents connected by a handoff edge](/images/quickstart/final_result.png)
-
----
-
-## 4) (Optional) Add light structure
-
-* **Alex → Structured Input:**
-
-  * Fields: `user_query` (String, Required)
-  * Why? Lina makes sure to clearly define the user's query for Alex. (Alex still sees the chat history but this is cleaner)
-
-![Screenshot showing the structured input configuration interface for defining user_query field](/images/quickstart/structured_input.png)
-
----
-
-## 5) Test the flow & inspect traces
-
-Open **Playground** and try:
-
-* “What does ResumeRanker cost?” → expect **handoff to Alex** (File Search cites sources).
-* “Can I book a demo for Tuesday?” → expect **Lina** to **use Google Calendar** tool.
-
-Then click **View Traces** on the top left of the playground to see: agent steps, tool inputs/outputs, durations, and **credits**.
-
-![Screenshot showing the Trace Explorer interface displaying agent steps, tool calls, durations, and credit consumption](/images/quickstart/test_traces.png)
-
----
-
-## 6) Design the widget & publish
-
-![Screenshot showing the widget design interface with logo upload, brand colors, greeting message, and callouts configuration](/images/quickstart/design_widget.png)
-
-1. Upload **logo**, set **brand colors**, add **default greeting** and **callouts** (e.g., “Ask about pricing or book a demo”).
-2. Make sure the workflow is set to **Public** (required for web widget deployment).
-3. **Publish (top right in playground) → Chat Bubble**
-4. Copy the snippet or follow CMS steps (WordPress, Wix, etc.).
-5. Paste into a page on your site and verify.
-
-![Screenshot showing the publish workflow interface with Chat Bubble option and embed code snippet](/images/quickstart/publish_agent.png)
-
----
-
-## You’re live
-
-You now have an **AI-routed, two-agent** assistant that answers FAQs and books meetings. Iterate quickly: tweak instructions → re-test → check **traces** → republish.
-
-**Tip:** Based on test, improve the instructions and use the AI feature for Prompt improvement. Add more agents later only when responsibilities are clear.
+- [Choose Brand Agents or AI Workforce](/getting-started/choose-product)
+- [Create a Brand Agent](/brand-agents/create-brand-agent)
+- [AI Workforce Agent Spaces](/ai-workforce/agent-spaces)
+- [AI Workforce Tools](/user-guides/tools)

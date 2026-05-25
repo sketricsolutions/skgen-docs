@@ -1,0 +1,55 @@
+---
+title: "AI Workforce Agent Spaces"
+description: "Build internal AI Workforce workflows in Agent Spaces with a main agent, sub agents, tools, models, testing, traces, and reusable templates."
+keywords: ["Agent Spaces", "AI Workforce", "multi-agent workflow builder", "agent orchestration", "AI agent builder"]
+---
+
+Agent Spaces are the visual builder for AI Workforce. They help you design internal multi-agent workflows without writing framework code.
+
+## Agent Space Structure
+
+![Pre-meeting preparation Agent Space with a main agent, helper agents, tools, and notes](/images/v3/ai-workforce-pre-meeting-editor.jpg)
+
+An Agent Space contains:
+
+- **Main agent:** the agent that talks to the user and owns the run.
+- **Sub agents:** specialist helpers the main agent can call.
+- **Tools:** built-in tools, app connectors, API requests, MCP servers, and Knowledge Bases.
+- **Testing:** a playground for running the workflow before relying on it.
+- **Traces:** execution history for debugging and optimization.
+
+## Building a Workflow
+
+Start small:
+
+1. Create an Agent Space.
+2. Configure the main agent.
+3. Add one specialist sub agent.
+4. Attach only the tools each agent needs.
+5. Describe when the main agent should call the sub agent.
+6. Run a test and inspect traces.
+7. Add more sub agents only when the responsibility boundary is clear.
+
+## Main Agent
+
+The main agent is the only agent that directly talks to the user. Its job is to understand the request, plan the work, use tools, call sub agents when useful, and return the final answer.
+
+Give the main agent clear instructions about what it owns, what tools it can use, and when it should ask a follow-up question.
+
+![Main agent editor with model settings, connected tools, and marketplace skills](/images/v3/ai-workforce-main-agent-tools-skills.jpg)
+
+## Sub Agents
+
+Sub agents are specialist helpers. They do not talk to the user directly and they cannot have their own sub agents.
+
+Use sub agents for bounded subtasks such as classification, extraction, summarization, research, redaction, and validation. Keep them narrow so traces are easy to understand.
+
+## Testing and Iteration
+
+Use the loop:
+
+**Edit -> Test -> Inspect trace -> Improve**
+
+Review tool calls, sub-agent calls, artifacts, latency, and credit usage before treating a workflow as production-ready.
+
+When tuning behavior, adjust the main agent first. Change the model, instructions, tool access, or structured output schema one at a time, then run the same test prompt again and inspect traces. Add sub agents only when the work needs a clear specialist helper.

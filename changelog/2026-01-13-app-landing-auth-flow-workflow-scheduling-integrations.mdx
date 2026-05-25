@@ -109,7 +109,7 @@ We improved workflow/template behavior:
 - New users who want a smoother path from public pages into the app experience
 - Teams building larger workflows who need **faster, more controlled editor navigation**
 - Anyone using scheduled triggers and wanting **clearer schedule status**
-- Builders relying on integrations (especially Pipedream triggers) who want **cleaner updates and fewer duplicates**
+- Builders relying on connector triggers who want **cleaner updates and fewer duplicates**
 - Users downloading files/assets from chat and needing reliable access
 - Teams importing API configs and wanting fewer parsing failures
 
@@ -129,7 +129,7 @@ We improved workflow/template behavior:
    - If it warns about unpublished/config-required, fix it before relying on the schedule
 4. Publish and confirm interval/cron is displayed
 
-### Update a Pipedream trigger without duplicates
+### Update a connector trigger without duplicates
 1. Open your integration/trigger settings
 2. Update the trigger configuration
 3. Re-run a test and confirm there are no duplicate integration records and the workflow triggers correctly
@@ -154,19 +154,19 @@ We improved workflow/template behavior:
 
 ## FAQ
 
-**Why did the site URLs change (what is `/app/`)?**  
+**Why did the site URLs change (what is `/app/`)?**
 Routing was standardized so the landing and app experience feel unified, with consistent navigation and public paths.
 
-**How do I know if my schedule trigger will actually run?**  
+**How do I know if my schedule trigger will actually run?**
 Check the schedule badge on the Trigger node—warnings appear if it’s unpublished or missing configuration, and published schedules show interval/cron values.
 
-**Will updating my Pipedream trigger create duplicates?**  
+**Will updating my connector trigger create duplicates?**
 This release improves trigger updates so existing integration records can be updated safely without creating duplicates.
 
-**Why are some changes described as “internal”?**  
+**Why are some changes described as “internal”?**
 Because reliability improvements (integration filtering, parsing, auth checks) reduce failures and edge cases you experience—even if the change is behind the scenes.
 
-**What if a file download is blocked in the browser?**  
+**What if a file download is blocked in the browser?**
 SketricGen now falls back to opening the asset in a new tab so it stays accessible.
 
 ---
@@ -174,6 +174,6 @@ SketricGen now falls back to opening the asset in a new tab so it stays accessib
 ## Get Started
 
 - **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
-- **Browse Templates:** [https://www.sketricgen.ai/templates](https://www.sketricgen.ai/templates)
+- **Browse Templates:** [https://www.sketricgen.ai/template](https://www.sketricgen.ai/template)
 - **Docs: Tools & Integrations:** [/user-guides/tools](/user-guides/tools)
 - **Docs: Getting Started:** [/getting-started/quickstart](/getting-started/quickstart)
