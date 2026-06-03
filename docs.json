@@ -12,7 +12,11 @@
   "seo": {
     "metatags": {
       "canonical": "https://docs.sketricgen.ai",
-      "og:image": "https://docs.sketricgen.ai/images/space-light.png",
+      "og:image": "https://www.sketricgen.ai/sketricgen-agentspace.png",
+      "og:image:width": "1024",
+      "og:image:height": "549",
+      "twitter:card": "summary_large_image",
+      "twitter:image": "https://www.sketricgen.ai/sketricgen-agentspace.png",
       "og:description": "Build website AI chatbots with Brand Agents and internal AI automation workflows with SketricGen AI Workforce.",
       "og:site_name": "SketricGen Documentation"
     }
@@ -77,8 +81,7 @@
             "pages": [
               "dev-guide/public-api-usage",
               "dev-guide/python-sdk",
-              "dev-guide/node-sdk",
-              "dev-guide/contacts"
+              "dev-guide/node-sdk"
             ]
           },
           {
