@@ -79,7 +79,6 @@
           {
             "group": "Dev Guide",
             "pages": [
-              "dev-guide/use-docs-with-ai-agents",
               "dev-guide/public-api-usage",
               "dev-guide/python-sdk",
               "dev-guide/node-sdk"
@@ -153,17 +152,6 @@
       "label": "Homepage",
       "href": "https://www.sketricgen.ai"
     }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "cursor",
-      "vscode",
-      "mcp"
-    ]
   },
   "footer": {
     "socials": {
