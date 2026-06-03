@@ -6,6 +6,8 @@ keywords: ["AI chatbot for website", "website chatbot", "website chat widget", "
 
 Deploy a Brand Agent to your website when you want visitors to ask questions, get product guidance, or submit lead details. This creates a public website chat widget backed by your Brand Agent knowledge and approved tools.
 
+Use this guide for copy-paste website embeds. If you are building a custom product integration or calling your agent from code, use the [Public API](/dev-guide/public-api-usage) instead.
+
 ## Before You Start
 
 You need:
@@ -31,10 +33,35 @@ Use the floating chat bubble when you want the agent available across your site 
 Example:
 
 ```html
-<script src="https://jswidget.sketricgen.ai/widget-embed.js" data-agent-id="YOUR_AGENT_ID"></script>
+<script
+  src="https://jswidget.sketricgen.ai/widget-embed.js"
+  data-agent-id="YOUR_AGENT_ID"
+></script>
 ```
 
 For multi-page websites, add the script to your shared layout so the widget appears consistently.
+
+## Identify Known Users with Contact ID
+
+If your website or product already has logged-in users, pass your internal user or contact identifier with `data-contact-id`. SketricGen stores this as the conversation `contact_id`, so conversations from the same person are grouped under the same contact in SketricGen.
+
+Use a stable internal ID, UUID, or hashed value. Avoid sending emails, phone numbers, names, or other directly identifiable personal data as the contact ID.
+
+If you do not know what internal user ID to use, skip this field. The widget still works without it.
+
+Example for products with logged-in users:
+
+```html
+<script
+  src="https://jswidget.sketricgen.ai/widget-embed.js"
+  data-agent-id="YOUR_AGENT_ID"
+  data-contact-id="YOUR_INTERNAL_USER_ID"
+></script>
+```
+
+If the visitor is anonymous, omit `data-contact-id`. The widget will use its browser-stored anonymous contact behavior instead.
+
+Developers can see the full identity model, including API, iframe, and fullscreen examples, in [Public API: Contact ID and User Grouping](/dev-guide/public-api-usage#contact-id-and-user-grouping).
 
 ## Inline iFrame
 
@@ -57,6 +84,17 @@ Example:
 ></iframe>
 ```
 
+To group iframe conversations for a known user, add the `contactId` query parameter:
+
+```html
+<iframe
+  src="https://www.sketricgen.ai/iframe-widget/YOUR_AGENT_ID?contactId=YOUR_INTERNAL_USER_ID"
+  width="100%"
+  height="700px"
+  frameborder="0"
+></iframe>
+```
+
 ## Test After Deploying
 
 After adding the widget:
@@ -64,7 +102,8 @@ After adding the widget:
 1. Open the live page.
 2. Confirm the widget or iframe appears.
 3. Ask a question from your Brand Agent's Knowledge Base.
-4. Test lead capture if enabled.
-5. Check the conversation in SketricGen.
+4. If you pass `data-contact-id` or `contactId`, confirm the conversation shows under the expected contact in SketricGen.
+5. Test lead capture if enabled.
+6. Check the conversation in SketricGen.
 
 If the widget does not appear, confirm the Brand Agent is published/public and that the `data-agent-id` or iframe URL uses the correct agent ID.
