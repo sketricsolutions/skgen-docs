@@ -98,6 +98,11 @@
               {
                 "group": "2026 Updates",
                 "pages": [
+                  "changelog/2026-07-20-affiliates-managed-connectors-teamspace-controls",
+                  "changelog/2026-07-13-teamspaces-shared-plans-project-connections",
+                  "changelog/2026-07-08-brand-agent-templates-mobile-editor-fixes",
+                  "changelog/2026-06-18-custom-skills-template-setup-agent-sharing",
+                  "changelog/2026-06-05-widget-navigation-crawl-limits-cookie-controls",
                   "changelog/2026-05-25-practical-agents-that-do-real-work",
                   "changelog/2026-03-13-max-trial-subscription-updates",
                   "changelog/2026-02-17-auth-utm-voice-limits-dashboard-ui",

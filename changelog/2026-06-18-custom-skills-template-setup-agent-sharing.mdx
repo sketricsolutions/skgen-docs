@@ -1,0 +1,150 @@
+---
+title: "Custom Skills, Smarter Template Setup & Brand Agent Sharing (June 18, 2026)"
+description: "SketricGen update: custom skill installation, template-ready assets, faster connector setup, plan usage cards, Brand Agent sharing, and Code Interpreter access."
+tags: ["release", "skills", "templates", "connectors", "brand-agents", "code-interpreter"]
+version: "v3"
+releaseDate: "2026-06-18"
+---
+
+This release makes advanced AI Workforce setups easier to install and reuse. Custom skills and template assets now arrive more reliably, connectors are matched more intelligently, and Brand Agents are easier to share.
+
+## TL;DR
+
+- **Install custom skills:** Add packaged custom skills to your agents with validation and clear progress feedback.
+- **Templates bring their supporting assets:** Required skill files can be installed with a template and cleaned up when you switch templates.
+- **Smarter connector matching:** Imported templates find the appropriate connector provider and actions more reliably.
+- **Live template updates:** Template listings refresh more consistently and show more options at once.
+- **Plan usage at a glance:** Agent Space and Brand Agent pages show plan allowances and current usage.
+- **Share Brand Agents:** A new sharing experience makes it easier to send an agent to collaborators or testers.
+- **Code Interpreter available:** AI Workforce agents can use Code Interpreter without an additional feature toggle.
+
+---
+
+## What's new
+
+### 1) Install and reuse custom skills
+
+You can now add custom skill packages to agents through a more complete installation flow:
+
+- **Packaged skill installation:** Install custom skills together with the files they need.
+- **Validation before use:** Skill packages are checked before they are made available to an agent.
+- **Visible progress:** Installation state is tracked so you can see when a skill is ready.
+- **Safer template changes:** Outdated skill artifacts are removed when you replace a template.
+
+**Why it matters:** You can reuse specialized agent behavior without manually rebuilding its instructions and supporting files every time.
+
+---
+
+### 2) Templates that set up more of the workflow
+
+Template installation now handles more of the configuration around the workflow itself:
+
+- **Supporting artifacts:** Templates can install the custom skill resources required by their agents.
+- **Cleaner template swaps:** Assets that belong to the previous template are pruned when they are no longer needed.
+- **Fresher listings:** Template data is refreshed when the page opens, reducing stale results.
+- **More discoverable options:** The initial template list shows up to 30 entries.
+
+**Why it matters:** Starting from a template requires less manual cleanup and produces a more complete, ready-to-test Agent Space.
+
+---
+
+### 3) Faster, more accurate connector setup
+
+Connector selection is more reliable when you install or import a workflow:
+
+- **Provider-aware matching:** Template tools are matched with the right available connector provider.
+- **Better action discovery:** Connector actions load from the current catalog when you need them.
+- **Safer cancellation:** Cancelling a template installation no longer disconnects an existing app connection.
+- **Faster initial loading:** Connector catalog details are loaded only when needed.
+
+**Why it matters:** Imported workflows are less likely to point at the wrong connector or disturb connections you already use.
+
+---
+
+### 4) Clearer limits and easier Brand Agent sharing
+
+Everyday account and Brand Agent management received several visible improvements:
+
+- **Plan usage cards:** Agent Space and Brand Agent pages show relevant limits and current usage.
+- **Brand Agent sharing:** Send an agent to teammates, reviewers, or testers from its page.
+- **Improved URL validation:** Brand Agent setup fields provide clearer feedback when a website address is incomplete or invalid.
+- **Smoother onboarding:** Guided tours better control when each step can continue.
+
+**Why it matters:** You can see available capacity before creating more agents and share work for review with fewer steps.
+
+---
+
+### 5) Code Interpreter for file and data work
+
+Code Interpreter is now available as an AI Workforce tool without a separate availability flag.
+
+- **Data analysis:** Let an agent calculate, transform, and inspect supported data files.
+- **File generation:** Use code-backed workflows to create useful output artifacts.
+- **Tool selection:** Add Code Interpreter from the tools available in the Agent Space editor.
+
+**Why it matters:** Agents can complete more calculation-heavy and file-based work inside the same workflow.
+
+---
+
+## Who this release is for
+
+- **AI Workforce builders** installing reusable custom skills.
+- **Template users** who want a more complete setup with less manual cleanup.
+- **Teams using multiple connector providers** in imported workflows.
+- **Brand Agent owners** sharing agents for review or testing.
+- **Workspace administrators** monitoring plan usage and limits.
+- **Data-focused teams** using Code Interpreter for analysis and file creation.
+
+## How to use (quick steps)
+
+### Install a custom skill
+
+1. Open an agent in your **Agent Space**.
+2. Open its **Skills** area and choose the custom skill installation option.
+3. Select the skill package and wait for validation and installation to complete.
+4. Test the agent to confirm the skill is available during the run.
+
+### Start from a template
+
+1. Browse [AI Workforce templates](https://www.sketricgen.ai/template).
+2. Select a template and install it into your Agent Space.
+3. Review the installed skills, supporting files, and connector actions.
+4. Connect the required apps before running the workflow.
+
+### Share a Brand Agent
+
+1. Open the Brand Agent you want to share.
+2. Use the available **Share** action.
+3. Send the resulting link through your preferred channel.
+
+---
+
+## FAQ
+
+**What is a custom skill?**
+A custom skill is a reusable set of instructions and supporting resources that teaches an agent how to perform a specific kind of work.
+
+**Do templates install their required skill files automatically?**
+Supported templates can install their associated skill artifacts as part of setup. Always review the installed skills and test the workflow before using it with production data.
+
+**What happens to skill files when I switch templates?**
+Artifacts that belonged to the previous template can be removed automatically, reducing stale or conflicting resources.
+
+**Will cancelling template setup disconnect an app I already connected?**
+No. Cancelling template installation should preserve existing app connections.
+
+**Where can I see my current plan usage?**
+Plan usage cards appear on relevant Agent Space and Brand Agent pages.
+
+**Is Code Interpreter available to every plan?**
+Its presence no longer depends on a separate feature flag. Your current plan and the in-product tool picker remain the source of truth for availability and usage limits.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Browse Templates:** [https://www.sketricgen.ai/template](https://www.sketricgen.ai/template)
+- **AI Workforce Overview:** [/ai-workforce/overview](/ai-workforce/overview)
+- **Tools and Skills:** [/user-guides/tools](/user-guides/tools)
+- **Create a Brand Agent:** [/brand-agents/create-brand-agent](/brand-agents/create-brand-agent)
