@@ -1,0 +1,151 @@
+---
+title: "Teamspaces, Shared Plans & Project-Scoped Connections (July 13, 2026)"
+description: "SketricGen update: Teamspace collaboration, shared plan limits, project-scoped connections, premium model guidance, and spreadsheet artifacts."
+tags: ["release", "teamspaces", "collaboration", "billing", "connectors", "models", "artifacts"]
+version: "v3"
+releaseDate: "2026-07-13"
+---
+
+Teamspaces are now the center of collaborative work in SketricGen. This release gives teams shared access, shared plan allowances, project-specific connections, and more capable file workspaces while strengthening separation between organizations.
+
+## TL;DR
+
+- **Teamspaces for shared work:** Invite teammates, share access, and manage ownership in one collaborative workspace.
+- **Shared plan and usage:** Members use the Teamspace owner's plan allowances, with limits tracked across the Teamspace.
+- **Teammate playground access:** Authorized members can test shared agents without needing the creator to run every test.
+- **Project-scoped connections:** Connected apps, custom credentials, and skills stay with the relevant Teamspace project.
+- **Clearer model access:** Premium models display plan requirements before you select them.
+- **Spreadsheet artifacts:** Run workspaces can open XLS and XLSX files in a spreadsheet-friendly viewer.
+- **Smoother chat:** Streamed responses animate more naturally and traces remain hidden until the response is ready.
+
+---
+
+## What's new
+
+### 1) Teamspaces built for collaboration
+
+Teamspaces now support more of the ownership and access controls teams need for shared AI work:
+
+- **Member access:** Invite teammates to work within a shared Teamspace.
+- **Shared agent testing:** Authorized members can open the playground and test Teamspace agents.
+- **Ownership transfer:** Move Teamspace ownership when responsibilities change.
+- **Mobile switching:** Change Teamspaces and projects through a layout designed for smaller screens.
+- **Stronger isolation:** Access checks have been tightened so agents, runs, and credentials remain within the correct Teamspace.
+
+**Why it matters:** Your team can build and test together without passing work through one account or mixing resources between organizations.
+
+---
+
+### 2) Shared plans, limits, and billing context
+
+Usage and subscription behavior now follow the active Teamspace:
+
+- **Owner plan inheritance:** Shared Teamspaces use the creator's current plan and entitlements.
+- **Teamspace-wide usage:** Seat, agent, and knowledge base allowances are tracked for the whole Teamspace.
+- **Relevant checkout:** Upgrade and billing actions apply to the Teamspace you currently have selected.
+- **Reliable rewards:** Eligible referral and reward credits are applied more safely.
+
+**Why it matters:** Members see one consistent set of allowances, and billing changes affect the workspace they intend to manage.
+
+---
+
+### 3) Connections and credentials that belong to the project
+
+App access now follows the Teamspace project instead of an individual member:
+
+- **Project-scoped connections:** Connector access is associated with the project where agents use it.
+- **Shared custom connections:** Bring-your-own-key and remote connections can be available to the appropriate Teamspace.
+- **Consistent skill installation:** Custom skills install against the Teamspace owner and remain usable by the shared project.
+- **Safer separation:** Moving between projects no longer implies that every credential should follow you.
+
+**Why it matters:** Teams can collaborate on an agent while keeping its app access and custom credentials attached to the correct project.
+
+---
+
+### 4) Clearer model availability
+
+The model picker now communicates plan access before a run begins:
+
+- **Premium model labels:** Models that require a higher plan appear locked when they are unavailable.
+- **Plan-aware selection:** The catalog reflects the entitlements of the active Teamspace.
+- **Fewer failed setups:** You can choose an available model while configuring the agent instead of discovering the restriction at runtime.
+
+**Why it matters:** Model capabilities and plan requirements are easier to understand while you build.
+
+---
+
+### 5) Better workspace files and chat feedback
+
+AI Workforce runs are more useful for document and spreadsheet work:
+
+- **Teamspace file storage:** Conversation artifacts are organized under the relevant Teamspace and project.
+- **Spreadsheet viewing:** Open supported XLS and XLSX artifacts in a spreadsheet-friendly viewer.
+- **Smoother streaming:** Assistant text appears with a more natural animation during a run.
+- **Cleaner progress state:** The trace button stays out of the way until streaming is complete.
+
+**Why it matters:** Teams can inspect spreadsheet results directly while run feedback stays focused and readable.
+
+---
+
+## Who this release is for
+
+- **Teams collaborating on Agent Spaces** across multiple members.
+- **Workspace owners** managing seats, agents, knowledge bases, and billing.
+- **Operations teams** sharing connectors and project-specific credentials.
+- **Builders using premium models** who need clear plan guidance.
+- **Analysts and operators** working with spreadsheet artifacts.
+- **Mobile users** switching between Teamspaces and projects.
+
+## How to use (quick steps)
+
+### Collaborate in a Teamspace
+
+1. Open your Teamspace settings and invite the teammates who need access.
+2. Select the appropriate project before creating or editing an agent.
+3. Ask an authorized teammate to open the agent's playground and run a test.
+4. Review Teamspace usage before adding more members or resources.
+
+### Configure a project connection
+
+1. Switch to the Teamspace and project that will use the app.
+2. Open **Tools** or the agent's connector setup.
+3. Connect the app or add the supported custom connection.
+4. Test the agent from the same project to confirm access.
+
+### Review a spreadsheet artifact
+
+1. Run an AI Workforce task that creates or updates a spreadsheet.
+2. Open the run workspace or artifact panel.
+3. Select the XLS or XLSX file to inspect it in the spreadsheet viewer.
+
+---
+
+## FAQ
+
+**Whose plan does a shared Teamspace use?**
+A shared Teamspace uses the owner's plan and entitlements. Usage and resource limits are tracked across that Teamspace.
+
+**Can teammates test an agent in the playground?**
+Yes. Authorized Teamspace members can test shared agents without signing in as the original creator.
+
+**Do my connected apps automatically appear in every project?**
+Connections are project-scoped. Connect or configure the app in the Teamspace project where the agent will use it.
+
+**What happens when I transfer Teamspace ownership?**
+The new owner takes responsibility for the Teamspace. Review membership, plan, billing, and connected resources as part of the transfer.
+
+**Why is a model shown as locked?**
+Locked models require a plan available to the active Teamspace. Use an unlocked model or review the available plan options.
+
+**Can I preview Excel files created by a run?**
+Yes. The run workspace supports spreadsheet-friendly viewing for XLS and XLSX artifacts.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **AI Workforce Overview:** [/ai-workforce/overview](/ai-workforce/overview)
+- **Agent Spaces:** [/ai-workforce/agent-spaces](/ai-workforce/agent-spaces)
+- **Runs, Files, and Artifacts:** [/ai-workforce/runs-files-artifacts](/ai-workforce/runs-files-artifacts)
+- **Tools and Skills:** [/user-guides/tools](/user-guides/tools)
