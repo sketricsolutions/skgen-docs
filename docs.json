@@ -80,6 +80,7 @@
             "group": "Dev Guide",
             "pages": [
               "dev-guide/public-api-usage",
+              "dev-guide/structured-output-tools",
               "dev-guide/python-sdk",
               "dev-guide/node-sdk"
             ]
