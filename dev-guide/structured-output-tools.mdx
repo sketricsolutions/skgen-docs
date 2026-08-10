@@ -4,10 +4,10 @@ description: "Define schema-validated JSON tools, detect their public API stream
 keywords: ["structured output", "JSON schema tool", "AI agent UI", "tool call event", "SketricGen API"]
 ---
 
-Structured Output is a model-callable tool that emits schema-validated JSON during an agent run. It is useful when your application needs to render a card, save typed project state, trigger routing, or pass a predictable payload to downstream code while the agent remains conversational.
+Structured Output is a model-callable tool that emits schema-validated JSON as the result of the current agent turn. It is useful when your application needs to render a card, save typed project state, trigger routing, or pass a predictable payload to downstream code while the conversation continues across turns.
 
 <Note>
-Structured Output does not pause the run. Use Human Input to collect a person's answer, then let the agent call Structured Output after the required values are available.
+A successful Structured Output call ends the current turn after its tool result is emitted, so the model does not duplicate the payload in a second prose response. It does not collect a person's answer: use Human Input for that, or send the frontend's next message on the same conversation to continue.
 </Note>
 
 ## Configure the tool
@@ -24,10 +24,10 @@ A workflow or template stores the node in this form:
 
 ```json
 {
-  "id": "tool-node-recommendations",
+  "id": "tool-node-recommendations-7d91c2a4",
   "type": "toolNode",
   "data": {
-    "name": "emit_render_recommendations_ndations",
+    "name": "emit_render_recommendations_7d91c2a4",
     "title": "Render recommendations",
     "toolType": "structured_output",
     "description": "Research is complete and the frontend needs recommendation cards.",
@@ -58,6 +58,26 @@ A workflow or template stores the node in this form:
 ```
 
 The editor generates `data.name` deterministically from the title and node ID. When building template JSON programmatically, use the current SketricGen template builder instead of inventing this value.
+
+## Use a zero-argument UI event
+
+When a frontend only needs a signal to display the canonical onboarding preferences form, use the fixed `user_preferences_form` custom tool instead of inventing a Structured Output schema:
+
+```json
+{
+  "id": "tool-node-user-preferences-form",
+  "type": "toolNode",
+  "data": {
+    "name": "user_preferences_form",
+    "toolType": "custom_tool",
+    "description": "Show the role and AI-experience form with no arguments as the final action, end the turn, and expect the selections in the user's next message.",
+    "is_enabled": true,
+    "config": {}
+  }
+}
+```
+
+The call emits ordinary `TOOL_CALL_START` and `TOOL_CALL_END` events with an empty arguments object, then ends the current turn. It does not create a HITL pause. Render the form when the event arrives, then send the selected role and AI experience as the next normal message using the same conversation ID. Do not send a HITL-resume request.
 
 ## Schema rules
 
@@ -91,7 +111,7 @@ function handleAgentEvent(event: Record<string, unknown>) {
 }
 ```
 
-`TOOL_CALL_START.tool_call_arguments` contains the model-supplied object. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result. Treat the end event as confirmation that runtime validation succeeded.
+`TOOL_CALL_START.tool_call_arguments` contains the model-supplied object. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result. Treat the end event as confirmation that runtime validation succeeded and the current agent turn is complete.
 
 ## Instruction pattern
 
