@@ -18,6 +18,7 @@ AI Workforce agents can use:
 - [**SketricGen connectors**](#sketricgen-connectors): 2,000+ app actions for internal workflows.
 - [**Custom MCP tools**](#custom-mcp-tools): company-specific capabilities exposed through MCP servers.
 - [**API Request**](#api-request): direct HTTP calls for controlled integrations.
+- [**Application UI events**](#application-ui-events): fixed zero-argument events that tell a custom frontend what to render.
 - [**Structured Output**](#structured-output): validated JSON events for application UI and downstream logic.
 - [**Web Search**](#web-search): current public information.
 - [**Image Generation**](#image-generation): visual asset generation when the tool is enabled.
@@ -94,11 +95,17 @@ Use the description field to tell the agent when to call the API and what a succ
 
 API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, REST API automation, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
 
+## Application UI Events
+
+The fixed `user_preferences_form` tool tells an onboarding frontend to display the standard role and AI-experience form. It has no arguments or output schema. Instruct the agent to call it as the final action of the turn and tell the frontend to send the selections in the user's next normal message on the same conversation.
+
+This event does not pause the run or use Human Input resume semantics. It ends the current turn after emitting its tool-call events, leaving form rendering and persistence to your application.
+
 ## Structured Output
 
-Structured Output lets an agent emit validated JSON at a meaningful point in a run. Add a title, explain exactly when the agent should call it, and define the fields the receiving application expects.
+Structured Output lets an agent emit validated JSON as the final action of a turn. Add a title, explain exactly when the agent should call it, and define the fields the receiving application expects.
 
-Use it for UI cards, classifications, recommendation payloads, reusable project state, or any downstream step that needs predictable fields. The call appears in the run stream, so an application can render the arguments immediately. It does not pause the agent for a reply; use Human Input when the run must wait for a person.
+Use it for UI cards, classifications, recommendation payloads, reusable project state, or any downstream step that needs predictable fields. The call appears in the run stream, so an application can render the arguments immediately; the successful tool result then ends that turn. It does not ask a person for a reply, so use Human Input when the agent needs an answer before it can continue.
 
 For the workflow JSON contract and stream-handling example, see [Structured Output for Developers](/dev-guide/structured-output-tools).
 
