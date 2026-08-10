@@ -4,7 +4,7 @@ description: "Understand AI Workforce orchestration for agentic workflows, inclu
 keywords: ["agent orchestration", "agentic workflow", "multi-agent workflow", "multi agent system", "sub agents", "structured outputs", "AI Workforce"]
 ---
 
-Orchestration defines how agents collaborate during an AI Workforce run or agentic workflow. Structured data defines when an agent should return predictable JSON instead of a normal conversational answer.
+Orchestration defines how agents collaborate during an AI Workforce run or agentic workflow. Structured data can shape an agent's final response or be emitted during a run through a [Structured Output tool](/dev-guide/structured-output-tools).
 
 In SketricGen V3, the main agent owns the user conversation. Sub agents help the main agent with bounded specialist work.
 
@@ -36,9 +36,9 @@ Good sub-agent jobs include:
 
 Sub agents cannot have their own sub agents. Keep the structure one level below the main agent so the workflow stays predictable.
 
-## Structured Data Outputs
+## Agent Response Schemas
 
-AI Workforce supports structured **outputs** when a run needs predictable JSON. Structured inputs are no longer part of the public workflow model. The main agent talks to the user, and sub agents support that main agent behind the scenes.
+AI Workforce supports agent response schemas when a final result needs predictable JSON. Structured inputs are no longer part of the public workflow model. The main agent talks to the user, and sub agents support that main agent behind the scenes.
 
 Use structured outputs when the result needs to be consumed by another system, rendered in a predictable UI, or reviewed consistently by your team.
 
@@ -51,7 +51,7 @@ Good fits include:
 - Connector-ready payloads
 - Final workflow outputs that should be copied into another system
 
-Avoid structured outputs for normal customer-facing chat replies. If a user expects a human-readable response, keep the agent conversational.
+Avoid a fixed final-response schema for normal customer-facing chat replies. If a user expects a human-readable response, keep the agent conversational. Use the separate Structured Output tool when the agent should remain conversational but also emit a typed event for an application.
 
 Structured outputs are most useful when:
 
