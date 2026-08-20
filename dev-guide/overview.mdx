@@ -1,0 +1,75 @@
+---
+title: "Developer Platform Overview"
+sidebarTitle: "Developer Overview"
+icon:
+  name: "code"
+  library: "fontawesome"
+  style: "solid"
+description: "Choose the SketricGen MCP server, Admin API, Runtime API, or SDK for AI agent management, automation, streaming, and custom applications."
+keywords: ["SketricGen API", "MCP server", "Admin API", "Runtime API", "AI agent API", "SDK"]
+---
+
+SketricGen exposes three developer surfaces. Choose the surface based on whether an AI assistant should manage SketricGen, your software should manage SketricGen resources, or your application should run an agent.
+
+## Choose the right integration
+
+| Surface | Use it when | Authentication | What it controls |
+| --- | --- | --- | --- |
+| **MCP server** | Claude, ChatGPT, Codex, or another MCP client should build and manage Brand Agents conversationally | SketricGen OAuth or an Admin API key | Brand Agent creation and editing, templates, knowledge bases, widget configuration, and connectors |
+| **Admin API** | Your backend, CLI, or automation should manage Teamspace resources directly | Admin API key beginning with `sk_admin_` | Projects, agents, Brand Agents, knowledge bases, conversations, traces, members, usage, and connectors |
+| **Runtime API** | Your application should send a message to an existing agent and receive its response | Runtime API key beginning with `sk_runtime_` | Agent execution through `POST /api/v1/run-workflow` |
+| **Python and Node.js SDKs** | You want a typed client for the Runtime API | Runtime API key beginning with `sk_runtime_` | Agent execution, streaming, and supported file uploads |
+
+## How the surfaces fit together
+
+```text
+AI assistant or MCP client
+        |
+        | Streamable HTTP + OAuth or sk_admin_ key
+        v
+SketricGen MCP server
+        |
+        | Calls the same authorized control plane
+        v
+SketricGen Admin API  <----- Your backend, CLI, or automation
+
+Your product, website, or backend
+        |
+        | API-KEY: sk_runtime_...
+        v
+SketricGen Runtime API -----> Existing agent run and streamed response
+```
+
+The MCP server is an AI-friendly adapter over the Admin API. It does not bypass Teamspace roles, project boundaries, plan limits, or connector permissions.
+
+The Runtime API is intentionally separate. An Admin API key cannot run an agent through the Runtime API, and a Runtime API key cannot create, edit, or delete Teamspace resources.
+
+## Start here
+
+- Connect an AI assistant with the [SketricGen MCP guide](/dev-guide/mcp-connect).
+- Manage resources programmatically with the [Admin API](/dev-guide/admin-api).
+- Run an existing agent with the [Runtime API](/dev-guide/public-api-usage).
+- Use the [Python SDK](/dev-guide/python-sdk) or [Node.js SDK](/dev-guide/node-sdk) for a higher-level Runtime API client.
+
+## API key location
+
+Create API keys from the active Teamspace:
+
+1. Open **Teamspace settings** in SketricGen.
+2. Select **API keys**.
+3. Select **Create key**.
+4. Choose **Runtime key** or **Admin key** based on the integration.
+5. Choose the narrowest project, agent, role, and expiration settings that support the task.
+6. Copy the plaintext key immediately. SketricGen shows it only once.
+
+API key creation requires an eligible Teamspace plan and permission to manage API keys.
+
+## Security rule
+
+Treat both key types as secrets:
+
+- Keep keys on a server or in a secret manager.
+- Never put a key in a public repository, screenshot, browser bundle, or prompt transcript.
+- Prefer OAuth for hosted MCP clients because the AI client never needs your Admin API key.
+- Use a narrowly scoped key for local agents and automation.
+- Revoke a key from Teamspace settings when it is no longer needed.

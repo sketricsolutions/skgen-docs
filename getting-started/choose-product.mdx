@@ -1,42 +1,79 @@
 ---
-title: "Brand Agents vs AI Workforce"
-description: "Compare SketricGen Brand Agents for website chatbots and lead capture with AI Workforce for internal AI automation, agentic workflows, schedules, and files."
+title: "Choose an Agent Type"
+sidebarTitle: "Choose an agent type"
+description: "Compare public, customer-facing Brand Agents with the private AI Workforce for long-running tasks, multi-agent automation, team collaboration, and files."
 icon: "split"
-keywords: ["Brand Agents", "AI Workforce", "AI chatbot for website", "website chatbot", "AI automation tools", "workflow automation"]
+keywords: ["Brand Agents vs AI Workforce", "agent types", "customer-facing AI agent", "internal AI agents", "AI chatbot for website", "AI automation tools"]
 ---
 
-SketricGen now has two main product paths: **Brand Agents** for customer-facing agents and **AI Workforce** for internal multi-agent work.
+SketricGen provides two agent types for different environments:
+
+- **Brand Agents** are public, customer-facing agents for websites and external channels.
+- **AI Workforce** agents operate inside a permissioned Teamspace and Project for more powerful internal work.
+
+Choose based on who will use the agent and what access it needs—not simply which agent sounds more advanced.
 
 ## Quick Decision
 
-Use **Brand Agents** when the agent will talk to visitors, leads, prospects, or customers. Use **AI Workforce** when your team will use agents inside the SketricGen platform to work with files, tools, and internal systems.
+Choose a **Brand Agent** when customers should talk directly to the agent. Choose **AI Workforce** when you and your team need agents to perform substantial work with files, plans, tools, business systems, and other agents.
 
-| Use case | Choose | Why |
+| Difference | Brand Agents | AI Workforce |
 | --- | --- | --- |
-| Website chatbot, AI sales agent, or visitor assistant | Brand Agents | Built for public widgets, brand voice, lead capture, and safer tool access |
-| Product FAQ agent trained from a site | Brand Agents | The wizard crawls your site and creates a brand-aware agent |
-| Internal research, writing, or operations work | AI Workforce | Supports longer runs, planning, files, artifacts, and 2,000+ connectors |
-| Recurring internal tasks or report automation | AI Workforce | Scheduled runs can trigger the workflow automatically |
-| Multi-agent workflows across internal tools | AI Workforce | Designed for team workflows and internal business systems |
-| Public customer channel deployment | Brand Agents | Customer-facing deployment is the primary workflow |
+| Primary users | Website visitors, prospects, leads, and customers | You and authorized Teamspace members |
+| Environment | Public, customer-facing deployment | Private, permissioned internal workspace |
+| Main purpose | Answer questions, guide visitors, capture leads, and represent your brand | Research, create, analyze, automate, and operate across internal workflows |
+| Work style | Focused customer conversations | Long-running and multi-step work with planning and todos |
+| Agent structure | One customer-facing agent with controlled tools | A main agent with optional specialist sub-agents and handoffs |
+| Files and artifacts | Brand knowledge and customer conversation context | Project, agent, and run workspaces with persistent files and generated artifacts |
+| Collaboration | Teams configure and review the customer experience | Teammates collaborate with the same agents through shared or private conversations |
+| Tools | Knowledge, lead capture, page navigation, web search, and selected safe actions | Powerful tools, skills, connectors, MCP, API requests, files, code execution, and structured output |
+| Automation | Responds when customers interact through a deployed channel | Runs manually, through conversations, or automatically on a schedule |
 
-## Brand Agents
+## Choose a Brand Agent for Public Customer Experiences
 
-Brand Agents are practical customer-facing agents. They can read your website, generate brand context, create a Knowledge Base, answer visitor questions, capture leads, and guide users through your site. Use them when you need a website chatbot, lead generation chatbot, or customer-facing AI receptionist for visitor intake and routing.
+Brand Agents are designed to become the AI layer on top of your website or customer channel. They can learn from your website, build Brand DNA and a Knowledge Base, answer personalized questions, capture leads, and route visitors to the right page.
 
-Brand Agents intentionally use a more controlled tool surface. Public agents should only get the tools they need, such as Knowledge Bases, lead capture, page navigation, web search, and selected app connectors.
+![Starting a Brand Agent from a website or manual brand setup](/images/product-ui-2026/brand-agent-create-start.png)
 
-## AI Workforce
+Use a Brand Agent for:
 
-AI Workforce is the internal agent workspace for teams. It uses Agent Spaces and an updated runtime for longer multi-agent tasks, AI workflow automation, and recurring team workflows.
+- A public website chatbot or AI receptionist
+- Product, pricing, policy, or support questions
+- Personalized page navigation across a website
+- Lead qualification and contact capture
+- Public deployment through website widgets or supported customer channels
+- Customer conversations that should follow your brand voice
 
-AI Workforce runs can plan work, call tools, use connected apps, call sub agents, create files, inspect artifacts, trigger recurring work on a schedule, and work through larger tasks that may take 10-30 minutes depending on complexity.
+Because anyone may interact with a public agent, Brand Agents use a deliberately controlled tool surface. Give them only the knowledge and customer-safe actions they need.
 
-## Product Boundaries
+## Choose AI Workforce for Powerful Internal Work
 
-Both product paths can use Knowledge Bases, but most other capabilities are product-specific:
+AI Workforce is a secure, permissioned agent workspace for you and your team. It is designed for work that may require longer execution, multiple agents, internal tools, reusable files, human decisions, and recurring automation.
 
-- Brand Agents focus on public deployment, Brand DNA, safe customer-facing tools, conversations, and leads.
-- AI Workforce focuses on Agent Spaces, sub agents, templates, skills, internal connectors, files, artifacts, traces, runs, and schedules.
+![AI Workforce Agent Space with the Project's agents arranged on a live operational floor](/images/product-ui-2026/agent-space-overview.png)
 
-The difference is the default workflow: Brand Agents are optimized for secure customer-facing deployment, while AI Workforce is optimized for internal work and team productivity.
+If you have used Claude Code or Codex, think of AI Workforce as giving agents a similar cloud workspace for broader business tasks. An agent can work through directories and files, maintain plans and todos, use powerful tools and connectors, create artifacts, and continue substantial tasks in the cloud. SketricGen adds visual Agent Build configuration, multi-agent orchestration, schedules, traces, and Teamspace collaboration around that work.
+
+Use AI Workforce for:
+
+- Research, content, analysis, sales, support, and operations workflows
+- Tasks that may run for several minutes and require multiple steps
+- A main agent that delegates focused work to specialist sub-agents
+- Project directories, persistent agent files, run files, and generated artifacts
+- Planning, todos, traces, and human-input checkpoints
+- Internal connectors, MCP tools, API requests, web search, skills, and code execution
+- Scheduled reports and recurring automations
+- Real-time Teamspace collaboration with shared or private conversations
+
+<Note>
+  AI Workforce conversations in a shared Project are public to authorized Project members by default. You can make a conversation private when only you should be able to view it.
+</Note>
+
+## You Can Use Both Agent Types
+
+Many teams use both agent types together:
+
+- A Brand Agent acts as the public front door for website visitors and leads.
+- AI Workforce agents research, create, analyze, and support the internal team behind that customer experience.
+
+Both can use approved Knowledge Bases, but their default access and interaction models are different. Brand Agents prioritize safe public engagement. AI Workforce prioritizes powerful, transparent, permissioned work for your team.

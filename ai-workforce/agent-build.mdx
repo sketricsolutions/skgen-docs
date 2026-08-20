@@ -1,0 +1,108 @@
+---
+title: "Agent Build: Configure How an AI Agent Works"
+sidebarTitle: "Agent Build"
+icon: "workflow"
+description: "Use SketricGen Agent Build to configure a main agent, sub-agents, instructions, models, tools, skills, knowledge, handoffs, and deployment."
+keywords: ["Agent Build", "AI agent builder", "multi-agent workflow", "agent orchestration", "AI Workforce"]
+---
+
+Agent Build is the internal configuration surface for one AI Workforce agent. It shows how input reaches the main agent, which sub-agents it can delegate to, and which tools and skills each agent can use.
+
+Use Agent Build to change behavior. Use [Agent Space](/ai-workforce/agent-space) to see the agent working across the Project, and use [Playground](/ai-workforce/playground) to run and test it.
+
+![Blog Writer Agent Build with an Input node, content-planning main agent, research tools, and specialist SEO sub-agent](/images/product-ui-2026/ai-workforce-blog-writer-build.jpg)
+
+## Agent Build Modes
+
+The top navigation separates three jobs:
+
+- **Build:** configure the agent graph and internal behavior.
+- **Run:** test the draft or published agent in Playground.
+- **Deploy:** publish or connect the agent to supported execution surfaces.
+
+The status near the top shows whether you are viewing the **Draft** or published version. Draft changes do not automatically replace the published configuration.
+
+![Switching from Agent Build to the Playground Run experience](/images/product-ui-2026/agent-build-to-playground.gif)
+
+## Build the Agent Graph
+
+An Agent Build can contain:
+
+- **Input:** the message or instruction entering from the Run experience or a deployed surface.
+- **Main agent:** owns the user request, chooses tools, delegates work, and returns the final response.
+- **Sub-agents:** specialists that receive bounded tasks from the main agent.
+- **Tools:** capabilities such as File Search, Web Search, app connectors, API requests, structured output, and custom MCP tools.
+- **Skills:** reusable task instructions and supporting resources attached to an agent.
+- **Sticky notes:** documentation and setup reminders placed directly on the canvas.
+- **Connections:** define which tools or sub-agents the main agent can call.
+
+Keep the main agent responsible for the overall outcome. Add a sub-agent when a responsibility is distinct enough to deserve its own instructions, model, tools, and trace.
+
+## Configure an Agent
+
+Select an agent node to open the configuration panel.
+
+![Blog Writer AI Workforce configuration panel with content strategy instructions, model, tools, and skills](/images/product-ui-2026/ai-workforce-blog-writer-configuration.jpg)
+
+You can configure:
+
+- **Name and icon:** identify the agent in Agent Space, Playground, and traces.
+- **Instructions:** define identity, responsibilities, process, tool rules, escalation, and expected output.
+- **Generate with AI:** draft or improve instructions, which you should review before saving.
+- **Model:** choose a model whose capabilities match the work.
+- **Tools:** attach only the actions and data sources the agent needs.
+- **Skills:** upload, browse, or generate reusable task guidance.
+
+Save changes before leaving the editor. Test one behavior change at a time so you can understand its effect in the trace.
+
+## Main Agents and Sub-Agents
+
+The main agent talks to the user. A sub-agent works behind the main agent and returns its result to the main agent.
+
+Sub-agents cannot contain their own sub-agents. Use them for focused work such as research, classification, extraction, content drafting, validation, or escalation.
+
+Instructions should tell the main agent:
+
+- What result it owns
+- Which tasks it may delegate
+- When it should use each tool
+- When it must request human input
+- What it should do when evidence is missing
+
+See [Multi-Agent Orchestration and Handoffs](/user-guides/orchestration-and-handoffs) for delegation and routing patterns. To emit schema-validated JSON, add the dedicated [Structured Output tool](/dev-guide/structured-output-tools).
+
+## Draft, Test, and Publish
+
+Use this improvement loop:
+
+1. Change one instruction, model, tool, skill, or connection.
+2. Save the draft.
+3. Open **Run** and use a realistic test prompt.
+4. Inspect tool calls, sub-agent delegation, files, human-input requests, and the final response.
+5. Open the trace when the result is unexpected.
+6. Publish only after the draft behaves as intended.
+
+## Capability Facts
+
+- **Product surface:** Agent Build
+- **Purpose:** define the internal behavior and capabilities of one agent
+- **Contains:** input, main agent, optional sub-agents, tools, skills, notes, and connections
+- **Main agent:** owns the conversation and final answer
+- **Sub-agent:** receives delegated work and does not talk directly to the user
+- **Draft behavior:** editable and testable without automatically replacing the published version
+- **Run surface:** [Playground](/ai-workforce/playground)
+- **Operational surface:** [Agent Space](/ai-workforce/agent-space)
+
+## Troubleshooting
+
+### The agent does not use an attached tool
+
+Confirm that the tool is connected to the correct agent and that the instructions explain when to use it. Test with a prompt that clearly requires the tool, then inspect the trace.
+
+### A sub-agent is never called
+
+Confirm that the sub-agent is connected to the main agent and has a distinct role. Tell the main agent which tasks should be delegated instead of duplicating the same responsibility in both agents.
+
+### The Run result does not include the latest changes
+
+Confirm whether Playground is testing the Draft or published version. Save the Agent Build and start a new test conversation when you need a clean comparison.

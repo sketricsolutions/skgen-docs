@@ -1,0 +1,156 @@
+---
+title: "SketricGen Product Capability Reference"
+sidebarTitle: "Capabilities"
+icon: "list-checks"
+description: "Reference SketricGen product surfaces, AI agent capabilities, inputs, outputs, permissions, controls, limitations, and supported execution paths."
+keywords: ["SketricGen capabilities", "AI agent platform", "Agent Space", "Agent Build", "Brand Agents"]
+---
+
+This page is the public capability map for SketricGen. It defines what each product surface does, how the surfaces connect, and where user choice, Project permissions, or configuration limit an agent.
+
+## Product Structure
+
+- A **Teamspace** contains members, roles, shared plan resources, and Projects.
+- A **Project** scopes agents, onboarding state, conversations, connections, files, and collaboration.
+- An **Agent Build** defines the internal behavior of one AI Workforce agent.
+- **Agent Space** shows live operational state across the agents in a Project.
+- **Playground** runs and tests an Agent Build through conversations.
+- A **Brand Agent** is a separate customer-facing agent configured for public conversations and deployment.
+
+## Capability Matrix
+
+| Surface | Primary purpose | Inputs | Outputs and visible state |
+| --- | --- | --- | --- |
+| Adaptive Onboarding | Recommend a useful first agent or workflow | Role, AI experience, optional public website, business goal | Conversation, optional research report, Brand Agent offer, template recommendations |
+| Agent Space | Monitor and enter live work across a Project | Selected Project, agent runtime state, presence, schedules | Agent status, active work, teammates, pending human input, operational details |
+| Agent Build | Configure one internal AI Workforce agent | Instructions, models, main agent, sub-agents, tools, skills, knowledge, connections | Draft and published agent configuration |
+| Playground | Run and test an agent | Text, files, voice input, human responses | Conversations, agent activity, files, artifacts, human-input requests, traces |
+| Brand Agents | Serve website visitors and public audiences | Website, Brand DNA, Knowledge Base, approved tools | Customer conversations, navigation, lead capture, widget or channel responses |
+| Runs / Schedules | Execute and repeat agent work | Agent, instruction, schedule, timezone, optional files | Run state, conversation, files, trace, next scheduled activity |
+| Knowledge Bases | Ground agents in approved information | Website crawl, supported files, pasted text, Q&A | Searchable knowledge sources and retrieved context |
+| Tools and Connectors | Let agents retrieve information or perform actions | Tool configuration, Project connection, action arguments | Tool results, external actions, errors, trace activity |
+| Skills | Give agents reusable task guidance | Skill instructions and supporting resources | Improved task-specific behavior inside an Agent Build |
+
+## Adaptive Onboarding
+
+Adaptive Onboarding may use public website analysis, public search, market or SEO data, and the live template catalog when they can improve a recommendation.
+
+It cannot access private analytics, CRM data, advertising accounts, internal files, or connected apps unless those are provided or connected through a separate authorized product flow.
+
+Brand Agent setup requires a user choice. Template recommendations are not installed automatically.
+
+## Agent Space
+
+Agent Space can show:
+
+- All agents in the selected Project
+- Working, Needs attention, Scheduled, Sleeping, or Runtime unavailable state
+- Active runs and last activity
+- Human-input requests
+- Deployed schedules and active automations
+- Sub-agent, skill, and tool counts
+- Teammates viewing or working in conversations
+
+Agent Space does not edit an agent's instructions, models, graph, tools, or skills. Those changes belong in Agent Build.
+
+## Agent Build
+
+Agent Build can configure:
+
+- One main agent
+- Specialist sub-agents
+- Agent names, icons, instructions, and models
+- Tools, app connectors, API actions, MCP tools, and Knowledge Bases
+- Skills
+- Agent-to-agent delegation
+- Input behavior and structured outputs
+- Draft and published versions
+- Supported deployment settings
+
+A sub-agent cannot have its own sub-agents and does not talk directly to the user. The main agent owns the conversation and final response.
+
+## Playground and Runs
+
+Playground can:
+
+- Start a new conversation
+- Continue a saved conversation
+- Display conversations started from Playground, Agent Space, or schedules
+- Accept text, supported files, voice input, and file mentions
+- Show live agent and tool activity
+- Pause for human input
+- Preview or download workspace artifacts
+- Reattach to supported longer-running work
+- Expose traces for review
+
+An agent run uses only the capabilities available to the selected Project and Agent Build. A connected app does not give every agent access to every action.
+
+## Human Input and Approval
+
+An agent can pause and request:
+
+- A choice from allowed options
+- Missing information
+- Confirmation
+- Approval or rejection
+- A custom response
+
+The request appears in the same conversation and can move the agent into **Needs attention** in Agent Space. The run continues only after an allowed response or cancellation.
+
+Human input does not guarantee that every external action is automatically approval-gated. The Agent Build and tool configuration must define where approval is required.
+
+## Files and Workspaces
+
+- **Project files** can be read across agents in the selected Project when permitted.
+- **Agent workspace files** persist across conversations for one agent.
+- **Conversation or run files** belong to a specific work context.
+- **Artifacts** are generated reports, documents, spreadsheets, images, data files, or other supported outputs.
+
+File scope affects reuse. A conversation file does not automatically become a Project file.
+
+## Tools, Connectors, and Skills
+
+- A **tool** is a callable capability.
+- A **connector** authorizes selected actions in an external app.
+- A **skill** is task guidance and resources; it does not grant external credentials.
+- A **Knowledge Base** provides retrievable information; it does not execute an external action.
+- A **custom MCP server** can expose tools outside the managed catalog, subject to configuration and access controls.
+
+SketricGen supports a large connector catalog, but availability, action scope, authentication method, and plan access vary by connector.
+
+## Brand Agents
+
+Brand Agents can be configured to:
+
+- Learn from public website content and approved Knowledge Bases
+- Use Brand DNA for identity and response style
+- Answer visitor questions
+- Navigate visitors to approved website pages
+- Capture leads inside chat
+- Use selected customer-facing connectors
+- Publish as a widget, fullscreen experience, or supported external channel
+- Store conversations and leads for review
+
+Public agents should receive the minimum safe tool access. A Brand Agent should not be treated as an internal AI Workforce agent with unrestricted business-app access.
+
+## Transparency and Evidence
+
+SketricGen exposes different evidence depending on the surface:
+
+- Conversation messages show user and agent communication.
+- Activity views show visible progress and tool work.
+- Traces show agent steps, tools, sub-agents, errors, latency, and credit usage.
+- Workspace panels show files available to or generated by a run.
+- Agent Space shows operational status and pending human work.
+
+Model output can still be incorrect. Verify important claims against source material, review generated files, and use human input before consequential external actions.
+
+## Related Documentation
+
+- [SketricGen Core Concepts](/getting-started/core-concepts)
+- [Adaptive Onboarding](/getting-started/adaptive-onboarding)
+- [Agent Space](/ai-workforce/agent-space)
+- [Agent Build](/ai-workforce/agent-build)
+- [Playground](/ai-workforce/playground)
+- [Brand Agents](/brand-agents/overview)
+- [Public API](/dev-guide/public-api-usage)

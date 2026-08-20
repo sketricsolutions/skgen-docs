@@ -1,5 +1,7 @@
 ---
 title: "AI Workforce Tools, Connectors, Skills, and MCP"
+sidebarTitle: "Tools & skills"
+icon: "wrench"
 description: "Connect AI Workforce agents to AI knowledge bases, 2,000+ connectors, MCP servers, API automation tools, web search, image generation, and marketplace skills."
 keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "skills marketplace"]
 ---
@@ -18,8 +20,7 @@ AI Workforce agents can use:
 - [**SketricGen connectors**](#sketricgen-connectors): 2,000+ app actions for internal workflows.
 - [**Custom MCP tools**](#custom-mcp-tools): company-specific capabilities exposed through MCP servers.
 - [**API Request**](#api-request): direct HTTP calls for controlled integrations.
-- [**Application UI events**](#application-ui-events): fixed zero-argument events that tell a custom frontend what to render.
-- [**Structured Output**](#structured-output): validated JSON events for application UI and downstream logic.
+- [**Structured Output**](#structured-output): validated JSON for application UI events, typed state, and downstream logic.
 - [**Web Search**](#web-search): current public information.
 - [**Image Generation**](#image-generation): visual asset generation when the tool is enabled.
 - [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
@@ -70,7 +71,7 @@ The allowlist matters. If the hosted MCP exposes ten tools but this workflow onl
 
 Use Custom MCP when you have a reusable hosted tool surface, an internal service that already speaks MCP, or a third-party product that publishes an MCP endpoint. Use [API Request](#api-request) when you only need to wrap one REST endpoint.
 
-For orchestration patterns, see [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs).
+For delegation and routing patterns, see [Multi-Agent Orchestration and Handoffs](/user-guides/orchestration-and-handoffs).
 
 ## API Request
 
@@ -95,17 +96,15 @@ Use the description field to tell the agent when to call the API and what a succ
 
 API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, REST API automation, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
 
-## Application UI Events
-
-The fixed `user_preferences_form` tool tells an onboarding frontend to display the standard role and AI-experience form. It has no arguments or output schema. Instruct the agent to call it as the final action of the turn and tell the frontend to send the selections in the user's next normal message on the same conversation.
-
-This event does not pause the run or use Human Input resume semantics. It ends the current turn after emitting its tool-call events, leaving form rendering and persistence to your application.
-
 ## Structured Output
 
-Structured Output lets an agent emit validated JSON as the final action of a turn. Add a title, explain exactly when the agent should call it, and define the fields the receiving application expects.
+Structured Output lets an agent emit schema-validated JSON when a workflow or application needs predictable data. Add a title, explain exactly when the agent should call it, and define the fields the receiving application expects.
 
-Use it for UI cards, classifications, recommendation payloads, reusable project state, or any downstream step that needs predictable fields. The call appears in the run stream, so an application can render the arguments immediately; the successful tool result then ends that turn. It does not ask a person for a reply, so use Human Input when the agent needs an answer before it can continue.
+Application UI events are one use of the same Structured Output tool, not a separate tool type. For example, a custom frontend can watch for a Structured Output call and use its validated fields to render recommendation cards, open a form, update typed project state, or navigate to the next application step.
+
+You can also use Structured Output for classifications, extraction results, connector-ready payloads, and any downstream process that needs predictable fields. The call appears in the run stream so your application can read the arguments and validated result.
+
+Structured Output does not automatically pause the run or end the agent's turn. If the application needs the event to be the final action for that turn, state that explicitly in the agent and tool instructions. Use Human Input instead when the agent must pause and wait for a person's answer before continuing.
 
 For the workflow JSON contract and stream-handling example, see [Structured Output for Developers](/dev-guide/structured-output-tools).
 
@@ -149,6 +148,6 @@ Installed skills can be reviewed from the Skills page. This helps teams see whic
 
 Attach tools only where they are needed. The main agent should have the tools required to plan and coordinate the run. Sub agents should receive the smaller tool set required for their specialist task.
 
-For example, a research sub agent may need Web Search and a Knowledge Base, while a reporting sub agent may only need access to run files and a structured output schema.
+For example, a research sub-agent may need Web Search and a Knowledge Base, while a reporting sub-agent may need only run files and the dedicated [Structured Output tool](/dev-guide/structured-output-tools).
 
 For debugging tool calls, action errors, latency, and credit usage, see [Traces and Optimization](/user-guides/traces-and-optimizations).

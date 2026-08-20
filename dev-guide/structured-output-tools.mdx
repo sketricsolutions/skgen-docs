@@ -1,13 +1,15 @@
 ---
 title: "Structured Output for Developers"
+sidebarTitle: "Structured output"
+icon: "brackets"
 description: "Define schema-validated JSON tools, detect their public API stream events, and render reliable application UI from SketricGen agent runs."
 keywords: ["structured output", "JSON schema tool", "AI agent UI", "tool call event", "SketricGen API"]
 ---
 
-Structured Output is a model-callable tool that emits schema-validated JSON as the result of the current agent turn. It is useful when your application needs to render a card, save typed project state, trigger routing, or pass a predictable payload to downstream code while the conversation continues across turns.
+Structured Output is a model-callable tool that emits schema-validated JSON during an agent run. It is useful when your application needs to render a card, save typed project state, trigger routing, or pass a predictable payload to downstream code while the conversation continues across turns.
 
 <Note>
-A successful Structured Output call ends the current turn after its tool result is emitted, so the model does not duplicate the payload in a second prose response. It does not collect a person's answer: use Human Input for that, or send the frontend's next message on the same conversation to continue.
+A Structured Output call does not automatically pause the run or end the agent's turn. If your application needs the call to be the final action of the turn, state that in the tool and agent instructions. Use Human Input when the agent must wait for a person's answer.
 </Note>
 
 ## Configure the tool
@@ -59,25 +61,13 @@ A workflow or template stores the node in this form:
 
 The editor generates `data.name` deterministically from the title and node ID. When building template JSON programmatically, use the current SketricGen template builder instead of inventing this value.
 
-## Use a zero-argument UI event
+## Use Structured Output for application UI events
 
-When a frontend only needs a signal to display the canonical onboarding preferences form, use the fixed `user_preferences_form` custom tool instead of inventing a Structured Output schema:
+An application UI event is a use case of Structured Output, not a separate platform tool. Define fields that tell the receiving frontend what to render or do, then detect the normal Structured Output tool-call event in your application.
 
-```json
-{
-  "id": "tool-node-user-preferences-form",
-  "type": "toolNode",
-  "data": {
-    "name": "user_preferences_form",
-    "toolType": "custom_tool",
-    "description": "Show the role and AI-experience form with no arguments as the final action, end the turn, and expect the selections in the user's next message.",
-    "is_enabled": true,
-    "config": {}
-  }
-}
-```
+For example, a recommendation workflow can emit component data for cards, while another workflow can emit an event name and the state required to open a form. Keep the schema specific to the agent and application you are building; onboarding-specific forms or events are not global SketricGen tools.
 
-The call emits ordinary `TOOL_CALL_START` and `TOOL_CALL_END` events with an empty arguments object, then ends the current turn. It does not create a HITL pause. Render the form when the event arrives, then send the selected role and AI experience as the next normal message using the same conversation ID. Do not send a HITL-resume request.
+Structured Output does not collect the user's response. After the frontend renders an interactive component, send the submitted values as the user's next message on the same conversation. Use Human Input instead if the agent run must pause and wait for that response.
 
 ## Schema rules
 
@@ -111,7 +101,7 @@ function handleAgentEvent(event: Record<string, unknown>) {
 }
 ```
 
-`TOOL_CALL_START.tool_call_arguments` contains the model-supplied object. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result. Treat the end event as confirmation that runtime validation succeeded and the current agent turn is complete.
+`TOOL_CALL_START.tool_call_arguments` contains the model-supplied object. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result. Treat the end event as confirmation that runtime validation succeeded, not as proof that the entire agent turn has ended.
 
 ## Instruction pattern
 

@@ -1,0 +1,180 @@
+---
+title: "Safer Widgets, Expanded Brand Agent APIs & Wix Improvements (August 6, 2026)"
+sidebarTitle: "Aug 6, 2026"
+icon: "calendar-days"
+description: "SketricGen update: safer embedded widgets, expanded Brand Agent APIs and MCP tools, stronger Wix linking, and more reliable AI-assisted building."
+tags: ["release", "security", "widgets", "brand-agents", "api", "mcp", "wix", "agent-build"]
+version: "v3"
+releaseDate: "2026-08-06"
+---
+
+This release strengthens how embedded agents authenticate visitors and expands the ways developers and AI clients can manage Brand Agents. Wix linking is safer, while Agent Build's Import, Improve, and Skill assistants are more responsive during longer requests.
+
+## TL;DR
+
+- **Safer public widgets:** Embedded agents use short-lived, agent-specific authorization instead of exposing a reusable runtime key.
+- **Visitor continuity:** Returning widget visitors can continue their identity without letting the browser choose a trusted contact identifier.
+- **Private widgets preserved:** API-key-protected agents continue to enforce their existing access requirements.
+- **Editable Brand Agents by API:** Update Brand Agent details, models, knowledge bases, and widget behavior without replacing the workflow graph.
+- **Richer MCP tools:** AI clients can discover Brand Agent templates and knowledge bases, then use them during agent creation.
+- **Connector-aware automation:** Brand connectors can be configured through the Admin API and MCP workflows with tool-level validation.
+- **Stronger Wix linking:** Verified Wix site context reaches the widget while invalid connection data is rejected safely.
+- **More reliable AI assistance:** Import, Improve, and Skill operations can stream longer work without the previous short request limit.
+
+---
+
+## What's new
+
+### 1) Safer embedded widgets and visitor sessions
+
+Public and private widgets now use a more narrowly scoped authorization model:
+
+- **Short-lived access:** Public widgets request temporary authorization for one agent instead of receiving a reusable runtime API key in the embed page.
+- **Automatic renewal:** Active widget sessions refresh their temporary authorization while a conversation is running.
+- **Signed visitor continuity:** SketricGen can recognize a returning anonymous visitor without trusting an identity supplied directly by the browser.
+- **Consistent fullscreen behavior:** Fullscreen and iframe widgets follow the same visitor identity rules.
+- **Private-agent protection:** Agents that require an API key keep that additional access check.
+- **Tighter agent permissions:** Import, instruction improvement, skill generation, lead submission, and other protected actions verify access to the target agent.
+
+**Why it matters:** You can embed agents publicly without placing a long-lived platform credential in customer-facing HTML, while private agents remain private.
+
+---
+
+### 2) Manage more Brand Agent settings through the API
+
+The Brand Agent management API now supports practical edits after creation:
+
+- **Agent details:** Update display names, agent names, instructions, the selected model, and attached knowledge bases.
+- **Widget configuration:** Change supported widget appearance and behavior settings independently from the agent's core details.
+- **Safe partial updates:** Send only the fields you want to change; the API preserves the remaining stored configuration.
+- **Brand Agent boundaries:** These operations cannot add or remove workflow nodes and reject agents that are not Brand Agents.
+- **Plan enforcement:** Model access and branding removal follow the Teamspace's active subscription entitlements.
+- **Clearer failures:** Invalid models, unavailable widget configuration, and unsupported agent types return explicit errors instead of silently overwriting data.
+
+**Why it matters:** Developers and AI operators can maintain Brand Agents programmatically while SketricGen preserves workflow structure and subscription rules.
+
+**For developers:** Use `PATCH /brand-agents/{agent_id}` for Brand Agent details and knowledge base assignment, and `PATCH /brand-agents/{agent_id}/widget-config` for widget settings. The retired standalone knowledge base attach and detach endpoints should no longer be used.
+
+---
+
+### 3) Build Brand Agents through richer MCP tools
+
+The SketricGen Model Context Protocol (MCP) server can now supply more of the context an AI client needs:
+
+- **Discover templates:** List available Brand Agent templates before choosing how to create an agent.
+- **Discover knowledge bases:** List accessible knowledge bases and select one during creation.
+- **Template-based creation:** Create a Brand Agent from a template identifier instead of recreating its setup manually.
+- **Knowledge-grounded creation:** Attach a selected knowledge base as part of the agent creation request.
+- **Connector setup:** Add supported Brand Agent connectors and grant only tools available for the selected app.
+- **Job visibility:** Creation-job results include the connectors being prepared for the agent.
+
+**Why it matters:** Claude, ChatGPT, and other MCP-compatible AI clients can understand available building blocks and assemble a more complete Brand Agent with fewer manual follow-up steps.
+
+---
+
+### 4) Stronger Wix site connections
+
+Wix integrations now pass verified site information into the connected agent experience:
+
+- **Site-aware widgets:** The widget receives the Wix site and instance context it needs for connected actions.
+- **Verified connection data:** SketricGen validates site information before treating it as the live Wix tool endpoint.
+- **Safe retries:** Invalid connection data is rejected without consuming the one-time link, so you can correct the issue and try again.
+- **Graceful version compatibility:** Older Wix app versions can still activate when optional signed context is absent.
+- **Regenerated embed bundle:** The production Wix embed code includes the latest connection behavior.
+
+**Why it matters:** Agents connected to Wix can act with the right site context, and failed setup attempts are less likely to leave the connection stuck.
+
+---
+
+### 5) Longer, more responsive AI-assisted building
+
+Three Agent Build assistants now use a dedicated streaming path:
+
+- **Import:** Watch progress while SketricGen converts an external API definition into agent-ready configuration.
+- **Improve:** Get more reliable instruction-improvement results without depending on a short page request.
+- **Skill:** Stream generated skill content as it is produced.
+- **Protected target selection:** The browser selects the feature, while SketricGen controls which internal assistant performs the work.
+- **Conversation reliability:** Additional history-refresh handling keeps widget transcripts consistent as conversations update.
+
+**Why it matters:** More complex imports and generations can take the time they need while still showing progress and enforcing access to the agent being edited.
+
+## Who this release is for
+
+- **Teams embedding public agents** that want safer visitor authorization without managing exposed runtime credentials.
+- **Teams operating private agents** that rely on API-key-gated widget access.
+- **Developers using the Admin API** to update Brand Agents after creation.
+- **AI clients and agentic tools using MCP** to discover templates, knowledge bases, and connectors.
+- **Wix site owners** connecting a Brand Agent to a specific site.
+- **Builders using Import, Improve, or Skill** for more involved Agent Build tasks.
+
+## How to use (quick steps)
+
+### Update a Brand Agent through the API
+
+1. Authenticate with credentials that can manage the target Brand Agent.
+2. Send a partial update to the Brand Agent details or widget configuration endpoint.
+3. Include only the fields you intend to change.
+4. Handle entitlement or validation errors before retrying with a supported value.
+5. Open the Playground or widget preview to verify the result.
+
+### Create a Brand Agent with an MCP client
+
+1. Connect your MCP-compatible AI client to the SketricGen MCP server.
+2. Ask it to list available Brand Agent templates and knowledge bases.
+3. Choose a template and, when relevant, a knowledge base.
+4. Ask the client to create the Brand Agent with those identifiers.
+5. Review the completed agent and test any requested connectors before publishing it.
+
+### Connect a Wix site
+
+1. Start the SketricGen connection flow from the Wix app.
+2. Choose the Brand Agent you want to use on that site.
+3. Complete the one-time linking step.
+4. If verification fails, restart or retry the link instead of creating a separate connection.
+5. Test the widget from the live Wix site so it receives the correct site context.
+
+### Use an AI-assisted Agent Build action
+
+1. Open the agent you are allowed to edit in **Agent Build**.
+2. Start **Import**, **Improve**, or **Skill** from its relevant editor.
+3. Keep the progress view open while the response streams.
+4. Review the generated configuration before saving or publishing the agent.
+
+---
+
+## FAQ
+
+**Does a public widget still expose a SketricGen runtime API key?**
+
+No. Public widget pages request short-lived authorization scoped to the selected agent. The temporary credential is renewed as needed instead of embedding a long-lived runtime key in the page.
+
+**Did private widget authentication change?**
+
+Private agents still require their existing API-key-based access. The new temporary widget authorization does not make a private agent public.
+
+**Can the Brand Agent update API redesign my workflow graph?**
+
+No. It updates supported Brand Agent fields and widget settings, but it cannot add or remove workflow nodes. Use Agent Build for graph-level changes.
+
+**How should API clients attach a knowledge base now?**
+
+Include the desired knowledge base identifiers in the Brand Agent update. The older standalone attach and detach operations were removed because they did not reliably update the agent's actual knowledge tool configuration.
+
+**Will an API or MCP request bypass my plan limits?**
+
+No. Model selection, branding removal, and other paid capabilities are validated against the active Teamspace plan even when the change comes from an API or MCP client.
+
+**What happens if Wix cannot verify the site information?**
+
+SketricGen rejects invalid signed context and preserves the one-time link for a valid retry. If optional context is simply missing from an older app version, the base connection can continue without trusting unverified site data.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Public API guide:** [/dev-guide/public-api-usage](/dev-guide/public-api-usage)
+- **Structured Output tools:** [/dev-guide/structured-output-tools](/dev-guide/structured-output-tools)
+- **Wix deployment guide:** [/deploy/wix](/deploy/wix)
+- **Brand Agent connectors:** [/brand-agents/connectors-and-leads](/brand-agents/connectors-and-leads)
+- **Agent Build:** [/ai-workforce/agent-build](/ai-workforce/agent-build)

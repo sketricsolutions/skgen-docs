@@ -1,5 +1,7 @@
 ---
 title: "Scheduled Runs, Files, and Artifacts"
+sidebarTitle: "Runs & artifacts"
+icon: "clock-3"
 description: "Use AI Workforce for scheduled automation, report automation, longer runs, planning, workspace files, generated artifacts, traces, and recurring internal work."
 keywords: ["AI Workforce runs", "scheduled automation", "report automation", "scheduled runs", "recurring AI tasks", "files", "artifacts", "traces"]
 ---
@@ -23,6 +25,23 @@ Longer runs are useful for research, content, analysis, internal operations, and
 ## Scheduled Runs
 
 Schedules let AI Workforce agents automate recurring work by triggering a run at a configured time. Instead of asking the agent manually each time, you can turn repeatable internal work into a scheduled run.
+
+### Create a schedule from the Input node
+
+Open the agent's **Agent Build**, then select the **Input** node on the Build canvas. Choose **Scheduled Trigger** to configure the message and cadence that will start each recurring run.
+
+![Agent Build canvas with the Input node selected and Scheduled Trigger configuration visible](/images/product-ui-2026/agent-build-input-scheduled-trigger.jpg)
+
+1. Open the agent from Agent Space and select **Manage Agent Build**.
+2. On the **Build** canvas, select the **Input** node.
+3. Choose **Scheduled Trigger**.
+4. Enter the **User Message** the agent should receive whenever the schedule fires.
+5. Set the recurrence to hourly, daily, weekly, or monthly, then configure the relevant minute, hour, day, and timezone settings.
+6. Select **Deploy Trigger**.
+
+At every scheduled interval, SketricGen sends the configured User Message to the agent as its trigger text. The agent then handles it like a new instruction and runs with its current instructions, tools, knowledge, connections, and permissions.
+
+Write the User Message as a complete recurring instruction. Include the subject, time range, sources, output format, and destination when they matter. For example: `Review this week's support conversations, summarize the top five recurring issues, and save the report as a Markdown file.`
 
 Scheduled runs work well for:
 

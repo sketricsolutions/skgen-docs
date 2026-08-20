@@ -5,8 +5,11 @@
   "description": "SketricGen docs for website Brand Agents and AI Workforce automation with AI knowledge bases, 2,000+ connectors, skills, models, files, and deployment.",
   "colors": {
     "primary": "#7D4AEA",
-    "light": "#7D4AEA",
+    "light": "#A78BFA",
     "dark": "#7D4AEA"
+  },
+  "icons": {
+    "library": "lucide"
   },
   "favicon": "favicon.ico",
   "seo": {
@@ -24,19 +27,24 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Product",
+        "icon": "boxes",
         "groups": [
           {
             "group": "Getting Started",
+            "icon": "rocket",
             "pages": [
               "getting-started/overview",
               "getting-started/choose-product",
+              "getting-started/adaptive-onboarding",
               "getting-started/core-concepts",
-              "getting-started/quickstart"
+              "getting-started/quickstart",
+              "reference/product-capabilities"
             ]
           },
           {
             "group": "Brand Agents",
+            "icon": "bot",
             "pages": [
               "brand-agents/overview",
               "brand-agents/create-brand-agent",
@@ -45,9 +53,13 @@
           },
           {
             "group": "AI Workforce",
+            "icon": "users",
             "pages": [
               "ai-workforce/overview",
-              "ai-workforce/agent-spaces",
+              "ai-workforce/agent-space",
+              "ai-workforce/team-collaboration",
+              "ai-workforce/agent-build",
+              "ai-workforce/playground",
               "user-guides/orchestration-and-handoffs",
               "user-guides/tools",
               "ai-workforce/runs-files-artifacts",
@@ -56,91 +68,121 @@
           },
           {
             "group": "Knowledge Bases",
+            "icon": "database",
             "pages": [
               "shared-platform/knowledge-bases"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Deployment",
+        "icon": "cloud-upload",
+        "groups": [
           {
-            "group": "Deployment",
+            "group": "Websites",
+            "icon": "globe",
             "pages": [
               "deploy/custom-website",
               "deploy/squarespace",
               "deploy/wix",
               "deploy/shopify",
               "deploy/wordpress",
-              "deploy/framer",
+              "deploy/framer"
+            ]
+          },
+          {
+            "group": "Messaging & Automation",
+            "icon": "messages-square",
+            "pages": [
               "deploy/whatsapp",
               "deploy/slack",
               "deploy/telegram",
               "deploy/instagram",
               "deploy/zapier"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Developers",
+        "icon": {
+          "name": "code",
+          "library": "fontawesome",
+          "style": "solid"
+        },
+        "groups": [
           {
-            "group": "Dev Guide",
+            "group": "Developer Guides",
+            "icon": {
+              "name": "code",
+              "library": "fontawesome",
+              "style": "solid"
+            },
             "pages": [
+              "dev-guide/overview",
+              "dev-guide/mcp-connect",
+              "dev-guide/admin-api",
               "dev-guide/public-api-usage",
               "dev-guide/structured-output-tools",
               "dev-guide/python-sdk",
               "dev-guide/node-sdk"
             ]
+          }
+        ]
+      },
+      {
+        "tab": "Product Updates",
+        "icon": "sparkles",
+        "groups": [
+          {
+            "group": "Major Releases",
+            "icon": "sparkles",
+            "pages": [
+              "changelog/v3.0.0",
+              "changelog/v2.0.0",
+              "changelog/v1.0.0"
+            ]
           },
           {
-            "group": "Product Updates",
+            "group": "2026 Updates",
+            "icon": "calendar-days",
             "pages": [
-              {
-                "group": "Major Releases",
-                "pages": [
-                  "changelog/v3.0.0",
-                  "changelog/v2.0.0",
-                  "changelog/v1.0.0"
-                ]
-              },
-              {
-                "group": "2026 Updates",
-                "pages": [
-                  "changelog/2026-07-20-affiliates-managed-connectors-teamspace-controls",
-                  "changelog/2026-07-13-teamspaces-shared-plans-project-connections",
-                  "changelog/2026-07-08-brand-agent-templates-mobile-editor-fixes",
-                  "changelog/2026-06-18-custom-skills-template-setup-agent-sharing",
-                  "changelog/2026-06-05-widget-navigation-crawl-limits-cookie-controls",
-                  "changelog/2026-05-25-practical-agents-that-do-real-work",
-                  "changelog/2026-03-13-max-trial-subscription-updates",
-                  "changelog/2026-02-17-auth-utm-voice-limits-dashboard-ui",
-                  "changelog/2026-02-12-brand-agent-crawl-dashboard-voice-ui",
-                  "changelog/2026-01-30-auth-widget-chat-api-landing",
-                  "changelog/2026-01-21-onboarding-infinite-scroll-tool-management",
-                  "changelog/2026-01-13-app-landing-auth-flow-workflow-scheduling-integrations"
-                ]
-              },
-              {
-                "group": "2025 Updates",
-                "expanded": false,
-                "pages": [
-                  "changelog/2025-12-29-node-inspector-editing-image-gen-integrations-performance",
-                  "changelog/2025-12-15-billing-fixes-integrations-onboarding",
-                  "changelog/2025-12-13-chat-widget-file-upload-guided-tour-advanced-agent-settings",
-                  "changelog/2025-11-26-conversations-contacts-attachments-instagram-zapier",
-                  "changelog/2025-11-17-telegram-google-signin-mobile-integrations",
-                  "changelog/2025-11-07-affiliate-referrals-widget-import-ui",
-                  "changelog/2025-11-03-iframe-fullscreen-embed-forced-handoff-ga-tracking",
-                  "changelog/2025-10-24-message-tracing-templates-ui-integrations"
-                ]
-              }
+              "changelog/2026-08-17-collaborative-agent-space-agent-build-onboarding",
+              "changelog/2026-08-06-secure-widgets-brand-agent-api-wix",
+              "changelog/2026-07-29-shopify-resilient-runs-project-billing",
+              "changelog/2026-07-20-affiliates-managed-connectors-teamspace-controls",
+              "changelog/2026-07-13-teamspaces-shared-plans-project-connections",
+              "changelog/2026-07-08-brand-agent-templates-mobile-editor-fixes",
+              "changelog/2026-06-18-custom-skills-template-setup-agent-sharing",
+              "changelog/2026-06-05-widget-navigation-crawl-limits-cookie-controls",
+              "changelog/2026-05-25-practical-agents-that-do-real-work",
+              "changelog/2026-03-13-max-trial-subscription-updates",
+              "changelog/2026-02-17-auth-utm-voice-limits-dashboard-ui",
+              "changelog/2026-02-12-brand-agent-crawl-dashboard-voice-ui",
+              "changelog/2026-01-30-auth-widget-chat-api-landing",
+              "changelog/2026-01-21-onboarding-infinite-scroll-tool-management",
+              "changelog/2026-01-13-app-landing-auth-flow-workflow-scheduling-integrations"
+            ]
+          },
+          {
+            "group": "2025 Updates",
+            "icon": "calendar-days",
+            "expanded": false,
+            "pages": [
+              "changelog/2025-12-29-node-inspector-editing-image-gen-integrations-performance",
+              "changelog/2025-12-15-billing-fixes-integrations-onboarding",
+              "changelog/2025-12-13-chat-widget-file-upload-guided-tour-advanced-agent-settings",
+              "changelog/2025-11-26-conversations-contacts-attachments-instagram-zapier",
+              "changelog/2025-11-17-telegram-google-signin-mobile-integrations",
+              "changelog/2025-11-07-affiliate-referrals-widget-import-ui",
+              "changelog/2025-11-03-iframe-fullscreen-embed-forced-handoff-ga-tracking",
+              "changelog/2025-10-24-message-tracing-templates-ui-integrations"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Overview",
-          "icon": "book-open",
-          "href": "https://docs.sketricgen.ai"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.png",
