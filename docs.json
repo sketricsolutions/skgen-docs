@@ -184,6 +184,28 @@
       }
     ]
   },
+  "redirects": [
+    {
+      "source": "/integrations/shopify",
+      "destination": "/deploy/shopify"
+    },
+    {
+      "source": "/user-guides/structured-inputs-and-outputs",
+      "destination": "/dev-guide/structured-output-tools"
+    },
+    {
+      "source": "/user-guides/advanced-agent-settings",
+      "destination": "/ai-workforce/agent-build"
+    },
+    {
+      "source": "/user-guides/max-agent-builder",
+      "destination": "/getting-started/adaptive-onboarding"
+    },
+    {
+      "source": "/user-guides/conversations-and-insights",
+      "destination": "/user-guides/traces-and-optimizations"
+    }
+  ],
   "logo": {
     "light": "/logo/light.png",
     "dark": "/logo/dark.png"

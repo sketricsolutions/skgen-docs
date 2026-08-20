@@ -2,8 +2,8 @@
 title: "AI Workforce Tools, Connectors, Skills, and MCP"
 sidebarTitle: "Tools & skills"
 icon: "wrench"
-description: "Connect AI Workforce agents to AI knowledge bases, 2,000+ connectors, MCP servers, API automation tools, web search, image generation, and marketplace skills."
-keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "skills marketplace"]
+description: "Connect AI Workforce agents to knowledge bases, 2,000+ connectors, MCP servers, APIs, web search, Code Interpreter, image generation, and marketplace skills."
+keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "Code Interpreter", "File Search", "skills marketplace"]
 ---
 
 Tools and skills turn AI Workforce agents from chat interfaces into AI automation tools that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
@@ -22,6 +22,7 @@ AI Workforce agents can use:
 - [**API Request**](#api-request): direct HTTP calls for controlled integrations.
 - [**Structured Output**](#structured-output): validated JSON for application UI events, typed state, and downstream logic.
 - [**Web Search**](#web-search): current public information.
+- [**Code Interpreter**](#code-interpreter): sandboxed Python for calculations, file processing, and generated artifacts.
 - [**Image Generation**](#image-generation): visual asset generation when the tool is enabled.
 - [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
 
@@ -29,13 +30,19 @@ Use the section links above to jump to the tool type you are configuring.
 
 ## Knowledge Bases
 
+<span id="2-file-search"></span>
+
 [Knowledge Bases](/shared-platform/knowledge-bases) let agents retrieve trusted source material from websites, uploaded files, pasted text, and Q&A pairs.
+
+In Agent Build, the **File Search** tool connects one or more approved Knowledge Bases to the agent that needs them. The agent can then retrieve relevant passages during a run instead of relying only on its model knowledge.
 
 Use Knowledge Bases when the agent needs approved company, product, policy, support, sales, or website context. For AI Workforce, this usually means internal reference data the run should cite or use while preparing an artifact. For Brand Agents, Knowledge Bases power customer-facing answers from approved website and brand content.
 
 Knowledge Bases are retrieval tools, not broad app connectors. If the agent needs to take action in another system, pair the Knowledge Base with a connector, API Request, or custom MCP tool.
 
 ## SketricGen Connectors
+
+<span id="1-sketric-app-marketplace"></span>
 
 SketricGen connectors give AI Workforce agents access to 2,000+ applications. They are useful for internal workflows that need to read or update CRMs, calendars, email, documents, spreadsheets, support systems, project management tools, databases, commerce tools, marketing platforms, and team communication apps.
 
@@ -49,7 +56,9 @@ For practical workflows, combine connectors with skills. A meeting-prep agent ca
 
 ## Custom MCP Tools
 
-Custom MCP tools let you connect a hosted MCP server directly to an AI Workforce agent. Use this when a service, vendor, or internal platform already exposes an MCP endpoint and you want SketricGen to make selected MCP tools available inside an Agent Space.
+<span id="6-custom-mcp"></span>
+
+Custom MCP tools let you connect a hosted MCP server directly to an AI Workforce agent. Use this when a service, vendor, or internal platform already exposes an MCP endpoint and you want to make selected MCP tools available to an agent through Agent Build.
 
 This is different from a single API Request. A hosted MCP can expose a group of tools, and SketricGen lets you discover those tools, choose the ones the agent can use, and attach the allowlisted set to the right agent.
 
@@ -74,6 +83,8 @@ Use Custom MCP when you have a reusable hosted tool surface, an internal service
 For delegation and routing patterns, see [Multi-Agent Orchestration and Handoffs](/user-guides/orchestration-and-handoffs).
 
 ## API Request
+
+<span id="5-api-request"></span>
 
 API Request turns a cURL-style REST endpoint into an API automation tool the agent can call. Use it when you have one endpoint, webhook, lookup, or action that should become available to the agent without building a full connector or MCP server.
 
@@ -110,11 +121,21 @@ For the workflow JSON contract and stream-handling example, see [Structured Outp
 
 ## Web Search
 
+<span id="3-web-search"></span>
+
 Web Search lets an agent look up current public information when a Knowledge Base is not enough.
 
 Use Web Search for market research, recent news, public company information, competitive checks, and time-sensitive facts. For workflows that require approved internal facts, pair Web Search with a [Knowledge Base](#knowledge-bases) and tell the agent which source should win when sources conflict.
 
 ![Web Search tool configuration](/images/user-guides/tools/tools_websearch.png)
+
+## Code Interpreter
+
+<span id="4-code-interpreter"></span>
+
+Code Interpreter gives AI Workforce agents a sandboxed Python environment for calculations, data analysis, file transformation, and artifact generation. Use it when the agent needs to inspect structured data, perform repeatable computation, or create a file rather than only explain an answer in chat.
+
+Treat generated files and calculations as run outputs that still require review. Give the agent clear input files, expected output format, and validation criteria, then inspect the resulting artifact and trace before using it downstream.
 
 ## Image Generation
 

@@ -14,7 +14,7 @@ A Structured Output call does not automatically pause the run or end the agent's
 
 ## Configure the tool
 
-In the Agent Space editor:
+In Agent Build:
 
 1. Add **Structured Output** from the advanced tools section.
 2. Give it a short title that describes the event, such as `Render recommendations`.
@@ -86,22 +86,56 @@ Keep the payload focused. A small schema is easier for lower-cost models to sati
 The public streaming API exposes ordinary tool-call events. Match the generated tool name or maintain a node-name mapping in your application.
 
 ```ts
+type TemplateRecommendation = { slug: string; reason: string };
+
+function isTemplateRecommendation(
+  value: unknown,
+): value is TemplateRecommendation {
+  if (typeof value !== "object" || value === null) return false;
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.slug === "string" &&
+    typeof candidate.reason === "string"
+  );
+}
+
+function parseRecommendationResult(result: unknown) {
+  let value = result;
+
+  if (typeof value === "string") {
+    try {
+      value = JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+
+  if (typeof value !== "object" || value === null) return null;
+
+  const templates = (value as Record<string, unknown>).templates;
+  if (!Array.isArray(templates) || !templates.every(isTemplateRecommendation)) {
+    return null;
+  }
+
+  return { templates };
+}
+
 function handleAgentEvent(event: Record<string, unknown>) {
   if (
-    event.type === "TOOL_CALL_START" &&
+    event.type === "TOOL_CALL_END" &&
     typeof event.tool_call_name === "string" &&
     event.tool_call_name.startsWith("emit_render_recommendations_")
   ) {
-    const payload = event.tool_call_arguments as {
-      templates: Array<{ slug: string; reason: string }>;
-    };
+    const payload = parseRecommendationResult(event.tool_call_result);
+    if (!payload) return;
 
     renderTemplateCards(payload.templates);
   }
 }
 ```
 
-`TOOL_CALL_START.tool_call_arguments` contains the model-supplied object. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result. Treat the end event as confirmation that runtime validation succeeded, not as proof that the entire agent turn has ended.
+`TOOL_CALL_START.tool_call_arguments` contains model-supplied data that has not yet completed runtime validation. Use the start event for progress UI, not application rendering or writes. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result; depending on the client transport, it may arrive as a JSON string or an object, so parse and runtime-check it before use. Treat the end event as confirmation that this tool call completed, not as proof that the entire agent turn has ended.
 
 ## Instruction pattern
 
