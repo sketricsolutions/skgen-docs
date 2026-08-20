@@ -1,12 +1,24 @@
 ---
-title: "Orchestration and Structured Data"
-description: "Understand AI Workforce orchestration for agentic workflows, including the main agent, sub agents, structured data outputs, planning, tools, and traces."
-keywords: ["agent orchestration", "agentic workflow", "multi-agent workflow", "multi agent system", "sub agents", "structured outputs", "AI Workforce"]
+title: "Multi-Agent Orchestration and Handoffs"
+sidebarTitle: "Orchestration"
+icon: "route"
+description: "Build multi-agent workflows in SketricGen with a main agent, specialist sub-agents, AI-routed delegation, forced handoffs, and traceable execution."
+keywords: ["agent orchestration", "agentic workflow", "multi-agent workflow", "multi agent system", "sub-agents", "agent handoffs", "AI Workforce"]
 ---
 
-Orchestration defines how agents collaborate during an AI Workforce run or agentic workflow. Structured data defines when an agent should return predictable JSON instead of a normal conversational answer.
+Orchestration defines how agents divide work during an AI Workforce run. In SketricGen, one main agent owns the conversation and can delegate focused tasks to specialist sub-agents.
 
-In SketricGen V3, the main agent owns the user conversation. Sub agents help the main agent with bounded specialist work.
+Use orchestration when one agent should coordinate a result that requires different skills, tools, knowledge, or review steps. Keep a single-agent build when one clear set of instructions and tools can complete the work reliably.
+
+## How SketricGen Orchestration Works
+
+1. The user sends a request to the main agent.
+2. The main agent decides how to approach the work.
+3. The main agent completes work directly or delegates a bounded task to a sub-agent.
+4. The sub-agent returns its result to the main agent.
+5. The main agent combines the available results and responds to the user.
+
+The main agent remains responsible for the conversation and final response. A sub-agent cannot add another sub-agent beneath itself.
 
 ## Main Agent
 
@@ -15,14 +27,14 @@ The main agent is responsible for:
 - Understanding the user's request.
 - Planning the work.
 - Calling tools and connectors.
-- Calling sub agents when specialist help is useful.
+- Calling sub-agents when specialist help is useful.
 - Returning the final response to the user.
 
-Write main-agent instructions that explain the task boundary, available tools, when to ask questions, and what a successful result looks like.
+Write main-agent instructions that explain the task boundary, available tools, when to delegate, when to ask questions, and what a successful result looks like.
 
-## Sub Agents
+## Sub-Agents
 
-Sub agents are specialist helpers. The main agent can call them for focused tasks and use their result in the final answer.
+Sub-agents are specialist helpers. The main agent can call them for focused tasks and use their results in the final answer.
 
 Good sub-agent jobs include:
 
@@ -34,55 +46,47 @@ Good sub-agent jobs include:
 - Validation
 - Short reusable subtasks
 
-Sub agents cannot have their own sub agents. Keep the structure one level below the main agent so the workflow stays predictable.
+Give each sub-agent a narrow responsibility, focused instructions, and only the tools and knowledge it needs. Sub-agents cannot have their own sub-agents, so keep the orchestration structure one level below the main agent.
 
-## Structured Data Outputs
+## Add and Connect a Sub-Agent
 
-AI Workforce supports structured **outputs** when a run needs predictable JSON. Structured inputs are no longer part of the public workflow model. The main agent talks to the user, and sub agents support that main agent behind the scenes.
+In Agent Build:
 
-Use structured outputs when the result needs to be consumed by another system, rendered in a predictable UI, or reviewed consistently by your team.
+1. Add a **Sub-Agent** to the canvas.
+2. Give it a clear name that describes its specialty.
+3. Configure its instructions, model, tools, skills, and knowledge.
+4. Connect it to the main agent.
+5. Describe when the main agent should delegate work to it.
+6. Save the build and test a prompt that should trigger the sub-agent.
+7. Open the trace to confirm which agent ran and what it returned.
 
-Good fits include:
+Avoid creating several overlapping sub-agents. The main agent delegates more reliably when each specialist has a distinct purpose.
+
+## AI-Routed and Forced Handoffs
+
+Use the handoff behavior that matches the workflow:
+
+- **AI-routed handoff:** The agent decides whether to delegate based on the request, its instructions, and the handoff description. Use this for flexible workflows where different requests need different specialists.
+- **Forced handoff:** The workflow always continues to the connected agent. Use this for a required sequence, such as research followed by validation or drafting followed by compliance review.
+
+Keep handoff descriptions specific. Explain what the receiving sub-agent handles and what result it must return. For a forced handoff, use one clear sequential connection so the path stays deterministic.
+
+## Structured Output Is a Dedicated Tool
+
+Agent Build no longer has an agent-level **Output Schema** setting. If an agent must emit predictable JSON, add the dedicated **Structured Output** tool and connect it to the main agent or sub-agent that should call it.
+
+Use the Structured Output tool for results such as:
 
 - Lead qualification summaries
 - Research briefs with fixed fields
 - Extraction from uploaded files
 - QA or validation reports
 - Connector-ready payloads
-- Final workflow outputs that should be copied into another system
+- Data rendered by a frontend or consumed by another system
 
-Avoid structured outputs for normal customer-facing chat replies. If a user expects a human-readable response, keep the agent conversational.
+Do not use Structured Output for every normal chat response. Keep the agent conversational when a person expects a readable answer.
 
-Structured outputs are most useful when:
-
-- The main agent needs to return a final result in a fixed shape.
-- A sub agent needs to give the main agent a predictable helper result.
-- A connector or downstream system expects specific fields.
-
-## Output Schema Setup
-
-Open the agent settings and configure the output schema fields.
-
-For each field, define:
-
-- **Name:** the JSON key, such as `lead_score` or `summary`.
-- **Type:** string, number, boolean, or another supported schema type.
-- **Description:** what the field should contain.
-- **Required:** whether the field must be present.
-
-Example:
-
-```json
-{
-  "lead_name": "Maya Chen",
-  "company": "Northstar Analytics",
-  "intent": "Book a product demo",
-  "lead_score": 82,
-  "recommended_next_step": "Route to sales with the requested analytics use case."
-}
-```
-
-Keep schemas small and focused. Re-test after changing schema fields, and check traces when a run fails to produce valid output.
+To configure its fields, call conditions, runtime event handling, and schema rules, see [Structured Output for Developers](/dev-guide/structured-output-tools).
 
 ## Planning in AI Workforce
 
@@ -92,10 +96,22 @@ The plan is not a replacement for review. Check final outputs, workspace files, 
 
 ## Traces
 
-Traces show which tools and sub agents were used, what failed, how long steps took, and what artifacts were created. Use traces when a run takes the wrong path or a sub agent returns a weak result.
+Traces show which tools and sub-agents were used, what failed, how long steps took, and what artifacts were created. Use traces when a run takes the wrong path, misses a handoff, or a sub-agent returns a weak result.
+
+## Orchestration Guidelines
+
+- Start with one main agent and add a sub-agent only when the responsibility is meaningfully different.
+- Give every sub-agent a distinct job and a small tool set.
+- Tell the main agent when it should delegate and what it must do with the result.
+- Use AI-routed handoffs for flexible decisions and forced handoffs for mandatory sequences.
+- Keep user-facing conversation ownership with the main agent.
+- Test direct requests, requests that need delegation, and requests that should not trigger a sub-agent.
+- Review traces before expanding the workflow.
 
 ## Related
 
-- [AI Workforce Agent Spaces](/ai-workforce/agent-spaces)
+- [Agent Build](/ai-workforce/agent-build)
 - [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts)
 - [AI Workforce Tools, Connectors, and Skills](/user-guides/tools)
+- [Structured Output for Developers](/dev-guide/structured-output-tools)
+- [Traces and Optimization](/user-guides/traces-and-optimizations)

@@ -6,6 +6,8 @@ keywords: ["AI agents", "agent instructions", "agent tools", "Brand Agents", "AI
 
 Agents are the working units inside SketricGen. A Brand Agent may be a single customer-facing agent with curated tools. An AI Workforce may contain multiple agents that collaborate on internal work.
 
+<span id="overview"></span>
+
 ## Agent Configuration
 
 Each agent can include:
@@ -47,11 +49,19 @@ For AI Workforce, add marketplace skills when the agent needs an optimized task 
 
 ## Structured Outputs
 
-Structured outputs are useful when an agent or downstream system needs predictable JSON. Use structured outputs for final API-like responses or focused sub-agent results, not for every normal human-facing answer.
+When an application needs predictable JSON, connect the dedicated [Structured Output tool](/dev-guide/structured-output-tools) to the agent that should emit it. Structured Output is a tool, not an agent-level response-schema setting.
+
+## Sub-Agents
+
+<span id="agent-as-a-tool"></span>
+
+Older interfaces described a specialist agent as an **agent as a tool**. In the current product, add it as a **sub-agent** in Agent Build. The main agent delegates a bounded task to the sub-agent, receives its result, and remains responsible for the user conversation and final answer.
+
+Sub-agents cannot contain their own sub-agents. Give each one a distinct responsibility, focused instructions, and only the tools it needs. See [Agent Build](/ai-workforce/agent-build#main-agents-and-sub-agents) for the current configuration surface.
 
 ## Related
 
 - [Brand Agents Overview](/brand-agents/overview)
-- [AI Workforce Agent Spaces](/ai-workforce/agent-spaces)
-- [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs)
+- [Agent Space and Agent Build](/ai-workforce/agent-spaces)
+- [Multi-Agent Orchestration and Handoffs](/user-guides/orchestration-and-handoffs)
 - [Tools](/user-guides/tools)

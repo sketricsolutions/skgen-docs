@@ -1,62 +1,93 @@
 ---
-title: "Quickstart"
-description: "Start quickly in SketricGen by creating an AI chatbot for your website with Brand Agents or an AI Workforce Agent Space for internal automation."
+title: "Quickstart: Build and Run Your First AI Agent"
+sidebarTitle: "Quickstart"
 icon: "rocket"
-keywords: ["SketricGen quickstart", "Brand Agent quickstart", "AI chatbot for website", "AI Workforce quickstart", "AI agent builder"]
+description: "Create your first SketricGen AI Workforce agent, configure it in Agent Build, run it in Playground, and verify its work from Agent Space."
+keywords: ["SketricGen quickstart", "build AI agent", "AI Workforce", "Agent Build", "Playground"]
 ---
 
-This quickstart gives you two paths. Choose **Brand Agent** for a customer-facing website chatbot or lead capture agent, or **AI Workforce** for internal multi-agent work and automation.
+This quickstart takes you from the selected Project to one completed AI Workforce run. You do not need to connect an external app for the first test.
 
-## Path 1: Create a Brand Agent
+## Before You Start
 
-Use this path when the agent will talk to visitors, prospects, leads, or customers.
+You need:
 
-1. Open **Brand Agents**.
-2. Click **New Brand Agent**.
-3. Choose **Website URL** or **Manual setup**.
-4. If using a URL, paste your website and let SketricGen read the site.
-5. Review the generated Brand DNA.
-6. Add or edit Knowledge Base sources.
-7. Connect optional tools such as Lead Capture, Page Navigation, Web Search, or selected app connectors.
-8. Test realistic visitor questions.
-9. Customize the widget and publish.
+- A SketricGen account
+- Access to a Teamspace and Project
+- Enough Project credits for a short test run
+- A simple task you can verify yourself
 
-See [Create a Brand Agent](/brand-agents/create-brand-agent) for the full setup flow and [Deploy a Custom Website Widget](/deploy/custom-website) when you are ready to embed it.
+If you want personalized recommendations first, complete [Adaptive Onboarding](/getting-started/adaptive-onboarding). You can also skip it and start directly in Agent Space.
 
-Test prompts:
+## 1. Open Agent Space
 
-- "What does this product do?"
-- "How much does it cost?"
-- "Can I book a demo?"
-- "Where can I find the refund policy?"
+Select **AI Workforce → Agent Space**. Confirm the Teamspace and Project shown in the switcher.
 
-## Path 2: Create an AI Workforce Agent Space
+![Agent Space showing the selected Project and available agents](/images/product-ui-2026/agent-space-overview.png)
 
-Use this path when the agent will be used internally by your team.
+## 2. Create an Agent
 
-1. Open **AI Workforce -> Agent Spaces**.
-2. Create a new Agent Space or start from a template.
-3. Configure the main agent.
-4. Add one specialist sub agent if the workflow needs help.
-5. Attach only the tools each agent needs.
-6. Select the model for each agent.
-7. Run a test in the playground.
-8. Inspect traces, generated files, and artifacts.
-9. Refine instructions and tools before using the workflow for real work.
+Select **Create new agent**. Choose a suitable template or begin with a simple agent.
 
-See [AI Workforce Agent Spaces](/ai-workforce/agent-spaces), [AI Workforce Tools](/user-guides/tools), and [Runs, Schedules, Files, and Artifacts](/ai-workforce/runs-files-artifacts) for deeper setup.
+The screenshots in this quickstart use a Blog Writer and SEO workflow as an example of an internal AI Workforce. It combines a main content-planning agent, research tools, a specialist SEO sub-agent, and workspace files. You can follow the same steps with another internal template.
 
-Good first AI Workforce tasks:
+For the first test, use one clear responsibility such as:
 
-- Research a market or prospect.
-- Draft a blog or campaign brief.
-- Summarize uploaded files.
-- Run an internal operations checklist.
-- Use a connector to fetch or update business data.
+- Summarize a document
+- Research a topic and return sources
+- Turn notes into a structured brief
+- Answer questions from a Knowledge Base
 
-## Next
+Avoid a multi-agent workflow until one main agent works correctly.
 
-- [Choose Brand Agents or AI Workforce](/getting-started/choose-product)
-- [Create a Brand Agent](/brand-agents/create-brand-agent)
-- [AI Workforce Agent Spaces](/ai-workforce/agent-spaces)
-- [AI Workforce Tools](/user-guides/tools)
+## 3. Configure Agent Build
+
+Open **Manage Agent Build** and configure:
+
+1. A descriptive agent name
+2. Instructions explaining the result it owns
+3. A model appropriate for the task
+4. Only the tools or Knowledge Base needed for the test
+
+![Blog Writer AI Workforce configuration with content strategy instructions, model, tools, and a specialist SEO sub-agent](/images/product-ui-2026/ai-workforce-blog-writer-configuration.jpg)
+
+Save the draft before running it.
+
+## 4. Run a Test
+
+Select **Run**, then **New Chat**. Enter a realistic prompt with enough detail to judge the result.
+
+![Playground showing a completed Blog Writer test with conversation history and Project and agent file workspaces](/images/product-ui-2026/ai-workforce-blog-writer-playground.jpg)
+
+Do not test with "hello" alone. A useful test prompt should require the instructions or tool you configured.
+
+## 5. Review the Result
+
+Check:
+
+- Did the agent follow the requested format?
+- Did it use the correct tool or Knowledge Base?
+- Did it delegate only when needed?
+- Did it create the expected file or artifact?
+- Did it request human input before an uncertain or consequential step?
+- Does the trace explain what happened?
+
+Change one part of the Agent Build at a time, then repeat the same prompt in a new conversation.
+
+## 6. Return to Agent Space
+
+Return to Agent Space and open the agent. You should see its configuration summary, recent activity, internal team, schedules, and any request needing attention.
+
+Your first success is complete when:
+
+- The agent exists in the correct Project.
+- A completed conversation appears in Playground history.
+- The output can be verified against your request.
+- You can explain the result from the trace or visible activity.
+
+## Next Steps
+
+- Add a focused [sub-agent](/user-guides/orchestration-and-handoffs) or a dedicated [Structured Output tool](/dev-guide/structured-output-tools).
+- Connect [tools, apps, or skills](/user-guides/tools).
+- Add trusted [Knowledge Base content](/shared-platform/knowledge-bases).
+- Learn about [runs, schedules, files, and artifacts](/ai-workforce/runs-files-artifacts).

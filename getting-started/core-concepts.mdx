@@ -1,73 +1,83 @@
 ---
-title: "Core Concepts"
-description: "Learn SketricGen core concepts for website Brand Agents, AI Workforce automation, Knowledge Bases, connectors, skills, sub agents, files, artifacts, and traces."
-icon: "puzzle"
-keywords: ["core concepts", "Brand Agents", "AI Workforce", "AI agent builder", "AI automation tools", "Knowledge Bases"]
+title: "SketricGen Core Concepts"
+sidebarTitle: "Core concepts"
+icon: "shapes"
+description: "Understand SketricGen Teamspaces, Projects, Agent Space, Agent Build, Playground, tools, skills, knowledge, runs, files, traces, and human input."
+keywords: ["AI agent concepts", "Agent Space", "Agent Build", "AI Workforce", "agentic workflows"]
 ---
 
-SketricGen has two product paths, but the same core concepts power both.
+SketricGen combines product structure, agent configuration, runtime activity, and human control. These definitions describe how the current platform works.
 
-## Brand Agents
+## Teamspaces and Projects
 
-Brand Agents are customer-facing agents trained on your brand, website, and approved knowledge. They are built for public deployment through widgets or customer channels. They are the best fit for a website chatbot, lead capture assistant, or visitor-facing support agent.
+A **Teamspace** contains members, roles, shared plan resources, and one or more Projects.
 
-Brand Agents focus on security, brand behavior, lead capture, visitor guidance, and controlled tool access.
+A **Project** scopes agents, conversations, connections, files, onboarding state, and collaboration. Always confirm the selected Project before creating or changing an agent.
 
-## AI Workforce
+## Adaptive Onboarding
 
-AI Workforce is the internal workspace for multi-agent work and workflow automation. It uses Agent Spaces and the updated runtime for longer runs, planning, files, artifacts, tools, and team workflows.
+[Adaptive Onboarding](/getting-started/adaptive-onboarding) is a saved Project conversation that recommends a useful first automation. It can use an optional public website, business goals, public research, and the live template catalog.
 
-AI Workforce is the right place for research, content, operations, sales, internal support, and file-heavy work.
+## Agent Space
 
-## Agents
+[Agent Space](/ai-workforce/agent-space) is the live operational workplace for a Project. It shows agents, active work, schedules, collaborators, and human-input requests.
 
-An agent is a role with:
+Agent Space does not define the internal agent graph.
 
-- Instructions
-- A selected model
-- Tools it can use
-- Optional structured output
-- A place in the workflow or product surface
+## Agent Build
 
-Good agents have narrow responsibilities and clear success criteria.
+[Agent Build](/ai-workforce/agent-build) defines how one agent works. It contains the main agent, optional sub-agents, instructions, models, tools, skills, notes, and connections.
 
-## Tools and Connectors
+## Playground
 
-Tools let agents act or retrieve information. Examples include:
+[Playground](/ai-workforce/playground) is the Run tab inside Agent Build. It manages test conversations, live activity, human input, file attachments, workspace artifacts, and conversation history.
 
-- Knowledge Bases
-- Web Search
-- Image Generation when enabled
-- API Request
-- 2,000+ SketricGen connectors
-- Marketplace skills
-- Custom MCP servers
-- Brand Agent Lead Capture and Page Navigation
+## Main Agents and Sub-Agents
 
-Only assign tools that the agent truly needs.
+The **main agent** receives the user's request, decides how to handle it, uses tools, delegates to sub-agents, and returns the final answer.
 
-## Skills
+A **sub-agent** is a specialist called by the main agent. It does not talk directly to the user and cannot have its own sub-agents.
 
-Skills are reusable task packages for AI Workforce agents. They can package task-specific instructions, files, and operating patterns so an agent can do a job in a more reliable way than starting from a blank prompt.
+## Instructions and Models
 
-Use skills when you want an agent to follow a curated process, such as analyzing a document, creating a report, reviewing a design, planning a project, or producing an artifact.
+**Instructions** define an agent's identity, responsibilities, process, boundaries, tool rules, escalation, and output expectations.
+
+The **model** provides the underlying language and reasoning capability. Model selection affects capabilities, speed, cost, context, and supported media.
+
+## Tools, Connectors, and Skills
+
+A **tool** performs an action or retrieves information. Examples include File Search, Web Search, API Request, Structured Output, and custom MCP tools.
+
+A **connector** is an approved connection to an external app and its actions. Access can be scoped to a Project and may use a managed connection or credentials supplied by your Teamspace.
+
+A **skill** is reusable task guidance and supporting resources attached to an agent. Skills improve how an agent performs a type of work; they do not automatically grant access to an external app.
 
 ## Knowledge Bases
 
-Knowledge Bases store trusted information from websites, files, text, or Q&A pairs. Brand Agents use them for public answers. AI Workforce uses them for internal reference data.
+A [Knowledge Base](/shared-platform/knowledge-bases) stores approved website, document, text, or Q&A content that an agent can retrieve. Knowledge Bases help keep answers grounded in your information.
 
-## Main Agents and Sub Agents
+## Runs and Schedules
 
-In AI Workforce, the main agent owns the user conversation and can call specialist sub agents for bounded work.
+A **run** is one execution of an agent. It can contain model work, tools, sub-agents, files, messages, and human-input pauses.
 
-Use sub agents for classification, extraction, summarization, validation, research, and other focused helper tasks. Sub agents cannot have their own sub agents, so workflows stay one level deep and easier to debug.
+A **schedule** starts repeatable work at a configured time. Test the agent manually before relying on scheduled execution.
 
-## Runs, Schedules, Files, and Artifacts
+## Files, Workspaces, and Artifacts
 
-AI Workforce runs can create and inspect files. A run workspace stores conversation-specific artifacts, while an agent workspace can store reusable files for future runs.
+**Project files** can be available across agents in a Project. An **agent workspace** persists reusable files across conversations for one agent. A conversation or run can also have its own working files.
 
-Schedules can trigger AI Workforce runs automatically for recurring internal work, such as daily briefs, weekly reports, or periodic checks across connected tools.
+An **artifact** is a file or structured result created during work, such as a report, spreadsheet, document, image, or exported dataset.
+
+## Human Input
+
+An agent can pause a run and ask a permitted user for a choice, clarification, confirmation, or approval. Agent Space shows these runs under **Needs attention**.
+
+Human input gives people control over uncertain or consequential steps. It is different from a public-channel handoff to a support representative.
 
 ## Traces
 
-Traces show how a run executed: agents, sub-agent calls, tool calls, errors, latency, credit usage, and generated artifacts. Use traces to debug and improve agents before relying on them.
+A **trace** records how a run progressed, including agent steps, tool calls, sub-agent calls, errors, latency, and credit usage. Use traces to explain an outcome and improve the Agent Build.
+
+## Brand Agents
+
+[Brand Agents](/brand-agents/overview) are customer-facing agents with website and brand context, Knowledge Bases, controlled tools, conversations, leads, and deployment settings. They are separate from the internal AI Workforce experience.

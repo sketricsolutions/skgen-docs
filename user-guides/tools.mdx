@@ -1,7 +1,9 @@
 ---
 title: "AI Workforce Tools, Connectors, Skills, and MCP"
-description: "Connect AI Workforce agents to AI knowledge bases, 2,000+ connectors, MCP servers, API automation tools, web search, image generation, and marketplace skills."
-keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "skills marketplace"]
+sidebarTitle: "Tools & skills"
+icon: "wrench"
+description: "Connect AI Workforce agents to knowledge bases, 2,000+ connectors, MCP servers, APIs, web search, Code Interpreter, image generation, and marketplace skills."
+keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "Code Interpreter", "File Search", "skills marketplace"]
 ---
 
 Tools and skills turn AI Workforce agents from chat interfaces into AI automation tools that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
@@ -18,7 +20,9 @@ AI Workforce agents can use:
 - [**SketricGen connectors**](#sketricgen-connectors): 2,000+ app actions for internal workflows.
 - [**Custom MCP tools**](#custom-mcp-tools): company-specific capabilities exposed through MCP servers.
 - [**API Request**](#api-request): direct HTTP calls for controlled integrations.
+- [**Structured Output**](#structured-output): validated JSON for application UI events, typed state, and downstream logic.
 - [**Web Search**](#web-search): current public information.
+- [**Code Interpreter**](#code-interpreter): sandboxed Python for calculations, file processing, and generated artifacts.
 - [**Image Generation**](#image-generation): visual asset generation when the tool is enabled.
 - [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
 
@@ -26,13 +30,19 @@ Use the section links above to jump to the tool type you are configuring.
 
 ## Knowledge Bases
 
+<span id="2-file-search"></span>
+
 [Knowledge Bases](/shared-platform/knowledge-bases) let agents retrieve trusted source material from websites, uploaded files, pasted text, and Q&A pairs.
+
+In Agent Build, the **File Search** tool connects one or more approved Knowledge Bases to the agent that needs them. The agent can then retrieve relevant passages during a run instead of relying only on its model knowledge.
 
 Use Knowledge Bases when the agent needs approved company, product, policy, support, sales, or website context. For AI Workforce, this usually means internal reference data the run should cite or use while preparing an artifact. For Brand Agents, Knowledge Bases power customer-facing answers from approved website and brand content.
 
 Knowledge Bases are retrieval tools, not broad app connectors. If the agent needs to take action in another system, pair the Knowledge Base with a connector, API Request, or custom MCP tool.
 
 ## SketricGen Connectors
+
+<span id="1-sketric-app-marketplace"></span>
 
 SketricGen connectors give AI Workforce agents access to 2,000+ applications. They are useful for internal workflows that need to read or update CRMs, calendars, email, documents, spreadsheets, support systems, project management tools, databases, commerce tools, marketing platforms, and team communication apps.
 
@@ -46,7 +56,9 @@ For practical workflows, combine connectors with skills. A meeting-prep agent ca
 
 ## Custom MCP Tools
 
-Custom MCP tools let you connect a hosted MCP server directly to an AI Workforce agent. Use this when a service, vendor, or internal platform already exposes an MCP endpoint and you want SketricGen to make selected MCP tools available inside an Agent Space.
+<span id="6-custom-mcp"></span>
+
+Custom MCP tools let you connect a hosted MCP server directly to an AI Workforce agent. Use this when a service, vendor, or internal platform already exposes an MCP endpoint and you want to make selected MCP tools available to an agent through Agent Build.
 
 This is different from a single API Request. A hosted MCP can expose a group of tools, and SketricGen lets you discover those tools, choose the ones the agent can use, and attach the allowlisted set to the right agent.
 
@@ -68,9 +80,11 @@ The allowlist matters. If the hosted MCP exposes ten tools but this workflow onl
 
 Use Custom MCP when you have a reusable hosted tool surface, an internal service that already speaks MCP, or a third-party product that publishes an MCP endpoint. Use [API Request](#api-request) when you only need to wrap one REST endpoint.
 
-For orchestration patterns, see [Orchestration and Structured Data](/user-guides/orchestration-and-handoffs).
+For delegation and routing patterns, see [Multi-Agent Orchestration and Handoffs](/user-guides/orchestration-and-handoffs).
 
 ## API Request
+
+<span id="5-api-request"></span>
 
 API Request turns a cURL-style REST endpoint into an API automation tool the agent can call. Use it when you have one endpoint, webhook, lookup, or action that should become available to the agent without building a full connector or MCP server.
 
@@ -93,13 +107,35 @@ Use the description field to tell the agent when to call the API and what a succ
 
 API Request works best for controlled endpoints such as webhooks, internal APIs, simple read-only lookups, enrichment calls, REST API automation, or one-off write actions. If the agent needs many actions from the same service, use a connector or Custom MCP instead.
 
+## Structured Output
+
+Structured Output lets an agent emit schema-validated JSON when a workflow or application needs predictable data. Add a title, explain exactly when the agent should call it, and define the fields the receiving application expects.
+
+Application UI events are one use of the same Structured Output tool, not a separate tool type. For example, a custom frontend can watch for a Structured Output call and use its validated fields to render recommendation cards, open a form, update typed project state, or navigate to the next application step.
+
+You can also use Structured Output for classifications, extraction results, connector-ready payloads, and any downstream process that needs predictable fields. The call appears in the run stream so your application can read the arguments and validated result.
+
+Structured Output does not automatically pause the run or end the agent's turn. If the application needs the event to be the final action for that turn, state that explicitly in the agent and tool instructions. Use Human Input instead when the agent must pause and wait for a person's answer before continuing.
+
+For the workflow JSON contract and stream-handling example, see [Structured Output for Developers](/dev-guide/structured-output-tools).
+
 ## Web Search
+
+<span id="3-web-search"></span>
 
 Web Search lets an agent look up current public information when a Knowledge Base is not enough.
 
 Use Web Search for market research, recent news, public company information, competitive checks, and time-sensitive facts. For workflows that require approved internal facts, pair Web Search with a [Knowledge Base](#knowledge-bases) and tell the agent which source should win when sources conflict.
 
 ![Web Search tool configuration](/images/user-guides/tools/tools_websearch.png)
+
+## Code Interpreter
+
+<span id="4-code-interpreter"></span>
+
+Code Interpreter gives AI Workforce agents a sandboxed Python environment for calculations, data analysis, file transformation, and artifact generation. Use it when the agent needs to inspect structured data, perform repeatable computation, or create a file rather than only explain an answer in chat.
+
+Treat generated files and calculations as run outputs that still require review. Give the agent clear input files, expected output format, and validation criteria, then inspect the resulting artifact and trace before using it downstream.
 
 ## Image Generation
 
@@ -133,6 +169,6 @@ Installed skills can be reviewed from the Skills page. This helps teams see whic
 
 Attach tools only where they are needed. The main agent should have the tools required to plan and coordinate the run. Sub agents should receive the smaller tool set required for their specialist task.
 
-For example, a research sub agent may need Web Search and a Knowledge Base, while a reporting sub agent may only need access to run files and a structured output schema.
+For example, a research sub-agent may need Web Search and a Knowledge Base, while a reporting sub-agent may need only run files and the dedicated [Structured Output tool](/dev-guide/structured-output-tools).
 
 For debugging tool calls, action errors, latency, and credit usage, see [Traces and Optimization](/user-guides/traces-and-optimizations).

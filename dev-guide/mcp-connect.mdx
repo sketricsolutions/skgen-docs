@@ -1,0 +1,280 @@
+---
+title: "Connect AI Agents with SketricGen MCP"
+sidebarTitle: "Connect with MCP"
+icon:
+  name: "plug"
+  library: "fontawesome"
+  style: "solid"
+description: "Connect Claude, ChatGPT, Codex, and other MCP clients to SketricGen to create, edit, and connect Brand Agents through natural language."
+keywords: ["SketricGen MCP", "MCP server", "AI agent connection", "Claude MCP", "ChatGPT MCP", "Codex MCP"]
+---
+
+Connect an MCP-compatible AI assistant to SketricGen so it can create and manage Brand Agents through conversation. The SketricGen MCP server exposes a focused set of control-plane tools and enforces the same Teamspace, project, role, and plan rules as the SketricGen application.
+
+## Connection details
+
+```text
+Name          SketricGen
+URL           https://mcp.sketricgen.ai/mcp
+Transport     MCP over Streamable HTTP
+Protocol      JSON-RPC 2.0
+Auth option 1 SketricGen OAuth
+Auth option 2 Authorization: Bearer sk_admin_YOUR_KEY
+```
+
+Use **OAuth** for hosted clients that support remote MCP authentication. Use an **Admin API key** for local agents, CLI clients, and custom MCP clients that need a static bearer credential.
+
+<Warning>
+  Do not use a `sk_runtime_` Runtime API key with the MCP endpoint. Runtime keys execute existing agents; MCP management requires OAuth or a `sk_admin_` Admin API key.
+</Warning>
+
+## Which connection path should you use?
+
+| AI client | Recommended path | What you provide |
+| --- | --- | --- |
+| Claude Web or Claude Desktop | Hosted OAuth connector | Only the MCP URL, then SketricGen sign-in |
+| ChatGPT web developer mode | Remote MCP app with OAuth | MCP URL and OAuth selection |
+| Codex desktop, CLI, or IDE | OAuth or Admin API key | MCP URL, then login; or an environment variable containing an Admin API key |
+| Claude Code, Cursor, Windsurf, or another local client | Admin API key | MCP URL and bearer header |
+| Custom server-side MCP client | Admin API key | MCP URL and bearer header |
+
+Client availability and labels can change. Check the current [ChatGPT developer mode documentation](https://developers.openai.com/api/docs/guides/developer-mode), [Codex MCP documentation](https://learn.chatgpt.com/docs/extend/mcp), or [Claude custom connector documentation](https://support.anthropic.com/en/articles/11175166-about-custom-integrations-using-remote-mcp) when your client shows different menus.
+
+## Option 1: Connect with SketricGen OAuth
+
+OAuth is the recommended path for hosted AI clients. The client opens SketricGen sign-in, asks you to choose an accessible project, and requests read and write access. You do not paste an API key, OAuth client ID, or client secret into the AI client.
+
+### Claude Web or Claude Desktop
+
+1. Open **Settings → Connectors** in Claude.
+2. For a Team or Enterprise organization, open **Organization connectors** if required by your workspace.
+3. Select **Add custom connector**.
+4. Name the connector `SketricGen`.
+5. Enter `https://mcp.sketricgen.ai/mcp` as the remote MCP server URL.
+6. Leave OAuth client ID and client secret empty when Claude offers those fields.
+7. Add the connector, then select **Connect**.
+8. Sign in to SketricGen, choose the Teamspace project, and approve the requested access.
+9. Enable SketricGen from Claude's tools menu in a new conversation.
+
+### ChatGPT web
+
+ChatGPT's developer mode is the path for testing a remote MCP server. Availability and workspace approval depend on the current ChatGPT plan and administrator settings.
+
+1. Enable **Developer mode** in ChatGPT settings.
+2. Open **Apps** or **Plugins**, then create a developer-mode app.
+3. Name the app `SketricGen`.
+4. Enter `https://mcp.sketricgen.ai/mcp` as the server URL.
+5. Choose **OAuth** authentication.
+6. Select **Scan Tools** and complete the SketricGen sign-in and project-consent flow.
+7. Create the app after the tool scan succeeds.
+8. Start a new chat and select SketricGen from the available apps or developer-mode tools.
+
+Do not enter an OAuth client ID or secret unless your client explicitly requires a pre-registered application. SketricGen supports OAuth discovery and Dynamic Client Registration for compatible clients.
+
+### Codex with OAuth
+
+Add the following to `~/.codex/config.toml` or a trusted project's `.codex/config.toml`:
+
+```toml
+[mcp_servers.sketricgen]
+url = "https://mcp.sketricgen.ai/mcp"
+auth = "oauth"
+```
+
+Then start the login flow:
+
+```bash
+codex mcp login sketricgen
+```
+
+Complete SketricGen sign-in and project consent in the browser. Use `codex mcp list` or `/mcp` in Codex to confirm the connection.
+
+## Option 2: Connect with an Admin API key
+
+Use an Admin API key when the client cannot complete SketricGen OAuth or when a server-side integration needs a non-interactive credential.
+
+### Create the key
+
+1. Open **Teamspace settings → API keys** in SketricGen.
+2. Select **Create key → Admin key**.
+3. Choose a **Project** scope for one project or **Teamspace** scope for multiple projects.
+4. Choose the lowest sufficient role: **Viewer**, **Editor**, or **Admin**.
+5. Choose an expiration date.
+6. Create the key and copy the `sk_admin_...` value immediately. It is shown once.
+
+Project-scoped keys implicitly target one project. Teamspace-scoped keys can see multiple projects, so write operations require an explicit project choice.
+
+### Manual MCP client configuration
+
+Clients that accept JSON MCP configuration commonly use this shape:
+
+```json
+{
+  "mcpServers": {
+    "sketricgen": {
+      "type": "http",
+      "url": "https://mcp.sketricgen.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer sk_admin_YOUR_KEY"
+      }
+    }
+  }
+}
+```
+
+The exact configuration filename and environment-variable syntax differ by client. Store the key outside version control whenever the client supports environment variables.
+
+### Codex with an Admin API key
+
+Set the key in your shell or secret store:
+
+```bash
+export SKETRICGEN_ADMIN_API_KEY="sk_admin_YOUR_KEY"
+```
+
+Reference the environment variable from Codex:
+
+```toml
+[mcp_servers.sketricgen]
+url = "https://mcp.sketricgen.ai/mcp"
+bearer_token_env_var = "SKETRICGEN_ADMIN_API_KEY"
+default_tools_approval_mode = "writes"
+```
+
+Restart Codex after changing its configuration. The `writes` approval mode asks before tools that are not marked read-only.
+
+## Verify the connection
+
+Start with a read-only prompt:
+
+```text
+Use SketricGen to tell me which Teamspace and project this connection can access.
+Then list my active agents. Do not change anything.
+```
+
+The MCP client should call `whoami` and `list_agents`. Check that the returned Teamspace and project match the scope you intended.
+
+Next, test the Brand Agent discovery flow:
+
+```text
+Use SketricGen to show me the available Brand Agent templates and reusable
+knowledge bases. Do not create an agent yet.
+```
+
+## What your AI can do
+
+The SketricGen MCP server currently publishes 15 tools:
+
+| Tool | Purpose |
+| --- | --- |
+| `whoami` | Confirm the connected Teamspace and project scope |
+| `list_projects` | List projects available to a Teamspace-scoped connection |
+| `list_agents` | List agents in the authorized scope |
+| `list_brand_agent_templates` | Discover Brand Agent templates and their required connectors |
+| `list_knowledge_bases` | Discover reusable, ready knowledge bases |
+| `create_brand_agent` | Start asynchronous Brand Agent creation from a website |
+| `get_brand_agent_status` | Follow creation progress and retrieve the finished embed snippet |
+| `list_brand_connectors` | Discover apps that can be connected to Brand Agents |
+| `list_connector_tools` | Discover the exact actions that can be granted for one connector |
+| `create_brand_connector_link` | Create a short-lived link for a person to authorize an app |
+| `check_brand_connector_connection` | Check whether the person completed authorization |
+| `attach_brand_connector` | Grant selected connector actions to an agent |
+| `detach_brand_connector` | Remove a connector from an agent without disconnecting the account |
+| `update_brand_agent_tool` | Read or change the Brand Agent's identity, instructions, model, and knowledge bases |
+| `update_brand_agent_config_tool` | Read or change widget appearance, messages, behavior, and visibility |
+
+The MCP surface does not currently include a tool for running an agent conversation. Use the [Runtime API](/dev-guide/public-api-usage) or Playground when you want to execute an existing agent.
+
+## Recommended Brand Agent workflow
+
+When you ask an AI assistant to create a Brand Agent, it should follow this sequence:
+
+1. Call `whoami` and identify the project silently.
+2. Offer available templates before creating anything.
+3. Ask for the website URL and offer a reusable knowledge base when one is ready.
+4. Call `create_brand_agent` and explain that crawling and knowledge-base creation take several minutes.
+5. Poll `get_brand_agent_status` until the status is `succeeded` or `failed`.
+6. On success, return the exact embed snippet.
+7. Offer required connectors, show their available tools, and ask before granting write-capable actions.
+8. Give any connector authorization link to the user to open. The AI should never complete provider sign-in itself.
+
+Useful prompt:
+
+```text
+Build a Brand Agent for https://example.com.
+
+First show me the available templates. Ask one decision at a time. Before
+connecting an external app, show me the exact read and write tools it would
+receive and wait for my approval.
+```
+
+## Security and permission model
+
+- **One selected project with OAuth:** OAuth consent binds the connection to one Teamspace project.
+- **Live membership checks:** Removing or demoting the connected user changes what the OAuth connection or Admin API key can do.
+- **Server-enforced roles:** Tool descriptions guide the AI, but the Admin API independently enforces every permission and plan limit.
+- **Human connector authorization:** The AI receives a short-lived setup link, not your Google, Slack, email, or other provider password.
+- **Explicit tool grants:** Connector actions are validated against the current connector catalog before they are attached.
+- **Read before write:** Brand Agent update tools can read current settings before applying a partial update.
+- **No billing control:** MCP tools cannot change subscriptions, purchase credits, or create additional API keys.
+
+<Warning>
+  An empty connector tool selection can mean unrestricted access for some connectors. Ask the AI to list the connector tools and explicitly confirm any permission that sends, deletes, publishes, spends, or changes external data.
+</Warning>
+
+## Troubleshooting
+
+### `401 unauthorized`
+
+**Cause:** The client sent no usable OAuth token or Admin API key.
+
+**Fix:** Complete the client's **Connect** or `mcp login` flow. For static authentication, confirm the header is `Authorization: Bearer sk_admin_...`.
+
+### `403 invalid_origin`
+
+**Cause:** A browser-based client sent an `Origin` that the SketricGen MCP server does not currently allow.
+
+**Fix:** Use a supported native or hosted client. Contact SketricGen support with the exact client and origin if a browser integration needs to be added.
+
+### `403 insufficient_scope`
+
+**Cause:** The OAuth connection approved read access but the requested tool changes data.
+
+**Fix:** Reconnect SketricGen and approve write access.
+
+### `403 project_scope_mismatch`
+
+**Cause:** A project-scoped Admin API key was asked to act on another project.
+
+**Fix:** Use the project selected when the key was created, or create a deliberately scoped Teamspace key.
+
+### `403 key_expired` or `403 key_revoked`
+
+**Cause:** The Admin API key is no longer valid.
+
+**Fix:** Create a new key, update the client's secret storage, and remove the old value from local configuration.
+
+### The AI says it changed a Brand Agent, but nothing changed
+
+**Cause:** The client may have performed a read or supplied an unsupported field.
+
+**Fix:** Ask it to verify that the update tool returned `mode: "write"` and that the intended field appears in `updated` before claiming success.
+
+## For AI agents reading this page
+
+- First identify the user's MCP client and whether it supports hosted OAuth.
+- Prefer OAuth when the client can complete it; do not ask the user for an Admin API key unnecessarily.
+- Never ask for the user's SketricGen password or an external app password.
+- If an Admin API key is required, instruct the user to create it in SketricGen and store it in the client's secret or environment-variable mechanism.
+- Verify the connection with `whoami` before creating or changing anything.
+- Read existing Brand Agent settings before writing them.
+- Treat connector setup links as short-lived credentials: show them only to the intended user and do not repeat or store them.
+- Ask for confirmation before granting tools that write, send, publish, delete, spend, or change data.
+- Do not claim an asynchronous Brand Agent is ready until `get_brand_agent_status` returns `succeeded`.
+
+## Related guides
+
+- [Developer Platform Overview](/dev-guide/overview)
+- [Admin API](/dev-guide/admin-api)
+- [Runtime API](/dev-guide/public-api-usage)
+- [Brand Agent connectors and leads](/brand-agents/connectors-and-leads)

@@ -1,20 +1,26 @@
 ---
-title: "Public API"
-description: "SketricGen Public API reference — run AI agent workflows, stream responses, and manage conversations with RESTful endpoints and API key auth."
-keywords: ["Public API", "REST", "workflow", "API key", "chat API"]
+title: "Runtime API"
+sidebarTitle: "Runtime API"
+icon:
+  name: "play"
+  library: "fontawesome"
+  style: "solid"
+description: "Use the SketricGen Runtime API to execute existing AI agents, stream responses, continue conversations, attach files, and resume human input."
+keywords: ["Runtime API", "AI agent execution", "REST", "workflow", "runtime API key", "streaming API"]
 ---
 
 ## Overview
 
-SketricGen provides a high-performance Public API service that enables AI-powered conversational workflows using custom agents you design in the Web App.
-This API provides endpoints for running AI workflows, managing conversations, and streaming real-time responses.
+The SketricGen Runtime API executes agents that you created in SketricGen. Use it to send a message, continue a conversation, attach previously uploaded files, stream the response, or resume a Human Input pause.
+
+The customer-facing Runtime API intentionally exposes one programmatic execution endpoint. Teamspace and agent management belong to the [Admin API](/dev-guide/admin-api), while conversational AI management belongs to the [SketricGen MCP server](/dev-guide/mcp-connect).
 
 **Base URL:**
 `https://chat-v2.sketricgen.ai/api/v1`
 
-## When to Use the Public API
+## When to use the Runtime API
 
-Use the Public API when you want to call a SketricGen agent from your own product, backend, workflow runner, or custom UI.
+Use the Runtime API when you want to call an existing SketricGen agent from your own product, backend, workflow runner, or custom UI.
 
 Common use cases:
 
@@ -28,14 +34,34 @@ If you only need a copy-paste website chat bubble or iframe, use [Deploy an AI C
 
 ## Authentication
 
-All API requests require authentication via an API key in the request headers.
+Every Runtime API request requires a Teamspace Runtime API key beginning with `sk_runtime_`.
+
+Create it from **Teamspace settings → API keys → Create key → Runtime key**. Choose the narrowest project and agent scope that supports the integration. The plaintext key is shown once.
 
 **Required Header:**
 
+```http
+API-KEY: sk_runtime_YOUR_KEY
 ```
-api-key: your_api_key_here
+
+Do not use an Admin API key beginning with `sk_admin_` here. Admin keys manage Teamspace resources; they do not execute agents.
+
+## Quick start
+
+```bash
+export SKETRICGEN_RUNTIME_API_KEY="sk_runtime_YOUR_KEY"
+
+curl -X POST "https://chat-v2.sketricgen.ai/api/v1/run-workflow" \
+  -H "API-KEY: $SKETRICGEN_RUNTIME_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": "agent_abc123xyz",
+    "user_input": "Summarize the latest product feedback.",
+    "stream": false
+  }'
 ```
-(You can retrieve it from your account setting at [www.sketricgen.ai/profile](https://www.sketricgen.ai/profile))
+
+Keep the Runtime API key on a server or in a secret manager. Do not call the Runtime API directly from public browser code.
 
 ## Endpoints
 
@@ -48,7 +74,7 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 
 | Header         | Type   | Required | Description                 |
 | -------------- | ------ | -------- | --------------------------- |
-| `api-key`      | string | Yes      | Your API authentication key |
+| `API-KEY`      | string | Yes      | Teamspace Runtime API key beginning with `sk_runtime_` |
 | `Content-Type` | string | Yes      | Must be `application/json`  |
 
 ### Request Body
@@ -59,7 +85,10 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 | `user_input`      | string  | Yes      | The user's message or query to process    | Max 10,000 characters                |
 | `conversation_id` | string  | No       | ID of existing conversation to continue   | If omitted, creates new conversation |
 | `contact_id`      | string  | No       | External identifier to associate conversation with a contact | Max 255 characters |
+| `assets`          | array   | No       | Previously uploaded asset file IDs to include with the message | Array of file ID strings |
 | `stream`          | boolean | No       | Enable real-time response streaming       | Default: `false`                     |
+| `disable_conversation_history` | boolean | No | Skip prior messages when processing this turn | Default: `false` |
+| `hitl_resume` | object | No | Resume a paused Human Input request | Requires `conversation_id` |
 
 ### Example Request
 
@@ -108,7 +137,7 @@ The same agent can be deployed through the website widget, iframe, fullscreen li
 
 | Deployment method | Agent identifier | Contact identifier |
 | ----------------- | ---------------- | ------------------ |
-| Public API | `agent_id` in the JSON body | `contact_id` in the JSON body |
+| Runtime API | `agent_id` in the JSON body | `contact_id` in the JSON body |
 | Chat bubble widget | `data-agent-id` on the script tag | `data-contact-id` on the script tag |
 | Floating pill widget | `data-agent-id` plus `data-layout="floating"` | `data-contact-id` on the script tag |
 | Inline iframe | Agent ID in `/iframe-widget/YOUR_AGENT_ID` | `contactId` query parameter |

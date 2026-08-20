@@ -1,62 +1,75 @@
 ---
 title: "SketricGen Overview"
-description: "SketricGen is an AI agent builder for website Brand Agents, lead capture chatbots, and AI Workforce automation with connectors, skills, files, and models."
-icon: "book-open"
-keywords: ["SketricGen", "AI agent builder", "AI chatbot for website", "website chatbot", "AI Workforce", "workflow automation tools"]
+sidebarTitle: "Overview"
+icon: "house"
+description: "Learn how SketricGen turns business context into Brand Agents and AI Workforce agents that use tools, knowledge, schedules, files, and human input."
+keywords: ["SketricGen", "AI agent builder", "Brand Agents", "AI Workforce", "no-code AI agents"]
 ---
 
-SketricGen is an AI agent builder for two practical products: **Brand Agents** and **AI Workforce**.
+SketricGen is a no-code platform for building AI agents that work with your business context, tools, files, and teammates. You can create customer-facing Brand Agents or an internal AI Workforce.
 
-Brand Agents are customer-facing website AI agents for visitor questions, lead capture, and guided support. AI Workforce is for internal AI automation, multi-agent workflows, schedules, files, artifacts, and connected business apps.
+The platform separates **where agents work** from **how agents are configured**:
 
-Both are built on the same platform foundations: agents, tools, Knowledge Bases, models, traces, and connected apps.
+- [Agent Space](/ai-workforce/agent-space) is the live workplace where you see agents, active work, schedules, teammates, and requests needing attention.
+- [Agent Build](/ai-workforce/agent-build) is the internal configuration surface for instructions, models, sub-agents, tools, skills, and handoffs.
+- [Playground](/ai-workforce/playground) is the Run experience for testing, conversations, files, artifacts, traces, and human input.
+
+## Start With Your Business Context
+
+[Adaptive Onboarding](/getting-started/adaptive-onboarding) can learn your role, AI experience, public website, and current bottleneck. It then recommends a practical first agent or live template.
+
+If you provide a website, the onboarding strategist can analyze public business and brand information. When relevant, it can research growth signals and offer to start a Brand Agent while the onboarding conversation continues.
+
+You remain in control of which recommendations to use. SketricGen does not automatically connect private accounts, publish content, or start a Brand Agent without your action.
 
 ## Brand Agents
 
-Brand Agents are designed for public customer experiences, especially when you need an AI chatbot for a website that understands your brand and can qualify visitors.
+[Brand Agents](/brand-agents/overview) are customer-facing agents trained on your website, Brand DNA, Knowledge Base, and approved tools.
 
-Use them to:
+Use a Brand Agent to:
 
-- Answer website visitor questions.
-- Capture and qualify leads.
-- Guide visitors to the right page.
-- Support product, pricing, policy, and onboarding questions.
-- Publish a widget or fullscreen chat experience.
-
-Brand Agents use a controlled tool surface so public agents only receive the capabilities you approve.
+- Answer visitor questions from your information
+- Guide visitors to relevant pages
+- Capture leads inside a conversation
+- Support product discovery and customer intake
+- Deploy a branded widget or fullscreen experience
 
 ## AI Workforce
 
-AI Workforce is designed for internal team work.
+[AI Workforce](/ai-workforce/overview) is for internal work across research, marketing, content, sales, support, data, and operations.
 
-Use it to:
+AI Workforce agents can:
 
-- Run longer multi-agent tasks.
-- Research, write, analyze, and summarize.
-- Work with files and generated artifacts.
-- Connect internal tools through 2,000+ SketricGen connectors, APIs, and built-in tools.
-- Install marketplace skills for optimized task behavior.
-- Schedule recurring internal tasks.
-- Inspect traces, tool calls, and run history.
+- Use built-in tools and connected business apps
+- Delegate work to specialist sub-agents
+- Use reusable skills and Knowledge Bases
+- Work with files and create artifacts
+- Pause for human input or approval
+- Run manually or on a schedule
+- Share conversations and operational state with permitted teammates
 
-The AI Workforce runtime helps agents plan, use tools, create files, and work through tasks that may take 10-30 minutes.
+## How the Main Surfaces Connect
 
-## Platform Capabilities
-
-SketricGen includes:
-
-- **Knowledge Bases:** trusted data from websites, files, text, and Q&A pairs.
-- **Tools and connectors:** built-in tools, 2,000+ SketricGen connectors, API Request, and custom tools.
-- **Skills marketplace:** reusable task packages that can be installed onto AI Workforce agents.
-- **Models:** a curated catalog that can include OpenAI, Claude, Gemini, DeepSeek, Qwen, and other approved models.
-- **AI Workforce templates:** starting points for internal team workflows.
-- **Runs and schedules:** manual and recurring AI Workforce work.
-- **Traces:** visibility into agents, tool calls, errors, latency, credits, and artifacts.
+1. Adaptive Onboarding or a template helps you choose a useful starting point.
+2. Agent Space shows the agents available in the selected Project.
+3. Agent Build defines how an agent works internally.
+4. Playground runs the draft or published agent.
+5. Traces, files, and human-input requests show what happened during the run.
+6. Runs and schedules repeat useful work after it has been tested.
 
 ## Next Steps
 
-- [Choose Brand Agents or AI Workforce](/getting-started/choose-product)
-- [Create a Brand Agent](/brand-agents/create-brand-agent)
-- [Deploy a Website Chatbot](/deploy/custom-website)
-- [Explore AI Workforce](/ai-workforce/overview)
-- [Review AI Workforce Tools](/user-guides/tools)
+<CardGroup cols={2}>
+  <Card title="Complete Adaptive Onboarding" icon="sparkles" href="/getting-started/adaptive-onboarding">
+    Get recommendations based on your role, website, and first automation goal.
+  </Card>
+  <Card title="Build Your First Agent" icon="rocket" href="/getting-started/quickstart">
+    Create, configure, run, and verify a simple AI Workforce agent.
+  </Card>
+  <Card title="Create a Brand Agent" icon="message-bot" href="/brand-agents/create-brand-agent">
+    Build a website-trained, customer-facing agent.
+  </Card>
+  <Card title="Learn the Core Concepts" icon="diagram-project" href="/getting-started/core-concepts">
+    Understand Projects, agents, tools, skills, runs, files, and human input.
+  </Card>
+</CardGroup>

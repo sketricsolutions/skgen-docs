@@ -1,0 +1,160 @@
+---
+title: "Structured Output for Developers"
+sidebarTitle: "Structured output"
+icon: "brackets"
+description: "Define schema-validated JSON tools, detect their public API stream events, and render reliable application UI from SketricGen agent runs."
+keywords: ["structured output", "JSON schema tool", "AI agent UI", "tool call event", "SketricGen API"]
+---
+
+Structured Output is a model-callable tool that emits schema-validated JSON during an agent run. It is useful when your application needs to render a card, save typed project state, trigger routing, or pass a predictable payload to downstream code while the conversation continues across turns.
+
+<Note>
+A Structured Output call does not automatically pause the run or end the agent's turn. If your application needs the call to be the final action of the turn, state that in the tool and agent instructions. Use Human Input when the agent must wait for a person's answer.
+</Note>
+
+## Configure the tool
+
+In Agent Build:
+
+1. Add **Structured Output** from the advanced tools section.
+2. Give it a short title that describes the event, such as `Render recommendations`.
+3. Describe exactly when the agent should call it and what the receiving application will do with the payload.
+4. Add at least one output field and mark every field your application requires.
+5. Connect the tool to the agent that should emit it, save, and test the run.
+
+A workflow or template stores the node in this form:
+
+```json
+{
+  "id": "tool-node-recommendations-7d91c2a4",
+  "type": "toolNode",
+  "data": {
+    "name": "emit_render_recommendations_7d91c2a4",
+    "title": "Render recommendations",
+    "toolType": "structured_output",
+    "description": "Research is complete and the frontend needs recommendation cards.",
+    "is_enabled": true,
+    "config": {
+      "version": 1,
+      "output_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "templates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "slug": { "type": "string" },
+                "reason": { "type": "string" }
+              },
+              "required": ["slug", "reason"]
+            }
+          }
+        },
+        "required": ["templates"]
+      }
+    }
+  }
+}
+```
+
+The editor generates `data.name` deterministically from the title and node ID. When building template JSON programmatically, use the current SketricGen template builder instead of inventing this value.
+
+## Use Structured Output for application UI events
+
+An application UI event is a use case of Structured Output, not a separate platform tool. Define fields that tell the receiving frontend what to render or do, then detect the normal Structured Output tool-call event in your application.
+
+For example, a recommendation workflow can emit component data for cards, while another workflow can emit an event name and the state required to open a form. Keep the schema specific to the agent and application you are building; onboarding-specific forms or events are not global SketricGen tools.
+
+Structured Output does not collect the user's response. After the frontend renders an interactive component, send the submitted values as the user's next message on the same conversation. Use Human Input instead if the agent run must pause and wait for that response.
+
+## Schema rules
+
+- The root must be a non-empty object schema.
+- Field names must start with a letter and contain only letters, numbers, and underscores.
+- Supported field types are string, integer, number, boolean, object, and array.
+- Arrays can contain supported primitives or objects.
+- Every name in `required` must exist in `properties` at that level.
+- Nesting cannot exceed eight levels.
+- The current contract version is `1`.
+
+Keep the payload focused. A small schema is easier for lower-cost models to satisfy and easier for your frontend to evolve safely.
+
+## Detect the event
+
+The public streaming API exposes ordinary tool-call events. Match the generated tool name or maintain a node-name mapping in your application.
+
+```ts
+type TemplateRecommendation = { slug: string; reason: string };
+
+function isTemplateRecommendation(
+  value: unknown,
+): value is TemplateRecommendation {
+  if (typeof value !== "object" || value === null) return false;
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.slug === "string" &&
+    typeof candidate.reason === "string"
+  );
+}
+
+function parseRecommendationResult(result: unknown) {
+  let value = result;
+
+  if (typeof value === "string") {
+    try {
+      value = JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+
+  if (typeof value !== "object" || value === null) return null;
+
+  const templates = (value as Record<string, unknown>).templates;
+  if (!Array.isArray(templates) || !templates.every(isTemplateRecommendation)) {
+    return null;
+  }
+
+  return { templates };
+}
+
+function handleAgentEvent(event: Record<string, unknown>) {
+  if (
+    event.type === "TOOL_CALL_END" &&
+    typeof event.tool_call_name === "string" &&
+    event.tool_call_name.startsWith("emit_render_recommendations_")
+  ) {
+    const payload = parseRecommendationResult(event.tool_call_result);
+    if (!payload) return;
+
+    renderTemplateCards(payload.templates);
+  }
+}
+```
+
+`TOOL_CALL_START.tool_call_arguments` contains model-supplied data that has not yet completed runtime validation. Use the start event for progress UI, not application rendering or writes. `TOOL_CALL_END.tool_call_result` contains the validated compact JSON result; depending on the client transport, it may arrive as a JSON string or an object, so parse and runtime-check it before use. Treat the end event as confirmation that this tool call completed, not as proof that the entire agent turn has ended.
+
+## Instruction pattern
+
+Tell the agent what must happen before the call and what it must do afterward:
+
+```text
+After you have the user's confirmed goal and a successful template-catalog response,
+call Render recommendations with two or three catalog slugs. Do not invent slugs.
+Call it as the final action of the onboarding turn, then stop.
+```
+
+Do not ask the model to place raw JSON in prose. Let the tool schema validate the fields and let the frontend own rendering, persistence, and navigation.
+
+## Security and reliability
+
+- Validate identifiers such as template slugs against server-trusted data before navigation or writes.
+- Do not put API keys or private credentials in the output schema, description, or tool arguments.
+- Make write actions idempotent and require confirmation separately; Structured Output itself only returns data.
+- Version your frontend component contract inside the payload when UI compatibility matters.
+- Test missing context, invalid values, duplicate tool calls, interrupted streams, and model retries.
+
+The former pre-release shape using `toolType: "custom_tool"` with `config.kind: "structured_output"` is not supported. Use `toolType: "structured_output"` and omit `config.kind`.

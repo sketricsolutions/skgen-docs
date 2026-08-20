@@ -1,0 +1,175 @@
+---
+title: "Shopify, Resilient Agent Runs & Easier Project Management (July 29, 2026)"
+sidebarTitle: "Jul 29, 2026"
+icon: "calendar-days"
+description: "SketricGen update: Shopify product recommendations, resilient agent runs, project controls, self-serve billing, and connector improvements."
+tags: ["release", "shopify", "widgets", "playground", "projects", "billing", "connectors"]
+version: "v3"
+releaseDate: "2026-07-29"
+---
+
+This release makes customer-facing agents more dependable and easier to manage. Shopify stores can connect Brand Agents to live product recommendations, active agent runs survive interruptions, and Teamspace owners gain clearer project and subscription controls.
+
+## TL;DR
+
+- **Shopify integration:** Connect an eligible Brand Agent to Shopify and show live product recommendations inside the shopper widget.
+- **Runs survive interruptions:** Refreshing, switching tabs, or briefly losing your connection no longer starts a duplicate conversation.
+- **Faster conversation switching:** Recently opened conversations load more quickly while active responses continue streaming.
+- **Project controls:** Create projects from the switcher and safely delete projects you no longer need.
+- **Centralized API keys:** Personal and Teamspace API keys now live together in Teamspace settings.
+- **Self-serve subscriptions:** Cancel, resume, or open the billing portal from the pricing experience.
+- **More reliable connectors:** Managed app connections and WhatsApp setup report their status more consistently.
+
+---
+
+## What's new
+
+### 1) Connect Brand Agents to Shopify
+
+The Shopify experience now links your store to an eligible SketricGen Brand Agent:
+
+- **Guided connection:** Sign in to SketricGen, choose an eligible Brand Agent, and complete the store-linking flow.
+- **Live product recommendations:** Shopper conversations can display product cards from the connected Shopify catalog.
+- **Widget customization:** Open the linked agent's widget settings to match the experience to your storefront.
+- **Safer store linking:** Connection attempts expire and cannot be reused, helping prevent a store from being linked with an old authorization.
+- **Reliable uninstall handling:** Removing the Shopify app cleanly disconnects the integration.
+
+**Why it matters:** Your Brand Agent can move from answering general questions to helping shoppers discover relevant products from your actual catalog.
+
+---
+
+### 2) Keep active runs through refreshes and reconnects
+
+SketricGen now restores in-progress agent runs after common browser and network interruptions:
+
+- **Automatic reconnection:** An active response can resume after a page refresh, tab switch, widget remount, or temporary connection loss.
+- **No duplicate conversation:** Reopening an in-progress run continues the existing conversation instead of creating a second one.
+- **Prompt restoration:** The active request appears again when you reconnect, so the resumed response retains its context.
+- **Multiple active runs:** If more than one run is active, SketricGen can restore each run independently.
+- **Cross-session cancellation:** Stopping a detached run reaches the active worker even when the request reconnects through a different server.
+- **Faster history navigation:** Cached conversation history makes switching between recent conversations feel more immediate.
+
+**Why it matters:** Long-running agents remain usable when real-world interruptions happen, without losing work or producing confusing duplicate threads.
+
+---
+
+### 3) Create and manage projects more easily
+
+Project and account controls are now easier to find and safer to use:
+
+- **Create from the switcher:** Start a new project without leaving the Teamspace and project selector.
+- **Complete project deletion:** Deleting a project removes the agents and knowledge bases that belong to it.
+- **Default-project protection:** SketricGen checks for a valid replacement before changing which project opens by default.
+- **Centralized API keys:** View or regenerate your personal API key from the same Teamspace tab used for administrator-managed keys.
+- **Editable account name:** Update your account name from your profile.
+- **Plan-aware model ordering:** Agent models are ordered to make options for your current subscription easier to understand.
+
+**Why it matters:** Teams can organize separate initiatives without hunting through unrelated settings, while destructive project changes follow a controlled cleanup process.
+
+---
+
+### 4) Manage subscriptions without contacting support
+
+The pricing experience now covers more of the subscription lifecycle:
+
+- **Cancel a subscription:** Schedule cancellation directly from the pricing page.
+- **Resume before cancellation:** Choose **Don't cancel** before the scheduled end date to keep the subscription active.
+- **Open the billing portal:** Manage supported billing details through the customer portal.
+- **Clear cancellation date:** See when a scheduled cancellation will take effect.
+- **Trial confirmation:** Review a dedicated confirmation dialog before cancelling a trial.
+- **Affiliate reliability:** Eligible commissions remain associated with invoices when a subscription is replaced.
+
+**Why it matters:** You can make routine billing decisions yourself and see their timing before they take effect.
+
+---
+
+### 5) More dependable connectors and onboarding guidance
+
+Several smaller improvements make setup and connected apps clearer:
+
+- **Accurate connection state:** An active managed connection now appears as connected when you add or reopen its tool node.
+- **Environment-aware availability:** Only managed connectors enabled for the current SketricGen environment are offered.
+- **WhatsApp setup reliability:** Registration uses the configured Meta application and handles setup failures more clearly.
+- **Cleaner channel settings:** WhatsApp, Telegram, and Instagram management dialogs focus on settings that are currently supported.
+- **Onboarding video:** Eligible users can reopen the onboarding video from the dashboard.
+- **Responsive sign-in window:** The authentication popup displays more consistently across screen sizes.
+
+**Why it matters:** Setup screens more accurately reflect what is connected and give new users a clearer path when they need help.
+
+## Who this release is for
+
+- **Shopify merchants** who want a Brand Agent to recommend products from their live catalog.
+- **Teams running longer agent tasks** where a refresh or temporary disconnect should not lose progress.
+- **Teamspace owners** creating, deleting, and organizing projects.
+- **Account administrators** managing API keys and subscription status.
+- **Affiliate partners** tracking eligible subscription commissions.
+- **Teams using WhatsApp or managed connectors** that need dependable connection status.
+
+## How to use (quick steps)
+
+### Connect a Brand Agent to Shopify
+
+1. Install or open the SketricGen app from your Shopify admin.
+2. Sign in to the SketricGen account that owns the Brand Agent.
+3. Select an eligible **Brand Agent** and complete the connection.
+4. Open the agent's **Widget** settings to customize the storefront experience.
+5. Test a product question and confirm that the response can display catalog cards.
+
+### Resume an interrupted agent run
+
+1. Start an agent run in the Playground or an embedded widget.
+2. If the page refreshes or the connection drops, reopen the same conversation.
+3. Let SketricGen reconnect to the active run; do not submit the request again.
+4. Use **Stop** if you need to cancel the restored run.
+
+### Create or delete a project
+
+1. Open the **Teamspace and project switcher**.
+2. Choose the option to create a project, then enter its name.
+3. To remove a project, open its project settings and review the deletion warning.
+4. Confirm only after checking the agents and knowledge bases that will also be removed.
+
+### Manage a scheduled cancellation
+
+1. Open the **Pricing** page from the Teamspace whose subscription you want to manage.
+2. Choose the available cancellation or billing-portal action.
+3. Review the effective date before confirming.
+4. If the cancellation is still pending, choose **Don't cancel** to resume the subscription.
+
+---
+
+## FAQ
+
+**Will refreshing an active run create another conversation?**
+
+No. SketricGen attempts to reconnect to the existing run and continue from its preserved position. If the run has already finished, the completed conversation appears in history.
+
+**Does deleting a project also delete its agents and knowledge bases?**
+
+Yes. Project deletion includes the resources owned by that project. Review the confirmation carefully and export or move anything you still need before deleting it.
+
+**Which agents can I connect to Shopify?**
+
+The Shopify selector lists Brand Agents eligible for the connection. If an agent does not appear, confirm that it is a Brand Agent in the active Teamspace project.
+
+**Do Shopify product cards use my live catalog?**
+
+Yes. Recommendations in the connected shopper widget use products available through the store's catalog connection.
+
+**When does a scheduled subscription cancellation take effect?**
+
+The pricing page shows the scheduled cancellation date. You can resume the subscription before that date when the **Don't cancel** action is available.
+
+**Where did my personal API key move?**
+
+Personal and Teamspace-managed API keys are now grouped in the API keys tab of Teamspace settings. Your permissions determine which keys and actions you can see.
+
+---
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Shopify deployment guide:** [/deploy/shopify](/deploy/shopify)
+- **Agent Playground:** [/ai-workforce/playground](/ai-workforce/playground)
+- **Teamspace collaboration:** [/ai-workforce/team-collaboration](/ai-workforce/team-collaboration)
+- **Knowledge Bases:** [/shared-platform/knowledge-bases](/shared-platform/knowledge-bases)

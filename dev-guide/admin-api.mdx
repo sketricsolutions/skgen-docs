@@ -1,0 +1,346 @@
+---
+title: "Admin API"
+sidebarTitle: "Admin API"
+icon:
+  name: "key"
+  library: "fontawesome"
+  style: "solid"
+description: "Use the SketricGen Admin API to automate projects, agents, Brand Agents, knowledge bases, conversations, usage, members, and connectors."
+keywords: ["SketricGen Admin API", "AI agent management API", "Brand Agent API", "Teamspace automation", "admin API key"]
+---
+
+The SketricGen Admin API is the control plane for managing a Teamspace from your backend, CLI, automation, or custom SDK. It uses the same permissions and plan limits as the SketricGen application.
+
+Use the [Runtime API](/dev-guide/public-api-usage) instead when your goal is to execute an existing agent and receive its response. Use the [MCP guide](/dev-guide/mcp-connect) when an AI assistant should manage SketricGen conversationally.
+
+## Base URL
+
+```text
+https://krjavjkt27.execute-api.us-east-1.amazonaws.com/dev/admin/v1
+```
+
+Store it as an environment variable so you can update environments without changing application code:
+
+```bash
+export SKETRICGEN_ADMIN_API_URL="https://krjavjkt27.execute-api.us-east-1.amazonaws.com/dev/admin/v1"
+```
+
+## Authentication
+
+Every request requires an Admin API key:
+
+```http
+Authorization: Bearer sk_admin_YOUR_KEY
+```
+
+Create the key from **Teamspace settings → API keys → Create key → Admin key**. The plaintext value is shown once.
+
+When creating the key, choose:
+
+- **Scope:** one project, or the entire Teamspace.
+- **Role:** Viewer, Editor, or Admin.
+- **Expiration:** 30, 90, 180, or 365 days, or a custom date within the supported maximum.
+
+Admin keys expire and cannot be changed in place. Revoke and recreate a key when its role, scope, or expiration needs to change.
+
+## First request
+
+Confirm the Teamspace before performing any write:
+
+```bash
+curl "$SKETRICGEN_ADMIN_API_URL/teamspaces" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY"
+```
+
+Expected shape:
+
+```json
+{
+  "teamspaces": [
+    {
+      "teamspace_id": "teamspace_123",
+      "slug": "example-team",
+      "display_name": "Example Team",
+      "subscription_plan": "Builder"
+    }
+  ]
+}
+```
+
+Never log the authorization header or include it in an error report.
+
+## Project and role behavior
+
+### Project-scoped key
+
+A project-scoped key can only access its selected project. Reads return resources from that project, and writes targeting another project return `403 project_scope_mismatch`.
+
+### Teamspace-scoped key
+
+A Teamspace-scoped key can read across projects. Write operations that create project-owned resources require a `project_id` in the request body.
+
+### Roles
+
+- **Viewer:** Read Teamspace resources, agents, Brand Agent settings, knowledge bases, conversations, traces, usage, and connector status.
+- **Editor:** Viewer access plus agent, Brand Agent, knowledge-base, and connector changes.
+- **Admin:** Editor access plus Teamspace-level project and member management where the endpoint supports it.
+
+The effective permission is limited by both the key's role and the key creator's current membership. Removing or demoting the creator can reduce or disable the key immediately.
+
+## Endpoint groups
+
+| Area | Available operations |
+| --- | --- |
+| Teamspace | Read the Teamspace associated with the key |
+| Projects | List, read, create, and rename projects |
+| Workflow agents | List, create, read, update, delete, and retrieve embed snippets |
+| Brand Agents | List templates; create asynchronously; read and edit identity, model, instructions, knowledge bases, and widget settings |
+| Knowledge bases | List, create, read, rename, delete, list data sources, and delete data sources |
+| Conversations | List conversations, read a conversation, and list its traces |
+| Members | List members and change an existing member's role with a Teamspace-scoped Admin key |
+| Usage | Read plan and credit usage |
+| Connectors | List connectors and tools, create hosted connection links, check status, attach, and detach |
+
+## Endpoint directory
+
+### Teamspace and projects
+
+```text
+GET    /teamspaces
+GET    /projects
+POST   /projects
+GET    /projects/{project_id}
+PATCH  /projects/{project_id}
+```
+
+Creating projects requires a Teamspace-scoped Admin key with Admin permission.
+
+### Workflow agents
+
+```text
+GET     /agents
+POST    /agents
+GET     /agents/{agent_id}
+PATCH   /agents/{agent_id}
+DELETE  /agents/{agent_id}
+GET     /agents/{agent_id}/embed-snippet
+```
+
+`POST /agents` expects a complete `workflow_config`. Use Agent Build when a human should visually edit the workflow graph.
+
+<Warning>
+  `POST /agents/{agent_id}/run` currently returns `501 run_not_available`. Run agents through the Runtime API at `POST https://chat-v2.sketricgen.ai/api/v1/run-workflow` with a `sk_runtime_` key.
+</Warning>
+
+### Brand Agents
+
+```text
+GET    /brand-agent-templates
+POST   /brand-agents
+GET    /jobs/{job_id}
+GET    /brand-agents/{agent_id}
+PATCH  /brand-agents/{agent_id}
+GET    /brand-agents/{agent_id}/widget-config
+PATCH  /brand-agents/{agent_id}/widget-config
+```
+
+Brand Agent creation is asynchronous. The initial request returns `202 Accepted` and a `job_id`; poll the job until it reaches `succeeded` or `failed`.
+
+### Knowledge bases
+
+```text
+GET     /knowledge-bases
+POST    /knowledge-bases
+GET     /knowledge-bases/{knowledge_base_id}
+PATCH   /knowledge-bases/{knowledge_base_id}
+DELETE  /knowledge-bases/{knowledge_base_id}
+GET     /knowledge-bases/{knowledge_base_id}/data-sources
+DELETE  /knowledge-bases/{knowledge_base_id}/data-sources/{file_name}
+```
+
+The Admin API can create an empty knowledge base but does not currently upload files into it. Website-based Brand Agent creation is the supported API flow that crawls content and builds a populated knowledge base.
+
+### Conversations, traces, members, and usage
+
+```text
+GET    /conversations
+GET    /conversations/{conversation_id}?agent_id={agent_id}
+GET    /conversations/{conversation_id}/traces?agent_id={agent_id}
+GET    /members
+PATCH  /members/{user_uuid}
+GET    /usage
+```
+
+Conversation and trace endpoints are read-only. Member endpoints require a Teamspace-scoped Admin key with Admin permission.
+
+### Connectors
+
+```text
+GET     /connectors
+GET     /connectors/{app_slug}/tools
+POST    /connectors/{app_slug}/connect-link
+GET     /connectors/{app_slug}/connection
+POST    /agents/{agent_id}/connectors
+DELETE  /agents/{agent_id}/connectors/{app_slug}
+```
+
+External-app authorization remains human-in-the-loop. The API returns a short-lived hosted connection URL for the user to open; it never returns the external provider's OAuth token to your integration.
+
+## Example: list agents
+
+```bash
+curl "$SKETRICGEN_ADMIN_API_URL/agents?limit=50" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY"
+```
+
+Response:
+
+```json
+{
+  "agents": [
+    {
+      "agent_id": "agent_123",
+      "name": "Growth Research Agent",
+      "agent_type": "workflow",
+      "agent_status": "active",
+      "project_id": "project_123"
+    }
+  ],
+  "next_token": null
+}
+```
+
+## Example: create a Brand Agent
+
+```bash
+curl -X POST "$SKETRICGEN_ADMIN_API_URL/brand-agents" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Example Brand Agent",
+    "seed_url": "https://example.com",
+    "publish_widget": false,
+    "project_id": "project_123"
+  }'
+```
+
+The `project_id` field is required for a Teamspace-scoped key and optional for a project-scoped key.
+
+Initial response:
+
+```json
+{
+  "agent_id": "skbrand_123",
+  "job_id": "job_123",
+  "status": "queued",
+  "poll_url": "/admin/v1/jobs/job_123",
+  "publish_widget": false
+}
+```
+
+Poll the job:
+
+```bash
+curl "$SKETRICGEN_ADMIN_API_URL/jobs/job_123" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY"
+```
+
+Do not treat `queued`, `crawling`, `crawled`, `kb_processing`, or `agent_finalizing` as completion. Only `succeeded` and `failed` are terminal states.
+
+## Example: update a Brand Agent safely
+
+Read the current settings first:
+
+```bash
+curl "$SKETRICGEN_ADMIN_API_URL/brand-agents/skbrand_123" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY"
+```
+
+Then patch only the intended fields:
+
+```bash
+curl -X PATCH "$SKETRICGEN_ADMIN_API_URL/brand-agents/skbrand_123" \
+  -H "Authorization: Bearer $SKETRICGEN_ADMIN_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "instructions": "Help website visitors choose the right plan. Ask before collecting personal information."
+  }'
+```
+
+Brand Agent patches can change the display name, primary agent name, instructions, model, and assigned knowledge bases. They cannot add, remove, or rewire arbitrary workflow nodes.
+
+## Example: connect an app
+
+Connector permissions are a grant to the agent. Use the exact tools published for the connector:
+
+1. `GET /connectors` to choose an app.
+2. `GET /connectors/{app_slug}/tools` to inspect grantable actions.
+3. `POST /connectors/{app_slug}/connect-link` to create a hosted authorization URL.
+4. Give that URL to the intended user. Do not log or persist it.
+5. Poll `GET /connectors/{app_slug}/connection` until `connected` is `true`.
+6. `POST /agents/{agent_id}/connectors` with the approved `allowed_tools`.
+
+<Warning>
+  Omitting `allowed_tools`, or sending an empty list for some external connectors, can grant every available tool. Enumerate the connector tools and obtain explicit approval for write-capable actions.
+</Warning>
+
+## Pagination
+
+Most list endpoints use cursor pagination:
+
+```text
+?limit=50&next_token=OPAQUE_TOKEN
+```
+
+- `limit` accepts 1 through 200 and defaults to 50.
+- Continue while `next_token` is a string.
+- Stop only when `next_token` is `null`.
+- Treat the token as opaque; do not decode or modify it.
+- A short page does not guarantee the listing is complete.
+
+The template and connector-tool catalogs use their documented `limit` and `offset` behavior instead of cursor pagination.
+
+## Error format
+
+Errors use a stable machine-readable `code`:
+
+```json
+{
+  "error": "Human-readable explanation",
+  "code": "project_scope_mismatch"
+}
+```
+
+Handle the `code` in application logic. The human-readable message may become clearer without changing the code.
+
+Common errors:
+
+| HTTP | Code | Meaning |
+| --- | --- | --- |
+| 401 | `missing_token` | No bearer token was supplied |
+| 401 | `invalid_key` | The key could not be verified |
+| 403 | `key_expired` | The key is past its expiration |
+| 403 | `key_revoked` | The key was revoked |
+| 403 | `project_scope_mismatch` | The request targets a different project |
+| 403 | `insufficient_role` | The key or its creator lacks the required permission |
+| 403 | `plan_downgraded` | The active plan no longer includes API keys |
+| 409 | `workflow_not_ready` | The Brand Agent has not finished provisioning |
+| 501 | `run_not_available` | Use the Runtime API to execute the agent |
+
+## Operations the Admin API does not expose
+
+The Admin API intentionally does not provide:
+
+- API-key creation, rotation, or revocation. A signed-in human manages keys in the app.
+- Billing changes, credit purchases, or subscription cancellation.
+- Owner transfer or owner-role grants.
+- New member invitations or member removal.
+- Direct file upload into a knowledge base.
+- Provider passwords or raw connector OAuth credentials.
+
+## Related guides
+
+- [Connect AI Agents with SketricGen MCP](/dev-guide/mcp-connect)
+- [Runtime API](/dev-guide/public-api-usage)
+- [Python SDK](/dev-guide/python-sdk)
+- [Node.js SDK](/dev-guide/node-sdk)

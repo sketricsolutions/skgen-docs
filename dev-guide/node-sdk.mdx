@@ -1,17 +1,25 @@
 ---
 title: "Node.js SDK"
+sidebarTitle: "Node.js SDK"
+icon:
+  name: "node-js"
+  library: "fontawesome"
+  style: "brands"
 description: "SketricGen Node.js SDK — run AI agent workflows, stream responses, upload files, and integrate with TypeScript or JavaScript applications."
 keywords: ["Node.js SDK", "sketricgen", "workflow", "TypeScript", "chat API"]
 ---
 
 ## Overview
 
-Node.js SDK for the SketricGen Chat Server API. Build AI-powered workflows, chat applications, and document analysis tools with TypeScript or JavaScript.
+Node.js SDK for the SketricGen Runtime API. Build AI-powered workflows, chat applications, and document analysis tools with TypeScript or JavaScript.
 
 ## Requirements
 
 - Node.js 18 or later (uses built-in `fetch`, `FormData`, `Blob`, and streams)
 - ESM: use `"type": "module"` in `package.json` or `.mjs` files
+- A Teamspace Runtime API key beginning with `sk_runtime_`
+
+Create the key from **Teamspace settings → API keys → Create key → Runtime key**. Admin API keys cannot run agents through this SDK.
 
 ## Installation
 
