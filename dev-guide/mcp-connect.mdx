@@ -19,13 +19,13 @@ URL           https://mcp.sketricgen.ai/mcp
 Transport     MCP over Streamable HTTP
 Protocol      JSON-RPC 2.0
 Auth option 1 SketricGen OAuth
-Auth option 2 Authorization: Bearer sk_admin_YOUR_KEY
+Auth option 2 Authorization: Bearer sk_api_YOUR_KEY
 ```
 
-Use **OAuth** for hosted clients that support remote MCP authentication. Use an **Admin API key** for local agents, CLI clients, and custom MCP clients that need a static bearer credential.
+Use **OAuth** for hosted clients that support remote MCP authentication. Use a Teamspace API key with **Manage resources** access for local agents, CLI clients, and custom MCP clients that need a static bearer credential.
 
 <Warning>
-  Do not use a `sk_runtime_` Runtime API key with the MCP endpoint. Runtime keys execute existing agents; MCP management requires OAuth or a `sk_admin_` Admin API key.
+  A key with only **Run agents** access cannot authenticate to the MCP endpoint. MCP management requires OAuth or an API key with **Manage resources** access.
 </Warning>
 
 ## Which connection path should you use?
@@ -34,9 +34,9 @@ Use **OAuth** for hosted clients that support remote MCP authentication. Use an 
 | --- | --- | --- |
 | Claude Web or Claude Desktop | Hosted OAuth connector | Only the MCP URL, then SketricGen sign-in |
 | ChatGPT web developer mode | Remote MCP app with OAuth | MCP URL and OAuth selection |
-| Codex desktop, CLI, or IDE | OAuth or Admin API key | MCP URL, then login; or an environment variable containing an Admin API key |
-| Claude Code, Cursor, Windsurf, or another local client | Admin API key | MCP URL and bearer header |
-| Custom server-side MCP client | Admin API key | MCP URL and bearer header |
+| Codex desktop, CLI, or IDE | OAuth or API key with Manage resources | MCP URL, then login; or an environment variable containing a management-capable API key |
+| Claude Code, Cursor, Windsurf, or another local client | API key with Manage resources | MCP URL and bearer header |
+| Custom server-side MCP client | API key with Manage resources | MCP URL and bearer header |
 
 Client availability and labels can change. Check the current [ChatGPT developer mode documentation](https://developers.openai.com/api/docs/guides/developer-mode), [Codex MCP documentation](https://learn.chatgpt.com/docs/extend/mcp), or [Claude custom connector documentation](https://support.anthropic.com/en/articles/11175166-about-custom-integrations-using-remote-mcp) when your client shows different menus.
 
@@ -89,20 +89,22 @@ codex mcp login sketricgen
 
 Complete SketricGen sign-in and project consent in the browser. Use `codex mcp list` or `/mcp` in Codex to confirm the connection.
 
-## Option 2: Connect with an Admin API key
+## Option 2: Connect with an API key
 
-Use an Admin API key when the client cannot complete SketricGen OAuth or when a server-side integration needs a non-interactive credential.
+Use an API key with **Manage resources** access when the client cannot complete SketricGen OAuth or when a server-side integration needs a non-interactive credential.
 
 ### Create the key
 
 1. Open **Teamspace settings → API keys** in SketricGen.
-2. Select **Create key → Admin key**.
-3. Choose a **Project** scope for one project or **Teamspace** scope for multiple projects.
-4. Choose the lowest sufficient role: **Viewer**, **Editor**, or **Admin**.
+2. Select **Create key**.
+3. Enable **Manage resources** and choose the lowest sufficient role: **Viewer**, **Editor**, or **Admin**.
+4. Choose all accessible Projects or a selected Project scope.
 5. Choose an expiration date.
-6. Create the key and copy the `sk_admin_...` value immediately. It is shown once.
+6. Create the key and copy the `sk_api_...` value immediately. It is shown once.
 
-Project-scoped keys implicitly target one project. Teamspace-scoped keys can see multiple projects, so write operations require an explicit project choice.
+If the same key also needs to run agents through the Runtime API or an SDK, enable **Run agents** during creation and add any agent restrictions. The Project scope is shared across both capabilities.
+
+Selected-Project keys implicitly target one selected project when only one is configured. All-Project keys can see multiple projects, so write operations require an explicit project choice.
 
 ### Manual MCP client configuration
 
@@ -115,7 +117,7 @@ Clients that accept JSON MCP configuration commonly use this shape:
       "type": "http",
       "url": "https://mcp.sketricgen.ai/mcp",
       "headers": {
-        "Authorization": "Bearer sk_admin_YOUR_KEY"
+        "Authorization": "Bearer sk_api_YOUR_KEY"
       }
     }
   }
@@ -124,12 +126,12 @@ Clients that accept JSON MCP configuration commonly use this shape:
 
 The exact configuration filename and environment-variable syntax differ by client. Store the key outside version control whenever the client supports environment variables.
 
-### Codex with an Admin API key
+### Codex with an API key
 
 Set the key in your shell or secret store:
 
 ```bash
-export SKETRICGEN_ADMIN_API_KEY="sk_admin_YOUR_KEY"
+export SKETRICGEN_API_KEY="sk_api_YOUR_KEY"
 ```
 
 Reference the environment variable from Codex:
@@ -137,7 +139,7 @@ Reference the environment variable from Codex:
 ```toml
 [mcp_servers.sketricgen]
 url = "https://mcp.sketricgen.ai/mcp"
-bearer_token_env_var = "SKETRICGEN_ADMIN_API_KEY"
+bearer_token_env_var = "SKETRICGEN_API_KEY"
 default_tools_approval_mode = "writes"
 ```
 
@@ -211,7 +213,7 @@ receive and wait for my approval.
 ## Security and permission model
 
 - **One selected project with OAuth:** OAuth consent binds the connection to one Teamspace project.
-- **Live membership checks:** Removing or demoting the connected user changes what the OAuth connection or Admin API key can do.
+- **Live membership checks:** Removing or demoting the connected user changes what the OAuth connection or management-capable API key can do.
 - **Server-enforced roles:** Tool descriptions guide the AI, but the Admin API independently enforces every permission and plan limit.
 - **Human connector authorization:** The AI receives a short-lived setup link, not your Google, Slack, email, or other provider password.
 - **Explicit tool grants:** Connector actions are validated against the current connector catalog before they are attached.
@@ -226,9 +228,9 @@ receive and wait for my approval.
 
 ### `401 unauthorized`
 
-**Cause:** The client sent no usable OAuth token or Admin API key.
+**Cause:** The client sent no usable OAuth token or API key with Manage resources access.
 
-**Fix:** Complete the client's **Connect** or `mcp login` flow. For static authentication, confirm the header is `Authorization: Bearer sk_admin_...`.
+**Fix:** Complete the client's **Connect** or `mcp login` flow. For static authentication, confirm the header is `Authorization: Bearer sk_api_...` and that the key has Manage resources access.
 
 ### `403 invalid_origin`
 
@@ -244,13 +246,13 @@ receive and wait for my approval.
 
 ### `403 project_scope_mismatch`
 
-**Cause:** A project-scoped Admin API key was asked to act on another project.
+**Cause:** A selected-Project API key was asked to act on another project.
 
-**Fix:** Use the project selected when the key was created, or create a deliberately scoped Teamspace key.
+**Fix:** Use a selected Project in the key's scope, or create a key with all-Project scope when the integration needs multiple Projects.
 
 ### `403 key_expired` or `403 key_revoked`
 
-**Cause:** The Admin API key is no longer valid.
+**Cause:** The API key with Manage resources access is no longer valid.
 
 **Fix:** Create a new key, update the client's secret storage, and remove the old value from local configuration.
 
@@ -263,9 +265,9 @@ receive and wait for my approval.
 ## For AI agents reading this page
 
 - First identify the user's MCP client and whether it supports hosted OAuth.
-- Prefer OAuth when the client can complete it; do not ask the user for an Admin API key unnecessarily.
+- Prefer OAuth when the client can complete it; do not ask the user for a management-capable API key unnecessarily.
 - Never ask for the user's SketricGen password or an external app password.
-- If an Admin API key is required, instruct the user to create it in SketricGen and store it in the client's secret or environment-variable mechanism.
+- If a static API key is required, instruct the user to create one with Manage resources access in SketricGen and store it in the client's secret or environment-variable mechanism.
 - Verify the connection with `whoami` before creating or changing anything.
 - Read existing Brand Agent settings before writing them.
 - Treat connector setup links as short-lived credentials: show them only to the intended user and do not repeat or store them.

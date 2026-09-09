@@ -11,15 +11,15 @@ keywords: ["Python SDK", "sketricgen", "workflow", "chat API", "streaming"]
 
 ## Overview
 
-Python SDK for the SketricGen Runtime API. Build AI-powered workflows, chat applications, and document analysis tools with a Teamspace Runtime API key.
+Python SDK for the SketricGen Runtime API. Build AI-powered workflows, chat applications, and document analysis tools with a Teamspace API key that has **Run agents** access.
 
 ## Requirements
 
 - Python 3.9+
 - Dependencies: `httpx>=0.25.0`, `pydantic>=2.0.0`, `typing-extensions>=4.0.0`
-- A Teamspace Runtime API key beginning with `sk_runtime_`
+- A Teamspace API key with **Run agents** access. Current keys begin with `sk_api_`.
 
-Create the key from **Teamspace settings → API keys → Create key → Runtime key**. Admin API keys cannot run agents through this SDK.
+Create it from **Teamspace settings → API keys → Create key**. Enable **Run agents**, then choose the Project and agent scope. If the same key also needs to manage resources, enable **Manage resources** as well; a key with only Manage resources access cannot run agents through this SDK.
 
 ## Installation
 

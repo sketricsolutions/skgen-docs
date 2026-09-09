@@ -43,17 +43,19 @@ The composer supports:
 
 Only attach files that the selected Project and agent are allowed to use. File access does not automatically give the agent access to unrelated connected apps.
 
-## Workspace Files and Artifacts
+## Workspace files and artifacts
 
-The Workspace panel separates reusable files by scope:
+Playground gives you quick access to files used by the current conversation or run. The **Files** experience is the management surface and separates files by scope:
 
 ![Opening, collapsing, and restoring the Playground workspace panel](/images/product-ui-2026/playground-workspace-panel.gif)
 
-- **Project files:** read-only files available across agents in the selected Project.
-- **Agent workspace:** files shared across conversations for the current agent.
-- **Conversation or run files:** files created or used for a specific conversation or run when shown in the artifact view.
+- **Project files:** files shared with every agent and conversation in the selected Project.
+- **Agent files:** files shared across all conversations for the current agent.
+- **Conversation files:** files created or used for a specific conversation or run. They remain private to that conversation and are removed 30 days after the last write.
 
-Select a file to preview or download it. Review generated reports, spreadsheets, images, documents, and other artifacts before sending or publishing them elsewhere.
+In Files, navigate folders and review file size and modified time. When your Project permissions allow editing, use **New file**, **Upload**, **Save**, **Rename**, or **Delete**. New files and browser edits are text-only. Preview images and PDFs in the browser, and download file types that cannot be previewed. Text files larger than 1 MB stay view-only. If a file changes after you open it, Save and Rename report a conflict so you can reload before replacing newer work.
+
+Select a file in Playground or Files to preview or download it. Review generated reports, spreadsheets, images, documents, and other artifacts before sending or publishing them elsewhere.
 
 ![Expanded Playground workspace showing separate Project and agent file scopes](/images/product-ui-2026/playground-workspace-expanded.png)
 

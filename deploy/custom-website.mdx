@@ -21,6 +21,19 @@ You need:
 
 The widget must be public because client-side website code cannot safely include a private API key.
 
+## Website access restrictions
+
+By default, a public Brand Agent has no domain restrictions and its widget can be embedded on any website. Add an allowlist when the widget should run only on sites you control:
+
+1. Open your Brand Agent's **Publish** or **Embed** settings.
+2. Under **Website access**, enter a hostname such as `example.com` or a website URL, then select **Add**.
+3. Add up to 25 domains. Use `*.example.com` to allow `example.com` and its subdomains.
+4. Remove any domain that should no longer load the widget, then select **Save**.
+
+The allowlist checks the embedding page's HTTP or HTTPS hostname. Paths are not stored as separate rules, and a hostname that is not listed cannot load the restricted widget. If the widget is missing after you save the list, check that the page hostname matches an entry, including the correct subdomain or wildcard, and confirm that the Brand Agent is still public and published.
+
+Saving one or more allowed domains disables the **Fullscreen iframe** option. Use the chat bubble or floating pill embed while the widget is restricted, or remove all saved domains before using a fullscreen iframe.
+
 ## Floating Chat Bubble
 
 Use the floating chat bubble when you want the agent available across your site as a website chatbot.
@@ -68,6 +81,10 @@ Developers can see the full identity model, including API, iframe, and fullscree
 ## Inline iFrame
 
 Use an iframe when you want the agent embedded directly inside a page section.
+
+<Note>
+  The **Fullscreen iframe** option is unavailable while one or more Website access domains are saved. Use a chat bubble or floating pill for a restricted embed, or remove the restrictions before generating a fullscreen iframe snippet.
+</Note>
 
 1. Open your Brand Agent.
 2. Open **Publish**.

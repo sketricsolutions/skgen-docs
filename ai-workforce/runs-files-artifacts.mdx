@@ -61,14 +61,19 @@ AI Workforce runs can maintain a todo/planning state during a run. This helps th
 
 The plan is a working aid, not a guarantee. Always review the final output, generated files, and [traces](/user-guides/traces-and-optimizations) when accuracy matters.
 
-## Workspace Files
+## Workspace files
 
-AI Workforce uses two workspace concepts:
+AI Workforce uses three file scopes. Open **Files** in the workspace to browse the selected Project's files:
 
-- **Run workspace:** temporary or conversation-specific files created during a run.
-- **Agent workspace:** reusable files that can be made available to future runs for the same agent.
+- **Project files:** shared with every agent and conversation in the selected Project.
+- **Agent files:** reusable across all conversations for one agent.
+- **Conversation files:** private to one conversation and removed 30 days after the last write.
 
-Generated artifacts can include drafts, reports, summaries, transformed data, or other files created by tools and agents.
+The Files experience supports folder navigation, file size and modified-time details, creating text files, uploading files into the current folder, saving edits, renaming files, and deleting files when your Project permissions allow those actions. Supported text files can be edited in the browser, images and PDFs can be previewed, and other file types can be downloaded. Text files larger than 1 MB remain view-only in the browser.
+
+Save and rename actions check whether the file changed after it was opened. If another change is detected, the action reports a conflict so you can reload before replacing newer work.
+
+Files created for a run or schedule use the Conversation scope. Generated artifacts can include drafts, reports, summaries, transformed data, or other files created by tools and agents.
 
 ## Inspecting Artifacts
 
