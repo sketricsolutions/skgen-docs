@@ -34,22 +34,22 @@ If you only need a copy-paste website chat bubble or iframe, use [Deploy an AI C
 
 ## Authentication
 
-Every Runtime API request requires a Teamspace Runtime API key beginning with `sk_runtime_`.
+Every Runtime API request requires a Teamspace API key with **Run agents** access. Current keys begin with `sk_api_`.
 
-Create it from **Teamspace settings → API keys → Create key → Runtime key**. Choose the narrowest project and agent scope that supports the integration. The plaintext key is shown once.
+Create it from **Teamspace settings → API keys → Create key**. Enable **Run agents**, choose the narrowest Project and agent scope that supports the integration, and copy the plaintext key when it is shown once. You can also enable **Manage resources** if the same credential needs Admin API access.
 
 **Required Header:**
 
 ```http
-API-KEY: sk_runtime_YOUR_KEY
+API-KEY: sk_api_YOUR_KEY
 ```
 
-Do not use an Admin API key beginning with `sk_admin_` here. Admin keys manage Teamspace resources; they do not execute agents.
+The key must have **Run agents** access. A key with only **Manage resources** access cannot execute agents through the Runtime API.
 
 ## Quick start
 
 ```bash
-export SKETRICGEN_RUNTIME_API_KEY="sk_runtime_YOUR_KEY"
+export SKETRICGEN_RUNTIME_API_KEY="sk_api_YOUR_KEY"
 
 curl -X POST "https://chat-v2.sketricgen.ai/api/v1/run-workflow" \
   -H "API-KEY: $SKETRICGEN_RUNTIME_API_KEY" \
@@ -74,7 +74,7 @@ Execute an AI workflow using a specified agent to generate intelligent responses
 
 | Header         | Type   | Required | Description                 |
 | -------------- | ------ | -------- | --------------------------- |
-| `API-KEY`      | string | Yes      | Teamspace Runtime API key beginning with `sk_runtime_` |
+| `API-KEY`      | string | Yes      | Teamspace API key with **Run agents** access, beginning with `sk_api_` |
 | `Content-Type` | string | Yes      | Must be `application/json`  |
 
 ### Request Body

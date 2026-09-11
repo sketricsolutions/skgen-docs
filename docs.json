@@ -148,6 +148,7 @@
             "group": "2026 Updates",
             "icon": "calendar-days",
             "pages": [
+              "changelog/2026-09-09-workspace-files-collaboration-scoped-api-keys",
               "changelog/2026-08-17-collaborative-agent-space-agent-build-onboarding",
               "changelog/2026-08-06-secure-widgets-brand-agent-api-wix",
               "changelog/2026-07-29-shopify-resilient-runs-project-billing",

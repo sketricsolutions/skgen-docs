@@ -27,21 +27,23 @@ export SKETRICGEN_ADMIN_API_URL="https://krjavjkt27.execute-api.us-east-1.amazon
 
 ## Authentication
 
-Every request requires an Admin API key:
+Every request requires a Teamspace API key with **Manage resources** access:
 
 ```http
-Authorization: Bearer sk_admin_YOUR_KEY
+Authorization: Bearer sk_api_YOUR_KEY
 ```
 
-Create the key from **Teamspace settings → API keys → Create key → Admin key**. The plaintext value is shown once.
+Create the key from **Teamspace settings → API keys → Create key**. Enable **Manage resources**, choose a Viewer, Editor, or Admin role, and set the Project scope. The plaintext `sk_api_...` value is shown once.
+
+If the same key also needs to run agents through the Runtime API or an SDK, enable **Run agents** during the same creation flow. A dual-capability key uses one shared Project scope; agent restrictions apply to its runtime access.
 
 When creating the key, choose:
 
-- **Scope:** one project, or the entire Teamspace.
+- **Project scope:** all accessible Projects, or a selected set of Projects.
 - **Role:** Viewer, Editor, or Admin.
 - **Expiration:** 30, 90, 180, or 365 days, or a custom date within the supported maximum.
 
-Admin keys expire and cannot be changed in place. Revoke and recreate a key when its role, scope, or expiration needs to change.
+Keys with **Manage resources** access expire and cannot be changed in place. Revoke and recreate a key when its role, scope, capabilities, or expiration needs to change.
 
 ## First request
 
@@ -71,13 +73,13 @@ Never log the authorization header or include it in an error report.
 
 ## Project and role behavior
 
-### Project-scoped key
+### Selected-Project key
 
-A project-scoped key can only access its selected project. Reads return resources from that project, and writes targeting another project return `403 project_scope_mismatch`.
+A selected-Project key can only access its selected Project or Projects. Reads return resources from that scope, and writes targeting another Project return `403 project_scope_mismatch`.
 
-### Teamspace-scoped key
+### All-Project key
 
-A Teamspace-scoped key can read across projects. Write operations that create project-owned resources require a `project_id` in the request body.
+An all-Project key can read across Projects. Write operations that create project-owned resources require a `project_id` in the request body when the key covers more than one Project.
 
 ### Roles
 
@@ -97,7 +99,7 @@ The effective permission is limited by both the key's role and the key creator's
 | Brand Agents | List templates; create asynchronously; read and edit identity, model, instructions, knowledge bases, and widget settings |
 | Knowledge bases | List, create, read, rename, delete, list data sources, and delete data sources |
 | Conversations | List conversations, read a conversation, and list its traces |
-| Members | List members and change an existing member's role with a Teamspace-scoped Admin key |
+| Members | List members and change an existing member's role with an all-Project key using the Admin role |
 | Usage | Read plan and credit usage |
 | Connectors | List connectors and tools, create hosted connection links, check status, attach, and detach |
 
@@ -113,7 +115,7 @@ GET    /projects/{project_id}
 PATCH  /projects/{project_id}
 ```
 
-Creating projects requires a Teamspace-scoped Admin key with Admin permission.
+Creating projects requires a key with **Manage resources** access, the **Admin** role, and all-Project (Teamspace-wide) scope.
 
 ### Workflow agents
 
@@ -129,7 +131,7 @@ GET     /agents/{agent_id}/embed-snippet
 `POST /agents` expects a complete `workflow_config`. Use Agent Build when a human should visually edit the workflow graph.
 
 <Warning>
-  `POST /agents/{agent_id}/run` currently returns `501 run_not_available`. Run agents through the Runtime API at `POST https://chat-v2.sketricgen.ai/api/v1/run-workflow` with a `sk_runtime_` key.
+  `POST /agents/{agent_id}/run` currently returns `501 run_not_available`. Run agents through the Runtime API at `POST https://chat-v2.sketricgen.ai/api/v1/run-workflow` with a key that has **Run agents** access.
 </Warning>
 
 ### Brand Agents
@@ -171,7 +173,7 @@ PATCH  /members/{user_uuid}
 GET    /usage
 ```
 
-Conversation and trace endpoints are read-only. Member endpoints require a Teamspace-scoped Admin key with Admin permission.
+Conversation and trace endpoints are read-only. Member endpoints require a key with **Manage resources** access, the **Admin** role, and all-Project (Teamspace-wide) scope.
 
 ### Connectors
 

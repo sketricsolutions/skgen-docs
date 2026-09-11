@@ -1,0 +1,228 @@
+---
+title: "Workspace files, collaboration, safer embeds, and scoped API keys (September 9, 2026)"
+sidebarTitle: "Sep 9, 2026"
+icon: "calendar-days"
+description: "SketricGen update: manage workspace files, inspect agent activity and run costs, show web sources, restrict website embeds, create scoped API keys, and build on mobile."
+tags: ["release", "workspace-files", "agent-space", "collaboration", "citations", "widgets", "api-keys", "onboarding"]
+version: "v3"
+releaseDate: "2026-09-09"
+---
+
+This release gives AI Workforce a clearer home for files, activity, and collaboration. It also makes web search evidence and run costs easier to inspect, adds better controls for embedded Brand Agents, and simplifies API key creation.
+
+## TL;DR
+
+- **Scoped workspace files:** Browse Project, Agent, and Conversation files from one Files experience, then create, upload, edit, rename, or delete files when your permissions allow it.
+- **More visible agent work:** Agent Space shows creator and updater details, recent activity, teammates, active runs, and requests that need attention.
+- **Evidence and cost in traces:** Web search sources persist in conversations and traces, while run costs are split into model, managed app, web search, and code-execution rows.
+- **More useful human input:** Human Input questions can accept multiple choices, including a custom "Something else" response.
+- **Safer website embeds:** Restrict a public Brand Agent to approved domains, lazy-load the widget iframe, and use refreshed mobile and error states.
+- **Unified API keys:** Create one key for runtime access, administration, or both, with project and agent restrictions.
+- **A clearer first-agent path:** The Brand Agent wizard now includes a live preview, and onboarding saves preferences with retry support.
+- **Responsive product surfaces:** Agent Space, Playground, settings, and public pages work better on smaller screens.
+
+## What's new
+
+### 1) Browse and manage workspace files
+
+The new **Files** experience brings reusable and run-specific files into one place:
+
+- **Three storage scopes:** Switch between **Project**, **Agent**, and **Conversation** files.
+- **Project files:** Share reference material with every agent and conversation in the selected Project.
+- **Agent files:** Keep reusable files available across an agent's conversations.
+- **Conversation files:** Keep files private to one conversation. They are removed 30 days after the last write.
+- **Folder navigation:** Open nested folders with breadcrumbs and review file size and modified time.
+- **File management:** Create text files, upload files into the current folder, save edits, rename files, and delete files when your access allows it.
+- **Type-aware viewing:** Edit supported text files in the browser, preview images and PDFs, and download file types that cannot be previewed. Text files larger than 1 MB stay view-only in the browser.
+- **Safer edits:** Save and rename operations detect conflicts when a file changed after you opened it instead of silently overwriting newer work.
+
+The Files experience is available from the AI Workforce workspace and is also connected to the files used by runs and schedules. See [Playground](/ai-workforce/playground) and [Scheduled Runs, Files, and Artifacts](/ai-workforce/runs-files-artifacts) for the file scopes that agents can use.
+
+**Why it matters:** You can find the right file without opening a particular conversation, keep durable agent context separate from temporary run output, and make small text changes without leaving SketricGen.
+
+### 2) See agent ownership and recent activity in Agent Space
+
+Agent Space now gives teams more context around the agents they share:
+
+- **Created by:** Agent cards show the person who created an agent when that information is available.
+- **Last updated by:** Cards and details show who last changed an agent when a user made the change.
+- **Recent activity:** Administrators can review recent agent creation, edit, and delete events from the details panel.
+- **Live collaboration:** Agent Space continues to show teammates, active runs, and requests waiting for human input.
+- **More resilient states:** Loading and retry actions make it clearer when live status is delayed or unavailable.
+- **Permission-aware activity:** Presence and activity do not grant access to an agent, Project, or conversation.
+
+See [Agent Space](/ai-workforce/agent-space) and [Multiplayer AI: Collaborate With Agents in Real Time](/ai-workforce/team-collaboration) for the current collaboration model.
+
+**Why it matters:** A team can tell who changed an agent, what happened recently, and which work needs attention without opening every conversation.
+
+### 3) Show web search sources and support multi-choice human input
+
+Agent conversations and trace views now expose more of the evidence and decisions behind a run:
+
+- **Clickable web sources:** Web search sources appear below the relevant response and in the trace, with the source hostname and link.
+- **Persisted citations:** Sources remain available when a saved conversation or trace is reopened.
+- **Correct attribution:** Sources found by a delegated agent stay with that activity instead of being presented as evidence for an unrelated step.
+- **Search disclosure:** The trace can show that a search ran even when the provider returned no source links.
+- **Multi-select questions:** Human Input can ask users to select all applicable options rather than choosing only one.
+- **Additive custom answers:** A user can select normal choices and add a typed "Something else" response when the question supports it.
+- **Single-select compatibility:** Existing single-choice Human Input questions keep their current behavior.
+- **Shared Playground updates:** Teammate answers, paused runs, and streamed responses synchronize more reliably in shared conversations.
+
+For background on Human Input and run activity, see [Playground](/ai-workforce/playground) and [AI Workforce tools](/user-guides/tools).
+
+**Why it matters:** People can check where a time-sensitive answer came from and give an agent a more complete decision when one choice is not enough.
+
+### 4) Understand where run credits went
+
+The trace details view now breaks down a run's total credit usage:
+
+- **Model calls:** Credits used by the agent's own model work.
+- **Managed apps:** Credits attributed to each SketricGen-managed connector used during the run.
+- **Web search:** Search activity is visible as its own row for clarity. It remains part of the model charge and is not added twice.
+- **Code execution:** Credits and run counts for code execution appear separately when the capability is used.
+- **Older traces:** Runs created before per-app detail was available still reconcile through a connected-app remainder row when needed.
+- **Large traces:** Traces stored outside the main record now load back into the trace view after access and privacy checks, so long runs do not appear blank.
+
+Open a run's trace from the Playground or Agent Build to review its activity, evidence, and credit usage before changing the workflow.
+
+**Why it matters:** The headline total now has an explanation. You can see whether a run spent credits on model work, a managed connector, web search, or code execution.
+
+### 5) Control where a Brand Agent widget can run
+
+Public Brand Agent embeds now support an allowed-domain list:
+
+- **Approved hosts:** Add up to 25 hostnames or website URLs where the widget may run.
+- **Subdomain wildcards:** Use a pattern such as `*.example.com` to allow the site's subdomains.
+- **Clear default:** With no domains saved, a public widget can be embedded on any website.
+- **Embed behavior:** A restricted widget uses the allowed-domain check, and the fullscreen iframe option is unavailable while restrictions are active.
+- **Lazy loading:** The widget iframe can load when it is needed instead of competing with the initial page load. The first visitor message waits until the widget is ready.
+- **Refreshed integrations:** Generated embed snippets, mobile behavior, and widget error messages have been updated for the current embed bundle.
+
+To configure this, open a public Brand Agent's **Publish** or **Embed** settings, add the domains under **Website access**, and select **Save**. See [Deploy to a custom website](/deploy/custom-website) for the embed options.
+
+**Why it matters:** You can keep an embedded customer-facing agent tied to the websites you control while reducing the work it does before a visitor opens the chat.
+
+### 6) Create one API key with exact access
+
+Teamspace settings now use one creation flow for runtime and administrative credentials:
+
+- **Choose capabilities:** Give a key **Run agents**, **Manage resources**, or both.
+- **Project scope:** Apply runtime access to all accessible Projects or a selected set of Projects.
+- **Agent restrictions:** Limit runtime access to selected agents inside the chosen Project scope.
+- **Administrative role:** Choose Viewer, Editor, or Admin permissions when the key manages Teamspace resources.
+- **Explicit administrative scope:** An administrative key can target one Project or the whole Teamspace according to its configured scope.
+- **Safer expiry:** Keys with administrative access use an expiry limit. Runtime-only keys can use the available runtime expiry options.
+- **Secret handling:** The new secret is shown once after creation, so save it before closing the confirmation step.
+
+Use [Teamspace Admin API](/dev-guide/admin-api) for management automation and the [Node.js SDK](/dev-guide/node-sdk) or [Python SDK](/dev-guide/python-sdk) for runtime integrations.
+
+**Why it matters:** One credential can match the job it performs. A widget or SDK does not need broad administrative access, and an automation key can be limited to the Projects and agents it actually needs.
+
+### 7) Start faster and work comfortably on smaller screens
+
+The first-agent and product UI paths received a broad usability pass:
+
+- **Live Brand Agent preview:** The creation wizard shows a current preview while you set the website, sources, brand details, and widget options.
+- **Clearer onboarding:** The preference flow separates work role and AI-agent experience, saves each choice, and offers **Try again** when saving or loading fails.
+- **Better first-agent handoff:** Onboarding can recommend a Brand Agent and open its setup separately while the onboarding conversation remains available.
+- **Mobile access:** Protected product routes no longer stop at a desktop-only gate. Navigation, Teamspace switching, tabs, dialogs, Agent Space, and run views adapt to smaller screens.
+- **Reliable loading states:** Agent Space and run views show retry actions when a request stalls instead of leaving an empty panel.
+- **Public page metadata:** Landing pages, blog content, and templates use more reliable crawlable markup and structured data.
+
+Start with [Adaptive Onboarding](/getting-started/adaptive-onboarding), or skip it and open [Agent Space](/ai-workforce/agent-space) when you already know which workflow to build.
+
+**Why it matters:** New users can move from context to a useful first agent with less guesswork, and existing teams can manage their work from more devices.
+
+### 8) Review the current schedule path
+
+Schedule setup continues through the Agent Build **Input** node and its **Scheduled Trigger** configuration. The legacy Pipedream trigger routes and scheduled-webhook service are no longer part of the platform.
+
+<Note>
+  If an older Pipedream schedule still uses a callback URL containing `/schedule_webhook/`, migrate it to the current Scheduled Trigger flow or retire it before relying on that schedule.
+</Note>
+
+See [Scheduled Runs, Files, and Artifacts](/ai-workforce/runs-files-artifacts) for the current schedule setup.
+
+## Who this release is for
+
+- **AI Workforce teams** managing shared Project, Agent, and Conversation files.
+- **Administrators** who need an activity trail and tightly scoped automation keys.
+- **Agent builders** inspecting web sources, credit usage, and multi-step human decisions.
+- **Brand Agent owners** embedding agents on websites they control.
+- **New users** starting with adaptive onboarding and a live Brand Agent preview.
+- **Mobile users** who need to build, test, and manage agents from smaller screens.
+
+## How to use (quick steps)
+
+### Manage workspace files
+
+1. Open **Files** in AI Workforce.
+2. Choose **Project**, **Agent**, or **Conversation** storage.
+3. Select an agent or conversation when the chosen scope requires one.
+4. Open folders and select a file to preview or edit it.
+5. Use **New file**, **Upload**, **Rename**, **Delete**, or **Save** when your permissions allow the action.
+
+### Review an agent's activity and trace costs
+
+1. Open **Agent Space** for the selected Teamspace Project.
+2. Select an agent to view its status, collaborators, activity, and pending input.
+3. Open the agent's Playground or a completed run.
+4. Open the trace and review sources, tool calls, credit rows, and generated files.
+
+### Restrict a website embed
+
+1. Open the public Brand Agent's **Publish** or **Embed** settings.
+2. Find **Website access**.
+3. Add a hostname or URL, or use a wildcard such as `*.example.com`.
+4. Remove any domain that should no longer load the widget.
+5. Select **Save**, copy the current embed snippet, and test it on an allowed site.
+
+### Create a scoped API key
+
+1. Open **Teamspace settings** and select **API keys**.
+2. Select **Create key** and give it a name that identifies its use.
+3. Choose **Run agents**, **Manage resources**, or both.
+4. Set the Project and agent restrictions that the key needs.
+5. Choose the administrative role and expiry when applicable.
+6. Copy the secret from the confirmation step and store it securely.
+
+## FAQ
+
+**Are Project files available to every agent?**
+
+Yes. Project files are shared with agents and conversations in the selected Project. Agent files remain scoped to one agent, and Conversation files remain scoped to one conversation.
+
+**Who can change a workspace file?**
+
+File actions depend on the selected scope and your Project permissions. If you do not have the required agent-edit access, the management actions are hidden.
+
+**Does web search add a second charge in the trace?**
+
+No. The trace shows web search as a separate line so you can see the activity, but that amount remains part of the model charge and is not added twice.
+
+**Can Human Input accept a normal choice and a custom answer together?**
+
+Yes, when the question enables multi-select and includes the "Something else" option. The custom text is submitted with the selected choices.
+
+**Can one API key run agents and manage resources?**
+
+Yes. Select both capabilities during creation, then set the shared Project scope and the appropriate administrative role. Keep runtime-only keys separate when a system only needs to run an agent.
+
+**Why is the fullscreen iframe option unavailable?**
+
+Fullscreen iframe embeds are unavailable while Website access restrictions are saved. Use a chat-bubble or floating-pill embed, or remove the domain restriction if a fullscreen iframe is required.
+
+**What should I do with an old Pipedream schedule?**
+
+Check its callback URL. If it contains `/schedule_webhook/`, migrate the schedule to the current Agent Build **Input** node and **Scheduled Trigger** flow, or retire it.
+
+## Get Started
+
+- **Try SketricGen:** [https://www.sketricgen.ai/](https://www.sketricgen.ai/)
+- **Adaptive Onboarding:** [/getting-started/adaptive-onboarding](/getting-started/adaptive-onboarding)
+- **Agent Space:** [/ai-workforce/agent-space](/ai-workforce/agent-space)
+- **Playground:** [/ai-workforce/playground](/ai-workforce/playground)
+- **Runs, Files, and Artifacts:** [/ai-workforce/runs-files-artifacts](/ai-workforce/runs-files-artifacts)
+- **Team collaboration:** [/ai-workforce/team-collaboration](/ai-workforce/team-collaboration)
+- **Admin API:** [/dev-guide/admin-api](/dev-guide/admin-api)
+- **Custom website embed:** [/deploy/custom-website](/deploy/custom-website)
