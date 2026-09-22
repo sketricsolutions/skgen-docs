@@ -2,12 +2,127 @@
 title: "Deploy to Wix"
 sidebarTitle: "Wix"
 icon: "globe"
-description: "Add a SketricGen Brand Agent as an AI chatbot for your Wix website with a floating chat widget or inline iframe."
-keywords: ["Wix chatbot", "AI chatbot for website", "website chatbot", "website chat widget", "Brand Agent widget"]
+description: "Connect a SketricGen Brand Agent to Wix with the recommended Wix app, or use a manual floating widget or inline iframe."
+keywords: ["Wix chatbot", "Wix AI chatbot", "SketricGen Wix app", "AI chatbot for website", "website chat widget", "Brand Agent widget"]
 ---
 
+The **SketricGen Brand Agent** app is the recommended way to add a Brand Agent to Wix. It connects your site without code or an embed snippet and displays the widget across your published site. Manual embed options remain available for custom layouts.
+
 <Tabs>
-  <Tab title="Floating Chat Bubble">
+  <Tab title="Wix App (Recommended)">
+
+  ## Before you start
+
+  You need:
+
+  - A SketricGen account with at least one Brand Agent. If you do not have one yet, [create a Brand Agent](/brand-agents/create-brand-agent).
+  - Wix permission to install or manage apps and publish the site. A site owner, co-owner, or collaborator with an appropriate custom role can complete the setup.
+
+  ## Step 1: Make your Brand Agent public and published
+
+  In SketricGen, open your Brand Agent and select the **Deploy** tab.
+
+  1. Set **Visibility** to **Public**. The page confirms that your agent is publicly accessible.
+  2. Select **Publish Now** if the agent has unpublished changes.
+
+  ![SketricGen Brand Agent Deploy tab showing Public visibility and the Publish Now button](/images/product-ui-2026/wix-app/step-1-public-and-publish.png)
+
+  > **Note:** Wix lists only Brand Agents that are active, published, set to **Public**, and editable by your account. If an agent is missing from the connection list, verify these settings before trying again.
+
+  ## Step 2: Open the Wix App Market
+
+  From your Wix site dashboard, go to **Apps → App Market**.
+
+  ![Wix site dashboard with Apps expanded and App Market selected](/images/product-ui-2026/wix-app/step-2-app-market.png)
+
+  ## Step 3: Find the SketricGen Brand Agent app
+
+  Search for **SketricGen**, then select **SketricGen Brand Agent** from the results.
+
+  ![Wix App Market search showing the SketricGen Brand Agent app](/images/product-ui-2026/wix-app/step-3-search-sketricgen.png)
+
+  ## Step 4: Add the app to your site
+
+  On the app page, select **Add to Site** and accept the permissions requested by Wix. The app is free to install.
+
+  ![SketricGen Brand Agent listing in the Wix App Market with the Add to Site button](/images/product-ui-2026/wix-app/step-4-add-to-site.png)
+
+  ## Step 5: Start the connection
+
+  The app appears in your dashboard under **Apps → SketricGen Brand Agent**. Open it, then select **Connect Brand Agent** in **01 Connect your Brand Agent**. A SketricGen window opens.
+
+  ![SketricGen Brand Agent setup page in Wix showing the Connect Brand Agent button](/images/product-ui-2026/wix-app/step-5-connect-brand-agent.png)
+
+  > **Note:** If the connection window does not open, allow popups for Wix and select **Connect Brand Agent** again.
+
+  ## Step 6: Sign in to SketricGen
+
+  Sign in with the account that can edit the Brand Agent you want to connect. Continue with Google or your email address.
+
+  ![SketricGen sign-in window opened from Wix with Google and email sign-in options](/images/product-ui-2026/wix-app/step-6-sign-in-redacted.png)
+
+  ## Step 7: Choose and connect your Brand Agent
+
+  Open the **Brand Agent** list and select the agent you want to use. Each entry includes its Teamspace and Project so that you can distinguish agents with similar names. Then select **Connect agent**.
+
+  ![SketricGen connection window with a Brand Agent selected from the list](/images/product-ui-2026/wix-app/step-7-select-agent-redacted.png)
+
+  After the connection succeeds, the Wix setup page displays **Connected and ready** with the connected agent ID.
+
+  ## Step 8: Choose the launcher and enable the widget
+
+  Under **02 Customize the widget**, choose how visitors open the Brand Agent:
+
+  - **Chat bubble:** A compact launcher in the bottom-right corner.
+  - **Floating pill:** A message field centered along the bottom of the page.
+
+  Under **03 Publish to your website**, set **Show Brand Agent widget** to **On**.
+
+  ![Wix app settings showing the Chat bubble launcher selected and the Brand Agent widget enabled](/images/product-ui-2026/wix-app/step-8-launcher-and-toggle.png)
+
+  ## Step 9: Publish and test your site
+
+  Publish your site from the Wix editor, then open the live site. The Brand Agent widget appears with the welcome message configured in SketricGen.
+
+  ![Published Wix site with the SketricGen Brand Agent widget open](/images/product-ui-2026/wix-app/step-9-live-site.png)
+
+  **Success:** Your Brand Agent is live on Wix.
+
+  ## Customize the widget
+
+  Appearance, welcome message, suggested questions, knowledge, and behavior are managed in SketricGen. From the Wix app, select **Open Brand Agent Editor**, or open the agent directly at [sketricgen.ai](https://www.sketricgen.ai), and then select **Customize Widget**.
+
+  Publish changes in SketricGen to send them to the live Wix widget without republishing your Wix site.
+
+  > **Note:** The launcher style is stored in Wix. After switching between **Chat bubble** and **Floating pill**, publish the Wix site again.
+
+  ## Change, hide, or disconnect the agent
+
+  From the app setup page:
+
+  - **Change agent:** Connect a different Brand Agent to the site.
+  - **Disconnect:** Unlink the agent and remove its widget. The Brand Agent and its content remain in SketricGen.
+  - **Show Brand Agent widget → Off:** Hide the widget without disconnecting the agent.
+
+  Publish the Wix site after changing any of these settings.
+
+  ## Troubleshooting
+
+  **My agent is not in the list.** Confirm that the agent is active, published, set to **Public**, and editable by your account. Return to [Step 1](#step-1-make-your-brand-agent-public-and-published), correct the settings, and reconnect.
+
+  **I see "Reconnect required."** Select **Change agent**, then choose the agent again to finish secure linking.
+
+  **The connection window opened blank and closed.** Sign in to [sketricgen.ai](https://www.sketricgen.ai) in the same browser, then retry the connection.
+
+  **The widget is missing from my live site.** Confirm that **Show Brand Agent widget** is **On**, then publish the Wix site.
+
+  **I signed in to the wrong SketricGen account.** Select **Sign out** in the connection window, then sign in with the account that can edit the agent.
+
+  **I cannot install the app or publish the site.** Ask the Wix site owner to install the app or grant you a role that can manage apps and publish the site.
+
+  </Tab>
+
+  <Tab title="Floating Chat Bubble (Manual)">
 
   ## **Step 1: Create your SketricGen account**
 
@@ -19,10 +134,9 @@ keywords: ["Wix chatbot", "AI chatbot for website", "website chatbot", "website 
 
     ## **Step 2: Copy the SketricGen Brand Agent Embed Code**
 
-  Go to your Brand Agent dashboard, click **Publish**, and copy the embed code.
-  **Note**: Ensure your Brand Agent is set to **Public**.
+  Open your Brand Agent and select **Deploy**. Set **Visibility** to **Public**, publish any pending changes, select **Chat Bubble**, and copy the embed code.
 
-  ![Screenshot showing SketricGen dashboard with Publish button and embed code copy option](/images/wix/screenshot1.png)
+  ![SketricGen Brand Agent Deploy tab with Public visibility and Chat Bubble selected](/images/product-ui-2026/wix-app/step-1-public-and-publish.png)
 
   ## **Step 3: Embed the Brand Agent in Wix**
 
@@ -59,7 +173,7 @@ keywords: ["Wix chatbot", "AI chatbot for website", "website chatbot", "website 
 
   </Tab>
 
-  <Tab title="Inline iFrame Embed">
+  <Tab title="Inline iFrame (Manual)">
 
   ## **Step 1: Create your SketricGen account**
 
@@ -71,10 +185,9 @@ keywords: ["Wix chatbot", "AI chatbot for website", "website chatbot", "website 
 
   ## **Step 2: Get the Embed Code**
 
-  From the SketricGen dashboard, click **Publish** and copy the embed code.
-  > Set visibility to **Public**.
+  Open your Brand Agent and select **Deploy**. Set **Visibility** to **Public**, publish any pending changes, select **iframe/Fullscreen**, and copy the iframe code.
 
-  ![Screenshot showing SketricGen Direct Embed iframe code copy interface](/images/wix/screenshot7.png)
+  ![SketricGen Brand Agent Deploy tab with Public visibility and iframe Fullscreen available](/images/product-ui-2026/wix-app/step-1-public-and-publish.png)
 
   ## **Step 3: Add the iFrame Embed to Wix**
 
