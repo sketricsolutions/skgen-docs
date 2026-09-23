@@ -7,13 +7,12 @@ Contact ID connects SketricGen conversations to a stable user or contact identif
 
 Where to go next:
 
-- If you are using the REST API, SDKs, AI Workforce, or a custom product integration, see [Public API: Contact ID and User Grouping](/dev-guide/public-api-usage#contact-id-and-user-grouping).
-- If you are adding the chat bubble or iframe to a website, see [Deploy an AI Chatbot to a Custom Website](/deploy/custom-website#identify-known-users-with-contact-id).
+- If you are using the REST API, SDKs, AI Workforce, or a custom product integration, see [Runtime API: Contact ID and User Grouping](/dev-guide/public-api-usage#contact-id-and-user-grouping).
+- If you are adding the chat bubble or iframe to a website, see [How Widget Visitors Are Identified](/deploy/custom-website#how-widget-visitors-are-identified).
 
 In short:
 
-- Public API requests use `contact_id` in the JSON body.
-- Website widgets use `data-contact-id` on the script tag.
-- iFrame and fullscreen links use the `contactId` query parameter.
+- Runtime API requests use `contact_id` in the JSON body.
+- Embedded widgets, iframes, and fullscreen links receive a contact identity assigned by SketricGen. They ignore `data-contact-id` and the `contactId` query parameter, because a page-supplied identifier could not be trusted as a visitor identity.
 
-Use a stable internal ID, UUID, or hashed value. Avoid emails, phone numbers, names, or other directly identifiable personal data.
+When you send `contact_id` through the Runtime API, use a stable internal ID, UUID, or hashed value. Avoid emails, phone numbers, names, or other directly identifiable personal data.
