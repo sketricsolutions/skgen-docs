@@ -16,10 +16,12 @@ You need:
 
 - A created Brand Agent
 - A tested customer-facing conversation flow
-- Public/published visibility enabled
+- A published version of the agent
 - Widget styling reviewed
 
-The widget must be public because client-side website code cannot safely include a private API key.
+Most website embeds use a **public** agent. A public widget requests short-lived authorization scoped to that one agent, so no long-lived credential sits in your page source.
+
+You can also embed a **private** agent by adding a scoped runtime key to the snippet. See [Embed a Private Agent](#embed-a-private-agent).
 
 ## Website access restrictions
 
@@ -56,63 +58,83 @@ Example:
 
 For multi-page websites, add the script to your shared layout so the widget appears consistently.
 
-## Identify Known Users with Contact ID
+## Floating Pill Layout
 
-If your website or product already has logged-in users, pass your internal user or contact identifier with `data-contact-id`. SketricGen stores this as the conversation `contact_id`, so conversations from the same person are grouped under the same contact in SketricGen.
-
-Use a stable internal ID, UUID, or hashed value. Avoid sending emails, phone numbers, names, or other directly identifiable personal data as the contact ID.
-
-If you do not know what internal user ID to use, skip this field. The widget still works without it.
-
-Example for products with logged-in users:
+The floating pill is an alternative launcher: a bottom-center pill instead of a corner bubble, with the chat panel opening above it when the visitor sends a message. Add `data-layout="floating"` to the same script tag.
 
 ```html
 <script
   src="https://jswidget.sketricgen.ai/widget-embed.js"
   data-agent-id="YOUR_AGENT_ID"
-  data-contact-id="YOUR_INTERNAL_USER_ID"
+  data-layout="floating"
 ></script>
 ```
 
-If the visitor is anonymous, omit `data-contact-id`. The widget will use its browser-stored anonymous contact behavior instead.
+<Note>
+  The floating pill is marked **Experimental** in the Publish screen. The chat bubble is the stable default; use the pill when the bottom-center placement suits your layout better, and test it on mobile before rolling it out.
+</Note>
 
-Developers can see the full identity model, including API, iframe, and fullscreen examples, in [Public API: Contact ID and User Grouping](/dev-guide/public-api-usage#contact-id-and-user-grouping).
+## Embed a Private Agent
+
+A private agent can run on your website when the snippet carries a Teamspace runtime key scoped to that single agent. Use this when the agent should not be reachable by anyone who copies your agent ID.
+
+1. Open **Teamspace settings → API keys → Create key**.
+2. Enable **Run agents**, and scope the key to the one agent and project this website needs.
+3. Open your Brand Agent's **Publish** screen and copy the snippet. While the agent is private, the snippet includes a `data-api-key` placeholder.
+4. Replace the placeholder with your scoped key.
+
+```html
+<script
+  src="https://jswidget.sketricgen.ai/widget-embed.js"
+  data-agent-id="YOUR_AGENT_ID"
+  data-api-key="YOUR_TEAMSPACE_RUNTIME_KEY"
+></script>
+```
+
+The widget hands the key to the chat frame in memory and exchanges it for short-lived, agent-scoped authorization. It does not persist the key in browser storage.
+
+<Warning>
+  A key placed in page HTML is still readable by anyone who views the page source. Scope it to the single agent that runs on that site, never reuse a broad Teamspace key, and keep it out of URLs, logs, and cookies. Rotate it by revoking the old key and pasting a new one into the snippet.
+</Warning>
+
+Messaging channels such as WhatsApp, Instagram, Telegram, Slack, and Zapier keep working while the agent is private, without a key in any page.
+
+## How Widget Visitors Are Identified
+
+SketricGen assigns the visitor identity for embedded widgets on the server. When a widget loads, it requests authorization for the agent, and SketricGen mints the contact identity and a visitor credential for that browser. A returning visitor presents the stored credential and continues their previous identity, so repeat conversations stay grouped without any work on your page.
+
+<Warning>
+  The widget does not accept a visitor identity chosen by the page. `data-contact-id` on the embed script, and the `contactId` query parameter on iframe and fullscreen URLs, are ignored for browser embeds. Because conversations are keyed by contact, a page-supplied identifier would let any site claim to be one of your known contacts.
+</Warning>
+
+To tie conversations to your own user records, call the [Runtime API](/dev-guide/public-api-usage) from your backend and send `contact_id` in the request body. That path is authenticated with a Teamspace runtime key, so the identifier can be trusted.
 
 ## Inline iFrame
 
 Use an iframe when you want the agent embedded directly inside a page section.
 
 <Note>
-  The **Fullscreen iframe** option is unavailable while one or more Website access domains are saved. Use a chat bubble or floating pill for a restricted embed, or remove the restrictions before generating a fullscreen iframe snippet.
+  The **Fullscreen iframe** option appears in the Publish screen only while the agent is public and no Website access domains are saved. Use the chat bubble or floating pill for a private or domain-restricted embed.
 </Note>
 
 1. Open your Brand Agent.
 2. Open **Publish**.
-3. Choose the direct embed or iframe option.
+3. Choose **Fullscreen iframe**.
 4. Copy the iframe code.
 5. Paste it into the page where the chat should appear.
 
-Example:
+The Publish screen generates a `/fullscreen-widget/` URL:
 
 ```html
 <iframe
-  src="https://www.sketricgen.ai/iframe-widget/YOUR_AGENT_ID"
+  src="https://www.sketricgen.ai/fullscreen-widget/YOUR_AGENT_ID"
   width="100%"
   height="700px"
   frameborder="0"
 ></iframe>
 ```
 
-To group iframe conversations for a known user, add the `contactId` query parameter:
-
-```html
-<iframe
-  src="https://www.sketricgen.ai/iframe-widget/YOUR_AGENT_ID?contactId=YOUR_INTERNAL_USER_ID"
-  width="100%"
-  height="700px"
-  frameborder="0"
-></iframe>
-```
+`/iframe-widget/YOUR_AGENT_ID` serves the same chat interface and is the better fit when the agent sits inside a page section rather than filling it.
 
 ## Test After Deploying
 
@@ -121,8 +143,8 @@ After adding the widget:
 1. Open the live page.
 2. Confirm the widget or iframe appears.
 3. Ask a question from your Brand Agent's Knowledge Base.
-4. If you pass `data-contact-id` or `contactId`, confirm the conversation shows under the expected contact in SketricGen.
+4. Reload the page and confirm the previous conversation is still available to the same browser.
 5. Test lead capture if enabled.
 6. Check the conversation in SketricGen.
 
-If the widget does not appear, confirm the Brand Agent is published/public and that the `data-agent-id` or iframe URL uses the correct agent ID.
+If the widget does not appear, confirm the Brand Agent is published, that the `data-agent-id` or iframe URL uses the correct agent ID, and that the page hostname matches your Website access list. For a private agent, also confirm the snippet carries a valid `data-api-key`.
