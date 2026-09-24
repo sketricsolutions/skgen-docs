@@ -2,20 +2,20 @@
 title: "Consolidated release notes (September 18, 2026)"
 sidebarTitle: "Sep 18, 2026"
 icon: "calendar-days"
-description: "SketricGen release notes for the changes merged after PR #331, including the onboarding, reliability, and responsive UX updates from PR #338."
+description: "SketricGen release notes covering onboarding, Agent Space, Brand Agent, Playground, widget, affiliate, and billing updates."
 tags: ["release", "landing-pages", "onboarding", "brand-agents", "playground", "widgets", "agent-space", "affiliates", "billing"]
 version: "v3"
 releaseDate: "2026-09-18"
 ---
 
-This consolidated update covers PRs **#332 through #338**, merged after PR #331. The changes in these pull requests are now in `main`.
+This consolidated update covers everything released since the last update.
 
 ## TL;DR
 
 - Signed-in visitors get clearer routes to Agent Space, Brand Agents, and Templates from landing and product pages.
 - Onboarding can resume human-input steps, accept voice input, preserve brand setup data, and handle website deep links more reliably.
 - Shared Playground runs, widgets, transcripts, and workflow settings now behave more consistently during concurrent or interrupted work.
-- Project Floor, the editor, and invite flows have cleaner metadata and better responsive behavior.
+- Agent Space, the editor, and invite flows have cleaner metadata and better responsive behavior.
 - The affiliate program now documents payout rules and retries conflicted commission writes safely.
 - Credit recovery, reset visibility, teamspace promotions, and annual promo credits now follow consistent rules.
 - Onboarding attribution, knowledge-base errors, human input, responsive layouts, and Agent Space reliability have been tightened across the product.
@@ -48,9 +48,9 @@ This consolidated update covers PRs **#332 through #338**, merged after PR #331.
 - Workflow widgets use their own defaults and no longer need unnecessary Brand Agent-specific storage configuration.
 - Uploaded widget configurations preserve public and private visibility settings.
 
-### Project Floor and editor experience
+### Agent Space and editor experience
 
-- Project Floor search now supports agent names and IDs alongside the existing filters.
+- Agent Space search now supports agent names and IDs alongside the existing filters.
 - Agent cards and detail views use tooltip metadata, last-active indicators, and cleaner activity timelines.
 - EditorPanel options now share consistent styling, spacing, borders, and Marketplace badge placement.
 - Responsive filters and invite-link overflow handling have been improved.
@@ -93,27 +93,11 @@ This consolidated update covers PRs **#332 through #338**, merged after PR #331.
 
 ### Responsive UI and Agent Space
 
-- Layout shifts are reduced across the sidebar, mobile banners, promo banners, canvas, Agent Space, and Project Floor.
+- Layout shifts are reduced across the sidebar, mobile banners, promo banners, canvas, and Agent Space.
 - Project-switcher icons stay stable after onboarding changes without requiring a reload.
-- Project Floor now caches results and supports creation-date sorting.
+- Agent Space now caches results and supports creation-date sorting.
 - Profile photos are protected, with improved profile cache behavior.
 - Reusable landing-page tables, pills, and feature sections support refreshed AI-agent positioning.
-
-### Validation for PR #338
-
-PR #338 passed lint, type-check, build, and the targeted Teamspace, analytics, push, blog, MCP, Shopify, and Wix test suites.
-
-## Pull request status
-
-| PR | Status | Focus |
-| --- | --- | --- |
-| #332 | Merged | Navigation, widget reattachment, chat UI, and landing redirect fixes |
-| #333 | Merged | Signed-in landing CTAs and onboarding and Playground fixes |
-| #334 | Merged | Hero CTA, human input, and Project Floor follow-up |
-| #335 | Merged | Affiliate terms and payout protections |
-| #336 | Merged | Landing, onboarding, widget, affiliate, pricing, and reliability release |
-| #337 | Merged | Annual promo credits and Brand Agent project selection |
-| #338 | Merged | Onboarding, attribution, knowledge bases, responsive UX, and reliability updates |
 
 ## Learn more
 
