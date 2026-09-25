@@ -18,7 +18,8 @@ SketricGen exposes three developer surfaces. Choose the surface based on whether
 | **MCP server** | Claude, ChatGPT, Codex, or another MCP client should build and manage Brand Agents conversationally | SketricGen OAuth or an API key with **Manage resources** access | Brand Agent creation and editing, templates, knowledge bases, widget configuration, and connectors |
 | **Admin API** | Your backend, CLI, or automation should manage Teamspace resources directly | API key with **Manage resources** access, beginning with `sk_api_` | Projects, agents, Brand Agents, knowledge bases, conversations, traces, members, usage, and connectors |
 | **Runtime API** | Your application should send a message to an existing agent and receive its response | API key with **Run agents** access, beginning with `sk_api_` | Agent execution through `POST /api/v1/run-workflow` |
-| **Python and Node.js SDKs** | You want a typed client for the Runtime API | API key with **Run agents** access, beginning with `sk_api_` | Agent execution, streaming, and supported file uploads |
+| **Python SDK** | You want one typed client for runtime and supported management operations | API key with **Run agents**, **Manage resources**, or both | Agent execution, HITL, streaming, file uploads, and supported Teamspace resource management |
+| **Node.js SDK** | You want a typed JavaScript client for the Runtime API | API key with **Run agents** access, beginning with `sk_api_` | Agent execution, streaming, and supported file uploads |
 
 ## How the surfaces fit together
 
@@ -49,7 +50,7 @@ The Runtime API and Admin API remain separate endpoints, but their permissions a
 - Connect an AI assistant with the [SketricGen MCP guide](/dev-guide/mcp-connect).
 - Manage resources programmatically with the [Admin API](/dev-guide/admin-api).
 - Run an existing agent with the [Runtime API](/dev-guide/public-api-usage).
-- Use the [Python SDK](/dev-guide/python-sdk) or [Node.js SDK](/dev-guide/node-sdk) for a higher-level Runtime API client.
+- Use the unified [Python SDK](/dev-guide/python-sdk) for runtime and supported management operations, or the [Node.js SDK](/dev-guide/node-sdk) for a higher-level Runtime API client.
 
 ## API key location
 

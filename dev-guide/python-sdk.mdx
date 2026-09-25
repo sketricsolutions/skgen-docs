@@ -5,310 +5,373 @@ icon:
   name: "python"
   library: "fontawesome"
   style: "brands"
-description: "SketricGen Python SDK — run AI agent workflows, stream responses, and attach files programmatically with async and sync support."
-keywords: ["Python SDK", "sketricgen", "workflow", "chat API", "streaming"]
+description: "Use the unified SketricGen Python SDK to run agents, handle human-in-the-loop requests, upload supported files, and manage Teamspace resources."
+keywords: ["Python SDK", "sketricgen", "workflow", "Admin API", "HITL", "file upload", "streaming"]
 ---
 
 ## Overview
 
-Python SDK for the SketricGen Runtime API. Build AI-powered workflows, chat applications, and document analysis tools with a Teamspace API key that has **Run agents** access.
+The `sketricgen` Python package provides one typed `SketricGenClient` for the Runtime API and the supported Admin API operations. Use it to run agents, stream responses, attach files, handle human-in-the-loop (HITL) pauses, browse Teamspace resources, and manage Brand Agents and connectors.
+
+SDK version `0.3.0` removed the separate `AdminClient`. The same client now routes runtime and management calls to the correct API.
 
 ## Requirements
 
-- Python 3.9+
-- Dependencies: `httpx>=0.25.0`, `pydantic>=2.0.0`, `typing-extensions>=4.0.0`
-- A Teamspace API key with **Run agents** access. Current keys begin with `sk_api_`.
+- Python 3.9 or later
+- `sketricgen>=0.3.0`
+- A Teamspace API key beginning with `sk_api_`
 
-Create it from **Teamspace settings → API keys → Create key**. Enable **Run agents**, then choose the Project and agent scope. If the same key also needs to manage resources, enable **Manage resources** as well; a key with only Manage resources access cannot run agents through this SDK.
+Create the key from **Teamspace settings → API keys → Create key**. Enable **Run agents** for workflow calls, **Manage resources** for control-plane calls, or both for the complete SDK surface. Project scope, agent restrictions, and management role still apply.
 
 ## Installation
 
 ```bash
-pip install sketricgen
+pip install --upgrade "sketricgen>=0.3.0"
 ```
 
-Or with other package managers:
+Or with another package manager:
 
 ```bash
-# uv
-uv add sketricgen
+uv add "sketricgen>=0.3.0"
 
-# poetry
-poetry add sketricgen
+poetry add "sketricgen>=0.3.0"
 ```
 
-## Quick Start
+## Configure the client
+
+Set the single supported API-key environment variable:
+
+```bash
+export SKETRICGEN_API_KEY="sk_api_YOUR_KEY"
+```
+
+Then create one client for runtime and management operations:
 
 ```python
 from sketricgen import SketricGenClient
 
-# Initialize client
-client = SketricGenClient(api_key="your-api-key")
-
-# Run a workflow
-response = await client.run_workflow(
-    agent_id="agent-123",
-    user_input="Hello, how are you?",
-)
-print(response.response)
-```
-
-## Features
-
-- **Run Workflows**: Execute chat/workflow requests with AI agents
-- **Streaming**: Real-time streaming responses using Server-Sent Events
-- **File Attachments**: Attach images and PDFs to workflows
-- **Async & Sync**: Both async and synchronous API support
-- **Type Safety**: Full type hints for IDE support
-- **Error Handling**: Comprehensive custom exception types
-
----
-
-## Client Reference
-
-### SketricGenClient
-
-The main client for interacting with the SketricGen API.
-
-#### Constructor
-
-```python
-client = SketricGenClient(
-    api_key: str,           # Your SketricGen API key (required)
-    timeout: int = 300,     # Request timeout in seconds
-    upload_timeout: int = 300,  # Upload timeout for large files
-    max_retries: int = 3,   # Maximum retry attempts
-)
-```
-
-#### From Environment Variables
-
-```python
-# Set SKETRICGEN_API_KEY environment variable
 client = SketricGenClient.from_env()
 ```
 
-| Environment Variable | Default | Description |
-|---------------------|---------|-------------|
-| `SKETRICGEN_API_KEY` | *required* | Your API key |
-| `SKETRICGEN_TIMEOUT` | `300` | Request timeout in seconds |
-| `SKETRICGEN_UPLOAD_TIMEOUT` | `300` | Upload timeout for large files |
+You can also pass the key directly:
+
+```python
+client = SketricGenClient(
+    api_key="sk_api_YOUR_KEY",
+    timeout=30,
+    upload_timeout=300,
+    max_retries=3,
+)
+```
+
+| Environment variable | Default | Description |
+| --- | --- | --- |
+| `SKETRICGEN_API_KEY` | Required | Teamspace API key used for every SDK operation |
+| `SKETRICGEN_TIMEOUT` | `300` | Runtime request timeout in seconds |
+| `SKETRICGEN_UPLOAD_TIMEOUT` | `300` | File-upload timeout in seconds |
 | `SKETRICGEN_MAX_RETRIES` | `3` | Maximum retry attempts |
 
----
+<Warning>
+  `SKETRICGEN_RUNTIME_API_KEY`, `SKETRICGEN_ADMIN_API_KEY`, and `AdminClient` are not supported in version 0.3.0. Replace them with `SKETRICGEN_API_KEY` and `SketricGenClient`.
+</Warning>
 
-### run_workflow()
+## Run an agent
 
-Execute a workflow/chat request (async).
-
-```python
-response = await client.run_workflow(
-    agent_id: str,                    # Agent ID to chat with (required)
-    user_input: str,                  # User message, max 10000 chars (required)
-    conversation_id: str = None,      # Resume a conversation
-    contact_id: str = None,           # External contact ID
-    file_paths: list[str] = None,     # Files to attach
-    stream: bool = False,             # Enable streaming
-)
-```
-
-**Returns**: `ChatResponse` if `stream=False`, `AsyncIterator[StreamEvent]` if `stream=True`
-
-#### Example: Non-Streaming
+### Async
 
 ```python
 response = await client.run_workflow(
     agent_id="agent-123",
-    user_input="What is the weather like today?",
-    conversation_id="conv-456",  # Optional: resume conversation
+    user_input="Summarize the latest project updates.",
 )
-print(f"Response: {response.response}")
-print(f"Conversation ID: {response.conversation_id}")
+
+print(response.response)
+print(response.conversation_id)
 ```
 
-#### Example: Streaming
+### Sync
+
+```python
+response = client.run_workflow_sync(
+    agent_id="agent-123",
+    user_input="Summarize the latest project updates.",
+)
+
+print(response.response)
+```
+
+Both methods accept the same arguments:
+
+```python
+response = await client.run_workflow(
+    agent_id,
+    user_input="",
+    conversation_id=None,
+    contact_id=None,
+    file_paths=None,
+    stream=False,
+    enable_hitl=False,
+    hitl_resume=None,
+)
+```
+
+`user_input` is required unless the request resumes a HITL pause or includes at least one file. Its maximum length is 10,000 characters.
+
+## Stream a response
+
+`run_workflow(..., stream=True)` returns an async iterator. The synchronous method returns a regular iterator.
 
 ```python
 import json
 
 async for event in await client.run_workflow(
     agent_id="agent-123",
-    user_input="Tell me a story",
+    user_input="Draft a launch plan.",
     stream=True,
 ):
     data = json.loads(event.data)
-    
+
     if data["type"] == "TEXT_MESSAGE_CONTENT":
         print(data["delta"], end="", flush=True)
-    elif data["type"] == "RUN_FINISHED":
-        print()
+
+    if event.is_terminal:
+        break
 ```
 
----
+The SDK marks `RUN_FINISHED`, `RUN_ERROR`, and `RUN_PAUSED_HITL` as terminal through `event.is_terminal`.
 
-### run_workflow_sync()
+| Event type | Meaning |
+| --- | --- |
+| `RUN_STARTED` | The workflow started |
+| `TEXT_MESSAGE_START` | An assistant message started |
+| `TEXT_MESSAGE_CONTENT` | A text chunk arrived |
+| `TEXT_MESSAGE_END` | The assistant message ended |
+| `TOOL_CALL_START` | A tool call started |
+| `TOOL_CALL_END` | A tool call ended |
+| `CUSTOM_EVENT` | A custom event; `deep_agents_hitl` carries pending HITL details |
+| `RUN_PAUSED_HITL` | The run paused for a human decision |
+| `RUN_FINISHED` | The run completed |
+| `RUN_ERROR` | The run failed |
 
-Synchronous version of `run_workflow()`.
+## Handle human-in-the-loop requests
+
+HITL is opt-in. Set `enable_hitl=True` on the initial request and every resume request where the agent may pause for an answer, approval, or rejection.
 
 ```python
-response = client.run_workflow_sync(
-    agent_id: str,
-    user_input: str,
-    conversation_id: str = None,
-    contact_id: str = None,
-    file_paths: list[str] = None,
-    stream: bool = False,
+from sketricgen import HitlDecision, HitlResume, SketricGenClient
+
+client = SketricGenClient.from_env()
+
+paused = await client.run_workflow(
+    agent_id="agent-123",
+    user_input="Prepare the campaign and ask for approval before scheduling it.",
+    enable_hitl=True,
 )
+
+if paused.run_paused_hitl and paused.hitl_request:
+    request = paused.hitl_request
+
+    # Render request.action_requests and honor each corresponding
+    # request.review_configs entry before collecting decisions.
+    resumed = await client.run_workflow(
+        agent_id="agent-123",
+        conversation_id=paused.conversation_id,
+        enable_hitl=True,
+        hitl_resume=HitlResume(
+            request_id=request.request_id,
+            decisions=[HitlDecision(type="approve")],
+        ),
+    )
 ```
 
-**Returns**: `ChatResponse` if `stream=False`, `Iterator[StreamEvent]` if `stream=True`
+Each decision must use a type allowed by the corresponding `review_configs` entry:
 
-#### Example
+| Decision | Payload | Use it for |
+| --- | --- | --- |
+| Respond | `HitlDecision(type="respond", message="October 15")` | Answering a requested question |
+| Approve | `HitlDecision(type="approve")` | Allowing a proposed action |
+| Reject | `HitlDecision(type="reject")` | Declining a proposed action |
 
-```python
-# Non-streaming
-response = client.run_workflow_sync(
-    agent_id="agent-123",
-    user_input="Hello!",
-)
-print(response.response)
+For multiple pending actions, provide one decision per action in the same order as `hitl_request.action_requests`. Resume on the same `conversation_id`, include the returned `request_id`, and do not send a new `user_input`. A resumed run can pause again.
 
-# Streaming
-for event in client.run_workflow_sync(
-    agent_id="agent-123",
-    user_input="Tell me a story",
-    stream=True,
-):
-    data = json.loads(event.data)
-    if data["type"] == "TEXT_MESSAGE_CONTENT":
-        print(data["delta"], end="", flush=True)
-```
+For streaming runs, capture the `deep_agents_hitl` custom event and stop when `RUN_PAUSED_HITL` arrives. Resume with a new `run_workflow()` call using the same typed `HitlResume` payload.
 
----
+## Attach files
 
-## Response Models
-
-### ChatResponse
-
-Response from a non-streaming workflow request.
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `agent_id` | `str` | Workflow/Agent ID |
-| `user_id` | `str` | User identifier |
-| `conversation_id` | `str` | Conversation ID for follow-up messages |
-| `response` | `str` | The assistant's response text |
-| `owner` | `str` | Owner of the agent |
-| `error` | `bool` | Error flag (default: `False`) |
-
-### StreamEvent
-
-Individual event from a streaming response.
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `event_type` | `str` | Type of the SSE event |
-| `data` | `str` | JSON string containing event data |
-| `id` | `str \| None` | Optional event ID |
-
----
-
-## Streaming Events
-
-The streaming API uses the [AG-UI Protocol](https://docs.ag-ui.com). Parse the `data` field as JSON to access event details.
-
-### Event Types
-
-| Event Type | Description | Key Fields |
-|------------|-------------|------------|
-| `RUN_STARTED` | Workflow execution started | `thread_id`, `run_id` |
-| `TEXT_MESSAGE_START` | Assistant message started | `message_id`, `role` |
-| `TEXT_MESSAGE_CONTENT` | Text chunk received | `message_id`, `delta` |
-| `TEXT_MESSAGE_END` | Assistant message completed | `message_id` |
-| `TOOL_CALL_START` | Tool/function call started | `tool_call_id`, `tool_call_name` |
-| `TOOL_CALL_END` | Tool/function call completed | `tool_call_id` |
-| `RUN_FINISHED` | Workflow completed | `thread_id`, `run_id` |
-| `RUN_ERROR` | Workflow error occurred | `message` |
-| `CUSTOM` | Custom event | varies |
-
-### Complete Streaming Example
-
-```python
-import json
-from sketricgen import SketricGenClient
-
-client = SketricGenClient(api_key="your-api-key")
-
-async for event in await client.run_workflow(
-    agent_id="agent-123",
-    user_input="Search for info and summarize it",
-    stream=True,
-):
-    data = json.loads(event.data)
-    event_type = data["type"]
-    
-    if event_type == "RUN_STARTED":
-        print(f"Started run: {data.get('run_id')}")
-    elif event_type == "TEXT_MESSAGE_CONTENT":
-        print(data["delta"], end="", flush=True)
-    elif event_type == "TOOL_CALL_START":
-        print(f"\n[Calling: {data['tool_call_name']}]")
-    elif event_type == "TOOL_CALL_END":
-        print("[Done]")
-    elif event_type == "RUN_FINISHED":
-        print("\n\nCompleted!")
-    elif event_type == "RUN_ERROR":
-        print(f"\nError: {data['message']}")
-```
-
----
-
-## File Attachments
-
-Attach files to workflows for document analysis and image understanding.
-
-### Supported File Types
-
-| Type | MIME Types | Max Size |
-|------|------------|----------|
-| Images | `image/jpeg`, `image/png`, `image/webp`, `image/gif` | 20 MB |
-| Documents | `application/pdf` | 20 MB |
-
-### Single File
+Pass one or more local paths through `file_paths`. The SDK uploads them in parallel, registers the resulting assets, and includes them in the workflow request.
 
 ```python
 response = await client.run_workflow(
     agent_id="agent-123",
-    user_input="Summarize this document",
-    file_paths=["/path/to/document.pdf"],
-)
-print(response.response)
-```
-
-### Multiple Files
-
-```python
-response = await client.run_workflow(
-    agent_id="agent-123",
-    user_input="Compare these two documents",
+    user_input="Compare the report with the source data.",
     file_paths=[
-        "/path/to/document1.pdf",
-        "/path/to/document2.pdf",
+        "/path/to/report.pdf",
+        "/path/to/source.csv",
+        "/path/to/notes.md",
     ],
 )
-print(response.response)
 ```
 
-### Streaming with Files
+Each file can be up to 20 MB.
+
+### Supported file types
+
+| Category | Extensions |
+| --- | --- |
+| Images | `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif` |
+| Documents and data | `.pdf`, `.csv`, `.xls`, `.xlsx`, `.json`, `.xml`, `.yaml`, `.yml`, `.txt`, `.md`, `.markdown`, `.html`, `.htm` |
+| Web source | `.js`, `.jsx`, `.mjs`, `.cjs`, `.ts`, `.tsx`, `.mts`, `.cts`, `.css`, `.scss`, `.sass`, `.less`, `.vue`, `.svelte` |
+| Application source | `.py`, `.pyw`, `.pyi`, `.rb`, `.php`, `.java`, `.kt`, `.kts`, `.go`, `.rs`, `.swift`, `.scala`, `.sc`, `.c`, `.h`, `.cc`, `.cpp`, `.cxx`, `.hpp`, `.cs`, `.fs`, `.fsx`, `.sql` |
+| Shell and scripting | `.sh`, `.bash`, `.zsh`, `.ps1`, `.bat`, `.cmd`, `.r`, `.dart`, `.ex`, `.exs`, `.erl`, `.hrl`, `.clj`, `.cljs`, `.lua`, `.pl`, `.pm`, `.rkt`, `.zig`, `.nim`, `.odin` |
+| Configuration and build text | `.toml`, `.ini`, `.cfg`, `.conf`, `.properties`, `.env`, `.gitignore`, `.dockerignore`, `.gradle`, `.cmake`, `.mk`, `.makefile`, `.vim` |
+
+An unsupported type raises `SketricGenContentTypeError`; an oversized file raises `SketricGenFileSizeError`.
+
+## Use the control plane
+
+Management operations use namespaces on the same `SketricGenClient`. The API key must have **Manage resources** access.
+
+### Identify the Teamspace
 
 ```python
-async for event in await client.run_workflow(
-    agent_id="agent-123",
-    user_input="Analyze this image",
-    file_paths=["/path/to/image.png"],
-    stream=True,
-):
-    data = json.loads(event.data)
-    if data["type"] == "TEXT_MESSAGE_CONTENT":
-        print(data["delta"], end="", flush=True)
+teamspace = await client.whoami()
+print(teamspace.teamspace_id, teamspace.display_name)
+
+teamspace = client.whoami_sync()
 ```
+
+### List scoped resources
+
+Project, agent, and knowledge-base lists transparently follow pagination. They fetch pages lazily as you consume the iterator.
+
+```python
+async for project in client.projects.list():
+    print(project.project_id, project.display_name)
+
+async for agent in client.agents.list():
+    print(agent.agent_id, agent.name)
+
+async for knowledge_base in client.knowledge_bases.list():
+    print(knowledge_base.knowledge_base_id, knowledge_base.name)
+```
+
+Use `list_sync()` on each namespace for synchronous iteration.
+
+### Manage Brand Agents
+
+```python
+# Start provisioning and wait for a terminal result.
+job = await client.brand_agents.create_and_wait(
+    name="Acme Support",
+    seed_url="https://example.com",
+    poll_interval=10,
+    timeout=600,
+)
+
+# Inspect and update an existing Brand Agent.
+agent = await client.brand_agents.get("skbrand_123")
+await client.brand_agents.update(
+    "skbrand_123",
+    display_name="Acme Assistant",
+    instructions="Answer concisely.",
+)
+
+# Read and update its widget configuration.
+widget = await client.brand_agents.get_widget_config("skbrand_123")
+await client.brand_agents.update_widget_config(
+    "skbrand_123",
+    primary_color="#0055FF",
+)
+```
+
+The namespace also provides `list_templates()`, `create()`, and `get_status()`. Every async method has a synchronous `_sync` variant.
+
+### Manage connectors
+
+```python
+connectors = await client.connectors.list()
+tools = await client.connectors.list_tools("gmail")
+
+link = await client.connectors.create_link("gmail", project_id="project-123")
+print(link.connect_url)
+
+status = await client.connectors.check_connection(
+    "gmail",
+    project_id="project-123",
+)
+
+await client.connectors.attach(
+    "agent-123",
+    "gmail",
+    allowed_tools=["send_email"],
+)
+await client.connectors.detach("agent-123", "gmail")
+```
+
+Connector methods also have synchronous `_sync` variants. Opening the hosted connection link and completing external authorization remains a human step.
+
+## Response models
+
+### `ChatResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `agent_id` | `str` | Agent ID |
+| `user_id` | `str` | User identifier |
+| `conversation_id` | `str` | Conversation ID for follow-up or resume requests |
+| `response` | `str` | Assistant response text |
+| `owner` | `str` | Agent owner |
+| `error` | `bool` | Whether the response represents an error |
+| `assets` | `list[Asset]` | Assets returned by the run |
+| `run_paused_hitl` | `bool` | Whether the run paused for a human decision |
+| `hitl_request` | `HitlRequest | None` | Typed pause metadata used to render and resume HITL |
+| `run_halted_out_of_credits` | `bool` | Whether the run stopped because credits were unavailable |
+
+### `StreamEvent`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `event_type` | `str` | Server-Sent Events envelope type |
+| `data` | `str` | JSON event payload |
+| `id` | `str | None` | Optional event ID |
+| `is_terminal` | `bool` | Whether the run finished, failed, or paused for HITL |
+
+## Error handling
+
+```python
+from sketricgen import (
+    SketricGenAdminError,
+    SketricGenAuthenticationError,
+    SketricGenContentTypeError,
+    SketricGenError,
+    SketricGenFileSizeError,
+    SketricGenJobError,
+)
+
+try:
+    response = await client.run_workflow(
+        agent_id="agent-123",
+        user_input="Analyze this file.",
+        file_paths=["/path/to/file.pdf"],
+    )
+except SketricGenAuthenticationError:
+    print("The API key was rejected.")
+except SketricGenContentTypeError as error:
+    print(f"Unsupported file type: {error}")
+except SketricGenFileSizeError as error:
+    print(f"File is larger than {error.max_size} bytes.")
+except SketricGenJobError as error:
+    print(f"Brand Agent job {error.job_id} failed: {error.error_summary}")
+except SketricGenAdminError as error:
+    print(f"Admin API error {error.code}: {error}")
+except SketricGenError as error:
+    print(f"SDK error: {error}")
+```
+
+Control-plane errors expose a machine-readable `code`. All SDK-specific errors inherit from `SketricGenError`.
+
+## Related guides
+
+- [Runtime API](/dev-guide/public-api-usage)
+- [Admin API](/dev-guide/admin-api)
+- [Node.js SDK](/dev-guide/node-sdk)
