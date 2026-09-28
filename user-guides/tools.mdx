@@ -141,13 +141,14 @@ Treat generated files and calculations as run outputs that still require review.
 
 <span id="image-generation"></span>
 
-Three built-in tools let AI Workforce agents produce visual media. They run on SketricGen's own image and video models, so there is no account to connect. Each output is billed in credits.
+Two built-in tools let AI Workforce agents produce visual media. They run on SketricGen's own image and video models, so there is no account to connect. Each output is billed in credits.
 
-- **Image Generation** creates new images from a prompt.
-- **Image Editing** changes an existing image: a file the user uploaded to the conversation, or an image the agent generated earlier. Use it for requests like "put our logo on this mug" or "swap the background".
+- **Image Generation & Editing** creates new images from a prompt and edits existing ones: a file the user uploaded to the conversation, or an image the agent generated earlier. Use it for requests like "make a banner for our sale", "put our logo on this mug", or "swap the background".
 - **Video Generation** creates short clips from a prompt. It can also animate an image you pass as the start frame. Clips can include sound when the user asks for it; sound costs more.
 
-To add one, open the agent in Agent Build, add a tool, and choose the tool type. Then tick the models the agent may use and, for each model, the qualities it may use. The builder shows the credit price of every option. When several models are ticked, the agent picks the one that fits each request. A new tool starts with the cheapest option your plan includes.
+To add one, open the agent in Agent Build, add a tool, and choose the tool type. Then tick the models the agent may use and, for each model, the qualities it may use. The builder shows the credit price of every option, including the separate price for edits. When several models are ticked, the agent picks the one that fits each request. A new tool starts with the cheapest option your plan includes; for images, that is the cheapest model that can both create and edit.
+
+A few image models only create images. For edits, the agent uses the ticked models that can edit, or the cheapest editing model your plan includes if none of them can.
 
 ### Models by plan
 
