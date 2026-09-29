@@ -23,7 +23,7 @@ AI Workforce agents can use:
 - [**Structured Output**](#structured-output): validated JSON for application UI events, typed state, and downstream logic.
 - [**Web Search**](#web-search): current public information.
 - [**Code Interpreter**](#code-interpreter): sandboxed Python for calculations, file processing, and generated artifacts.
-- [**Image and video generation**](#image-and-video-generation): create and edit images and short videos, billed in credits.
+- [**Image and video generation**](#image-and-video-generation): create and edit images and short videos, and watch videos to answer questions about them, billed in credits.
 - [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
 
 Use the section links above to jump to the tool type you are configuring.
@@ -176,6 +176,12 @@ Options above your plan appear locked in the builder, and a workflow that select
 Generated images and videos show in the chat and are saved to the conversation's files, so a later step can reuse them: edit an image, animate it, edit a clip, analyze it with Code Interpreter, or post it through a connector.
 
 Videos and video edits can take a few minutes to render. The chat shows progress while a clip renders. If a render outlasts the wait, the agent says it is still rendering and fetches the result later.
+
+### Watching videos
+
+Every AI Workforce agent can watch videos; there is no tool to add. When a user uploads a video, or the agent generates or edits one, the agent can answer questions about it: what happens, who or what appears, what is said, and any on-screen text. This works whatever model the agent runs on. SketricGen sends the clip to a video-capable model and gives the agent a text answer, so the video itself never enters the conversation.
+
+Watching is billed like the agent's own model usage, by the length of video watched. Large files are compressed automatically before watching, and only the first 10 minutes of a longer video are watched.
 
 Brand Agents do not include these tools.
 
