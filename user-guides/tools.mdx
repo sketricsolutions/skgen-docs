@@ -3,7 +3,7 @@ title: "AI Workforce Tools, Connectors, Skills, and MCP"
 sidebarTitle: "Tools & skills"
 icon: "wrench"
 description: "Connect AI Workforce agents to knowledge bases, 2,000+ connectors, MCP servers, APIs, web search, Code Interpreter, image and video generation, and marketplace skills."
-keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "Code Interpreter", "File Search", "image generation", "video generation", "skills marketplace"]
+keywords: ["AI agent tools", "AI automation tools", "MCP server", "MCP tools", "API automation tool", "SketricGen connectors", "Code Interpreter", "File Search", "image generation", "video generation", "video editing", "skills marketplace"]
 ---
 
 Tools and skills turn AI Workforce agents from chat interfaces into AI automation tools that can do real work. They let agents retrieve trusted information, act in connected apps, follow optimized task playbooks, generate artifacts, and complete longer internal work.
@@ -23,7 +23,7 @@ AI Workforce agents can use:
 - [**Structured Output**](#structured-output): validated JSON for application UI events, typed state, and downstream logic.
 - [**Web Search**](#web-search): current public information.
 - [**Code Interpreter**](#code-interpreter): sandboxed Python for calculations, file processing, and generated artifacts.
-- [**Image and video generation**](#image-and-video-generation): create images, edit images, and create short videos, billed in credits.
+- [**Image and video generation**](#image-and-video-generation): create and edit images and short videos, billed in credits.
 - [**Marketplace skills**](#skills-marketplace): reusable task packages optimized by other builders.
 
 Use the section links above to jump to the tool type you are configuring.
@@ -144,11 +144,11 @@ Treat generated files and calculations as run outputs that still require review.
 Two built-in tools let AI Workforce agents produce visual media. They run on SketricGen's own image and video models, so there is no account to connect. Each output is billed in credits.
 
 - **Image Generation & Editing** creates new images from a prompt and edits existing ones: a file the user uploaded to the conversation, or an image the agent generated earlier. Use it for requests like "make a banner for our sale", "put our logo on this mug", or "swap the background".
-- **Video Generation** creates short clips from a prompt. It can also animate an image you pass as the start frame. Clips can include sound when the user asks for it; sound costs more.
+- **Video Generation & Editing** creates short clips from a prompt, and can animate an image you pass as the start frame. Clips can include sound when the user asks for it; sound costs more. It also edits existing clips: a video the user uploaded to the conversation, or one the agent generated earlier. Use it for requests like "turn this clip into a watercolor" or "put this jacket on the presenter". An edit keeps the clip's motion and changes what the prompt asks for. Reference images can guide the new look.
 
-To add one, open the agent in Agent Build, add a tool, and choose the tool type. Then tick the models the agent may use and, for each model, the qualities it may use. The builder shows the credit price of every option, including the separate price for edits. When several models are ticked, the agent picks the one that fits each request. A new tool starts with the cheapest option your plan includes; for images, that is the cheapest model that can both create and edit.
+To add one, open the agent in Agent Build, add a tool, and choose the tool type. Then tick the models the agent may use and, for each model, the qualities it may use. The builder shows the credit price of every option, including the separate price for edits. When several models are ticked, the agent picks the one that fits each request. A new tool starts with the cheapest option your plan includes. For images, that is the cheapest model that can both create and edit. For video, it is the cheapest model that creates clips plus the cheapest model that edits them.
 
-A few image models only create images. For edits, the agent uses the ticked models that can edit, or the cheapest editing model your plan includes if none of them can.
+Some models only create and others only edit. For edits, the agent uses the ticked models that can edit, or the cheapest editing model your plan includes if none of them can. Video editing models also accept only certain clips, which the builder lists under each model: Wan VACE edits MP4, MOV, WebM, and M4V clips of 1–30 seconds, and Kling O3 Pro edits MP4 and MOV clips of 3–15 seconds at 720p or higher. Kling O3 Pro keeps the clip's original sound unless the user asks to drop it; Wan VACE returns silent video.
 
 ### Models by plan
 
@@ -158,7 +158,7 @@ Each plan includes everything in the plans above it.
 | --- | --- | --- |
 | Free | FLUX.1 [schnell], FLUX.2 [klein] | Not included |
 | Explorer | Adds FLUX.2 [dev] and [pro], Seedream 4.5, GPT Image 2 (medium), Nano Banana 2 (1K) | Not included |
-| Builder | Adds Nano Banana 2 (2K), Nano Banana Pro, GPT Image 2 (high) | Wan 3.0 (720p), Kling 3 Pro, Veo 3.1 Fast |
+| Builder | Adds Nano Banana 2 (2K), Nano Banana Pro, GPT Image 2 (high) | Wan 3.0 (720p), Kling 3 Pro, Veo 3.1 Fast; editing with Wan VACE (480p to 720p) and Kling O3 Pro |
 | Scale | Adds 4K Nano Banana options | Adds Wan 3.0 (1080p) and Veo 3.1 |
 
 Options above your plan appear locked in the builder, and a workflow that selects them cannot be saved. If a teamspace moves to a lower plan, its agents keep working with the cheapest option the new plan includes.
@@ -166,15 +166,16 @@ Options above your plan appear locked in the builder, and a workflow that select
 ### Credits and limits
 
 - You are charged only for outputs the agent delivers. Nothing is charged for an output the safety filter blocks, or for a failed or cancelled generation.
-- One message can create up to 10 images and 2 videos (4 images on Free). Send a new message to make more.
+- Video edits are billed per second of the edited clip. Before it starts, the agent sets aside credits for the full length of the clip, or for the model's longest clip when the length can't be read. You are then charged for the length it delivers.
+- One message can create or edit up to 10 images and 2 videos (4 images on Free). Send a new message to make more.
 - The agent checks your balance before it starts a generation. If the balance is too low, it tells the user instead of starting.
-- The credits each run used appear in its trace, on an **Image & video** row.
+- The credits each run used appear in its trace, on **Image generation & editing** and **Video generation & editing** rows.
 
 ### Where outputs go
 
-Generated images and videos show in the chat and are saved to the conversation's files, so a later step can reuse them: edit an image, animate it, analyze it with Code Interpreter, or post it through a connector.
+Generated images and videos show in the chat and are saved to the conversation's files, so a later step can reuse them: edit an image, animate it, edit a clip, analyze it with Code Interpreter, or post it through a connector.
 
-Videos can take a few minutes to render. The chat shows progress while a clip renders. If a render outlasts the wait, the agent says it is still rendering and fetches the result later.
+Videos and video edits can take a few minutes to render. The chat shows progress while a clip renders. If a render outlasts the wait, the agent says it is still rendering and fetches the result later.
 
 Brand Agents do not include these tools.
 
