@@ -179,7 +179,7 @@ Videos and video edits can take a few minutes to render. The chat shows progress
 
 ### Watching videos
 
-AI Workforce agents on a multimodal model, one that can view images, can also watch videos; there is no tool to add. When a user uploads a video, or the agent generates or edits one, the agent can answer questions about it: what happens, who or what appears, what is said, and any on-screen text. Models that accept video themselves, such as Gemini, watch with their own model; other multimodal models use a Gemini model behind the scenes. Either way the agent gets a text answer, so the video itself never enters the conversation.
+AI Workforce agents on a multimodal model, one that can view images, can also watch videos; there is no tool to add. When a user uploads a video, or the agent generates or edits one, the agent can answer questions about it: what happens, who or what appears, what is said, and any on-screen text. Models that accept video themselves, such as Gemini, see and hear the clip directly, the way they see an image, for the step where they load it. Other multimodal models ask a Gemini model about the clip and get a text answer. Either way the video is not kept in the conversation or sent again; the agent loads it again when it needs another look.
 
 Text-only models, such as DeepSeek V4, can't watch videos. As with images, the agent asks the user to select a multimodal model. It can still share the video, or edit it with Video Generation & Editing.
 
