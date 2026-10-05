@@ -1,0 +1,108 @@
+---
+title: "Consolidated release notes (September 18, 2026)"
+sidebarTitle: "Sep 18, 2026"
+icon: "calendar-days"
+description: "SketricGen release notes covering onboarding, Agent Space, Brand Agent, Playground, widget, affiliate, and billing updates."
+tags: ["release", "landing-pages", "onboarding", "brand-agents", "playground", "widgets", "agent-space", "affiliates", "billing"]
+version: "v3"
+releaseDate: "2026-09-18"
+---
+
+This consolidated update covers everything released since the last update.
+
+## TL;DR
+
+- Signed-in visitors get clearer routes to Agent Space, Brand Agents, and Templates from landing and product pages.
+- Onboarding can resume human-input steps, accept voice input, preserve brand setup data, and handle website deep links more reliably.
+- Shared Playground runs, widgets, transcripts, and workflow settings now behave more consistently during concurrent or interrupted work.
+- Agent Space, the editor, and invite flows have cleaner metadata and better responsive behavior.
+- The affiliate program now documents payout rules and retries conflicted commission writes safely.
+- Credit recovery, reset visibility, teamspace promotions, and annual promo credits now follow consistent rules.
+- Onboarding attribution, knowledge-base errors, human input, responsive layouts, and Agent Space reliability have been tightened across the product.
+
+## Released changes
+
+### Landing pages and navigation
+
+- Signed-in visitors now see **Agent Space** or **Brand Agents** and **Templates** calls to action across landing and product pages.
+- Authentication and redirect handling no longer create stray agents or send users to the wrong dashboard.
+- New **Use Cases** and **Alternatives** hubs make it easier to find the right product path, along with new AI automation landing pages.
+- Signed-in call-to-action clicks now send the correct Google Tag Manager events.
+- Landing metadata, FAQs, sitemap entries, LLM routes, footer navigation, and shared hero visuals have been refreshed.
+
+### Onboarding and Brand Agent flows
+
+- Human-input steps can resume after an interruption. Validation, inline input controls, and saved state now work together across reloads.
+- Onboarding now supports voice input.
+- URL tracking handles partial and stringified webpage-tool responses, and template starts no longer duplicate themselves.
+- Brand DNA and initial brand-kit data persist across crawl progress updates.
+- Website deep links can reuse a project, edit an existing Brand Agent, or create a new eligible project before crawling.
+- The onboarding journey panel, activity timeline, favicons, and internal-tool filtering have been reworked for a clearer setup flow.
+
+### Playground, widgets, and workflows
+
+- Shared Playground runs are tracked by run ID, so concurrent runs stay separate and human-input rows resolve against the correct run.
+- Stale stream reattachment, cancellation recovery, transcript restoration, and duplicate history refreshes are more reliable.
+- Users can delete workspace folders and open workspace paths linked from chat and widget messages.
+- Wide tables scroll inside messages, and widget stop controls keep attachment and voice actions available.
+- Workflow widgets use their own defaults and no longer need unnecessary Brand Agent-specific storage configuration.
+- Uploaded widget configurations preserve public and private visibility settings.
+
+### Agent Space and editor experience
+
+- Agent Space search now supports agent names and IDs alongside the existing filters.
+- Agent cards and detail views use tooltip metadata, last-active indicators, and cleaner activity timelines.
+- EditorPanel options now share consistent styling, spacing, borders, and Marketplace badge placement.
+- Responsive filters and invite-link overflow handling have been improved.
+
+### Affiliate program
+
+- A public affiliate terms and conditions page is now available.
+- Payout rules cover the **$20 minimum threshold**, the **$200 self-enrolled campaign cap**, manual bank transfers, verification, and anti-fraud protections.
+- Affiliate commission writes now retry bounded compare-and-swap conflicts instead of silently dropping commissions.
+- Affiliate landing pages, the dashboard, schema, documentation, sitemap, and LLM discovery links have been updated.
+
+### Billing, credits, and pricing
+
+- Daily credit rescue covers dormant accounts and teamspace reads, with a one-time toast when credits are granted.
+- The sidebar and out-of-credits notices show the daily credit reset countdown.
+- Additional teamspaces receive promo-adjusted Free credits consistently with signup.
+- Annual 2x promo credits remain active for the full qualifying billing cycle, including all 12 monthly releases.
+- Pricing copy has been updated while preserving compatibility with legacy annual subscriptions.
+
+### Onboarding, attribution, and project management
+
+- Project-scoped onboarding state, resumable setup reminders, analytics, and service-writer support are now available.
+- UTM and referral attribution now survives auth popups, SSO, middleware redirects, and account creation.
+- Admins can delete non-default projects through a guarded flow.
+- Obsolete project setup audit fields have been removed, with lifecycle handling moved to the current project state model.
+
+### Knowledge bases and error handling
+
+- Knowledge-base create and edit flows now show actionable loading and error states.
+- Batch uploads continue processing valid files when one file is unsupported.
+- Pipedream connections, action selection, null trace entries, and render failures now provide recoverable feedback.
+- Application-level and feature-level error boundaries now catch failures closer to where they occur.
+
+### Chat, widgets, and human input
+
+- Human-input timelines now restore pending approvals immediately and handle updates more reliably.
+- Web-search sources stay hidden while a run is active.
+- Embedded widget height now accounts for promo and onboarding banners.
+- The unused `ChatWidgetEmbed` component has been removed, and chat layout and tool labels have been cleaned up.
+
+### Responsive UI and Agent Space
+
+- Layout shifts are reduced across the sidebar, mobile banners, promo banners, canvas, and Agent Space.
+- Project-switcher icons stay stable after onboarding changes without requiring a reload.
+- Agent Space now caches results and supports creation-date sorting.
+- Profile photos are protected, with improved profile cache behavior.
+- Reusable landing-page tables, pills, and feature sections support refreshed AI-agent positioning.
+
+## Learn more
+
+- [Adaptive Onboarding](/getting-started/adaptive-onboarding)
+- [Agent Space](/ai-workforce/agent-space)
+- [Playground](/ai-workforce/playground)
+- [Brand Agents](/brand-agents/overview)
+- [Affiliate terms and conditions](https://www.sketricgen.ai/affiliate-program-terms-and-conditions)
