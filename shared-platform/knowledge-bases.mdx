@@ -25,6 +25,7 @@ You can add knowledge through:
 - File uploads
 - Pasted text
 - Q&A pairs
+- Notion pages, with optional scheduled sync
 
 Supported ingestion types include PDF, DOC, DOCX, TXT, MD, HTML, PPTX, and JSON.
 
@@ -51,6 +52,29 @@ This is useful when a crawl includes:
 Better source Markdown usually means better agent answers. Treat the scraped Markdown as the editable source of truth for website knowledge, especially before publishing a Brand Agent to visitors.
 
 ![Review and edit scraped website Markdown](/images/v3/knowledge-base-markdown-review.gif)
+
+## Sync Notion Pages
+
+Connect Notion when your team already maintains its source of truth there, such as SOPs, product notes, support macros, or internal policies. SketricGen imports the pages you select and can keep them refreshed on a schedule, so the agent answers from current content instead of a one-time copy.
+
+Add a Notion source while creating or editing a Knowledge Base, or during Brand Agent setup.
+
+1. Select **Connect** on the Notion card and complete the Notion authorization in the popup window. Allow popups if the window does not open.
+2. Share the pages you want with the SketricGen integration inside Notion. Only shared pages appear in the page list.
+3. Under **Pages to import**, select the pages this Knowledge Base should use.
+4. Choose a **Cadence**: **Manual only**, **Every day**, or **Once a week**. New sources default to once a week.
+5. Select **Remove pages deleted in Notion** when a page removed in Notion should also leave the Knowledge Base.
+6. Save the source. When you add Notion while creating a Knowledge Base, the first sync starts after the Knowledge Base is created.
+
+### Manage an Existing Notion Source
+
+- **Sync now** queues an immediate sync without waiting for the next scheduled run.
+- **Scheduled sync** can be paused at any time. Pausing keeps already imported pages and their vectors available to the agent; it only stops future refreshes.
+- A source shows **Reconnect needed** when the Notion authorization has expired. Reconnect to resume syncing.
+
+<Note>
+  Notion sync applies to Knowledge Bases. Connecting Notion here imports page content for retrieval; it does not give the agent permission to write back to your Notion workspace.
+</Note>
 
 ## Use Knowledge in Agents
 
