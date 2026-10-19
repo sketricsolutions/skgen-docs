@@ -43,8 +43,6 @@ SketricGen Runtime API -----> Existing agent run and streamed response
 
 The MCP server is an AI-friendly adapter over the Admin API. It does not bypass Teamspace roles, project boundaries, plan limits, or connector permissions.
 
-The management MCP server and Admin API require an Explorer, Builder, or Scale Teamspace. OAuth does not bypass this plan requirement. Using MCP tools inside an agent is a separate capability available on Free.
-
 The Runtime API and Admin API remain separate endpoints, but their permissions are capabilities on the same API-key entity. A key can have **Run agents**, **Manage resources**, or both. A key without Run agents cannot execute an agent, and a key without Manage resources cannot create, edit, or delete Teamspace resources.
 
 ## Start here

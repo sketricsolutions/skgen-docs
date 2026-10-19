@@ -11,12 +11,6 @@ keywords: ["SketricGen MCP", "MCP server", "AI agent connection", "Claude MCP", 
 
 Connect an MCP-compatible AI assistant to SketricGen so it can create and manage Brand Agents through conversation. The SketricGen MCP server exposes a focused set of control-plane tools and enforces the same Teamspace, project, role, and plan rules as the SketricGen application.
 
-## Plan requirement
-
-The connected Teamspace must be on **Explorer, Builder, or Scale**. Free Teamspaces cannot use the SketricGen management MCP server, whether connecting through OAuth, the CLI bridge, or an API key. Resource requests check the Teamspace's current plan.
-
-Using hosted or custom MCP tools inside an agent is a separate capability available on Free. It does not grant access to this management server. The connected Teamspace's plan determines access, rather than the user's personal Teamspace plan.
-
 ## Connection details
 
 ```text
@@ -322,12 +316,6 @@ Updates, website refreshes, detachments, and deletions carry the MCP destructive
 </Warning>
 
 ## Troubleshooting
-
-### `403 plan_downgraded`
-
-**Cause:** The connected Teamspace is on Free, which does not include API and MCP automation. This applies to OAuth as well as API keys, even if browser sign-in completed.
-
-**Fix:** Upgrade the connected Teamspace to Explorer or higher, or sign in to an eligible Teamspace project you can access.
 
 ### `401 unauthorized`
 
