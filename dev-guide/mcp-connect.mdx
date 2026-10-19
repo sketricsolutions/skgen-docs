@@ -61,24 +61,37 @@ Use a stable global installation. Setup records the absolute Node and bridge pat
 | `sketricgen doctor` | Verify initialization, tool discovery, and read-only access |
 | `sketricgen tools` | List the live tool names after sign-in |
 | `sketricgen auth login --read-only` | Sign in with read-only access |
-| `sketricgen auth login` | Sign in again to choose a different project or renew consent |
+| `sketricgen auth login` | Sign in again to change the selected projects or renew consent |
 | `sketricgen auth logout` | Revoke the connection and remove its saved credentials |
 
 The default credential store uses the OS credential store to protect the saved session, and tokens refresh automatically. Browser sign-in must finish on the same computer as the CLI. For SSH, containers, or CI without a local browser, use an API key. See the [CLI guide](https://www.sketricgen.ai/cli.md) for credential-store options and the [agent installation guide](https://www.sketricgen.ai/INSTALL_FOR_AGENTS.md) for assistant-led setup.
 
 ## Option 1: Connect with SketricGen OAuth
 
-OAuth works with hosted and local clients. The client opens SketricGen sign-in, asks you to choose an accessible project, and requests access. You do not paste an API key, OAuth client ID, or client secret into the AI client.
+OAuth works with hosted and local clients. The client opens SketricGen sign-in, asks you to choose one or more accessible projects, and requests access. All selected projects must belong to the same Teamspace, and one connection can cover up to 50 projects. You do not paste an API key, OAuth client ID, or client secret into the AI client.
 
 | Scope | Access |
 | --- | --- |
-| `https://mcp.sketricgen.ai/mcp/read` | Inspect resources in the selected project |
+| `https://mcp.sketricgen.ai/mcp/read` | Inspect resources in the selected projects |
 | `https://mcp.sketricgen.ai/mcp/write` | Change resources within your live role and plan limits |
 | `offline_access` | Refresh the connection without signing in for every access token |
 
-Access tokens last one hour; rotating refresh grants last up to seven days. Sign in again to choose another project. Revoking either token revokes the whole connection, including replacement tokens. A write scope does not give a Viewer edit permissions.
+Access tokens last one hour; rotating refresh grants last up to seven days. Sign in again to change the selected projects. Projects created later, including projects created through `create_project`, are not added to an existing connection; reconnect and select them. Revoking either token revokes the whole connection, including replacement tokens. A write scope does not give a Viewer edit permissions.
+
+When a connection covers more than one project, `whoami` returns `project_choice_required: true`, and create calls need an explicit `project_id`.
+
+### Plan access over OAuth
+
+| Teamspace plan | Tools available over OAuth |
+| --- | --- |
+| Free | `whoami`; Brand Agent creation and management; templates; knowledge-base content, refreshes, and deletion; connectors; and embed snippets, within existing plan limits |
+| Explorer or higher | Everything on Free, plus visitor conversations (`list_conversations`, `get_conversation`), usage (`get_usage`), and project tools (`list_projects`, `create_project`, `update_project`) |
+
+On Free, conversation, usage, and project tools return `403 mcp_tool_not_in_plan`. Creating or renaming a project also needs write consent and a live Teamspace Owner or Admin role. API-key connections keep their own plan and scope requirements.
 
 ### Claude Web or Claude Desktop
+
+If SketricGen is listed in Claude's connector directory, add it from **Settings → Connectors**, select **Connect**, and continue from step 8. Otherwise add it as a custom connector:
 
 1. Open **Settings → Connectors** in Claude.
 2. For a Team or Enterprise organization, open **Organization connectors** if required by your workspace.
@@ -87,7 +100,7 @@ Access tokens last one hour; rotating refresh grants last up to seven days. Sign
 5. Enter `https://mcp.sketricgen.ai/mcp` as the remote MCP server URL.
 6. Leave OAuth client ID and client secret empty when Claude offers those fields.
 7. Add the connector, then select **Connect**.
-8. Sign in to SketricGen, choose the Teamspace project, and approve the requested access.
+8. Sign in to SketricGen, choose one or more projects from the same Teamspace, and approve the requested access.
 9. Enable SketricGen from Claude's tools menu in a new conversation.
 
 ### ChatGPT web
@@ -142,7 +155,7 @@ For [native remote OAuth](https://code.claude.com/docs/en/mcp) without the CLI b
 claude mcp add --scope user --transport http sketricgen https://mcp.sketricgen.ai/mcp
 ```
 
-Run `/mcp` inside Claude Code, select SketricGen, and authenticate in the browser. Choose a project and approve access. Do not add a bearer header for OAuth.
+Run `/mcp` inside Claude Code, select SketricGen, and authenticate in the browser. Choose one or more projects and approve access. Do not add a bearer header for OAuth.
 
 ## Option 2: Connect with an API key
 
@@ -205,11 +218,11 @@ Restart Codex after changing its configuration. The `writes` approval mode asks 
 Start with a read-only prompt:
 
 ```text
-Use SketricGen to tell me which Teamspace and project this connection can access.
+Use SketricGen to tell me which Teamspace and projects this connection can access.
 Then list my active agents. Do not change anything.
 ```
 
-The MCP client should call `whoami` and `list_agents`. Check that the returned Teamspace and project match the scope you intended.
+The MCP client should call `whoami` and `list_agents`. Check that the returned Teamspace and projects match the scope you intended.
 
 Next, test the Brand Agent discovery flow:
 
@@ -222,34 +235,34 @@ knowledge bases. Do not create an agent yet.
 
 The SketricGen MCP server currently publishes 26 tools. Use your client's tool discovery or `sketricgen tools` for the live schemas.
 
-| Tool | Purpose |
-| --- | --- |
-| `whoami` | Confirm the connected Teamspace and project scope |
-| `list_projects` | List projects available to a Teamspace-scoped connection |
-| `list_agents` | List agents in the authorized scope |
-| `list_brand_agent_templates` | Discover Brand Agent templates and their required connectors |
-| `list_knowledge_bases` | Discover reusable, ready knowledge bases |
-| `create_brand_agent` | Start asynchronous Brand Agent creation from a website |
-| `get_brand_agent_status` | Follow creation progress and retrieve the finished embed snippet |
-| `list_brand_connectors` | Discover apps that can be connected to Brand Agents |
-| `list_connector_tools` | Discover the exact actions that can be granted for one connector |
-| `create_brand_connector_link` | Create a short-lived link for a person to authorize an app |
-| `check_brand_connector_connection` | Check whether the person completed authorization |
-| `attach_brand_connector` | Grant selected connector actions to an agent |
-| `detach_brand_connector` | Remove a connector from an agent without disconnecting the account |
-| `update_brand_agent_tool` | Read or change the Brand Agent's identity, instructions, model, and knowledge bases |
-| `update_brand_agent_config_tool` | Read or change widget appearance, messages, behavior, and visibility |
-| `get_embed_snippet` | Retrieve embed code for an existing agent |
-| `list_conversations` | List visitor conversations, optionally for one agent |
-| `get_conversation` | Read a conversation and its paginated transcript |
-| `get_usage` | Read the plan, remaining credits, and connector-run allowance |
-| `delete_brand_agent` | Delete an agent after confirming its exact current name; keep its knowledge bases |
-| `create_project` | Create a project using an eligible Teamspace-wide management API key |
-| `update_project` | Rename a project using an eligible management API key |
-| `delete_knowledge_base` | Delete an unused knowledge base after confirming its exact current name |
-| `add_knowledge_base_content` | Add a titled plain-text or Markdown document to an existing knowledge base |
-| `refresh_knowledge_base` | Re-crawl an existing website source and update changed content |
-| `get_knowledge_base_refresh_status` | Follow a refresh job and read its page-change counts |
+| Tool | Purpose | OAuth plan |
+| --- | --- | --- |
+| `whoami` | Confirm the connected Teamspace, its plan, and the projects this connection can act in | All plans |
+| `list_projects` | List the projects this connection can see | Explorer or higher |
+| `list_agents` | List agents in the authorized scope | All plans |
+| `list_brand_agent_templates` | Discover Brand Agent templates and their required connectors | All plans |
+| `list_knowledge_bases` | Discover reusable, ready knowledge bases | All plans |
+| `create_brand_agent` | Start asynchronous Brand Agent creation from a website | All plans |
+| `get_brand_agent_status` | Follow creation progress and retrieve the finished embed snippet | All plans |
+| `list_brand_connectors` | Discover apps that can be connected to Brand Agents | All plans |
+| `list_connector_tools` | Discover the exact actions that can be granted for one connector | All plans |
+| `create_brand_connector_link` | Create a short-lived link for a person to authorize an app | All plans |
+| `check_brand_connector_connection` | Check whether the person completed authorization | All plans |
+| `attach_brand_connector` | Grant selected connector actions to an agent | All plans |
+| `detach_brand_connector` | Remove a connector from an agent without disconnecting the account | All plans |
+| `update_brand_agent_tool` | Read or change the Brand Agent's identity, instructions, model, and knowledge bases | All plans |
+| `update_brand_agent_config_tool` | Read or change widget appearance, messages, behavior, and visibility | All plans |
+| `get_embed_snippet` | Retrieve embed code for an existing agent | All plans |
+| `list_conversations` | List visitor conversations, optionally for one agent | Explorer or higher |
+| `get_conversation` | Read a conversation and its paginated transcript | Explorer or higher |
+| `get_usage` | Read the plan, remaining credits, and connector-run allowance | Explorer or higher |
+| `delete_brand_agent` | Delete an agent after confirming its exact current name; keep its knowledge bases | All plans |
+| `create_project` | Create a project; requires a live Teamspace Owner or Admin, and OAuth needs write consent | Explorer or higher |
+| `update_project` | Rename a project; requires a live Teamspace Owner or Admin, and OAuth can rename only its selected projects | Explorer or higher |
+| `delete_knowledge_base` | Delete an unused knowledge base after confirming its exact current name | All plans |
+| `add_knowledge_base_content` | Add a titled plain-text or Markdown document to an existing knowledge base | All plans |
+| `refresh_knowledge_base` | Re-crawl an existing website source and update changed content | All plans |
+| `get_knowledge_base_refresh_status` | Follow a refresh job and read its page-change counts | All plans |
 
 Both update tools read when called with only `agent_id` and write when patch fields are supplied. Check `mode: "write"` and `updated` before reporting a change. The agent-settings read returns `available_models`; use a valid model ID allowed by the Teamspace plan. Setting `knowledge_base_ids` replaces the assigned set, and each knowledge base must be ready and in the agent's project.
 
@@ -300,8 +313,9 @@ receive and wait for my approval.
 
 ## Security and permission model
 
-- **One selected project with OAuth:** OAuth consent binds the connection to one Teamspace project.
-- **Project management requires an API key:** OAuth cannot create or rename projects. Creating a project requires an Admin-role management key covering the whole Teamspace, limited by its creator's live Owner or Admin role. Renaming requires an eligible management key that can access the project.
+- **Selected projects with OAuth:** OAuth consent binds the connection to the projects you select, up to 50 in one Teamspace. Projects created later are not added until you reconnect and select them.
+- **Plan-gated tools:** On Free, OAuth connections can build and manage Brand Agents, knowledge bases, and connectors. Conversation, usage, and project tools require Explorer or higher.
+- **Project management needs an Owner or Admin:** Creating or renaming a project requires Explorer or higher and a live Teamspace Owner or Admin role. OAuth also needs write consent and can rename only its selected projects. With an API key, creating a project requires an Admin-role management key covering the whole Teamspace, and renaming requires a key that can access the project.
 - **Live membership checks:** Removing or demoting the connected user changes what the OAuth connection or management-capable API key can do.
 - **Server-enforced roles:** Tool descriptions guide the AI, but the Admin API independently enforces every permission and plan limit.
 - **Human connector authorization:** The AI receives a short-lived setup link, not your Google, Slack, email, or other provider password.
@@ -341,11 +355,23 @@ Updates, website refreshes, detachments, and deletions carry the MCP destructive
 
 **Fix:** Reconnect SketricGen and approve write access.
 
+### `403 mcp_tool_not_in_plan`
+
+**Cause:** An OAuth connection on the Free plan called a conversation, usage, or project tool.
+
+**Fix:** Upgrade the Teamspace to Explorer or higher to use these tools over OAuth. Brand Agent, knowledge-base, connector, and `whoami` tools keep working on Free.
+
+### `403 insufficient_role`
+
+**Cause:** The connected user's live role does not allow the action, for example creating or renaming a project without a Teamspace Owner or Admin role.
+
+**Fix:** Ask a Teamspace Owner or Admin to perform the action or to change your role.
+
 ### `403 oauth_capability_not_exposed`
 
-**Cause:** An OAuth connection tried to create or rename a project.
+**Cause:** An OAuth connection tried an operation that MCP OAuth does not expose, such as deleting an agent that is not a Brand Agent.
 
-**Fix:** Use the SketricGen app or an eligible management API key. Approving a write scope does not expose these operations to OAuth.
+**Fix:** Use the SketricGen app or an API key with the required access. Approving a write scope does not expose these operations to OAuth.
 
 ### `403 key_not_teamspace_scoped`
 
@@ -389,7 +415,8 @@ Updates, website refreshes, detachments, and deletions carry the MCP destructive
 - Prefer OAuth when the client can complete it; do not ask the user for a management-capable API key unnecessarily.
 - Never ask for the user's SketricGen password or an external app password.
 - If a static API key is required, instruct the user to create one with Manage resources access in SketricGen and store it in the client's secret or environment-variable mechanism.
-- Verify the connection with `whoami` before creating or changing anything.
+- Verify the connection with `whoami` before creating or changing anything. If it returns `project_choice_required: true`, ask which project to use and pass its `project_id`.
+- If a tool returns `mcp_tool_not_in_plan`, do not retry it or suggest switching credentials to bypass the plan requirement.
 - Read existing Brand Agent settings before writing them.
 - Treat connector setup links as short-lived credentials: show them only to the intended user and do not repeat or store them.
 - Ask for confirmation before granting tools that write, send, publish, delete, spend, or change data.
