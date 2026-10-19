@@ -99,7 +99,7 @@ The effective permission is limited by both the key's role and the key creator's
 | Projects | List, read, create, and rename projects |
 | Workflow agents | List, create, read, update, delete, and retrieve embed snippets |
 | Brand Agents | List templates; create asynchronously; read and edit identity, model, instructions, knowledge bases, and widget settings |
-| Knowledge bases | List, create, read, rename, delete, list data sources, and delete data sources |
+| Knowledge bases | List, create, read, rename, delete, add text content, refresh website sources, list data sources, and delete data sources |
 | Conversations | List conversations, read a conversation, and list its traces |
 | Members | List members and change an existing member's role with an all-Project key using the Admin role |
 | Usage | Read plan and credit usage |
@@ -158,11 +158,19 @@ POST    /knowledge-bases
 GET     /knowledge-bases/{knowledge_base_id}
 PATCH   /knowledge-bases/{knowledge_base_id}
 DELETE  /knowledge-bases/{knowledge_base_id}
+POST    /knowledge-bases/{knowledge_base_id}/content
+POST    /knowledge-bases/{knowledge_base_id}/refresh
 GET     /knowledge-bases/{knowledge_base_id}/data-sources
 DELETE  /knowledge-bases/{knowledge_base_id}/data-sources/{file_name}
 ```
 
-The Admin API can create an empty knowledge base but does not currently upload files into it. Website-based Brand Agent creation is the supported API flow that crawls content and builds a populated knowledge base.
+The Admin API can create an empty knowledge base. Website-based Brand Agent creation crawls content and builds a populated knowledge base. Direct file upload is not exposed; extract file text before adding it through the content endpoint.
+
+`POST /knowledge-bases/{knowledge_base_id}/content` accepts a JSON body with `title` of up to 120 characters and plain-text or Markdown `content` of up to 200,000 characters. It returns `202 Accepted` with `status: "processing"` while indexing runs. Changes affect every agent using the knowledge base. Storage and plan limits apply.
+
+`POST /knowledge-bases/{knowledge_base_id}/refresh` re-crawls a website already in the knowledge base. Send `base_url` when several websites are present. It returns `202 Accepted` and a `job_id`; poll `GET /jobs/{job_id}` through `queued`, `crawling`, and `kb_refreshing` until `succeeded` or `failed`. The result reports added, updated, deleted, unchanged, and uncrawled pages. Missing pages are deleted only after a complete crawl within the plan's page limit; background indexing can continue after success.
+
+Content additions and refreshes return `409 kb_not_ready` while the knowledge base is processing another change. Knowledge-base deletion returns `409 kb_in_use` while a live agent uses it. Supply `expected_name` as a query parameter for a name-checked deletion; a mismatch returns `409 kb_name_mismatch`. Accepted deletion returns `202 Accepted` with `status: "deleting"` while cleanup runs.
 
 ### Conversations, traces, members, and usage
 
@@ -175,7 +183,7 @@ PATCH  /members/{user_uuid}
 GET    /usage
 ```
 
-Conversation and trace endpoints are read-only. Member endpoints require a key with **Manage resources** access, the **Admin** role, and all-Project (Teamspace-wide) scope.
+Conversation and trace endpoints are read-only. `GET /conversations/{conversation_id}` requires `agent_id` and returns the conversation plus a `messages` transcript in chronological order. Pass `limit` and `next_token` to read the remaining messages. Member endpoints require a key with **Manage resources** access, the **Admin** role, and all-Project (Teamspace-wide) scope.
 
 ### Connectors
 
